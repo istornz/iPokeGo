@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27F3855D1D4130B30004A1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855C1D4130B30004A1B3 /* main.m */; };
+		27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855F1D4130B30004A1B3 /* AppDelegate.m */; };
+		27F385631D4130B30004A1B3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385621D4130B30004A1B3 /* ViewController.m */; };
+		27F385661D4130B30004A1B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F385641D4130B30004A1B3 /* Main.storyboard */; };
+		27F385681D4130B30004A1B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F385671D4130B30004A1B3 /* Assets.xcassets */; };
+		27F3856B1D4130B30004A1B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */; };
+		27F385761D4130B30004A1B3 /* iPokeGoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385751D4130B30004A1B3 /* iPokeGoTests.m */; };
+		27F385811D4130B30004A1B3 /* iPokeGoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385801D4130B30004A1B3 /* iPokeGoUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27F385721D4130B30004A1B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F385501D4130B30004A1B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27F385571D4130B30004A1B3;
+			remoteInfo = iPokeGo;
+		};
+		27F3857D1D4130B30004A1B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27F385501D4130B30004A1B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27F385571D4130B30004A1B3;
+			remoteInfo = iPokeGo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		27F385581D4130B30004A1B3 /* iPokeGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPokeGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F3855C1D4130B30004A1B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		27F3855E1D4130B30004A1B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		27F3855F1D4130B30004A1B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		27F385611D4130B30004A1B3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		27F385621D4130B30004A1B3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		27F385651D4130B30004A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		27F385671D4130B30004A1B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27F3856A1D4130B30004A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		27F3856C1D4130B30004A1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27F385711D4130B30004A1B3 /* iPokeGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPokeGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F385751D4130B30004A1B3 /* iPokeGoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPokeGoTests.m; sourceTree = "<group>"; };
+		27F385771D4130B30004A1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27F3857C1D4130B30004A1B3 /* iPokeGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPokeGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F385801D4130B30004A1B3 /* iPokeGoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPokeGoUITests.m; sourceTree = "<group>"; };
+		27F385821D4130B30004A1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27F385551D4130B30004A1B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F3856E1D4130B30004A1B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F385791D4130B30004A1B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		27F3854F1D4130B30004A1B3 = {
+			isa = PBXGroup;
+			children = (
+				27F3855A1D4130B30004A1B3 /* iPokeGo */,
+				27F385741D4130B30004A1B3 /* iPokeGoTests */,
+				27F3857F1D4130B30004A1B3 /* iPokeGoUITests */,
+				27F385591D4130B30004A1B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		27F385591D4130B30004A1B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27F385581D4130B30004A1B3 /* iPokeGo.app */,
+				27F385711D4130B30004A1B3 /* iPokeGoTests.xctest */,
+				27F3857C1D4130B30004A1B3 /* iPokeGoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27F3855A1D4130B30004A1B3 /* iPokeGo */ = {
+			isa = PBXGroup;
+			children = (
+				27F3855E1D4130B30004A1B3 /* AppDelegate.h */,
+				27F3855F1D4130B30004A1B3 /* AppDelegate.m */,
+				27F385611D4130B30004A1B3 /* ViewController.h */,
+				27F385621D4130B30004A1B3 /* ViewController.m */,
+				27F385641D4130B30004A1B3 /* Main.storyboard */,
+				27F385671D4130B30004A1B3 /* Assets.xcassets */,
+				27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */,
+				27F3856C1D4130B30004A1B3 /* Info.plist */,
+				27F3855B1D4130B30004A1B3 /* Supporting Files */,
+			);
+			path = iPokeGo;
+			sourceTree = "<group>";
+		};
+		27F3855B1D4130B30004A1B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27F3855C1D4130B30004A1B3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27F385741D4130B30004A1B3 /* iPokeGoTests */ = {
+			isa = PBXGroup;
+			children = (
+				27F385751D4130B30004A1B3 /* iPokeGoTests.m */,
+				27F385771D4130B30004A1B3 /* Info.plist */,
+			);
+			path = iPokeGoTests;
+			sourceTree = "<group>";
+		};
+		27F3857F1D4130B30004A1B3 /* iPokeGoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				27F385801D4130B30004A1B3 /* iPokeGoUITests.m */,
+				27F385821D4130B30004A1B3 /* Info.plist */,
+			);
+			path = iPokeGoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		27F385571D4130B30004A1B3 /* iPokeGo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F385851D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGo" */;
+			buildPhases = (
+				27F385541D4130B30004A1B3 /* Sources */,
+				27F385551D4130B30004A1B3 /* Frameworks */,
+				27F385561D4130B30004A1B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iPokeGo;
+			productName = iPokeGo;
+			productReference = 27F385581D4130B30004A1B3 /* iPokeGo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		27F385701D4130B30004A1B3 /* iPokeGoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F385881D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGoTests" */;
+			buildPhases = (
+				27F3856D1D4130B30004A1B3 /* Sources */,
+				27F3856E1D4130B30004A1B3 /* Frameworks */,
+				27F3856F1D4130B30004A1B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27F385731D4130B30004A1B3 /* PBXTargetDependency */,
+			);
+			name = iPokeGoTests;
+			productName = iPokeGoTests;
+			productReference = 27F385711D4130B30004A1B3 /* iPokeGoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		27F3857B1D4130B30004A1B3 /* iPokeGoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27F3858B1D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGoUITests" */;
+			buildPhases = (
+				27F385781D4130B30004A1B3 /* Sources */,
+				27F385791D4130B30004A1B3 /* Frameworks */,
+				27F3857A1D4130B30004A1B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27F3857E1D4130B30004A1B3 /* PBXTargetDependency */,
+			);
+			name = iPokeGoUITests;
+			productName = iPokeGoUITests;
+			productReference = 27F3857C1D4130B30004A1B3 /* iPokeGoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27F385501D4130B30004A1B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Dimitri Dessus";
+				TargetAttributes = {
+					27F385571D4130B30004A1B3 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = C6D6DBHW5C;
+						DevelopmentTeamName = "Dimitri Dessus";
+						ProvisioningStyle = Automatic;
+					};
+					27F385701D4130B30004A1B3 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = C6D6DBHW5C;
+						DevelopmentTeamName = "Dimitri Dessus";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 27F385571D4130B30004A1B3;
+					};
+					27F3857B1D4130B30004A1B3 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = C6D6DBHW5C;
+						DevelopmentTeamName = "Dimitri Dessus";
+						ProvisioningStyle = Automatic;
+						TestTargetID = 27F385571D4130B30004A1B3;
+					};
+				};
+			};
+			buildConfigurationList = 27F385531D4130B30004A1B3 /* Build configuration list for PBXProject "iPokeGo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 27F3854F1D4130B30004A1B3;
+			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				27F385571D4130B30004A1B3 /* iPokeGo */,
+				27F385701D4130B30004A1B3 /* iPokeGoTests */,
+				27F3857B1D4130B30004A1B3 /* iPokeGoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27F385561D4130B30004A1B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F3856B1D4130B30004A1B3 /* LaunchScreen.storyboard in Resources */,
+				27F385681D4130B30004A1B3 /* Assets.xcassets in Resources */,
+				27F385661D4130B30004A1B3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F3856F1D4130B30004A1B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F3857A1D4130B30004A1B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27F385541D4130B30004A1B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F385631D4130B30004A1B3 /* ViewController.m in Sources */,
+				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
+				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F3856D1D4130B30004A1B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F385761D4130B30004A1B3 /* iPokeGoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27F385781D4130B30004A1B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27F385811D4130B30004A1B3 /* iPokeGoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27F385731D4130B30004A1B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27F385571D4130B30004A1B3 /* iPokeGo */;
+			targetProxy = 27F385721D4130B30004A1B3 /* PBXContainerItemProxy */;
+		};
+		27F3857E1D4130B30004A1B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27F385571D4130B30004A1B3 /* iPokeGo */;
+			targetProxy = 27F3857D1D4130B30004A1B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27F385641D4130B30004A1B3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27F385651D4130B30004A1B3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27F3856A1D4130B30004A1B3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27F385831D4130B30004A1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		27F385841D4130B30004A1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27F385861D4130B30004A1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = iPokeGo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		27F385871D4130B30004A1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = iPokeGo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		27F385891D4130B30004A1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iPokeGoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPokeGo.app/iPokeGo";
+			};
+			name = Debug;
+		};
+		27F3858A1D4130B30004A1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iPokeGoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iPokeGo.app/iPokeGo";
+			};
+			name = Release;
+		};
+		27F3858C1D4130B30004A1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iPokeGoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iPokeGo;
+			};
+			name = Debug;
+		};
+		27F3858D1D4130B30004A1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = iPokeGoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = iPokeGo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27F385531D4130B30004A1B3 /* Build configuration list for PBXProject "iPokeGo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F385831D4130B30004A1B3 /* Debug */,
+				27F385841D4130B30004A1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27F385851D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F385861D4130B30004A1B3 /* Debug */,
+				27F385871D4130B30004A1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27F385881D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F385891D4130B30004A1B3 /* Debug */,
+				27F3858A1D4130B30004A1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		27F3858B1D4130B30004A1B3 /* Build configuration list for PBXNativeTarget "iPokeGoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27F3858C1D4130B30004A1B3 /* Debug */,
+				27F3858D1D4130B30004A1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27F385501D4130B30004A1B3 /* Project object */;
+}
