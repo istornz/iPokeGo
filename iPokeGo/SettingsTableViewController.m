@@ -45,11 +45,21 @@
         [self.gymsSwitch setOn:YES]; // Not already set
     else
         [self.gymsSwitch setOn:[prefs boolForKey:@"display_gyms"]];
+    
+    if([prefs objectForKey:@"display_common"] == nil)
+        [self.commonSwitch setOn:YES]; // Not already set
+    else
+        [self.commonSwitch setOn:[prefs boolForKey:@"display_common"]];
 }
 
 -(IBAction)closeAction:(UIBarButtonItem *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+                                    postNotificationName:@"HideRefresh"
+                                    object:nil
+                                    userInfo:nil];
 }
 
 -(IBAction)saveAction:(UIBarButtonItem *)sender
@@ -61,6 +71,11 @@
     }
     
     [prefs synchronize];
+    
+    [[NSNotificationCenter defaultCenter]
+                                    postNotificationName:@"HideRefresh"
+                                    object:nil
+                                    userInfo:nil];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -78,6 +93,9 @@
             break;
         case SWITCH_GYMS:
             [prefs setObject:[NSNumber numberWithBool:self.gymsSwitch.on] forKey:@"display_gyms"];
+            break;
+        case SWITCH_COMMON:
+            [prefs setObject:[NSNumber numberWithBool:self.commonSwitch.on] forKey:@"display_common"];
             break;
             
         default:

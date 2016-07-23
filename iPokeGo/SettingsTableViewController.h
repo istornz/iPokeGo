@@ -30,6 +30,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *gymsLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *gymsSwitch;
 
+@property(weak, nonatomic) IBOutlet UIImageView *commonImageView;
+@property(weak, nonatomic) IBOutlet UILabel *commonLabel;
+@property(weak, nonatomic) IBOutlet UISwitch *commonSwitch;
+
 -(IBAction)closeAction:(UIBarButtonItem *)sender;
 -(IBAction)saveAction:(UIBarButtonItem *)sender;
 -(IBAction)swicthsAction:(UISwitch *)sender;

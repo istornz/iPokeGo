@@ -11,5 +11,7 @@
 @interface PokemonAnnotation : MKPointAnnotation
 
 @property int pokemonID;
+@property NSDate *expirationDate;
+@property NSString *spawnpointID;
 
 @end

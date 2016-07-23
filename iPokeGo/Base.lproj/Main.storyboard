@@ -70,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rje-O7-Gbw">
-                            <frame key="frameInset" minY="296" width="375" height="44"/>
+                            <frame key="frameInset" minY="340" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -221,6 +221,40 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vp2-Za-Cz5">
+                                        <rect key="frame" x="0.0" y="296" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vp2-Za-Cz5" id="Tnf-Xr-enS">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common" translatesAutoresizingMaskIntoConstraints="NO" id="EP2-LN-thq">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="9QC-cA-gNW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hide very common" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqr-4Z-ndM">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNu-bZ-VQt">
+                                                    <connections>
+                                                        <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="DuV-WH-88f"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vqr-4Z-ndM" firstAttribute="centerY" secondItem="xNu-bZ-VQt" secondAttribute="centerY" id="4We-zo-Fbn"/>
+                                                <constraint firstItem="EP2-LN-thq" firstAttribute="top" secondItem="Tnf-Xr-enS" secondAttribute="topMargin" id="74b-JU-lkl"/>
+                                                <constraint firstItem="EP2-LN-thq" firstAttribute="bottom" secondItem="Tnf-Xr-enS" secondAttribute="bottomMargin" id="Di6-rS-UfI"/>
+                                                <constraint firstItem="Vqr-4Z-ndM" firstAttribute="leading" secondItem="EP2-LN-thq" secondAttribute="trailing" constant="8" symbolic="YES" id="d3Z-a7-PB0"/>
+                                                <constraint firstItem="EP2-LN-thq" firstAttribute="centerY" secondItem="Vqr-4Z-ndM" secondAttribute="centerY" id="dD9-68-RMY"/>
+                                                <constraint firstItem="xNu-bZ-VQt" firstAttribute="trailing" secondItem="Tnf-Xr-enS" secondAttribute="trailingMargin" id="oIY-re-upr"/>
+                                                <constraint firstItem="EP2-LN-thq" firstAttribute="leading" secondItem="Tnf-Xr-enS" secondAttribute="leadingMargin" id="xck-mG-hUQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -242,6 +276,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="commonImageView" destination="EP2-LN-thq" id="c27-Bl-Vb7"/>
+                        <outlet property="commonLabel" destination="Vqr-4Z-ndM" id="qm9-m6-V1n"/>
+                        <outlet property="commonSwitch" destination="xNu-bZ-VQt" id="JYc-lD-ptb"/>
                         <outlet property="fermerButton" destination="Uqc-xu-UoW" id="lfl-DQ-gIE"/>
                         <outlet property="gymsImageView" destination="5xx-4w-XG9" id="wEf-FN-B29"/>
                         <outlet property="gymsLabel" destination="l0T-Vk-KFi" id="9Od-S2-2mf"/>
@@ -300,6 +337,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="common" width="37" height="37"/>
         <image name="gym" width="37" height="37"/>
         <image name="location" width="128" height="126"/>
         <image name="pokemon" width="37" height="37"/>
