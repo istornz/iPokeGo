@@ -267,7 +267,7 @@
                                                            {
                                                                isFav = NO;
                                                                for (NSString *pokemonID in self.savedFavorite) {
-                                                                   if ([pokemonID isEqualToString:key]) {
+                                                                   if ([pokemonID intValue] == [key intValue]) {
                                                                        isFav = YES;
                                                                        break;
                                                                    }
