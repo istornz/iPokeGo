@@ -19,8 +19,10 @@
 {
     MKCoordinateRegion region;
     AVAudioPlayer *pokemonAppearSound;
+    AVAudioPlayer *pokemonFavAppearSound;
     BOOL firstConnection;
     BOOL moved;
+    BOOL isFav;
 }
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
@@ -36,6 +38,7 @@
 @property(strong, nonatomic) NSMutableArray *pokemons;
 @property(strong, nonatomic) NSMutableArray *pokestops;
 @property(strong, nonatomic) NSMutableArray *gyms;
+@property(strong, nonatomic) NSArray *savedFavorite;
 @property(strong, nonatomic) NSArray *verycommon;
 
 @property(strong, nonatomic) NSDictionary *localization;

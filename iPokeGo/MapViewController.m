@@ -30,6 +30,7 @@
     self.mapview.zoomEnabled = true;
     moved           = NO;
     firstConnection = YES;
+    isFav           = NO;
     
     [[NSNotificationCenter defaultCenter]
                                         addObserver:self
@@ -40,6 +41,7 @@
     [self loadLocalization];
     [self checkGPS];
     [self loadSoundFiles];
+    [self loadFavoritePokemonSaved];
     self.requestStr = [self buildRequest];
     
     if(self.requestStr != nil)
@@ -59,7 +61,19 @@
     }
     else
     {
-        //ALERTE
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:@"Error"
+                                    message:@"Impossible to make the request"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:nil];
+        
+        [alert addAction:ok];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
     
     
@@ -70,12 +84,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)loadFavoritePokemonSaved
+{
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    self.savedFavorite          = [defaults objectForKey:@"pokemon_favorite"];
+}
+
 -(void)loadSoundFiles
 {
     NSString *pathPokemonAppearSound    = [NSString stringWithFormat:@"%@/ding.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrlPokemonAppearSound   = [NSURL fileURLWithPath:pathPokemonAppearSound];
     
+    NSString *pathPokemonFavAppearSound    = [NSString stringWithFormat:@"%@/favoritePokemon.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrlPokemonFavAppearSound   = [NSURL fileURLWithPath:pathPokemonFavAppearSound];
+    
     pokemonAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonAppearSound error:nil];
+    pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
 }
 
 -(void)loadLocalization
@@ -234,16 +258,40 @@
                                                        point.subtitle       = [NSString stringWithFormat:@"Disappears at %02d:%02d:%02d", (int)hour, (int)minute, (int)second];
                                                        point.pokemonID      = [[self.pokemons[i] valueForKey:@"pokemon_id"] intValue];
                                                        
-                                                       NSLog(@"Pokemon added on map");
-                                                       
                                                        [self.mapview addAnnotation:point];
                                                        
                                                        if(!firstConnection)
                                                        {
-                                                           [pokemonAppearSound play];
+                                                           NSString *notificationMessage = [NSString stringWithFormat:@"%@ was added on the map !", point.title];
+                                                           if([self.savedFavorite count] > 0)
+                                                           {
+                                                               isFav = NO;
+                                                               for (NSString *pokemonID in self.savedFavorite) {
+                                                                   if ([pokemonID isEqualToString:key]) {
+                                                                       isFav = YES;
+                                                                       break;
+                                                                   }
+                                                               }
+                                                           }
                                                            
                                                            self.notification = [CWStatusBarNotification new];
-                                                           [self.notification displayNotificationWithMessage:[NSString stringWithFormat:@"%@ was added on the map !", point.title]forDuration:4.0f];
+                                                           
+                                                           if(isFav)
+                                                           {
+                                                               NSLog(@"FAV Pokemon added on map !!");
+                                                               [pokemonFavAppearSound play];
+                                                               notificationMessage = [NSString stringWithFormat:@"%@ your favorite pokemon was on the map !", point.title];
+                                                               self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];;
+                                                               self.notification.notificationLabelTextColor = [UIColor whiteColor];
+                                                               
+                                                           }
+                                                           else
+                                                           {
+                                                               NSLog(@"Pokemon added on map");
+                                                               [pokemonAppearSound play];
+                                                           }
+                                                           
+                                                           [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
                                                            
                                                            __weak typeof(self) weakSelf = self;
                                                            self.notification.notificationTappedBlock = ^(void) {
@@ -266,7 +314,6 @@
                                        {
                                            for (int i = 0; i < [self.pokestops count]; i++) {
                                                
-                                               
                                                for (id<MKAnnotation> ann in self.mapview.annotations)
                                                {
                                                    if ([ann isKindOfClass:[PokestopAnnotation class]])
@@ -286,8 +333,8 @@
                                                    CLLocationCoordinate2D pokestopLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] floatValue], [self.pokestops[i][@"longitude"] floatValue]);
                                                    
                                                    point.coordinate = pokestopLocation;
-                                                   point.title      = @"Pokéstop";
-                                                   point.subtitle   = @"";
+                                                   point.title      = @"Pokestop";
+                                                   point.subtitle   = @"This is a pokestop";
                                                    point.pokestopID = [[self.pokestops[i] valueForKey:@"pokestop_id"] intValue];
                                                    
                                                    if([[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]])
@@ -330,7 +377,7 @@
                                                    
                                                    point.coordinate     = gymLocation;
                                                    point.title          = @"Gym";
-                                                   point.subtitle       = @"";
+                                                   point.subtitle       = [NSString stringWithFormat:@"Gym points : %d", [self.gyms[i][@"gym_points"] intValue]];
                                                    point.gymsID         = [[self.gyms[i] valueForKey:@"team_id"] intValue];
                                                    point.guardPokemonID = [[self.gyms[i] valueForKey:@"guard_pokemon_id"] intValue];
                                                    point.gym_points     = [[self.gyms[i] valueForKey:@"gym_points"] intValue];
@@ -457,7 +504,11 @@
                     default:
                         break;
                 }
-                
+
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationGym.guardPokemonID]]];
+                imageView.frame = CGRectMake(0, 0, 50, 50);
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                view.leftCalloutAccessoryView = imageView;
                 view.image = gymImage;
             }
         }
@@ -465,11 +516,13 @@
         {
             PokestopAnnotation *annotationPokestop = annotation;
             NSString *lureStr = [NSString stringWithFormat:@"%@", annotationPokestop.lure];
-            view.canShowCallout = YES;
+            
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:lureStr];
+            
             if (!view) {
                 
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:lureStr];
+                view.canShowCallout = YES;
                 
                 UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
                 

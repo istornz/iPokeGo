@@ -9,6 +9,8 @@
 #ifndef global_h
 #define global_h
 
+#define POKEMON_NUMBER      151
+
 #define SWITCH_POKEMON      0
 #define SWITCH_POKESTOPS    1
 #define SWITCH_GYMS         2
