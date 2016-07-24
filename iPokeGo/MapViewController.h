@@ -23,6 +23,10 @@
     BOOL firstConnection;
     BOOL moved;
     BOOL isFav;
+    
+    BOOL isNormalNotificationActivated;
+    BOOL isFavNotificationActivated;
+    BOOL isHideVeryCommonActivated;
 }
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;

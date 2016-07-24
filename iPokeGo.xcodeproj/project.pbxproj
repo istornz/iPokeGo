@@ -15,6 +15,7 @@
 		273604561D44094700194BAF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604551D44094700194BAF /* ding.mp3 */; };
 		273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 273604631D440E4900194BAF /* CWStatusBarNotification.m */; };
 		273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604651D441B7B00194BAF /* favoritePokemon.mp3 */; };
+		276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */; };
 		277209DC1D441CAA0008B7FA /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
 		27814C6B1D4221AD0032F237 /* Gym.png in Resources */ = {isa = PBXBuildFile; fileRef = 27814C611D4221AD0032F237 /* Gym.png */; };
@@ -983,6 +984,8 @@
 		273604621D440E4900194BAF /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
 		273604631D440E4900194BAF /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
 		273604651D441B7B00194BAF /* favoritePokemon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = favoritePokemon.mp3; sourceTree = "<group>"; };
+		276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsSettingsTableViewController.h; sourceTree = "<group>"; };
+		276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsSettingsTableViewController.m; sourceTree = "<group>"; };
 		277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
 		277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
 		277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonTableViewCell.h; sourceTree = "<group>"; };
@@ -2013,6 +2016,21 @@
 			name = Annotations;
 			sourceTree = "<group>";
 		};
+		276FD5581D457AD5006E4B96 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */,
+				277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */,
+				277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */,
+				277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */,
+				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
+				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
+				276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */,
+				276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		27814C601D4221A40032F237 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -2983,14 +3001,9 @@
 				27F3855E1D4130B30004A1B3 /* AppDelegate.h */,
 				27F3855F1D4130B30004A1B3 /* AppDelegate.m */,
 				275B4E1B1D4562FA00ED8348 /* Annotations */,
+				276FD5581D457AD5006E4B96 /* Settings */,
 				27F385611D4130B30004A1B3 /* MapViewController.h */,
 				27F385621D4130B30004A1B3 /* MapViewController.m */,
-				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
-				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
-				277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */,
-				277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */,
-				277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */,
-				277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */,
 				27F385641D4130B30004A1B3 /* Main.storyboard */,
 				27F385671D4130B30004A1B3 /* Assets.xcassets */,
 				27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */,
@@ -4126,6 +4139,7 @@
 				2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */,
 				27F385631D4130B30004A1B3 /* MapViewController.m in Sources */,
 				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
+				276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */,
 				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
 				277209DC1D441CAA0008B7FA /* FavoriteTableViewController.m in Sources */,

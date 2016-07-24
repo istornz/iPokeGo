@@ -77,6 +77,11 @@
                                     object:nil
                                     userInfo:nil];
     
+    [[NSNotificationCenter defaultCenter]
+                                    postNotificationName:@"LoadSaveData"
+                                    object:nil
+                                    userInfo:nil];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -15,6 +15,10 @@
 #define SWITCH_POKESTOPS    1
 #define SWITCH_GYMS         2
 #define SWITCH_COMMON       3
+
+#define SWITCH_NOTIFI_NORM  0
+#define SWITCH_NOTIFI_FAV   1
+
 #define MAP_SCALE           0.02
 
 #define TEAM_BLUE           1
