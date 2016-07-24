@@ -20,6 +20,7 @@ Compile this project with Xcode 8 beta
 This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
 ## TODO
 TODO: Make the app totaly independent
+TODO: Change scan position based on user location
 ## Android Version
 
 There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. All Android related prs and issues please refer to this [repo](https://github.com/omkarmoghe/Pokemap).
