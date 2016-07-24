@@ -2000,6 +2000,19 @@
 			name = CWStatusBarNotification;
 			sourceTree = "<group>";
 		};
+		275B4E1B1D4562FA00ED8348 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				27F38F1C1D4185B40004A1B3 /* PokemonAnnotation.h */,
+				27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */,
+				2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */,
+				2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */,
+				2788622B1D4226D300CCF60E /* PokestopAnnotation.h */,
+				2788622C1D4226D300CCF60E /* PokestopAnnotation.m */,
+			);
+			name = Annotations;
+			sourceTree = "<group>";
+		};
 		27814C601D4221A40032F237 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -2969,14 +2982,9 @@
 				27F385941D4139CA0004A1B3 /* global.h */,
 				27F3855E1D4130B30004A1B3 /* AppDelegate.h */,
 				27F3855F1D4130B30004A1B3 /* AppDelegate.m */,
+				275B4E1B1D4562FA00ED8348 /* Annotations */,
 				27F385611D4130B30004A1B3 /* MapViewController.h */,
 				27F385621D4130B30004A1B3 /* MapViewController.m */,
-				27F38F1C1D4185B40004A1B3 /* PokemonAnnotation.h */,
-				27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */,
-				2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */,
-				2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */,
-				2788622B1D4226D300CCF60E /* PokestopAnnotation.h */,
-				2788622C1D4226D300CCF60E /* PokestopAnnotation.m */,
 				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
 				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
 				277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */,

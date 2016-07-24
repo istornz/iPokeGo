@@ -38,10 +38,10 @@
                                         name:@"HideRefresh"
                                         object:nil];
     
+    [self loadSavedData];
     [self loadLocalization];
     [self checkGPS];
     [self loadSoundFiles];
-    [self loadFavoritePokemonSaved];
     self.requestStr = [self buildRequest];
     
     if(self.requestStr != nil)
@@ -84,10 +84,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)loadFavoritePokemonSaved
+-(void)loadSavedData
 {
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
     self.savedFavorite          = [defaults objectForKey:@"pokemon_favorite"];
+    self.mapLocation            = [defaults objectForKey:@"map_position"];
 }
 
 -(void)loadSoundFiles
@@ -127,7 +128,7 @@
     
     self.localization = [NSJSONSerialization JSONObjectWithData:localizationData
                                                         options:NSJSONReadingMutableContainers
-                                                            error:&error];
+                                                          error:&error];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
@@ -146,6 +147,13 @@
         }
     }
     
+    // Saving current position
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *mapRegion = [[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithDouble:self.mapview.region.center.latitude], [NSNumber numberWithDouble:self.mapview.region.center.longitude], [NSNumber numberWithDouble:self.mapview.region.span.latitudeDelta], [NSNumber numberWithDouble:self.mapview.region.span.longitudeDelta]] forKeys:@[@"latitude", @"longitude", @"latitudeDelta", @"longitudeDelta"]];
+    
+    [prefs setObject:mapRegion forKey:@"map_position"];
+    [prefs synchronize];
 }
 
 -(void)checkGPS
@@ -177,7 +185,20 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    [self performSelector:@selector(locationAction:) withObject:nil afterDelay:0];
+    if([self.mapLocation count] > 0)
+    {
+        region.center.latitude      = [[self.mapLocation objectForKey:@"latitude"] doubleValue];
+        region.center.longitude     = [[self.mapLocation objectForKey:@"longitude"] doubleValue];
+        region.span.latitudeDelta   = [[self.mapLocation objectForKey:@"latitudeDelta"] doubleValue];
+        region.span.longitudeDelta  = [[self.mapLocation objectForKey:@"longitudeDelta"] doubleValue];
+        
+        moved = YES;
+        [self.mapview setRegion:region animated:YES];
+    }
+    else
+    {
+        [self performSelector:@selector(locationAction:) withObject:nil afterDelay:0];
+    }
 }
 
 -(void)loadData

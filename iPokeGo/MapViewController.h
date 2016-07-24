@@ -42,6 +42,7 @@
 @property(strong, nonatomic) NSArray *verycommon;
 
 @property(strong, nonatomic) NSDictionary *localization;
+@property(strong, nonatomic) NSDictionary *mapLocation;
 
 @property(strong, nonatomic) UIPopoverController *popover;
 @property(strong, nonatomic) CWStatusBarNotification *notification;
