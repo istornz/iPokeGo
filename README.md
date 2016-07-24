@@ -23,6 +23,8 @@ TODO: Make the app totaly independent
 ## Android Version
 
 There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. All Android related prs and issues please refer to this [repo](https://github.com/omkarmoghe/Pokemap).
+## LICENSE
+iPokeGo is released under the MIT license. See LICENSE for details.
 
 #[Official Website] (https://jz6.github.io/PoGoMap/#)
 Live visualization of all pokemon (with option to show gyms and pokestops) in your area. This is a proof of concept that we can load all nearby pokemon given a location. Currently runs on a Flask server displaying a Google Map with markers on it.
