@@ -43,24 +43,14 @@
     
     if(self.requestStr != nil)
     {
-        self.timerData = [NSTimer scheduledTimerWithTimeInterval:5
-                                                          target:self
-                                                        selector:@selector(loadData)
-                                                        userInfo:nil
-                                                         repeats:YES];
-        
-        self.timerDataCleaner = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                                 target:self
-                                                               selector:@selector(mapCleaner)
-                                                               userInfo:nil
-                                                                repeats:YES];
+        [self launchTimers];
         
     }
     else
     {
         UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Error"
-                                    message:@"Impossible to make the request"
+                                    alertControllerWithTitle:@"Server not set"
+                                    message:@"Please go in settings to enter server address"
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction
@@ -80,6 +70,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)launchTimers
+{
+    if(![self.timerData isValid])
+    {
+        NSLog(@"[+] Starting data timer...");
+        self.timerData = [NSTimer scheduledTimerWithTimeInterval:5
+                                                          target:self
+                                                        selector:@selector(loadData)
+                                                        userInfo:nil
+                                                         repeats:YES];
+    }
+    
+    if(![self.timerDataCleaner isValid])
+    {
+        NSLog(@"[+] Starting clear timer...");
+        self.timerDataCleaner = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                 target:self
+                                                               selector:@selector(mapCleaner)
+                                                               userInfo:nil
+                                                                repeats:YES];
+    }
+}
+
 -(void)initObserver
 {
     [[NSNotificationCenter defaultCenter]
@@ -92,6 +105,11 @@
                                     addObserver:self
                                     selector:@selector(loadSavedData)
                                     name:@"LoadSaveData"
+                                    object:nil];
+    [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                    selector:@selector(launchTimers)
+                                    name:@"LaunchTimers"
                                     object:nil];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
@@ -567,7 +585,7 @@
     self.requestNewLocationStr  = SERVER_API_LOCA;
     
     self.display_pokemons_str   = @"true";
-    self.display_pokestops_str  = @"true";
+    self.display_pokestops_str  = @"false";
     self.display_gyms_str       = @"true";
     
     if([server_addr length] > 0)
@@ -596,6 +614,10 @@
         request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:self.display_gyms_str];
         
         self.requestNewLocationStr = [self.requestNewLocationStr stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+    }
+    else
+    {
+        request = nil;
     }
     
     return request;
