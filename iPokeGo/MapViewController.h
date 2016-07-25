@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "PokemonAnnotation.h"
 #import "GymAnnotation.h"
 #import "PokestopAnnotation.h"
+#import "ScanAnnotation.h"
+#import "SVPulsingAnnotationView.h"
 #import "global.h"
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverControllerDelegate>
@@ -20,6 +23,7 @@
     MKCoordinateRegion region;
     AVAudioPlayer *pokemonAppearSound;
     AVAudioPlayer *pokemonFavAppearSound;
+    CLLocationCoordinate2D radar;
     BOOL firstConnection;
     BOOL moved;
     BOOL isFav;
@@ -30,9 +34,12 @@
 }
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
+@property(weak, nonatomic) IBOutlet UIButton *radarButton;
 @property(nonatomic, retain) IBOutlet MKMapView *mapview;
+
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(strong, nonatomic) NSString *requestStr;
+@property(strong, nonatomic) NSString *requestNewLocationStr;
 @property(strong, nonatomic) NSString *display_pokemons_str;
 @property(strong, nonatomic) NSString *display_pokestops_str;
 @property(strong, nonatomic) NSString *display_gyms_str;
@@ -53,6 +60,7 @@
 
 
 -(IBAction)locationAction:(id)sender;
+-(IBAction)radarAction:(id)sender;
 
 @end
 
