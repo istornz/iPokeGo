@@ -1,0 +1,7 @@
+osx_image: xcode8
+
+language: objective-c
+osx_image: xcode8
+xcode_project: iPokeGo.xcodeproj
+xcode_scheme: iPokeGo
+xcode_sdk: iphonesimulator10.0
