@@ -2,12 +2,13 @@
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo)
 This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
 
-<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo1.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo4.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo2.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
 - Show/Hide Pokemons,Pokestops and Gyms
+- Change radar position
 - Drive destination to capture a specific pokemon
 - Notification on status bar when a new pokemon was added on the map
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
