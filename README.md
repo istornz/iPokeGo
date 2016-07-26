@@ -14,7 +14,7 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
 - Add any server
 - See distance and remaining time on each pokemons
-- Possibility to show/hide very common pokemon like (Rattata, Pidgey, Zubat, Drowzee)
+- Possibility to show/hide common pokemon in a list
 
 ## Installation
 1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
@@ -24,7 +24,7 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 5. Plug in your device and at the top select it in the dropdown
 6. Hit the play button it should compile and transfer over to the device pluged in and open
 7. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
-8. unplug and enjoy the app
+8. Unplug and enjoy the app
 
 ## Compatibility
 - iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
