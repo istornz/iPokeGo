@@ -16,7 +16,7 @@
 		273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 273604631D440E4900194BAF /* CWStatusBarNotification.m */; };
 		273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604651D441B7B00194BAF /* favoritePokemon.mp3 */; };
 		276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */; };
-		277209DC1D441CAA0008B7FA /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */; };
+		277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
 		27814C6B1D4221AD0032F237 /* Gym.png in Resources */ = {isa = PBXBuildFile; fileRef = 27814C611D4221AD0032F237 /* Gym.png */; };
 		27814C6C1D4221AD0032F237 /* Harmony_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 27814C621D4221AD0032F237 /* Harmony_large.png */; };
@@ -991,8 +991,8 @@
 		273604651D441B7B00194BAF /* favoritePokemon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = favoritePokemon.mp3; sourceTree = "<group>"; };
 		276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsSettingsTableViewController.h; sourceTree = "<group>"; };
 		276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsSettingsTableViewController.m; sourceTree = "<group>"; };
-		277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
-		277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
+		277209DA1D441CAA0008B7FA /* PokemonSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonSelectTableViewController.h; sourceTree = "<group>"; };
+		277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonSelectTableViewController.m; sourceTree = "<group>"; };
 		277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonTableViewCell.h; sourceTree = "<group>"; };
 		277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonTableViewCell.m; sourceTree = "<group>"; };
 		27814C611D4221AD0032F237 /* Gym.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gym.png; sourceTree = "<group>"; };
@@ -2038,8 +2038,8 @@
 			children = (
 				277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */,
 				277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */,
-				277209DA1D441CAA0008B7FA /* FavoriteTableViewController.h */,
-				277209DB1D441CAA0008B7FA /* FavoriteTableViewController.m */,
+				277209DA1D441CAA0008B7FA /* PokemonSelectTableViewController.h */,
+				277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */,
 				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
 				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
 				276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */,
@@ -3161,8 +3161,8 @@
 				TargetAttributes = {
 					27F385571D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = C6D6DBHW5C;
-						DevelopmentTeamName = "Dimitri Dessus";
+						DevelopmentTeam = 5HC6C66BE5;
+						DevelopmentTeamName = "Mark van Lagen (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
 					27F385701D4130B30004A1B3 = {
@@ -4175,7 +4175,7 @@
 				276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */,
 				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
-				277209DC1D441CAA0008B7FA /* FavoriteTableViewController.m in Sources */,
+				277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 			);
@@ -4323,7 +4323,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mvl.iPokeGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4336,7 +4336,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mvl.iPokeGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
