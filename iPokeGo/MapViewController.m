@@ -896,6 +896,15 @@
                                     rightExpression:[NSExpression expressionForConstantValue:[PokemonAnnotation class]]
                                     customSelector:@selector(isMemberOfClass:)];
     annotations = [annotations filteredArrayUsingPredicate:filterPredicate];
+	
+	for (id <MKAnnotation> annotation in annotations)
+	{
+		PokemonAnnotation *annotationPoke = (PokemonAnnotation *)annotation;
+		
+		annotationPoke.hidePokemon = [self isPokemonVeryCommon:[[NSNumber numberWithInt:annotationPoke.pokemonID] stringValue]];
+
+	}
+	
     [self.mapview removeAnnotations:annotations];
     [self.mapview addAnnotations:annotations];
 }
