@@ -7,6 +7,7 @@
 //
 
 #import "SettingsTableViewController.h"
+#import "PokemonSelectTableViewController.h"
 
 @interface SettingsTableViewController ()
 
@@ -65,6 +66,26 @@
         [self.timeTimerSwitch setOn:NO]; // Not already set
     else
         [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	if([segue.identifier isEqualToString:@"showPokemonSelect"]) {
+		PokemonSelectTableViewController *destViewController = segue.destinationViewController;
+
+		switch (((UITableViewCell *)sender).tag) {
+			case SELECT_COMMON:
+				destViewController.title = @"Common";
+				destViewController.preferenceKey = @"pokemon_common";
+				break;
+			case SELECT_FAVORITE:
+				destViewController.title = @"Favorite";
+				destViewController.preferenceKey = @"pokemon_favorite";
+				break;
+			default:
+				break;
+		}
+	}
 }
 
 -(IBAction)closeAction:(UIBarButtonItem *)sender

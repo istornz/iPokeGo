@@ -24,11 +24,6 @@
     self.pokemons   = [[NSMutableArray alloc] init];
     self.pokestops  = [[NSMutableArray alloc] init];
     self.gyms       = [[NSMutableArray alloc] init];
-    self.verycommon = [[NSMutableArray alloc] initWithObjects:@"13",
-                                                                @"41",
-                                                                @"19",
-                                                                @"16",
-                                                                @"96", nil];
     
     self.mapview.zoomEnabled = true;
     moved                           = NO;
@@ -207,8 +202,9 @@
 {
     NSLog(@"[+] ----- LOAD SAVE DATA");
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
-    
-    self.savedFavorite              = [defaults objectForKey:@"pokemon_favorite"];
+	
+	self.savedFavorite              = [defaults objectForKey:@"pokemon_favorite"];
+	self.savedCommon              = [defaults objectForKey:@"pokemon_common"];
     self.mapLocation                = [defaults objectForKey:@"map_position"];
     
     if([defaults objectForKey:@"norm_notification"] != nil)
@@ -667,8 +663,8 @@
 {
     BOOL returnState = NO;
 
-    for (int i = 0; i < [self.verycommon count]; i++) {
-        NSString *idTab = [self.verycommon objectAtIndex:i];
+    for (int i = 0; i < [self.savedCommon count]; i++) {
+        NSString *idTab = [self.savedCommon objectAtIndex:i];
         
         if ([idPokeToTest isEqualToString:idTab])
         {
@@ -900,6 +896,15 @@
                                     rightExpression:[NSExpression expressionForConstantValue:[PokemonAnnotation class]]
                                     customSelector:@selector(isMemberOfClass:)];
     annotations = [annotations filteredArrayUsingPredicate:filterPredicate];
+	
+	for (id <MKAnnotation> annotation in annotations)
+	{
+		PokemonAnnotation *annotationPoke = (PokemonAnnotation *)annotation;
+		
+		annotationPoke.hidePokemon = [self isPokemonVeryCommon:[[NSNumber numberWithInt:annotationPoke.pokemonID] stringValue]];
+
+	}
+	
     [self.mapview removeAnnotations:annotations];
     [self.mapview addAnnotations:annotations];
 }

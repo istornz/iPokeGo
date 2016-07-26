@@ -50,7 +50,7 @@
 @property(strong, nonatomic) NSMutableArray *pokestops;
 @property(strong, nonatomic) NSMutableArray *gyms;
 @property(strong, nonatomic) NSArray *savedFavorite;
-@property(strong, nonatomic) NSArray *verycommon;
+@property(strong, nonatomic) NSArray *savedCommon;
 
 @property(strong, nonatomic) NSDictionary *localization;
 @property(strong, nonatomic) NSDictionary *mapLocation;
