@@ -13,6 +13,7 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 - Notification on status bar when a new pokemon was added on the map
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
 - Add any server
+- See distance and remaining time on each pokemons
 - Possibility to show/hide very common pokemon like (Rattata, Pidgey, Zubat, Drowzee)
 
 ## Installation
