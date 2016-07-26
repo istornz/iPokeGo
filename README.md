@@ -3,7 +3,7 @@
 This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo4.jpg" width="270" height="480"/>
-<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo2.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo5.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
