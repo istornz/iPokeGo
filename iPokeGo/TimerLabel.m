@@ -7,6 +7,7 @@
 //
 
 #import "TimerLabel.h"
+#import "NSString+Formatting.h"
 
 @interface TimerLabel()
 @property (nonatomic) NSTimer *timer;
@@ -33,7 +34,7 @@
     NSInteger integerValue = (NSInteger)timeInterval;
     uint8_t minutes = integerValue / 60;
     uint8_t seconds = integerValue % 60;
-    self.text = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    self.attributedText = [NSString stringWithFormat:@"%d:%02d", minutes, seconds].outlinedAttributedString;
 }
 
 @end

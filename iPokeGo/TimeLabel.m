@@ -7,6 +7,7 @@
 //
 
 #import "TimeLabel.h"
+#import "NSString+Formatting.h"
 
 @implementation TimeLabel
 
@@ -14,7 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.font = [UIFont systemFontOfSize:13.0];
+        self.font = [UIFont boldSystemFontOfSize:13.0];
         self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
@@ -23,7 +24,8 @@
 - (void)setDate:(NSDate*)date {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
-    self.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
+
+    self.attributedText = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]].outlinedAttributedString;
 }
 
 @end

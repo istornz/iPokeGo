@@ -7,6 +7,7 @@
 //
 
 #import "DistanceLabel.h"
+#import "NSString+Formatting.h"
 
 @implementation DistanceLabel
 
@@ -14,16 +15,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.font = [UIFont systemFontOfSize:13.0];
+        self.font = [UIFont boldSystemFontOfSize:13.0];
         self.textAlignment = NSTextAlignmentRight;
-        self.layer.shadowColor = [UIColor whiteColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0.0, 1.0);
     }
     return self;
 }
 
 - (void)setDistance:(double)distance {
-    self.text = [NSString stringWithFormat:@"%.0fm", distance];
+    self.attributedText = [NSString stringWithFormat:@"%.0fm", distance].outlinedAttributedString;
 }
 
 @end
