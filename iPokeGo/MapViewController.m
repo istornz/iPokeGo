@@ -7,6 +7,9 @@
 //
 
 #import "MapViewController.h"
+#import "TimeLabel.h"
+#import "TimerLabel.h"
+#import "DistanceLabel.h"
 
 @interface MapViewController ()
 
@@ -106,10 +109,17 @@
                                     selector:@selector(loadSavedData)
                                     name:@"LoadSaveData"
                                     object:nil];
+    
     [[NSNotificationCenter defaultCenter]
                                     addObserver:self
                                     selector:@selector(launchTimers)
                                     name:@"LaunchTimers"
+                                    object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+                                    addObserver:self
+                                    selector:@selector(refreshPokemons)
+                                    name:@"RefreshPokemons"
                                     object:nil];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
@@ -643,7 +653,7 @@
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     MKAnnotationView *view = nil;
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ((id<MKAnnotation>)annotation != mapView.userLocation) {
         
         if([annotation isKindOfClass:[PokemonAnnotation class]])
@@ -662,6 +672,34 @@
                 view.canShowCallout = YES;
                 view.rightCalloutAccessoryView = button;
                 view.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationPokemon.pokemonID]];
+                
+                if([defaults boolForKey:@"display_time"]) {
+                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                }
+                
+                if([defaults boolForKey:@"display_distance"]) {
+                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                }
+                
+                
+            } else {
+                // TODO: Its just for 'live' view update when settings changed, probably need to optimise
+                for (UIView *subView in view.subviews) {
+                    if ([subView isKindOfClass:[TimeLabel class]]) {
+                        [subView removeFromSuperview];
+                    }
+                    if ([subView isKindOfClass:[DistanceLabel class]]) {
+                        [subView removeFromSuperview];
+                    }
+                }
+                
+                if([defaults boolForKey:@"display_time"]) {
+                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                }
+                
+                if([defaults boolForKey:@"display_distance"]) {
+                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                }
             }
         }
         else if ([annotation isKindOfClass:[GymAnnotation class]])
@@ -806,6 +844,18 @@
     [self loadData];
 }
 
+-(void)refreshPokemons {
+    NSArray *annotations = [self.mapview annotations];
+
+    NSPredicate *filterPredicate = [NSComparisonPredicate
+                                    predicateWithLeftExpression:[NSExpression expressionForEvaluatedObject]
+                                    rightExpression:[NSExpression expressionForConstantValue:[PokemonAnnotation class]]
+                                    customSelector:@selector(isMemberOfClass:)];
+    annotations = [annotations filteredArrayUsingPredicate:filterPredicate];
+    [self.mapview removeAnnotations:annotations];
+    [self.mapview addAnnotations:annotations];
+}
+
 -(void)mapCleaner
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
@@ -847,6 +897,29 @@
         region.span.longitudeDelta  = MAP_SCALE;
         [self.mapview setRegion:region animated:YES];
     }
+}
+
+- (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
+    TimeLabel *timeLabel;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
+        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+    } else {
+        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+        
+    }
+    [timeLabel setDate:annotation.expirationDate];
+    return timeLabel;
+}
+
+- (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
+    CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
+    ;
+    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
+    CLLocationDistance distance = [pokemonLocation distanceFromLocation:userLocation];
+    
+    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+    [distanceLabel setDistance:distance];
+    return distanceLabel;
 }
 
 @end
