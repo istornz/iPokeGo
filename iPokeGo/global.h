@@ -29,7 +29,7 @@
 #define SPRITE_SIZE         65
 #define IMAGE_SIZE          32.5
 
-#define SERVER_API_DATA     @"http://%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
-#define SERVER_API_LOCA     @"http://%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
+#define SERVER_API_DATA     @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
+#define SERVER_API_LOCA     @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
 
 #endif /* global_h */

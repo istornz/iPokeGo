@@ -3161,8 +3161,8 @@
 				TargetAttributes = {
 					27F385571D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 6PTQC4C8XB;
-						DevelopmentTeamName = "Luis Alvarado (Personal Team)";
+						DevelopmentTeam = C6D6DBHW5C;
+						DevelopmentTeamName = "Dimitri Dessus";
 						ProvisioningStyle = Automatic;
 					};
 					27F385701D4130B30004A1B3 = {
