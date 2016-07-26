@@ -37,7 +37,7 @@
         [self.pokemonsSwitch setOn:[prefs boolForKey:@"display_pokemons"]];
     
     if([prefs objectForKey:@"display_pokestops"] == nil)
-        [self.pokestopsSwitch setOn:YES]; // Not already set
+        [self.pokestopsSwitch setOn:NO]; // Not already set
     else
         [self.pokestopsSwitch setOn:[prefs boolForKey:@"display_pokestops"]];
     
@@ -47,7 +47,7 @@
         [self.gymsSwitch setOn:[prefs boolForKey:@"display_gyms"]];
     
     if([prefs objectForKey:@"display_common"] == nil)
-        [self.commonSwitch setOn:YES]; // Not already set
+        [self.commonSwitch setOn:NO]; // Not already set
     else
         [self.commonSwitch setOn:[prefs boolForKey:@"display_common"]];
 }
@@ -79,6 +79,11 @@
     
     [[NSNotificationCenter defaultCenter]
                                     postNotificationName:@"LoadSaveData"
+                                    object:nil
+                                    userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+                                    postNotificationName:@"LaunchTimers"
                                     object:nil
                                     userInfo:nil];
     

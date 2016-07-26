@@ -2,12 +2,13 @@
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo)
 This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
 
-<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo1.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo4.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo2.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
 - Show/Hide Pokemons,Pokestops and Gyms
+- Change radar position
 - Drive destination to capture a specific pokemon
 - Notification on status bar when a new pokemon was added on the map
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
@@ -18,17 +19,19 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
 2. Open *iPokeGo.xcodeproj* in Xcode
 3. Choose your own itunes account under *Signing > Team*
-4. Plug in your device and at the top select it in the dropdown
-5. Hit the play button it should compile and transfer over to the device pluged in and open
-6. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
-7. unplug and enjoy the app
+4. Change the identifier in Xcode from 'com.dimitri-dessus.iPokeGo' to something like 'com.YOUR_NAME.iPokeGo'. 
+5. Plug in your device and at the top select it in the dropdown
+6. Hit the play button it should compile and transfer over to the device pluged in and open
+7. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
+8. unplug and enjoy the app
 
 ## Compatibility
 This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
 
 ## TODO
-- TODO: Make the app totaly independent
-- TODO: Change scan position based on user location
+- [ ] Make the app totaly independent
+- [ ] Regroup pokestops annotations to reduce CPU usage
+- [x] Change scan position
 
 ## Android Version
 There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. All Android related prs and issues please refer to this [repo](https://github.com/omkarmoghe/Pokemap).

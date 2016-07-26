@@ -11,7 +11,7 @@
 @interface PokemonAnnotation : MKPointAnnotation
 
 @property int pokemonID;
-@property BOOL veryCommonPokemon;
+@property BOOL hidePokemon;
 @property NSDate *expirationDate;
 @property NSString *spawnpointID;
 

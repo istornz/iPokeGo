@@ -79,7 +79,24 @@
     NSString *key                   = [NSString stringWithFormat:@"%d", ((int)indexPath.row + 1)];
     
     cell.pokemonName.text           = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
-    cell.pokemonimageView.image     = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", key]];
+
+    UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
+    
+    /* Spritesheet has 7 columns */
+    int x = indexPath.row%SPRITESHEET_COLS*SPRITE_SIZE;
+    
+    int y = (int)indexPath.row + 1;
+    
+    while(y%SPRITESHEET_COLS != 0) y++;
+    
+    y = ((y/SPRITESHEET_COLS) -1) * SPRITE_SIZE;
+    
+    CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
+    cell.pokemonimageView.image = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
     
     if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue])
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];

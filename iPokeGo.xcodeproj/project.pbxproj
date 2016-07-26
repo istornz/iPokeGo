@@ -954,6 +954,11 @@
 		27F385901D4133580004A1B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F3858F1D4133580004A1B3 /* MapKit.framework */; };
 		27F385931D4138730004A1B3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385921D4138730004A1B3 /* SettingsTableViewController.m */; };
 		27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */; };
+		27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424491D468394007ADEE4 /* ScanAnnotation.m */; };
+		27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F4244B1D4684B8007ADEE4 /* ScanPin.png */; };
+		27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4244D1D469710007ADEE4 /* AudioToolbox.framework */; };
+		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
+		A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0847DAF1D46D12100215DC9 /* icons-hd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1938,6 +1943,14 @@
 		27F385941D4139CA0004A1B3 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		27F38F1C1D4185B40004A1B3 /* PokemonAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonAnnotation.h; sourceTree = "<group>"; };
 		27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonAnnotation.m; sourceTree = "<group>"; };
+		27F424481D468394007ADEE4 /* ScanAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanAnnotation.h; sourceTree = "<group>"; };
+		27F424491D468394007ADEE4 /* ScanAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanAnnotation.m; sourceTree = "<group>"; };
+		27F4244B1D4684B8007ADEE4 /* ScanPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScanPin.png; sourceTree = "<group>"; };
+		27F4244D1D469710007ADEE4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		27F4244F1D469A68007ADEE4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
+		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
+		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1945,6 +1958,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */,
 				27F385901D4133580004A1B3 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1989,6 +2003,7 @@
 		273604571D440B0900194BAF /* Custom classes */ = {
 			isa = PBXGroup;
 			children = (
+				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
 				2736045B1D440B1700194BAF /* CWStatusBarNotification */,
 			);
 			name = "Custom classes";
@@ -2012,6 +2027,8 @@
 				2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */,
 				2788622B1D4226D300CCF60E /* PokestopAnnotation.h */,
 				2788622C1D4226D300CCF60E /* PokestopAnnotation.m */,
+				27F424481D468394007ADEE4 /* ScanAnnotation.h */,
+				27F424491D468394007ADEE4 /* ScanAnnotation.m */,
 			);
 			name = Annotations;
 			sourceTree = "<group>";
@@ -2044,6 +2061,7 @@
 				27814C681D4221AD0032F237 /* PstopLured.png */,
 				27814C691D4221AD0032F237 /* Valor_large.png */,
 				27814C6A1D4221AD0032F237 /* Valor.png */,
+				27F4244B1D4684B8007ADEE4 /* ScanPin.png */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -2051,6 +2069,7 @@
 		27ED1F971D4387140056E366 /* larger */ = {
 			isa = PBXGroup;
 			children = (
+				A0847DAF1D46D12100215DC9 /* icons-hd.png */,
 				27ED1F981D43871E0056E366 /* 1.png */,
 				27ED1F991D43871E0056E366 /* 2.png */,
 				27ED1F9A1D43871E0056E366 /* 3-mega.png */,
@@ -3042,6 +3061,8 @@
 		27F3858E1D4133580004A1B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27F4244F1D469A68007ADEE4 /* CoreTelephony.framework */,
+				27F4244D1D469710007ADEE4 /* AudioToolbox.framework */,
 				27F3858F1D4133580004A1B3 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -3062,6 +3083,15 @@
 				27ED1F971D4387140056E366 /* larger */,
 			);
 			name = Pokemons;
+			sourceTree = "<group>";
+		};
+		27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */,
+				27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */,
+			);
+			name = SVPulsingAnnotationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3406,6 +3436,7 @@
 				27ED26AE1D4387230056E366 /* 711.png in Resources */,
 				27ED26991D4387230056E366 /* 698.png in Resources */,
 				27ED23B61D4387220056E366 /* 132.png in Resources */,
+				27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */,
 				27ED265A1D4387230056E366 /* 666-tundra.png in Resources */,
 				27ED244F1D4387220056E366 /* 249.png in Resources */,
 				27ED24351D4387220056E366 /* 225.png in Resources */,
@@ -3771,6 +3802,7 @@
 				27814C741D4221AD0032F237 /* Valor.png in Resources */,
 				27ED24231D4387220056E366 /* 209.png in Resources */,
 				27ED25981D4387230056E366 /* 519.png in Resources */,
+				A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */,
 				27ED23FF1D4387220056E366 /* 201-a.png in Resources */,
 				27ED260B1D4387230056E366 /* 622.png in Resources */,
 				27ED259C1D4387230056E366 /* 523.png in Resources */,
@@ -4134,6 +4166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */,
+				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,
 				277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */,
 				27F385931D4138730004A1B3 /* SettingsTableViewController.m in Sources */,
 				2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */,
@@ -4144,6 +4177,7 @@
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
 				277209DC1D441CAA0008B7FA /* FavoriteTableViewController.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
+				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4236,7 +4270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -4275,7 +4309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -4291,6 +4325,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4303,6 +4338,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
