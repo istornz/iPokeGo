@@ -26,7 +26,8 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 8. unplug and enjoy the app
 
 ## Compatibility
-This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
+- iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
+- Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/tree/V2.0)
 
 ## TODO
 - [ ] Make the app totaly independent
