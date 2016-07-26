@@ -34,6 +34,18 @@
 @property(weak, nonatomic) IBOutlet UILabel *commonLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *commonSwitch;
 
+@property (weak, nonatomic) IBOutlet UIImageView *distanceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *distanceSwitch;
+
+@property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *timeSwitch;
+
+@property (weak, nonatomic) IBOutlet UIImageView *timeTimerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeTimerLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *timeTimerSwitch;
+
 -(IBAction)closeAction:(UIBarButtonItem *)sender;
 -(IBAction)saveAction:(UIBarButtonItem *)sender;
 -(IBAction)swicthsAction:(UISwitch *)sender;
