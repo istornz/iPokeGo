@@ -36,6 +36,7 @@
     isFav                           = NO;
     isNormalNotificationActivated   = YES;
     isFavNotificationActivated      = YES;
+    isHideVeryCommonActivated       = NO;
     
     [self initObserver];
     [self loadSavedData];
@@ -47,7 +48,6 @@
     if(self.requestStr != nil)
     {
         [self launchTimers];
-        
     }
     else
     {
@@ -59,7 +59,10 @@
         UIAlertAction *ok = [UIAlertAction
                              actionWithTitle:@"OK"
                              style:UIAlertActionStyleDefault
-                             handler:nil];
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [self performSegueWithIdentifier:@"showSettings" sender:nil];
+                             }];
         
         [alert addAction:ok];
         
@@ -215,10 +218,23 @@
         isFavNotificationActivated      = [defaults boolForKey:@"fav_notification"];
     
     if([defaults objectForKey:@"display_common"] != nil)
-        isHideVeryCommonActivated       = [defaults boolForKey:@"display_common"];
+    {
+        if(isHideVeryCommonActivated != [defaults boolForKey:@"display_common"])
+        {
+            isHideVeryCommonActivated       = [defaults boolForKey:@"display_common"];
+            firstConnection                 = YES;
+        }
+    }
     
     if(([defaults objectForKey:@"radar_lat"] != nil) && ([defaults objectForKey:@"radar_long"] != nil))
     {
+        for (int i = 0; i < [self.mapview.annotations count]; i++) {
+            MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+            
+            if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
+                [self.mapview removeAnnotation:annotation];
+        }
+        
         NSLog(@"[!] - Restore radar");
         CLLocationCoordinate2D locCoord;
         locCoord.latitude   = [defaults doubleForKey:@"radar_lat"];
@@ -374,6 +390,7 @@
                                                              JSONObjectWithData:data
                                                              options:NSJSONReadingMutableContainers
                                                              error:&error];
+                                   
                                    if([self.display_pokemons_str isEqualToString:@"true"])
                                    {
                                        BOOL annFound = NO;
@@ -415,73 +432,85 @@
                                                    
                                                    NSString *key    = [self.pokemons[i] objectForKey:@"pokemon_id"];
                                                    
-                                                   if(![self isPokemonVeryCommon:[NSString stringWithFormat:@"%@", key]] && ([date timeIntervalSinceNow] > 0.0))
+                                                   BOOL isPokemonVeryCommonPokemon = [self isPokemonVeryCommon:[NSString stringWithFormat:@"%@", key]];
+                                                   
+                                                   if([date timeIntervalSinceNow] > 0.0)
                                                    {
-                                                       point.spawnpointID   = [self.pokemons[i] objectForKey:@"spawnpoint_id"];
-                                                       point.expirationDate = date;
-                                                       
-                                                       point.coordinate     = pokemonLocation;
-                                                       point.title          = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
-                                                       point.subtitle       = [NSString stringWithFormat:@"Disappears at %02d:%02d:%02d", (int)hour, (int)minute, (int)second];
-                                                       point.pokemonID      = [[self.pokemons[i] valueForKey:@"pokemon_id"] intValue];
-                                                       
-                                                       [self.mapview addAnnotation:point];
-                                                       
-                                                       if(!firstConnection)
+                                                       if((isPokemonVeryCommonPokemon == YES) && (isHideVeryCommonActivated == YES))
                                                        {
-                                                           NSString *notificationMessage = [NSString stringWithFormat:@"%@ was added on the map !", point.title];
-                                                           if([self.savedFavorite count] > 0)
+                                                           // Nothing to do
+                                                           // Option "hide very common" activated and the pokemon is very common
+                                                       }
+                                                       else
+                                                       {
+                                                           point.hidePokemon    = isPokemonVeryCommonPokemon;
+                                                           point.spawnpointID   = [self.pokemons[i] objectForKey:@"spawnpoint_id"];
+                                                           point.expirationDate = date;
+                                                           
+                                                           point.coordinate     = pokemonLocation;
+                                                           point.title          = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
+                                                           point.subtitle       = [NSString stringWithFormat:@"Disappears at %02d:%02d:%02d", (int)hour, (int)minute, (int)second];
+                                                           point.pokemonID      = [[self.pokemons[i] valueForKey:@"pokemon_id"] intValue];
+                                                           
+                                                           [self.mapview addAnnotation:point];
+                                                           
+                                                           if(!firstConnection)
                                                            {
-                                                               isFav = NO;
-                                                               for (NSString *pokemonID in self.savedFavorite) {
-                                                                   if ([pokemonID intValue] == [key intValue]) {
-                                                                       isFav = YES;
-                                                                       break;
+                                                               NSString *notificationMessage = [NSString stringWithFormat:@"%@ was added on the map !", point.title];
+                                                               if([self.savedFavorite count] > 0)
+                                                               {
+                                                                   isFav = NO;
+                                                                   for (NSString *pokemonID in self.savedFavorite) {
+                                                                       if ([pokemonID intValue] == [key intValue]) {
+                                                                           isFav = YES;
+                                                                           break;
+                                                                       }
                                                                    }
                                                                }
-                                                           }
-                                                           
-                                                           if(isFav)
-                                                           {
-                                                               NSLog(@"FAV Pokemon added on map !!");
                                                                
-                                                               notificationMessage = [NSString stringWithFormat:@"%@ your favorite pokemon was on the map !", point.title];
+                                                               if(isFav)
+                                                               {
+                                                                   NSLog(@"FAV Pokemon added on map !!");
+                                                                   
+                                                                   notificationMessage = [NSString stringWithFormat:@"%@ your favorite pokemon was on the map !", point.title];
+                                                                   
+                                                                   if(isFavNotificationActivated)
+                                                                   {
+                                                                       self.notification = [CWStatusBarNotification new];
+                                                                       self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];;
+                                                                       self.notification.notificationLabelTextColor = [UIColor whiteColor];
+                                                                       
+                                                                       [pokemonFavAppearSound play];
+                                                                       
+                                                                       [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
+                                                                       
+                                                                       __weak typeof(self) weakSelf = self;
+                                                                       self.notification.notificationTappedBlock = ^(void) {
+                                                                           [weakSelf.mapview showAnnotations:@[point] animated:YES];
+                                                                       };
+                                                                   }
+                                                               }
+                                                               else
+                                                               {
+                                                                   NSLog(@"Pokemon added on map %@", point.title);
+                                                                   if(isNormalNotificationActivated)
+                                                                   {
+                                                                       self.notification = [CWStatusBarNotification new];
+                                                                       [pokemonAppearSound play];
+                                                                       
+                                                                       [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
+                                                                       
+                                                                       __weak typeof(self) weakSelf = self;
+                                                                       self.notification.notificationTappedBlock = ^(void) {
+                                                                           [weakSelf.mapview showAnnotations:@[point] animated:YES];
+                                                                       };
+                                                                   }
+                                                               }
                                                                
-                                                               if(isFavNotificationActivated)
-                                                               {
-                                                                   self.notification = [CWStatusBarNotification new];
-                                                                   self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];;
-                                                                   self.notification.notificationLabelTextColor = [UIColor whiteColor];
-                                                                   
-                                                                   [pokemonFavAppearSound play];
-                                                                   
-                                                                   [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
-                                                                   
-                                                                   __weak typeof(self) weakSelf = self;
-                                                                   self.notification.notificationTappedBlock = ^(void) {
-                                                                       [weakSelf.mapview showAnnotations:@[point] animated:YES];
-                                                                   };
-                                                               }
+                                                               
                                                            }
-                                                           else
-                                                           {
-                                                               NSLog(@"Pokemon added on map %@", point.title);
-                                                               if(isNormalNotificationActivated)
-                                                               {
-                                                                   self.notification = [CWStatusBarNotification new];
-                                                                   [pokemonAppearSound play];
-                                                                   
-                                                                   [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
-                                                                   
-                                                                   __weak typeof(self) weakSelf = self;
-                                                                   self.notification.notificationTappedBlock = ^(void) {
-                                                                       [weakSelf.mapview showAnnotations:@[point] animated:YES];
-                                                                   };
-                                                               }
-                                                           }
-                                                           
-                                                           
                                                        }
+                                                       
                                                    }
                                                }
                                                
@@ -608,8 +637,8 @@
         
         if([defaults objectForKey:@"display_pokestops"] != nil)
         {
-            if(!display_pokestops)
-                self.display_pokestops_str = @"false";
+            if(display_pokestops)
+                self.display_pokestops_str = @"true";
         }
         
         if([defaults objectForKey:@"display_gyms"] != nil)
@@ -623,6 +652,7 @@
         request = [request stringByReplacingOccurrencesOfString:@"%%pokestops_display%%" withString:self.display_pokestops_str];
         request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:self.display_gyms_str];
         
+        NSLog(@"%@", request);
         self.requestNewLocationStr = [self.requestNewLocationStr stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     }
     else
@@ -671,6 +701,7 @@
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[NSString stringWithFormat:@"%d",annotationPokemon.pokemonID]];
                 view.canShowCallout = YES;
                 view.rightCalloutAccessoryView = button;
+                
                 UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
                 
                 /* Spritesheet has 7 columns */
@@ -887,6 +918,12 @@
                     {
                         NSLog(@"Pokemon removed %@", annotation.title);
                         
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+                            [self.mapview removeAnnotation:annotation];
+                        }];
+                    }
+                    else if((annotationPoke.hidePokemon == YES) && (isHideVeryCommonActivated == YES))
+                    {
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
                             [self.mapview removeAnnotation:annotation];
                         }];

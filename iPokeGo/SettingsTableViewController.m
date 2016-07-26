@@ -47,7 +47,7 @@
         [self.gymsSwitch setOn:[prefs boolForKey:@"display_gyms"]];
     
     if([prefs objectForKey:@"display_common"] == nil)
-        [self.commonSwitch setOn:YES]; // Not already set
+        [self.commonSwitch setOn:NO]; // Not already set
     else
         [self.commonSwitch setOn:[prefs boolForKey:@"display_common"]];
 
