@@ -914,8 +914,8 @@
 - (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
     ;
-    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
-    CLLocationDistance distance = [pokemonLocation distanceFromLocation:userLocation];
+
+    CLLocationDistance distance = [pokemonLocation distanceFromLocation:self.mapview.userLocation.location];
     
     DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
     [distanceLabel setDistance:distance];
