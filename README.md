@@ -30,6 +30,7 @@ This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
 
 ## TODO
 - [ ] Make the app totaly independent
+- [ ] Regroup pokestops annotations to reduce CPU usage
 - [x] Change scan position
 
 ## Android Version
