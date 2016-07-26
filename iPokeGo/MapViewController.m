@@ -605,8 +605,8 @@
         
         if([defaults objectForKey:@"display_pokestops"] != nil)
         {
-            if(!display_pokestops)
-                self.display_pokestops_str = @"false";
+            if(display_pokestops)
+                self.display_pokestops_str = @"true";
         }
         
         if([defaults objectForKey:@"display_gyms"] != nil)
@@ -620,6 +620,7 @@
         request = [request stringByReplacingOccurrencesOfString:@"%%pokestops_display%%" withString:self.display_pokestops_str];
         request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:self.display_gyms_str];
         
+        NSLog(@"%@", request);
         self.requestNewLocationStr = [self.requestNewLocationStr stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     }
     else
