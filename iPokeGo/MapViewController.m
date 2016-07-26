@@ -209,6 +209,13 @@
     
     if(([defaults objectForKey:@"radar_lat"] != nil) && ([defaults objectForKey:@"radar_long"] != nil))
     {
+        for (int i = 0; i < [self.mapview.annotations count]; i++) {
+            MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+            
+            if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
+                [self.mapview removeAnnotation:annotation];
+        }
+        
         NSLog(@"[!] - Restore radar");
         CLLocationCoordinate2D locCoord;
         locCoord.latitude   = [defaults doubleForKey:@"radar_lat"];
