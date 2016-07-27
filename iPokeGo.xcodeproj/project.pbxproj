@@ -3189,8 +3189,8 @@
 				TargetAttributes = {
 					27F385571D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 5HC6C66BE5;
-						DevelopmentTeamName = "Mark van Lagen (Personal Team)";
+						DevelopmentTeam = C6D6DBHW5C;
+						DevelopmentTeamName = "Dimitri Dessus";
 						ProvisioningStyle = Automatic;
 					};
 					27F385701D4130B30004A1B3 = {
@@ -4355,7 +4355,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mvl.iPokeGo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4368,7 +4368,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mvl.iPokeGo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
