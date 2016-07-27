@@ -252,7 +252,10 @@
     
     NSString *pathPokemonFavAppearSound    = [NSString stringWithFormat:@"%@/favoritePokemon.mp3", [[NSBundle mainBundle] resourcePath]];
     NSURL *soundUrlPokemonFavAppearSound   = [NSURL fileURLWithPath:pathPokemonFavAppearSound];
-    
+	
+	AVAudioSession *audiosession = [AVAudioSession sharedInstance];
+	[audiosession setCategory:AVAudioSessionCategoryAmbient error:nil];
+	
     pokemonAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonAppearSound error:nil];
     pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
 }
@@ -274,6 +277,8 @@
         filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
     else if([language isEqualToString:@"zh_cn"])
         filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.zh_cn" withExtension:@"json"];
+    else if([language isEqualToString:@"ja"])
+        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.ja" withExtension:@"json"];
     else
         filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
     
