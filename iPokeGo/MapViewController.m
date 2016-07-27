@@ -47,12 +47,12 @@
     else
     {
         UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Server not set"
-                                    message:@"Please go in settings to enter server address"
+                                    alertControllerWithTitle:NSLocalizedString(@"Server not set", @"The title of an alert that tells the user, that no server was set.")
+                                    message:NSLocalizedString(@"Please go in settings to enter server address", @"The message of an alert that tells the user, that no server was set.")
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:@"OK"
+                             actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
@@ -318,12 +318,12 @@
     {
         //Location Services is off from settings
         UIAlertController *alert = [UIAlertController
-                                      alertControllerWithTitle:@"Error"
-                                      message:@"Location denied, please go in settings to allow this app to use your location"
+                                      alertControllerWithTitle:NSLocalizedString(@"Location service denied", @"The title of an alert, that tells the user that he/she denied location access to the app.")
+                                      message:NSLocalizedString(@"Location denied, please go in settings to allow this app to use your location", @"The message of an alert, that tells the user that he/she denied location access to the app.")
                                       preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:@"OK"
+                             actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
                              style:UIAlertActionStyleDefault
                              handler:nil];
         

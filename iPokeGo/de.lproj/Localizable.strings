@@ -1,0 +1,20 @@
+/* The message of an alert, that tells the user that he/she denied location access to the app. */
+"Location denied, please go in settings to allow this app to use your location" = "Bitte erlaube der App den Zugriff auf Ortungsdienste, damit Pokemon in Deiner Nähe angezeigt werden können.";
+
+/* The title of an alert, that tells the user that he/she denied location access to the app. */
+"Location service denied" = "Ortungsdienste verweigert";
+
+/* A common affirmative action title, like 'OK' in english. */
+"OK" = "OK";
+
+/* The message of an alert that tells the user, that no server was set. */
+"Please go in settings to enter server address" = "Bitte öffne die Einstellungen und füge einen Server hinzu.";
+
+/* The title of an alert that tells the user, that no server was set. */
+"Server not set" = "Kein Server angegeben";
+
+/* The title of the Pokémon selection for common Pokémon. */
+"Common" = "Gewöhnlich";
+
+/* The title of the Pokémon selection for favorite Pokémon. */
+"Favorite" = "Favoriten";

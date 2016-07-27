@@ -960,6 +960,7 @@
 		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
 		A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0847DAF1D46D12100215DC9 /* icons-hd.png */; };
 		AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F01D47D04200DEE95C /* pokemon.json */; };
+		AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F61D49252100DEE95C /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1961,6 +1962,9 @@
 		AEFA37F31D47D04B00DEE95C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/pokemon.json"; sourceTree = "<group>"; };
 		AEFA37F41D47D04E00DEE95C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fr; path = fr.lproj/pokemon.json; sourceTree = "<group>"; };
 		AEFA37F51D491E4900DEE95C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ja; path = ja.lproj/pokemon.json; sourceTree = "<group>"; };
+		AEFA37F71D49252100DEE95C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AEFA37FF1D49292D00DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		AEFA380B1D49293400DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3049,6 +3053,7 @@
 				27F385671D4130B30004A1B3 /* Assets.xcassets */,
 				27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */,
 				27F3856C1D4130B30004A1B3 /* Info.plist */,
+				AEFA37F61D49252100DEE95C /* Localizable.strings */,
 				0256E3801D473D4900CEEE3F /* Views */,
 				27F3855B1D4130B30004A1B3 /* Supporting Files */,
 			);
@@ -4035,6 +4040,7 @@
 				27ED253B1D4387220056E366 /* 454.png in Resources */,
 				27ED258C1D4387230056E366 /* 507.png in Resources */,
 				27ED25471D4387220056E366 /* 465.png in Resources */,
+				AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */,
 				27ED26311D4387230056E366 /* 648.png in Resources */,
 				27814C6B1D4221AD0032F237 /* Gym.png in Resources */,
 				27ED267B1D4387230056E366 /* 676-matron.png in Resources */,
@@ -4245,6 +4251,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				27F385651D4130B30004A1B3 /* Base */,
+				AEFA37FF1D49292D00DEE95C /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4267,6 +4274,15 @@
 				AEFA37F51D491E4900DEE95C /* ja */,
 			);
 			name = pokemon.json;
+			sourceTree = "<group>";
+		};
+		AEFA37F61D49252100DEE95C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEFA37F71D49252100DEE95C /* Base */,
+				AEFA380B1D49293400DEE95C /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
