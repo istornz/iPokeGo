@@ -39,3 +39,6 @@
 
 /* The hint that a favorite Pokémon appeared on the map. */
 "[Pokemon] your favorite pokemon was added to the map!" = "%@, dein Favorit, wurde der Karte hinzugefügt!";
+
+/* The title of an annotation on the map to scan the location. */
+"Scan location" = "Position scannen";
