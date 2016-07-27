@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */; };
-		272FCEAC1D423F83003ED548 /* pokemon.de.json in Resources */ = {isa = PBXBuildFile; fileRef = 272FCEA81D423F83003ED548 /* pokemon.de.json */; };
-		272FCEAD1D423F83003ED548 /* pokemon.en.json in Resources */ = {isa = PBXBuildFile; fileRef = 272FCEA91D423F83003ED548 /* pokemon.en.json */; };
-		272FCEAE1D423F83003ED548 /* pokemon.fr.json in Resources */ = {isa = PBXBuildFile; fileRef = 272FCEAA1D423F83003ED548 /* pokemon.fr.json */; };
-		272FCEAF1D423F83003ED548 /* pokemon.zh_cn.json in Resources */ = {isa = PBXBuildFile; fileRef = 272FCEAB1D423F83003ED548 /* pokemon.zh_cn.json */; };
 		273604561D44094700194BAF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604551D44094700194BAF /* ding.mp3 */; };
 		273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 273604631D440E4900194BAF /* CWStatusBarNotification.m */; };
 		273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604651D441B7B00194BAF /* favoritePokemon.mp3 */; };
@@ -959,6 +955,7 @@
 		27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4244D1D469710007ADEE4 /* AudioToolbox.framework */; };
 		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
 		A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0847DAF1D46D12100215DC9 /* icons-hd.png */; };
+		AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F01D47D04200DEE95C /* pokemon.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -981,10 +978,6 @@
 /* Begin PBXFileReference section */
 		2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymAnnotation.h; sourceTree = "<group>"; };
 		2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GymAnnotation.m; sourceTree = "<group>"; };
-		272FCEA81D423F83003ED548 /* pokemon.de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon.de.json; sourceTree = "<group>"; };
-		272FCEA91D423F83003ED548 /* pokemon.en.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon.en.json; sourceTree = "<group>"; };
-		272FCEAA1D423F83003ED548 /* pokemon.fr.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon.fr.json; sourceTree = "<group>"; };
-		272FCEAB1D423F83003ED548 /* pokemon.zh_cn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon.zh_cn.json; sourceTree = "<group>"; };
 		273604551D44094700194BAF /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
 		273604621D440E4900194BAF /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
 		273604631D440E4900194BAF /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
@@ -1951,6 +1944,10 @@
 		27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
+		AEFA37F11D47D04800DEE95C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/pokemon.json; sourceTree = "<group>"; };
+		AEFA37F21D47D04A00DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = de.lproj/pokemon.json; sourceTree = "<group>"; };
+		AEFA37F31D47D04B00DEE95C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/pokemon.json"; sourceTree = "<group>"; };
+		AEFA37F41D47D04E00DEE95C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fr; path = fr.lproj/pokemon.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1983,10 +1980,7 @@
 		272FCEA71D423F74003ED548 /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
-				272FCEA81D423F83003ED548 /* pokemon.de.json */,
-				272FCEA91D423F83003ED548 /* pokemon.en.json */,
-				272FCEAA1D423F83003ED548 /* pokemon.fr.json */,
-				272FCEAB1D423F83003ED548 /* pokemon.zh_cn.json */,
+				AEFA37F01D47D04200DEE95C /* pokemon.json */,
 			);
 			name = Localizations;
 			sourceTree = "<group>";
@@ -3188,6 +3182,9 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				"zh-Hans",
+				fr,
 			);
 			mainGroup = 27F3854F1D4130B30004A1B3;
 			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
@@ -3553,7 +3550,6 @@
 				27ED241F1D4387220056E366 /* 205.png in Resources */,
 				27ED232F1D4387220056E366 /* 5.png in Resources */,
 				27ED23F31D4387220056E366 /* 189.png in Resources */,
-				272FCEAE1D423F83003ED548 /* pokemon.fr.json in Resources */,
 				27ED26751D4387230056E366 /* 676-dandy.png in Resources */,
 				27ED26661D4387230056E366 /* 670-orange.png in Resources */,
 				27ED253D1D4387220056E366 /* 456.png in Resources */,
@@ -3590,7 +3586,6 @@
 				27ED259F1D4387230056E366 /* 526.png in Resources */,
 				27ED24C81D4387220056E366 /* 359.png in Resources */,
 				27ED234C1D4387220056E366 /* 31.png in Resources */,
-				272FCEAC1D423F83003ED548 /* pokemon.de.json in Resources */,
 				27ED24CB1D4387220056E366 /* 362.png in Resources */,
 				27ED23351D4387220056E366 /* 9-mega.png in Resources */,
 				27ED23721D4387220056E366 /* 68.png in Resources */,
@@ -3674,7 +3669,7 @@
 				27ED25841D4387230056E366 /* 499.png in Resources */,
 				27ED25131D4387220056E366 /* 421-sunshine.png in Resources */,
 				27ED25571D4387220056E366 /* 479-heat.png in Resources */,
-				272FCEAD1D423F83003ED548 /* pokemon.en.json in Resources */,
+				AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */,
 				27ED25771D4387230056E366 /* 493-ice.png in Resources */,
 				27ED26051D4387230056E366 /* 616.png in Resources */,
 				27ED24F31D4387220056E366 /* 396.png in Resources */,
@@ -3883,7 +3878,6 @@
 				27ED238F1D4387220056E366 /* 96.png in Resources */,
 				27ED24751D4387220056E366 /* 285.png in Resources */,
 				27ED23B71D4387220056E366 /* 133.png in Resources */,
-				272FCEAF1D423F83003ED548 /* pokemon.zh_cn.json in Resources */,
 				27ED23341D4387220056E366 /* 8.png in Resources */,
 				27ED23471D4387220056E366 /* 26.png in Resources */,
 				27ED24981D4387220056E366 /* 316.png in Resources */,
@@ -4229,6 +4223,17 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		AEFA37F01D47D04200DEE95C /* pokemon.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEFA37F11D47D04800DEE95C /* en */,
+				AEFA37F21D47D04A00DEE95C /* de */,
+				AEFA37F31D47D04B00DEE95C /* zh-Hans */,
+				AEFA37F41D47D04E00DEE95C /* fr */,
+			);
+			name = pokemon.json;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -4236,6 +4241,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4281,6 +4287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

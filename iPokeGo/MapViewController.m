@@ -251,25 +251,12 @@
     pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
 }
 
--(void)loadLocalization
-{
-    NSString *language = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+-(void)loadLocalization {
     NSError *error;
     
-    NSURL *filePath = nil;
+    NSURL *filePath = [[NSBundle mainBundle] URLForResource:@"pokemon" withExtension:@"json"];
     
     self.localization = [[NSDictionary alloc] init];
-    
-    if([language isEqualToString:@"fr"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.fr" withExtension:@"json"];
-    else if([language isEqualToString:@"de"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.de" withExtension:@"json"];
-    else if([language isEqualToString:@"en"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
-    else if([language isEqualToString:@"zh_cn"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.zh_cn" withExtension:@"json"];
-    else
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
     
     NSString *stringPath = [filePath absoluteString];
     NSData *localizationData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringPath]];
