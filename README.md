@@ -26,6 +26,13 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 7. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
 8. Unplug and enjoy the app
 
+## Configuration
+On settings, please enter the address of your server.
+
+Warning <img src="http://www.outsourcing-pharma.com/var/plain_site/storage/images/publications/pharmaceutical-science/outsourcing-pharma.com/clinical-development/ab-science-hit-with-fda-warning-letter-over-clinical-trials/10077458-1-eng-GB/AB-Science-hit-with-FDA-warning-letter-over-clinical-trials.png" width="20" height="20"/> : "localhost:5000" or "127.0.0.1:5000" are hardware address so it will not work !
+
+To find your address look at this : http://bit.ly/2aweVR1 (if you have a local server) and http://bit.ly/1dWVBmR (if you want to remote server).
+
 ## Compatibility
 - iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
 - Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/tree/V2.0)
