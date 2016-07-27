@@ -6,13 +6,13 @@
 //  Copyright © 2016 Dimitri Dessus. All rights reserved.
 //
 
-#import "FavoriteTableViewController.h"
+#import "PokemonSelectTableViewController.h"
 
-@interface FavoriteTableViewController ()
+@interface PokemonSelectTableViewController ()
 
 @end
 
-@implementation FavoriteTableViewController
+@implementation PokemonSelectTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,12 +24,12 @@
     [self loadLocalization];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *pokemonListSaved = [defaults objectForKey:@"pokemon_favorite"];
+    NSArray *pokemonListSaved = [defaults objectForKey:self.preferenceKey];
     
     if([pokemonListSaved count] > 0)
-        self.pokemonFavorite    = [[NSMutableArray alloc] initWithArray:pokemonListSaved];
+        self.pokemonSelected    = [[NSMutableArray alloc] initWithArray:pokemonListSaved];
     else
-        self.pokemonFavorite    = [[NSMutableArray alloc] init];
+        self.pokemonSelected    = [[NSMutableArray alloc] init];
     
     for (int i = 1; i < (POKEMON_NUMBER + 1); i++)
     {
@@ -112,11 +112,11 @@
     
     if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue]) {
         [self.pokemonChecked replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:NO]];
-        [self.pokemonFavorite removeObject:[self.pokemonID objectAtIndex:indexPath.row]];
+        [self.pokemonSelected removeObject:[self.pokemonID objectAtIndex:indexPath.row]];
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     } else {
         [self.pokemonChecked replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
-        [self.pokemonFavorite addObject:[self.pokemonID objectAtIndex:indexPath.row]];
+        [self.pokemonSelected addObject:[self.pokemonID objectAtIndex:indexPath.row]];
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }
 }
@@ -140,7 +140,7 @@
 -(IBAction)saveAction:(id)sender
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:self.pokemonFavorite forKey:@"pokemon_favorite"];
+    [prefs setObject:self.pokemonSelected forKey:self.preferenceKey];
     [prefs synchronize];
     
     [self.navigationController popViewControllerAnimated:YES];

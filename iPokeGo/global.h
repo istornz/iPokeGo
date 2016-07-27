@@ -15,6 +15,12 @@
 #define SWITCH_POKESTOPS    1
 #define SWITCH_GYMS         2
 #define SWITCH_COMMON       3
+#define SWITCH_DISTANCE     4
+#define SWITCH_TIME         5
+#define SWITCH_TIMETIMER    6
+
+#define SELECT_FAVORITE	    0
+#define SELECT_COMMON       1
 
 #define SWITCH_NOTIFI_NORM  0
 #define SWITCH_NOTIFI_FAV   1

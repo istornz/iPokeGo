@@ -3,7 +3,7 @@
 This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo4.jpg" width="270" height="480"/>
-<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo2.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo5.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
@@ -13,7 +13,8 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 - Notification on status bar when a new pokemon was added on the map
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
 - Add any server
-- Possibility to show/hide very common pokemon like (Rattata, Pidgey, Zubat, Drowzee)
+- See distance and remaining time on each pokemons
+- Possibility to show/hide common pokemon in a list
 
 ## Installation
 1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
@@ -23,10 +24,18 @@ This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-
 5. Plug in your device and at the top select it in the dropdown
 6. Hit the play button it should compile and transfer over to the device pluged in and open
 7. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
-8. unplug and enjoy the app
+8. Unplug and enjoy the app
+
+## Configuration
+On settings, please enter the address of your server.
+
+Warning <img src="http://www.outsourcing-pharma.com/var/plain_site/storage/images/publications/pharmaceutical-science/outsourcing-pharma.com/clinical-development/ab-science-hit-with-fda-warning-letter-over-clinical-trials/10077458-1-eng-GB/AB-Science-hit-with-FDA-warning-letter-over-clinical-trials.png" width="20" height="20"/> : "localhost:5000" or "127.0.0.1:5000" are hardware address so it will not work !
+
+To find your address look at this : http://bit.ly/2aweVR1 (if you have a local server) and http://bit.ly/1dWVBmR (if you want to remote server).
 
 ## Compatibility
-This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
+- iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
+- Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/tree/V2.0)
 
 ## TODO
 - [ ] Make the app totaly independent
