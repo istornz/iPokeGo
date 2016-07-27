@@ -18,3 +18,27 @@
 
 /* The title of the Pokémon selection for favorite Pokémon. */
 "Favorite" = "Favoriten";
+
+/* The title of a Pokéstop annotation on the map. */
+"Pokestop" = "Pokéstop";
+
+/* The message of a Pokéstop annotation on the map. */
+"This is a pokestop" = "Dies ist ein Pokéstop";
+
+/* The title of a gym annotation on the map. */
+"Gym" = "Arena";
+
+/* The description of a gym annotation on the map with points. */
+"Gym points: %d" = "Arenapunkte: %d";
+
+/* The hint in a annotation callout that indicates when a Pokémon disappears. */
+"Disappears at %02d:%02d:%02d" = "Verschwindet um %02d:%02d:%02d";
+
+/* The hint that a certain Pokémon appeared on the map. */
+"[Pokemon] was added to the map!" = "%@ wurde der Karte hinzugefügt!";
+
+/* The hint that a favorite Pokémon appeared on the map. */
+"[Pokemon] your favorite pokemon was added to the map!" = "%@, dein Favorit, wurde der Karte hinzugefügt!";
+
+/* The title of an annotation on the map to scan the location. */
+"Scan location" = "Position scannen";

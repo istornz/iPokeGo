@@ -146,7 +146,7 @@
         [prefs synchronize];
         
         dropPin.coordinate = locCoord;
-        dropPin.title = @"Scan location";
+        dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
         
         for (int i = 0; i < [self.mapview.annotations count]; i++) {
             MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
@@ -240,7 +240,7 @@
         radar = locCoord;
         
         dropPin.coordinate = locCoord;
-        dropPin.title = @"Scan location";
+        dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
         [self.mapview addAnnotation:dropPin];
     }
 }
@@ -435,14 +435,14 @@
                                                            
                                                            point.coordinate     = pokemonLocation;
                                                            point.title          = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
-                                                           point.subtitle       = [NSString stringWithFormat:@"Disappears at %02d:%02d:%02d", (int)hour, (int)minute, (int)second];
+                                                           point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Disappears at %02d:%02d:%02d", @"The hint in a annotation callout that indicates when a Pokémon disappears."), (int)hour, (int)minute, (int)second];
                                                            point.pokemonID      = [[self.pokemons[i] valueForKey:@"pokemon_id"] intValue];
                                                            
                                                            [self.mapview addAnnotation:point];
                                                            
                                                            if(!firstConnection)
                                                            {
-                                                               NSString *notificationMessage = [NSString stringWithFormat:@"%@ was added on the map !", point.title];
+                                                               NSString *notificationMessage = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , point.title];
                                                                if([self.savedFavorite count] > 0)
                                                                {
                                                                    isFav = NO;
@@ -458,7 +458,7 @@
                                                                {
                                                                    NSLog(@"FAV Pokemon added on map !!");
                                                                    
-                                                                   notificationMessage = [NSString stringWithFormat:@"%@ your favorite pokemon was on the map !", point.title];
+                                                                   notificationMessage = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , point.title];
                                                                    
                                                                    if(isFavNotificationActivated)
                                                                    {
@@ -532,8 +532,8 @@
                                                    CLLocationCoordinate2D pokestopLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] floatValue], [self.pokestops[i][@"longitude"] floatValue]);
                                                    
                                                    point.coordinate = pokestopLocation;
-                                                   point.title      = @"Pokestop";
-                                                   point.subtitle   = @"This is a pokestop";
+                                                   point.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
+                                                   point.subtitle   = NSLocalizedString(@"This is a pokestop", @"The message of a Pokéstop annotation on the map.");
                                                    point.pokestopID = [[self.pokestops[i] valueForKey:@"pokestop_id"] intValue];
                                                    
                                                    if([[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]])
@@ -575,8 +575,8 @@
                                                    CLLocationCoordinate2D gymLocation = CLLocationCoordinate2DMake([self.gyms[i][@"latitude"] floatValue], [self.gyms[i][@"longitude"] floatValue]);
                                                    
                                                    point.coordinate     = gymLocation;
-                                                   point.title          = @"Gym";
-                                                   point.subtitle       = [NSString stringWithFormat:@"Gym points : %d", [self.gyms[i][@"gym_points"] intValue]];
+                                                   point.title          = NSLocalizedString(@"Gym", @"The title of a gym annotation on the map.");
+                                                   point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Gym points: %d", @"The description of a gym annotation on the map with points."), [self.gyms[i][@"gym_points"] intValue]];
                                                    point.gymsID         = [[self.gyms[i] valueForKey:@"team_id"] intValue];
                                                    point.guardPokemonID = [[self.gyms[i] valueForKey:@"guard_pokemon_id"] intValue];
                                                    point.gym_points     = [[self.gyms[i] valueForKey:@"gym_points"] intValue];
