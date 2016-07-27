@@ -204,13 +204,7 @@
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
 	
 	self.savedFavorite              = [defaults objectForKey:@"pokemon_favorite"];
-//	self.savedCommon              = [defaults objectForKey:@"pokemon_common"];
-    self.savedCommon              = [[NSMutableArray alloc] initWithObjects:
-                                     @"13", @"10", @"17", @"18", @"20", @"21",
-                                     @"41", @"42", @"48", @"84",
-                                     @"19",
-                                     @"16",
-                                     @"96", nil];
+	self.savedCommon              = [defaults objectForKey:@"pokemon_common"];
     self.mapLocation                = [defaults objectForKey:@"map_position"];
     
     if([defaults objectForKey:@"norm_notification"] != nil)
@@ -703,9 +697,25 @@
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[NSString stringWithFormat:@"%d",annotationPokemon.pokemonID]];
                 view.canShowCallout = YES;
                 view.rightCalloutAccessoryView = button;
-                view.image = [UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationPokemon.pokemonID]];
-                view.frame = CGRectMake(0, 0, 52, 48);
-                view.contentMode = UIViewContentModeScaleAspectFill;
+                
+                UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
+                
+                /* Spritesheet has 7 columns */
+                int x = (annotationPokemon.pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
+                
+                int y = annotationPokemon.pokemonID;
+                
+                while(y%SPRITESHEET_COLS != 0) y++;
+                
+                y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
+                
+                CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+                
+                CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
+                view.image = [UIImage imageWithCGImage:imageRef];
+                
+                view.frame = CGRectMake(0, 0, IMAGE_SIZE*1.5, IMAGE_SIZE*1.5);
+                CGImageRelease(imageRef);
                 
                 if([defaults boolForKey:@"display_time"]) {
                     [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
