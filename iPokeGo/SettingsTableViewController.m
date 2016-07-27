@@ -75,11 +75,11 @@
 
 		switch (((UITableViewCell *)sender).tag) {
 			case SELECT_COMMON:
-				destViewController.title = @"Common";
+				destViewController.title = NSLocalizedString(@"Common", @"The title of the Pokémon selection for common Pokémon.") ;
 				destViewController.preferenceKey = @"pokemon_common";
 				break;
 			case SELECT_FAVORITE:
-				destViewController.title = @"Favorite";
+				destViewController.title = NSLocalizedString(@"Favorite", @"The title of the Pokémon selection for favorite Pokémon.");
 				destViewController.preferenceKey = @"pokemon_favorite";
 				break;
 			default:

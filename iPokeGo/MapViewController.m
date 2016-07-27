@@ -47,12 +47,12 @@
     else
     {
         UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Server not set"
-                                    message:@"Please go in settings to enter server address"
+                                    alertControllerWithTitle:NSLocalizedString(@"Server not set", @"The title of an alert that tells the user, that no server was set.")
+                                    message:NSLocalizedString(@"Please go in settings to enter server address", @"The message of an alert that tells the user, that no server was set.")
                                     preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:@"OK"
+                             actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
@@ -260,27 +260,12 @@
     pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
 }
 
--(void)loadLocalization
-{
-    NSString *language = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+-(void)loadLocalization {
     NSError *error;
     
-    NSURL *filePath = nil;
+    NSURL *filePath = [[NSBundle mainBundle] URLForResource:@"pokemon" withExtension:@"json"];
     
     self.localization = [[NSDictionary alloc] init];
-    
-    if([language isEqualToString:@"fr"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.fr" withExtension:@"json"];
-    else if([language isEqualToString:@"de"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.de" withExtension:@"json"];
-    else if([language isEqualToString:@"en"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
-    else if([language isEqualToString:@"zh_cn"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.zh_cn" withExtension:@"json"];
-    else if([language isEqualToString:@"ja"])
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.ja" withExtension:@"json"];
-    else
-        filePath = [[NSBundle mainBundle] URLForResource:@"pokemon.en" withExtension:@"json"];
     
     NSString *stringPath = [filePath absoluteString];
     NSData *localizationData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringPath]];
@@ -333,12 +318,12 @@
     {
         //Location Services is off from settings
         UIAlertController *alert = [UIAlertController
-                                      alertControllerWithTitle:@"Error"
-                                      message:@"Location denied, please go in settings to allow this app to use your location"
+                                      alertControllerWithTitle:NSLocalizedString(@"Location service denied", @"The title of an alert, that tells the user that he/she denied location access to the app.")
+                                      message:NSLocalizedString(@"Location denied, please go in settings to allow this app to use your location", @"The message of an alert, that tells the user that he/she denied location access to the app.")
                                       preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:@"OK"
+                             actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
                              style:UIAlertActionStyleDefault
                              handler:nil];
         
