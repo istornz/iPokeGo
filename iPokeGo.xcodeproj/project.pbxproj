@@ -962,6 +962,7 @@
 		27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F4244B1D4684B8007ADEE4 /* ScanPin.png */; };
 		27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4244D1D469710007ADEE4 /* AudioToolbox.framework */; };
 		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
+		46397F6C1D48973E004EADF3 /* pokemon.ja.json in Resources */ = {isa = PBXBuildFile; fileRef = 46397F6B1D48973E004EADF3 /* pokemon.ja.json */; };
 		A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0847DAF1D46D12100215DC9 /* icons-hd.png */; };
 /* End PBXBuildFile section */
 
@@ -1962,6 +1963,7 @@
 		27F4244F1D469A68007ADEE4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
+		46397F6B1D48973E004EADF3 /* pokemon.ja.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pokemon.ja.json; sourceTree = "<group>"; };
 		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2011,6 +2013,7 @@
 				272FCEA81D423F83003ED548 /* pokemon.de.json */,
 				272FCEA91D423F83003ED548 /* pokemon.en.json */,
 				272FCEAA1D423F83003ED548 /* pokemon.fr.json */,
+				46397F6B1D48973E004EADF3 /* pokemon.ja.json */,
 				272FCEAB1D423F83003ED548 /* pokemon.zh_cn.json */,
 			);
 			name = Localizations;
@@ -3955,6 +3958,7 @@
 				27ED233D1D4387220056E366 /* 16.png in Resources */,
 				27ED24B51D4387220056E366 /* 345.png in Resources */,
 				27ED259B1D4387230056E366 /* 522.png in Resources */,
+				46397F6C1D48973E004EADF3 /* pokemon.ja.json in Resources */,
 				27ED246D1D4387220056E366 /* 278.png in Resources */,
 				27ED265B1D4387230056E366 /* 666.png in Resources */,
 				27ED23BD1D4387220056E366 /* 139.png in Resources */,
