@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"PokemonTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"pokemoncell"];
+
     self.pokemonID          = [[NSMutableArray alloc] init];
     self.pokemonChecked     = [[NSMutableArray alloc] init];
     found                   = NO;
@@ -65,6 +67,10 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -75,7 +81,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    PokemonTableViewCell *cell      = [tableView dequeueReusableCellWithIdentifier:@"pokemoncell" forIndexPath:indexPath];
+    static NSString *tableIdentifier = @"pokemoncell";
+    PokemonTableViewCell *cell = (PokemonTableViewCell *) [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
+    
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PokemonTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
     NSString *key                   = [NSString stringWithFormat:@"%d", ((int)indexPath.row + 1)];
     
     cell.pokemonName.text           = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
@@ -108,6 +122,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     PokemonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue]) {

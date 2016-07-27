@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tN7-MN-fXw" customClass="PokemonTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tN7-MN-fXw" id="NaP-9Q-Ndj">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wIv-sa-FPB">
+                        <rect key="frame" x="8" y="8" width="65" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="wIv-sa-FPB" secondAttribute="height" multiplier="1:1" id="uJ5-rJ-Ulz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-xG-bS2">
+                        <rect key="frame" x="81" y="8" width="231" height="65"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="wIv-sa-FPB" firstAttribute="top" secondItem="NaP-9Q-Ndj" secondAttribute="top" constant="8" id="0vA-dQ-RDU"/>
+                    <constraint firstAttribute="bottom" secondItem="O3s-xG-bS2" secondAttribute="bottom" constant="8" id="16P-ls-qVS"/>
+                    <constraint firstItem="O3s-xG-bS2" firstAttribute="leading" secondItem="wIv-sa-FPB" secondAttribute="trailing" constant="8" id="JWV-lS-PiE"/>
+                    <constraint firstAttribute="bottom" secondItem="wIv-sa-FPB" secondAttribute="bottom" constant="8" id="PR6-jA-tZt"/>
+                    <constraint firstItem="O3s-xG-bS2" firstAttribute="top" secondItem="NaP-9Q-Ndj" secondAttribute="top" constant="8" id="llT-tT-H3w"/>
+                    <constraint firstItem="wIv-sa-FPB" firstAttribute="leading" secondItem="NaP-9Q-Ndj" secondAttribute="leading" constant="8" id="o1i-8W-gEM"/>
+                    <constraint firstAttribute="trailing" secondItem="O3s-xG-bS2" secondAttribute="trailing" constant="8" id="uL7-mN-6kj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="pokemonName" destination="O3s-xG-bS2" id="Or0-fP-iIz"/>
+                <outlet property="pokemonimageView" destination="wIv-sa-FPB" id="DQX-tD-UdF"/>
+            </connections>
+            <point key="canvasLocation" x="319" y="444"/>
+        </tableViewCell>
+    </objects>
+</document>
