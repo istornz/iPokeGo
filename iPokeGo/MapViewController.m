@@ -204,7 +204,13 @@
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
 	
 	self.savedFavorite              = [defaults objectForKey:@"pokemon_favorite"];
-	self.savedCommon              = [defaults objectForKey:@"pokemon_common"];
+//	self.savedCommon              = [defaults objectForKey:@"pokemon_common"];
+    self.savedCommon              = [[NSMutableArray alloc] initWithObjects:
+                                     @"13", @"10", @"17", @"18", @"20", @"21",
+                                     @"41", @"42", @"48", @"84",
+                                     @"19",
+                                     @"16",
+                                     @"96", nil];
     self.mapLocation                = [defaults objectForKey:@"map_position"];
     
     if([defaults objectForKey:@"norm_notification"] != nil)
