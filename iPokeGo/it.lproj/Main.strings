@@ -1,38 +1,47 @@
+/* Class = "UITextField"; placeholder = "http://example.com:5000"; ObjectID = "2Np-Qc-YrV"; */
+"2Np-Qc-YrV.placeholder" = "http://example.com:5000";
+
 /* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
-"4fQ-bY-gce.text" = "Normale";
+"4fQ-bY-gce.text" = "Notifiche Normali";
 
 /* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
-"7ko-iA-AHA.text" = "Vibration";
+"7ko-iA-AHA.text" = "Vibrazione";
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "8Xl-BM-0fo"; */
-"8Xl-BM-0fo.text" = "Benachrichtigungen";
+"8Xl-BM-0fo.text" = "Notifiche";
+
+/* Class = "UINavigationItem"; title = "iPokeGO"; ObjectID = "9hh-uV-Y8u"; */
+"9hh-uV-Y8u.title" = "iPokeGO";
 
 /* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "54h-D9-tBH"; */
-"54h-D9-tBH.text" = "Favorisierte Pokémon";
+"54h-D9-tBH.text" = "Pokémon Favoriti";
 
 /* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
-"Chl-3V-xZU.title" = "Favoriten";
+"Chl-3V-xZU.title" = "Favoriti";
+
+/* Class = "UILabel"; text = "Bulbizarre"; ObjectID = "JXZ-XW-o1E"; */
+"JXZ-XW-o1E.text" = "Bulbizarre";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "LVj-cE-dT0"; */
 "LVj-cE-dT0.text" = "Server";
 
 /* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
-"VTm-hq-lXv.headerTitle" = "Ansicht";
+"VTm-hq-lXv.headerTitle" = "Vista";
 
 /* Class = "UILabel"; text = "Hide Common"; ObjectID = "Vqr-4Z-ndM"; */
-"Vqr-4Z-ndM.text" = "Gewöhnliche ausblenden";
+"Vqr-4Z-ndM.text" = "Nascondi Comuni";
 
 /* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
-"WOD-rI-XQR.headerTitle" = "Global";
+"WOD-rI-XQR.headerTitle" = "Generali";
 
 /* Class = "UILabel"; text = "Show Distance"; ObjectID = "f3D-0y-G02"; */
-"f3D-0y-G02.text" = "Distanz anzeigen";
+"f3D-0y-G02.text" = "Mostra Distanza";
 
 /* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "ki1-kr-sA7"; */
-"ki1-kr-sA7.title" = "Benachrichtigungen";
+"ki1-kr-sA7.title" = "Notifiche";
 
 /* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
-"l0T-Vk-KFi.text" = "Arenen";
+"l0T-Vk-KFi.text" = "Palestre";
 
 /* Class = "UILabel"; text = "Pokémon"; ObjectID = "ltF-Ma-tNo"; */
 "ltF-Ma-tNo.text" = "Pokémon";
@@ -41,17 +50,17 @@
 "md8-IQ-yAP.text" = "Pokéstops";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "n4v-qt-5L6"; */
-"n4v-qt-5L6.title" = "Einstellungen";
+"n4v-qt-5L6.title" = "Impostazioni";
 
 /* Class = "UILabel"; text = "Show Time"; ObjectID = "noN-PI-lN3"; */
-"noN-PI-lN3.text" = "Zeit anzeigen";
+"noN-PI-lN3.text" = "Mostra Orario";
 
 /* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
-"qL9-xq-yVt.text" = "Favoriten";
+"qL9-xq-yVt.text" = "Notifiche Favoriti";
 
 /* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "qZK-uj-arc"; */
-"qZK-uj-arc.text" = "Gewöhnliche Pokémon";
+"qZK-uj-arc.text" = "Pokémon Comuni";
 
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
-"ySg-LB-wEB.text" = "Timer statt Zeit anzeigen";
+"ySg-LB-wEB.text" = "Sostituisci Orario con Timer";
 
