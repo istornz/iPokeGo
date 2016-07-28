@@ -61,7 +61,9 @@
                     <navigationItem key="navigationItem" title="iPokeGO" id="9hh-uV-Y8u">
                         <barButtonItem key="rightBarButtonItem" image="settings" id="QgY-d3-dyb">
                             <connections>
-                                <segue destination="J9n-1T-uXc" kind="presentation" identifier="showSettings" id="EX8-FF-kLb"/>
+                                <segue destination="J9n-1T-uXc" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="QgY-d3-dyb" id="EX8-FF-kLb">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
