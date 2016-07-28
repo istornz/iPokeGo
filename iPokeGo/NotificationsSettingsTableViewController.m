@@ -39,6 +39,11 @@
     else
         [self.favoriteNotificationSwitch setOn:[prefs boolForKey:@"fav_notification"]];
     
+    if([prefs objectForKey:@"vibration"] == nil)
+        [self.vibrationSwitch setOn:YES]; // Not already set
+    else
+        [self.vibrationSwitch setOn:[prefs boolForKey:@"vibration"]];
+    
 }
 
 -(IBAction)switchAction:(UISwitch *)sender
@@ -51,6 +56,9 @@
             break;
         case SWITCH_NOTIFI_FAV:
             [prefs setObject:[NSNumber numberWithBool:self.favoriteNotificationSwitch.on] forKey:@"fav_notification"];
+            break;
+        case SWITCH_VIBRATION:
+            [prefs setObject:[NSNumber numberWithBool:self.vibrationSwitch.on] forKey:@"vibration"];
             break;
             
         default:

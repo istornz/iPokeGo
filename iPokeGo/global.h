@@ -24,6 +24,7 @@
 
 #define SWITCH_NOTIFI_NORM  0
 #define SWITCH_NOTIFI_FAV   1
+#define SWITCH_VIBRATION    2
 
 #define MAP_SCALE           0.02
 

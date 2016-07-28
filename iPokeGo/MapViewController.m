@@ -32,6 +32,7 @@
     isNormalNotificationActivated   = YES;
     isFavNotificationActivated      = YES;
     isHideVeryCommonActivated       = NO;
+    isVibrationActivated              = NO;
     
     [self initObserver];
     [self loadSavedData];
@@ -212,6 +213,10 @@
     
     if([defaults objectForKey:@"fav_notification"] != nil)
         isFavNotificationActivated      = [defaults boolForKey:@"fav_notification"];
+    
+    if([defaults objectForKey:@"vibration"] != nil)
+        isVibrationActivated      = [defaults boolForKey:@"vibration"];
+
     
     if([defaults objectForKey:@"display_common"] != nil)
     {
@@ -467,6 +472,10 @@
                                                                        self.notification.notificationLabelTextColor = [UIColor whiteColor];
                                                                        
                                                                        [pokemonFavAppearSound play];
+                                                                       if(isVibrationActivated)
+                                                                       {
+                                                                           AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+                                                                       }
                                                                        
                                                                        [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
                                                                        
@@ -483,6 +492,10 @@
                                                                    {
                                                                        self.notification = [CWStatusBarNotification new];
                                                                        [pokemonAppearSound play];
+                                                                       if(isVibrationActivated)
+                                                                       {
+                                                                           AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+                                                                       }
                                                                        
                                                                        [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
                                                                        

@@ -31,6 +31,7 @@
     BOOL isNormalNotificationActivated;
     BOOL isFavNotificationActivated;
     BOOL isHideVeryCommonActivated;
+    BOOL isVibrationActivated;
 }
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;

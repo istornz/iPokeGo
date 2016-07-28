@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11173.2" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="grx-CZ-2cH">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11173.2" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="grx-CZ-2cH">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11143.2"/>
@@ -19,7 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqr-1P-Zum">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqr-1P-Zum">
+                                <frame key="frameInset" minY="667" width="375"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="CMF-dP-z3f"/>
                                 </connections>
@@ -520,7 +521,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="fPW-Ij-8vg">
-                            <frame key="frameInset" minY="152" width="375"/>
+                            <frame key="frameInset" minY="196" width="375"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
@@ -595,6 +596,40 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7iL-gV-jAo">
+                                        <rect key="frame" x="0.0" y="152" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7iL-gV-jAo" id="cHm-OO-tiu">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vibration" translatesAutoresizingMaskIntoConstraints="NO" id="ayl-Bb-svU">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="UeL-fF-CgQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ko-iA-AHA">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4BL-vh-OIN">
+                                                    <connections>
+                                                        <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="7ck-kl-8qM"/>
+                                                        <action selector="switchAction:" destination="wh6-tH-e6J" eventType="valueChanged" id="p1z-2B-CHd"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7ko-iA-AHA" firstAttribute="centerY" secondItem="4BL-vh-OIN" secondAttribute="centerY" id="0Zb-Vv-5Ab"/>
+                                                <constraint firstItem="7ko-iA-AHA" firstAttribute="leading" secondItem="ayl-Bb-svU" secondAttribute="trailing" constant="8" symbolic="YES" id="6qE-wj-8Sa"/>
+                                                <constraint firstItem="4BL-vh-OIN" firstAttribute="trailing" secondItem="cHm-OO-tiu" secondAttribute="trailingMargin" id="8kj-QO-7U6"/>
+                                                <constraint firstItem="ayl-Bb-svU" firstAttribute="leading" secondItem="cHm-OO-tiu" secondAttribute="leadingMargin" id="Ab8-C5-QmP"/>
+                                                <constraint firstItem="ayl-Bb-svU" firstAttribute="top" secondItem="cHm-OO-tiu" secondAttribute="topMargin" id="Fui-K1-cj1"/>
+                                                <constraint firstItem="ayl-Bb-svU" firstAttribute="bottom" secondItem="cHm-OO-tiu" secondAttribute="bottomMargin" id="p9i-y5-ebx"/>
+                                                <constraint firstItem="ayl-Bb-svU" firstAttribute="centerY" secondItem="7ko-iA-AHA" secondAttribute="centerY" id="zl9-Mx-pvq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -611,6 +646,9 @@
                         <outlet property="normalNotificationImageView" destination="FEZ-lz-79d" id="Dry-fm-Nci"/>
                         <outlet property="normalNotificationLabel" destination="4fQ-bY-gce" id="Ica-wT-957"/>
                         <outlet property="normalNotificationSwitch" destination="amc-ai-1tS" id="7Az-bx-h76"/>
+                        <outlet property="vibrationImageView" destination="ayl-Bb-svU" id="eWc-d8-spC"/>
+                        <outlet property="vibrationLabel" destination="7ko-iA-AHA" id="YhL-pZ-Aj3"/>
+                        <outlet property="vibrationSwitch" destination="4BL-vh-OIN" id="jA0-mC-b7j"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCT-aZ-cAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -723,6 +761,7 @@
         <image name="settings" width="37" height="37"/>
         <image name="time" width="37" height="37"/>
         <image name="timer" width="37" height="37"/>
+        <image name="vibration" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="woz-ey-Fr8"/>
