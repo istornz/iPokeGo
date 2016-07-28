@@ -462,12 +462,6 @@
                                                    
                                                    NSDate *date = [NSDate dateWithTimeIntervalSince1970:(milliTime / 1000)];
                                                    
-                                                   NSCalendar *calendar = [NSCalendar currentCalendar];
-                                                   NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:date];
-                                                   NSInteger hour   = [components hour];
-                                                   NSInteger minute = [components minute];
-                                                   NSInteger second = [components second];
-                                                   
                                                    NSString *key    = [self.pokemons[i] objectForKey:@"pokemon_id"];
                                                    
                                                    BOOL isPokemonVeryCommonPokemon = [self isPokemonVeryCommon:[NSString stringWithFormat:@"%@", key]];
@@ -487,7 +481,7 @@
                                                            
                                                            point.coordinate     = pokemonLocation;
                                                            point.title          = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
-                                                           point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Disappears at %02d:%02d:%02d", @"The hint in a annotation callout that indicates when a Pokémon disappears."), (int)hour, (int)minute, (int)second];
+                                                           point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Disappears at", @"The hint in a annotation callout that indicates when a Pokémon disappears."), [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
                                                            point.pokemonID      = [[self.pokemons[i] valueForKey:@"pokemon_id"] intValue];
                                                            
                                                            [self.mapview addAnnotation:point];
@@ -656,7 +650,7 @@
                                }
                            }];
 }
-                                                  
+    
 -(NSString *)buildRequest
 {
     // Build Request

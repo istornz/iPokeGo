@@ -32,7 +32,7 @@
 "Gym points: %d" = "Arenapunkte: %d";
 
 /* The hint in a annotation callout that indicates when a Pokémon disappears. */
-"Disappears at %02d:%02d:%02d" = "Verschwindet um %02d:%02d:%02d";
+"Disappears at" = "Verschwindet um %@";
 
 /* The hint that a certain Pokémon appeared on the map. */
 "[Pokemon] was added to the map!" = "%@ wurde der Karte hinzugefügt!";
