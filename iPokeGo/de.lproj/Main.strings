@@ -52,3 +52,6 @@
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
 "ySg-LB-wEB.text" = "Timer statt Zeit anzeigen";
 
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
+"7ko-iA-AHA.text" = "Vibration";
+
