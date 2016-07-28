@@ -29,6 +29,32 @@
 		27814C731D4221AD0032F237 /* Valor_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 27814C691D4221AD0032F237 /* Valor_large.png */; };
 		27814C741D4221AD0032F237 /* Valor.png in Resources */ = {isa = PBXBuildFile; fileRef = 27814C6A1D4221AD0032F237 /* Valor.png */; };
 		2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2788622C1D4226D300CCF60E /* PokestopAnnotation.m */; };
+		27917DE11D4A1AEA00A9E6BE /* settings_icons.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917DE01D4A1AEA00A9E6BE /* settings_icons.png */; };
+		27917DE31D4A33AE00A9E6BE /* logo_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917DE21D4A33AE00A9E6BE /* logo_app.png */; };
+		27B525F31D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */; };
+		27B525F41D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */; };
+		27B525F51D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */; };
+		27B525F61D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */; };
+		27B525F71D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */; };
+		27B525F81D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */; };
+		27B525F91D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */; };
+		27B525FA1D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */; };
+		27B525FB1D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */; };
+		27B525FC1D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */; };
+		27B525FD1D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */; };
+		27B525FE1D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */; };
+		27B525FF1D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */; };
+		27B526001D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */; };
+		27B526011D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */; };
+		27B526021D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */; };
+		27B526031D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */; };
+		27B526041D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */; };
+		27B526051D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */; };
+		27B526061D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */; };
+		27B526071D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */; };
+		27B526081D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */; };
+		27B526091D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */; };
+		27B5260A1D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */; };
 		27ED232A1D4387220056E366 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27ED1F981D43871E0056E366 /* 1.png */; };
 		27ED232B1D4387220056E366 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27ED1F991D43871E0056E366 /* 2.png */; };
 		27ED232C1D4387220056E366 /* 3-mega.png in Resources */ = {isa = PBXBuildFile; fileRef = 27ED1F9A1D43871E0056E366 /* 3-mega.png */; };
@@ -1013,6 +1039,32 @@
 		27814C6A1D4221AD0032F237 /* Valor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Valor.png; sourceTree = "<group>"; };
 		2788622B1D4226D300CCF60E /* PokestopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopAnnotation.h; sourceTree = "<group>"; };
 		2788622C1D4226D300CCF60E /* PokestopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopAnnotation.m; sourceTree = "<group>"; };
+		27917DE01D4A1AEA00A9E6BE /* settings_icons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icons.png; sourceTree = "<group>"; };
+		27917DE21D4A33AE00A9E6BE /* logo_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_app.png; sourceTree = "<group>"; };
+		27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0000_Frame-24.png"; sourceTree = "<group>"; };
+		27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0001_Frame-23.png"; sourceTree = "<group>"; };
+		27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0002_Frame-22.png"; sourceTree = "<group>"; };
+		27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0003_Frame-21.png"; sourceTree = "<group>"; };
+		27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0004_Frame-20.png"; sourceTree = "<group>"; };
+		27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0005_Frame-19.png"; sourceTree = "<group>"; };
+		27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0006_Frame-18.png"; sourceTree = "<group>"; };
+		27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0007_Frame-17.png"; sourceTree = "<group>"; };
+		27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0008_Frame-16.png"; sourceTree = "<group>"; };
+		27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0009_Frame-15.png"; sourceTree = "<group>"; };
+		27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0010_Frame-14.png"; sourceTree = "<group>"; };
+		27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0011_Frame-13.png"; sourceTree = "<group>"; };
+		27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0012_Frame-12.png"; sourceTree = "<group>"; };
+		27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0013_Frame-11.png"; sourceTree = "<group>"; };
+		27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0014_Frame-10.png"; sourceTree = "<group>"; };
+		27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0015_Frame-9.png"; sourceTree = "<group>"; };
+		27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0016_Frame-8.png"; sourceTree = "<group>"; };
+		27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0017_Frame-7.png"; sourceTree = "<group>"; };
+		27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0018_Frame-6.png"; sourceTree = "<group>"; };
+		27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0019_Frame-5.png"; sourceTree = "<group>"; };
+		27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0020_Frame-4.png"; sourceTree = "<group>"; };
+		27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0021_Frame-3.png"; sourceTree = "<group>"; };
+		27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0022_Frame-2.png"; sourceTree = "<group>"; };
+		27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0023_Frame-1.png"; sourceTree = "<group>"; };
 		27ED1F981D43871E0056E366 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = Pokemons/larger/1.png; sourceTree = "<group>"; };
 		27ED1F991D43871E0056E366 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2.png; path = Pokemons/larger/2.png; sourceTree = "<group>"; };
 		27ED1F9A1D43871E0056E366 /* 3-mega.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "3-mega.png"; path = "Pokemons/larger/3-mega.png"; sourceTree = "<group>"; };
@@ -2077,6 +2129,9 @@
 		27814C601D4221A40032F237 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				27B525DA1D4A4F1600D1DC17 /* PokestopLuredAnimated */,
+				27917DE21D4A33AE00A9E6BE /* logo_app.png */,
+				27917DE01D4A1AEA00A9E6BE /* settings_icons.png */,
 				27814C611D4221AD0032F237 /* Gym.png */,
 				27814C621D4221AD0032F237 /* Harmony_large.png */,
 				27814C631D4221AD0032F237 /* Instinct_large.png */,
@@ -2090,6 +2145,37 @@
 				27F4244B1D4684B8007ADEE4 /* ScanPin.png */,
 			);
 			name = Others;
+			sourceTree = "<group>";
+		};
+		27B525DA1D4A4F1600D1DC17 /* PokestopLuredAnimated */ = {
+			isa = PBXGroup;
+			children = (
+				27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */,
+				27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */,
+				27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */,
+				27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */,
+				27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */,
+				27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */,
+				27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */,
+				27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */,
+				27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */,
+				27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */,
+				27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */,
+				27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */,
+				27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */,
+				27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */,
+				27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */,
+				27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */,
+				27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */,
+				27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */,
+				27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */,
+				27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */,
+				27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */,
+				27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */,
+				27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */,
+				27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */,
+			);
+			name = PokestopLuredAnimated;
 			sourceTree = "<group>";
 		};
 		27ED1F971D4387140056E366 /* larger */ = {
@@ -3240,6 +3326,7 @@
 			files = (
 				27ED269F1D4387230056E366 /* 704.png in Resources */,
 				27ED24C61D4387220056E366 /* 358.png in Resources */,
+				27B526001D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png in Resources */,
 				27ED25051D4387220056E366 /* 412-trash.png in Resources */,
 				27ED26AA1D4387230056E366 /* 711-average.png in Resources */,
 				27ED23EF1D4387220056E366 /* 185.png in Resources */,
@@ -3248,6 +3335,7 @@
 				27ED25991D4387230056E366 /* 520.png in Resources */,
 				27ED257B1D4387230056E366 /* 493-rock.png in Resources */,
 				27ED257E1D4387230056E366 /* 493.png in Resources */,
+				27B525F71D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png in Resources */,
 				27ED266C1D4387230056E366 /* 671-orange.png in Resources */,
 				27ED25C51D4387230056E366 /* 560.png in Resources */,
 				27ED260C1D4387230056E366 /* 623.png in Resources */,
@@ -3266,6 +3354,7 @@
 				27ED24D31D4387220056E366 /* 370.png in Resources */,
 				27ED24601D4387220056E366 /* 265.png in Resources */,
 				27ED26A11D4387230056E366 /* 706.png in Resources */,
+				27B526091D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png in Resources */,
 				27ED26181D4387230056E366 /* 635.png in Resources */,
 				27ED23791D4387220056E366 /* 75.png in Resources */,
 				27ED267E1D4387230056E366 /* 676-star.png in Resources */,
@@ -3281,6 +3370,7 @@
 				27ED25061D4387220056E366 /* 412.png in Resources */,
 				27ED243A1D4387220056E366 /* 229.png in Resources */,
 				27ED24E71D4387220056E366 /* 386-normal.png in Resources */,
+				27B526031D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png in Resources */,
 				27ED25A91D4387230056E366 /* 536.png in Resources */,
 				27ED266F1D4387230056E366 /* 671-yellow.png in Resources */,
 				27ED248F1D4387220056E366 /* 308.png in Resources */,
@@ -3319,6 +3409,7 @@
 				27ED24D01D4387220056E366 /* 367.png in Resources */,
 				27ED24BB1D4387220056E366 /* 351-rainy.png in Resources */,
 				27ED26791D4387230056E366 /* 676-kabuki.png in Resources */,
+				27B525FA1D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png in Resources */,
 				27ED255E1D4387230056E366 /* 483.png in Resources */,
 				27ED247A1D4387220056E366 /* 290.png in Resources */,
 				27ED24DF1D4387220056E366 /* 381-mega.png in Resources */,
@@ -3332,11 +3423,13 @@
 				27ED26081D4387230056E366 /* 619.png in Resources */,
 				27ED234E1D4387220056E366 /* 33.png in Resources */,
 				27ED23DE1D4387220056E366 /* 169.png in Resources */,
+				27B5260A1D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png in Resources */,
 				27ED267D1D4387230056E366 /* 676-pharaoh.png in Resources */,
 				27ED258E1D4387230056E366 /* 509.png in Resources */,
 				27ED252A1D4387220056E366 /* 439.png in Resources */,
 				27ED23631D4387220056E366 /* 54.png in Resources */,
 				27ED247F1D4387220056E366 /* 295.png in Resources */,
+				27B526051D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png in Resources */,
 				27ED23DB1D4387220056E366 /* 166.png in Resources */,
 				27ED243B1D4387220056E366 /* 230.png in Resources */,
 				27ED260E1D4387230056E366 /* 625.png in Resources */,
@@ -3346,6 +3439,7 @@
 				27ED26451D4387230056E366 /* 664.png in Resources */,
 				27ED24171D4387220056E366 /* 201-w.png in Resources */,
 				27ED255C1D4387230056E366 /* 481.png in Resources */,
+				27B525FF1D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png in Resources */,
 				27ED25341D4387220056E366 /* 448-mega.png in Resources */,
 				27ED26771D4387230056E366 /* 676-diamond.png in Resources */,
 				27ED25831D4387230056E366 /* 498.png in Resources */,
@@ -3374,6 +3468,7 @@
 				27ED26A91D4387230056E366 /* 710.png in Resources */,
 				27ED24D51D4387220056E366 /* 372.png in Resources */,
 				27ED23B11D4387220056E366 /* 128.png in Resources */,
+				27B526081D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png in Resources */,
 				27ED258A1D4387230056E366 /* 505.png in Resources */,
 				27ED25081D4387220056E366 /* 413-sandy.png in Resources */,
 				27ED25AF1D4387230056E366 /* 542.png in Resources */,
@@ -3392,6 +3487,7 @@
 				27ED255B1D4387230056E366 /* 480.png in Resources */,
 				27ED24B81D4387220056E366 /* 348.png in Resources */,
 				27ED24D91D4387220056E366 /* 376.png in Resources */,
+				27B525F41D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png in Resources */,
 				27ED232E1D4387220056E366 /* 4.png in Resources */,
 				27ED266B1D4387230056E366 /* 671-blue.png in Resources */,
 				27ED24DC1D4387220056E366 /* 379.png in Resources */,
@@ -3429,6 +3525,7 @@
 				27ED24EC1D4387220056E366 /* 389.png in Resources */,
 				27ED265D1D4387230056E366 /* 668.png in Resources */,
 				27ED25EE1D4387230056E366 /* 593.png in Resources */,
+				27B526011D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png in Resources */,
 				27ED26741D4387230056E366 /* 675.png in Resources */,
 				27ED23701D4387220056E366 /* 66.png in Resources */,
 				27ED24281D4387220056E366 /* 213.png in Resources */,
@@ -3485,6 +3582,7 @@
 				27ED239D1D4387220056E366 /* 110.png in Resources */,
 				27ED23691D4387220056E366 /* 60.png in Resources */,
 				27ED23F81D4387220056E366 /* 194.png in Resources */,
+				27B525F81D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png in Resources */,
 				27ED26531D4387230056E366 /* 666-ocean.png in Resources */,
 				27ED25A61D4387230056E366 /* 533.png in Resources */,
 				273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */,
@@ -3517,6 +3615,7 @@
 				27ED250F1D4387220056E366 /* 418.png in Resources */,
 				27ED24C01D4387220056E366 /* 353.png in Resources */,
 				27ED24471D4387220056E366 /* 242.png in Resources */,
+				27B526021D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png in Resources */,
 				27ED236A1D4387220056E366 /* 61.png in Resources */,
 				27ED24841D4387220056E366 /* 300.png in Resources */,
 				27ED26B01D4387230056E366 /* 713.png in Resources */,
@@ -3611,6 +3710,7 @@
 				27ED25871D4387230056E366 /* 502.png in Resources */,
 				27ED25691D4387230056E366 /* 492-land.png in Resources */,
 				27ED258F1D4387230056E366 /* 510.png in Resources */,
+				27917DE31D4A33AE00A9E6BE /* logo_app.png in Resources */,
 				27ED24911D4387220056E366 /* 310-mega.png in Resources */,
 				27ED23F21D4387220056E366 /* 188.png in Resources */,
 				27ED25BB1D4387230056E366 /* 552.png in Resources */,
@@ -3629,6 +3729,7 @@
 				27ED26AC1D4387230056E366 /* 711-small.png in Resources */,
 				27ED248A1D4387220056E366 /* 305.png in Resources */,
 				27ED24121D4387220056E366 /* 201-r.png in Resources */,
+				27B525FB1D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png in Resources */,
 				27ED25641D4387230056E366 /* 487.png in Resources */,
 				27ED23A91D4387220056E366 /* 121.png in Resources */,
 				27ED25AD1D4387230056E366 /* 540.png in Resources */,
@@ -3664,6 +3765,7 @@
 				27ED26471D4387230056E366 /* 666-archipelago.png in Resources */,
 				27ED24261D4387220056E366 /* 212-mega.png in Resources */,
 				27ED262E1D4387230056E366 /* 647.png in Resources */,
+				27B526041D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png in Resources */,
 				27ED23DF1D4387220056E366 /* 170.png in Resources */,
 				27ED25BD1D4387230056E366 /* 554.png in Resources */,
 				27ED26931D4387230056E366 /* 692.png in Resources */,
@@ -3770,6 +3872,7 @@
 				27ED25AC1D4387230056E366 /* 539.png in Resources */,
 				27ED23821D4387220056E366 /* 84.png in Resources */,
 				27ED24CD1D4387220056E366 /* 364.png in Resources */,
+				27B525FC1D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png in Resources */,
 				27ED233A1D4387220056E366 /* 13.png in Resources */,
 				27ED24321D4387220056E366 /* 222.png in Resources */,
 				27ED25041D4387220056E366 /* 412-sandy.png in Resources */,
@@ -3884,6 +3987,7 @@
 				27ED25701D4387230056E366 /* 493-fairy.png in Resources */,
 				27ED255A1D4387230056E366 /* 479.png in Resources */,
 				27ED25C71D4387230056E366 /* 562.png in Resources */,
+				27B525F51D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png in Resources */,
 				27ED23681D4387220056E366 /* 59.png in Resources */,
 				27ED263A1D4387230056E366 /* 653.png in Resources */,
 				27ED263E1D4387230056E366 /* 657.png in Resources */,
@@ -3971,6 +4075,7 @@
 				27ED25B71D4387230056E366 /* 550-blue-striped.png in Resources */,
 				27ED25AE1D4387230056E366 /* 541.png in Resources */,
 				27ED252E1D4387220056E366 /* 443.png in Resources */,
+				27B526071D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png in Resources */,
 				27ED24401D4387220056E366 /* 235.png in Resources */,
 				27ED249D1D4387220056E366 /* 321.png in Resources */,
 				27ED268A1D4387230056E366 /* 683.png in Resources */,
@@ -3982,6 +4087,7 @@
 				27ED26971D4387230056E366 /* 696.png in Resources */,
 				27ED25611D4387230056E366 /* 486.png in Resources */,
 				27ED26511D4387230056E366 /* 666-modern.png in Resources */,
+				27B525FD1D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png in Resources */,
 				27ED254F1D4387220056E366 /* 473.png in Resources */,
 				27ED26321D4387230056E366 /* 649-burn.png in Resources */,
 				27ED26301D4387230056E366 /* 648-pirouette.png in Resources */,
@@ -4025,6 +4131,8 @@
 				27ED25D21D4387230056E366 /* 573.png in Resources */,
 				27ED24E11D4387220056E366 /* 382.png in Resources */,
 				27ED23B51D4387220056E366 /* 131.png in Resources */,
+				27B525FE1D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png in Resources */,
+				27917DE11D4A1AEA00A9E6BE /* settings_icons.png in Resources */,
 				27ED24D21D4387220056E366 /* 369.png in Resources */,
 				27ED245D1D4387220056E366 /* 262.png in Resources */,
 				27ED253F1D4387220056E366 /* 458.png in Resources */,
@@ -4042,12 +4150,14 @@
 				27ED25471D4387220056E366 /* 465.png in Resources */,
 				AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */,
 				27ED26311D4387230056E366 /* 648.png in Resources */,
+				27B526061D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png in Resources */,
 				27814C6B1D4221AD0032F237 /* Gym.png in Resources */,
 				27ED267B1D4387230056E366 /* 676-matron.png in Resources */,
 				27ED23FA1D4387220056E366 /* 196.png in Resources */,
 				27ED248E1D4387220056E366 /* 308-mega.png in Resources */,
 				27ED24B21D4387220056E366 /* 342.png in Resources */,
 				27ED251A1D4387220056E366 /* 423.png in Resources */,
+				27B525F61D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png in Resources */,
 				27ED23C91D4387220056E366 /* 150-mega-x.png in Resources */,
 				27ED23801D4387220056E366 /* 82.png in Resources */,
 				27ED25001D4387220056E366 /* 409.png in Resources */,
@@ -4126,6 +4236,7 @@
 				27ED242D1D4387220056E366 /* 217.png in Resources */,
 				27ED23DC1D4387220056E366 /* 167.png in Resources */,
 				27ED251B1D4387220056E366 /* 424.png in Resources */,
+				27B525F31D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png in Resources */,
 				27ED23381D4387220056E366 /* 11.png in Resources */,
 				27ED23C01D4387220056E366 /* 142-mega.png in Resources */,
 				27ED24571D4387220056E366 /* 257-mega.png in Resources */,
@@ -4168,6 +4279,7 @@
 				27ED268D1D4387230056E366 /* 686.png in Resources */,
 				27ED26681D4387230056E366 /* 670-white.png in Resources */,
 				27ED256C1D4387230056E366 /* 493-bug.png in Resources */,
+				27B525F91D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png in Resources */,
 				27ED23C11D4387220056E366 /* 142.png in Resources */,
 				27ED23FD1D4387220056E366 /* 199.png in Resources */,
 				27ED25FC1D4387230056E366 /* 607.png in Resources */,

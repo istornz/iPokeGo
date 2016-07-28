@@ -97,7 +97,6 @@
     cell.pokemonimageView.image = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     
-    
     if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue])
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     else

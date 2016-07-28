@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "star_filled-1.png",
+      "filename" : "favorite_icons1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "star_filled.png",
+      "filename" : "favorite_icons2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "christmas_star_filled.png",
+      "filename" : "favorite_icons.png",
       "scale" : "3x"
     }
   ],

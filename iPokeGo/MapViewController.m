@@ -25,7 +25,7 @@
     self.pokestops  = [[NSMutableArray alloc] init];
     self.gyms       = [[NSMutableArray alloc] init];
     
-    self.mapview.zoomEnabled = true;
+    self.mapview.zoomEnabled        = true;
     moved                           = NO;
     firstConnection                 = YES;
     isFav                           = NO;
@@ -34,6 +34,8 @@
     isHideVeryCommonActivated       = NO;
     isVibrationActivated              = NO;
     
+    [self loadAnimatedImages];
+    [self loadNavBar];
     [self initObserver];
     [self loadSavedData];
     [self loadLocalization];
@@ -70,6 +72,51 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)loadNavBar
+{
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+    UIImage* image = [UIImage imageNamed:@"logo_app.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
+    imageView.frame = frame;
+    
+    UIView* titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    imageView.frame = titleView.bounds;
+    [titleView addSubview:imageView];
+    
+    self.navigationItem.titleView = imageView;
+}
+
+-(void)loadAnimatedImages
+{
+    self.animatedPokestopLured = [NSArray arrayWithObjects:[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0021_Frame-3.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0020_Frame-4.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0019_Frame-5.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0018_Frame-6.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0017_Frame-7.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0016_Frame-8.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0015_Frame-9.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0014_Frame-10.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0013_Frame-11.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0012_Frame-12.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0011_Frame-13.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0010_Frame-14.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0009_Frame-15.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0008_Frame-16.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0007_Frame-17.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0006_Frame-18.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0005_Frame-19.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0004_Frame-20.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0003_Frame-21.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
+                                  [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"], nil];
 }
 
 -(void)launchTimers
@@ -795,7 +842,14 @@
                 UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
                 
                 if(![lureStr isEqualToString:@"none"])
-                    pokestopImage = [UIImage imageNamed:@"PstopLured.png"];
+                {
+                    UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+                    animatedImageView.animationImages = self.animatedPokestopLured;
+                    animatedImageView.animationDuration = 1.0f;
+                    [animatedImageView setFrame:CGRectMake(0, 0, 30, 30)];
+                    [animatedImageView startAnimating];
+                    [view addSubview: animatedImageView];
+                }
                 
                 view.image = pokestopImage;
             }
