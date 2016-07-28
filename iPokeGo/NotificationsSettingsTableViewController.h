@@ -19,6 +19,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *favoriteNotificationLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *favoriteNotificationSwitch;
 
+@property(weak, nonatomic) IBOutlet UIImageView *vibrationImageView;
+@property(weak, nonatomic) IBOutlet UILabel *vibrationLabel;
+@property(weak, nonatomic) IBOutlet UISwitch *vibrationSwitch;
+
 -(IBAction)switchAction:(UISwitch *)sender;
 
 @end
