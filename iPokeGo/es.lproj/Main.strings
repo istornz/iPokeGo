@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
-"4fQ-bY-gce.text" = "Notificación Normal";
+"4fQ-bY-gce.text" = "Notificar Normal";
 
 /* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
 "7ko-iA-AHA.text" = "Vibración";
@@ -20,7 +20,7 @@
 "VTm-hq-lXv.headerTitle" = "Visualización";
 
 /* Class = "UILabel"; text = "Hide Common"; ObjectID = "Vqr-4Z-ndM"; */
-"Vqr-4Z-ndM.text" = "Ocultar comúnes";
+"Vqr-4Z-ndM.text" = "Ocultar Comunes";
 
 /* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
 "WOD-rI-XQR.headerTitle" = "Global";
@@ -47,10 +47,10 @@
 "noN-PI-lN3.text" = "Mostrar Tiempo";
 
 /* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
-"qL9-xq-yVt.text" = "Notificación de Favoritos";
+"qL9-xq-yVt.text" = "Notificar Favoritos";
 
 /* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "qZK-uj-arc"; */
-"qZK-uj-arc.text" = "Pokémon Comúnes";
+"qZK-uj-arc.text" = "Pokémon Comunes";
 
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
 "ySg-LB-wEB.text" = "Mostrar Tiempo Restante en vez de Tiempo";
