@@ -53,4 +53,4 @@
 "qZK-uj-arc.text" = "Pokémon Comunes";
 
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
-"ySg-LB-wEB.text" = "Mostrar Tiempo Restante en vez de Tiempo";
+"ySg-LB-wEB.text" = "Mostrar Tiempo Restante";
