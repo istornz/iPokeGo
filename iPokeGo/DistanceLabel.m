@@ -15,7 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.font = [UIFont boldSystemFontOfSize:13.0];
+        self.font = [UIFont boldSystemFontOfSize:10.0];
         self.textAlignment = NSTextAlignmentRight;
     }
     return self;

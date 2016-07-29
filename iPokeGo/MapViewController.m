@@ -1038,17 +1038,20 @@
     }
 }
 
+
 - (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     TimeLabel *timeLabel;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
-        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
     } else {
-        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
         
     }
     [timeLabel setDate:annotation.expirationDate];
     return timeLabel;
 }
+
+
 
 - (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
@@ -1061,7 +1064,7 @@
 
     CLLocationDistance distance = [pokemonLocation distanceFromLocation:baseLocation];
     
-    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(0, frame.size.height - 20, frame.size.width, 20)];
+    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(-7, 45, 50, 10)];
     [distanceLabel setDistance:distance];
     return distanceLabel;
 }
