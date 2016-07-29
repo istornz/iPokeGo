@@ -20,10 +20,10 @@
 "Location service denied" = "Ubicación desactivada";
 
 /* A common affirmative action title, like 'OK' in english. */
-"OK" = "OK";
+"OK" = "Aceptar";
 
 /* The message of an alert that tells the user, that no server was set. */
-"Please go in settings to enter server address" = "Dirijete a configuración para introducir la dirección del servidor";
+"Please go in settings to enter server address" = "Revise la configuración para introducir la dirección del servidor";
 
 /* The title of a Pokéstop annotation on the map. */
 "Pokestop" = "Poképarada";
@@ -41,4 +41,4 @@
 "[Pokemon] was added to the map!" = "¡%@ ha sido añadido al mapa!";
 
 /* The hint that a favorite Pokémon appeared on the map. */
-"[Pokemon] your favorite pokemon was added to the map!" = "¡%@, tú Pokémon favorito ha sido añadido al mapa!";
+"[Pokemon] your favorite pokemon was added to the map!" = "¡%@, tu Pokémon favorito ha sido añadido al mapa!"";
