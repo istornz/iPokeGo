@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
-"4fQ-bY-gce.text" = "Notificar Normal";
+"4fQ-bY-gce.text" = "Todos los Pokémon";
 
 /* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
 "7ko-iA-AHA.text" = "Vibración";
@@ -47,7 +47,7 @@
 "noN-PI-lN3.text" = "Mostrar Tiempo";
 
 /* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
-"qL9-xq-yVt.text" = "Notificar Favoritos";
+"qL9-xq-yVt.text" = "Pokémon Favoritos";
 
 /* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "qZK-uj-arc"; */
 "qZK-uj-arc.text" = "Pokémon Comunes";
