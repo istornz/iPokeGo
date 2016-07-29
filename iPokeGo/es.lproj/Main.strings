@@ -1,0 +1,56 @@
+/* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
+"4fQ-bY-gce.text" = "Todos los Pokémon";
+
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
+"7ko-iA-AHA.text" = "Vibración";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "8Xl-BM-0fo"; */
+"8Xl-BM-0fo.text" = "Notificaciones";
+
+/* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "54h-D9-tBH"; */
+"54h-D9-tBH.text" = "Pokémon Favorito";
+
+/* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
+"Chl-3V-xZU.title" = "Favoritos";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "LVj-cE-dT0"; */
+"LVj-cE-dT0.text" = "Servidor";
+
+/* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
+"VTm-hq-lXv.headerTitle" = "Visualización";
+
+/* Class = "UILabel"; text = "Hide Common"; ObjectID = "Vqr-4Z-ndM"; */
+"Vqr-4Z-ndM.text" = "Ocultar Comunes";
+
+/* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
+"WOD-rI-XQR.headerTitle" = "Global";
+
+/* Class = "UILabel"; text = "Show Distance"; ObjectID = "f3D-0y-G02"; */
+"f3D-0y-G02.text" = "Mostrar Distancia";
+
+/* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "ki1-kr-sA7"; */
+"ki1-kr-sA7.title" = "Notificaciones";
+
+/* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
+"l0T-Vk-KFi.text" = "Gimnasios";
+
+/* Class = "UILabel"; text = "Pokémon"; ObjectID = "ltF-Ma-tNo"; */
+"ltF-Ma-tNo.text" = "Pokémon";
+
+/* Class = "UILabel"; text = "Pokéstops"; ObjectID = "md8-IQ-yAP"; */
+"md8-IQ-yAP.text" = "Poképaradas";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "n4v-qt-5L6"; */
+"n4v-qt-5L6.title" = "Configuración";
+
+/* Class = "UILabel"; text = "Show Time"; ObjectID = "noN-PI-lN3"; */
+"noN-PI-lN3.text" = "Mostrar Tiempo";
+
+/* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
+"qL9-xq-yVt.text" = "Pokémon Favoritos";
+
+/* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "qZK-uj-arc"; */
+"qZK-uj-arc.text" = "Pokémon Comunes";
+
+/* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
+"ySg-LB-wEB.text" = "Mostrar Tiempo Restante";

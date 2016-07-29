@@ -1,0 +1,44 @@
+/* The title of the Pokémon selection for common Pokémon. */
+"Common" = "Común";
+
+/* The hint in a annotation callout that indicates when a Pokémon disappears. */
+"Disappears at" = "Desaparece a las %@";
+
+/* The title of the Pokémon selection for favorite Pokémon. */
+"Favorite" = "Favoritos";
+
+/* The title of a gym annotation on the map. */
+"Gym" = "Gimnasio";
+
+/* The description of a gym annotation on the map with points. */
+"Gym points: %d" = "Prestigio: %d";
+
+/* The message of an alert, that tells the user that he/she denied location access to the app. */
+"Location denied, please go in settings to allow this app to use your location" = "Ubicación desactivada. Abre Ajustes en el teléfono y permite a esta aplicación usar la ubicación";
+
+/* The title of an alert, that tells the user that he/she denied location access to the app. */
+"Location service denied" = "Ubicación desactivada";
+
+/* A common affirmative action title, like 'OK' in english. */
+"OK" = "Aceptar";
+
+/* The message of an alert that tells the user, that no server was set. */
+"Please go in settings to enter server address" = "Revise la configuración para introducir la dirección del servidor";
+
+/* The title of a Pokéstop annotation on the map. */
+"Pokestop" = "Poképarada";
+
+/* The title of an annotation on the map to scan the location. */
+"Scan location" = "Escanear ubicación";
+
+/* The title of an alert that tells the user, that no server was set. */
+"Server not set" = "Servidor no configurado";
+
+/* The message of a Pokéstop annotation on the map. */
+"This is a pokestop" = "Esta es una Poképarada";
+
+/* The hint that a certain Pokémon appeared on the map. */
+"[Pokemon] was added to the map!" = "¡%@ ha sido añadido al mapa!";
+
+/* The hint that a favorite Pokémon appeared on the map. */
+"[Pokemon] your favorite pokemon was added to the map!" = "¡%@, tu Pokémon favorito ha sido añadido al mapa!"";
