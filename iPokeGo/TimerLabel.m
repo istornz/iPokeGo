@@ -11,20 +11,21 @@
 
 @interface TimerLabel()
 @property (nonatomic) NSTimer *timer;
-@property (nonatomic) NSTimeInterval expireIn;
+@property (nonatomic) NSDate *expiryDate;
 @end
 
 @implementation TimerLabel
 
 - (void)setDate:(NSDate*)date {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
-    self.expireIn = [date timeIntervalSinceNow];
-    [self setTimeInterval:self.expireIn];
+    self.expiryDate = date;
+    [self setTimeInterval:[self.expiryDate timeIntervalSinceNow]];
 }
 
 - (void)timerFired {
-    if (self.expireIn-- > 0) {
-        [self setTimeInterval:self.expireIn];
+    NSTimeInterval expiredIn = [self.expiryDate timeIntervalSinceNow];
+    if (expiredIn > 0) {
+        [self setTimeInterval:expiredIn];
     } else {
         [self.timer invalidate];
     }
