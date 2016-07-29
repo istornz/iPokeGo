@@ -53,6 +53,11 @@
         [self.commonSwitch setOn:NO]; // Not already set
     else
         [self.commonSwitch setOn:[prefs boolForKey:@"display_common"]];
+    
+    if([prefs objectForKey:@"display_onlyfav"] == nil)
+        [self.viewOnlyFavoriteSwitch setOn:NO]; // Not already set
+    else
+        [self.viewOnlyFavoriteSwitch setOn:[prefs boolForKey:@"display_onlyfav"]];
 
     if([prefs objectForKey:@"display_distance"] == nil)
         [self.distanceSwitch setOn:NO]; // Not already set
@@ -158,6 +163,35 @@
             break;
         case SWITCH_TIMETIMER:
             [prefs setObject:[NSNumber numberWithBool:self.timeTimerSwitch.on] forKey:@"display_timer"];
+            break;
+        case SWITCH_ONLYFAV:
+            if(self.viewOnlyFavoriteSwitch.on)
+            {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSArray *pokemonListSaved = [defaults objectForKey:@"pokemon_favorite"];
+                
+                if([pokemonListSaved count] == 0)
+                {
+                    [self.viewOnlyFavoriteSwitch setOn:NO];
+                    
+                    UIAlertController *alert = [UIAlertController
+                                                alertControllerWithTitle:NSLocalizedString(@"Be carreful !", @"The title of an alert that tells the user, that no favorite pokemon is already set.")
+                                                message:NSLocalizedString(@"You don't have any favorite pokemon.\nPlease go add some Pokemon in Settings", @"The message of an alert that tells the user, that no favorite pokemon is already set.")
+                                                preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *ok = [UIAlertAction
+                                         actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
+                                         style:UIAlertActionStyleDefault
+                                         handler:nil];
+                    
+                    [alert addAction:ok];
+                    
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            }
+            
+            [prefs setObject:[NSNumber numberWithBool:self.viewOnlyFavoriteSwitch.on] forKey:@"display_onlyfav"];
+            
             break;
         default:
             // Nothing

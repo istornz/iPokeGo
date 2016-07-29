@@ -12,6 +12,7 @@
 
 @property int pokemonID;
 @property BOOL hidePokemon;
+@property BOOL isFav;
 @property NSDate *expirationDate;
 @property NSString *spawnpointID;
 

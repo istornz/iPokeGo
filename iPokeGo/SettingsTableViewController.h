@@ -34,6 +34,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *commonLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *commonSwitch;
 
+@property (weak, nonatomic) IBOutlet UIImageView *viewOnlyFavoriteImageView;
+@property (weak, nonatomic) IBOutlet UILabel *viewOnlyFavoriteLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *viewOnlyFavoriteSwitch;
+
 @property (weak, nonatomic) IBOutlet UIImageView *distanceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *distanceSwitch;

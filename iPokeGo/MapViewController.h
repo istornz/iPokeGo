@@ -26,12 +26,13 @@
     CLLocationCoordinate2D radar;
     BOOL firstConnection;
     BOOL moved;
-    BOOL isFav;
+    //BOOL isFav;
     
     BOOL isNormalNotificationActivated;
     BOOL isFavNotificationActivated;
     BOOL isHideVeryCommonActivated;
     BOOL isVibrationActivated;
+    BOOL isViewOnlyFav;
 }
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
