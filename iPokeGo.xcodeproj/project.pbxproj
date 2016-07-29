@@ -2009,6 +2009,8 @@
 		27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
+		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37F11D47D04800DEE95C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/pokemon.json; sourceTree = "<group>"; };
 		AEFA37F21D47D04A00DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = de.lproj/pokemon.json; sourceTree = "<group>"; };
 		AEFA37F31D47D04B00DEE95C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/pokemon.json"; sourceTree = "<group>"; };
@@ -3306,6 +3308,7 @@
 				"zh-Hans",
 				fr,
 				ja,
+				it,
 			);
 			mainGroup = 27F3854F1D4130B30004A1B3;
 			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
@@ -4364,6 +4367,7 @@
 			children = (
 				27F385651D4130B30004A1B3 /* Base */,
 				AEFA37FF1D49292D00DEE95C /* de */,
+				AE1E273F1D4A8F4900FA1BA0 /* it */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4393,6 +4397,7 @@
 			children = (
 				AEFA37F71D49252100DEE95C /* Base */,
 				AEFA380B1D49293400DEE95C /* de */,
+				AE1E27401D4A8F4900FA1BA0 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

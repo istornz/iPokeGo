@@ -1,45 +1,45 @@
 /* The title of the Pokémon selection for common Pokémon. */
-"Common" = "Gewöhnliche";
+"Common" = "Comuni";
 
 /* The hint in a annotation callout that indicates when a Pokémon disappears. */
-"Disappears at" = "Verschwindet um %@";
+"Disappears at" = "Scompare alle ore: %@";
 
 /* The title of the Pokémon selection for favorite Pokémon. */
-"Favorite" = "Favoriten";
+"Favorite" = "Favoriti";
 
 /* The title of a gym annotation on the map. */
-"Gym" = "Arena";
+"Gym" = "Palestra";
 
 /* The description of a gym annotation on the map with points. */
-"Gym points: %d" = "Arenapunkte: %d";
+"Gym points: %d" = "Punti Palestra: %d";
 
 /* The message of an alert, that tells the user that he/she denied location access to the app. */
-"Location denied, please go in settings to allow this app to use your location" = "Bitte erlaube der App den Zugriff auf Ortungsdienste, damit Pokemon in Deiner Nähe angezeigt werden können.";
+"Location denied, please go in settings to allow this app to use your location" = "Posizione negata! Autorizza l'uso della tua posizione all'applicazione dal Menù Impostazioni!";
 
 /* The title of an alert, that tells the user that he/she denied location access to the app. */
-"Location service denied" = "Ortungsdienste verweigert";
+"Location service denied" = "Servizio di Localizzazione negato!";
 
 /* A common affirmative action title, like 'OK' in english. */
 "OK" = "OK";
 
 /* The message of an alert that tells the user, that no server was set. */
-"Please go in settings to enter server address" = "Bitte öffne die Einstellungen und füge einen Server hinzu.";
+"Please go in settings to enter server address" = "Apri il Menù Impostazioni e aggiungi l'indirizzo di un Server!";
 
 /* The title of a Pokéstop annotation on the map. */
 "Pokestop" = "Pokéstop";
 
 /* The title of an annotation on the map to scan the location. */
-"Scan location" = "Position scannen";
+"Scan location" = "Scan Posizione";
 
 /* The title of an alert that tells the user, that no server was set. */
-"Server not set" = "Kein Server angegeben";
+"Server not set" = "Nessun Server è stato inserito!";
 
 /* The message of a Pokéstop annotation on the map. */
-"This is a pokestop" = "Dies ist ein Pokéstop";
+"This is a pokestop" = "Questo è un Pokéstop";
 
 /* The hint that a certain Pokémon appeared on the map. */
-"[Pokemon] was added to the map!" = "%@ wurde der Karte hinzugefügt!";
+"[Pokemon] was added to the map!" = "%@ è stato aggiunto alla Mappa!";
 
 /* The hint that a favorite Pokémon appeared on the map. */
-"[Pokemon] your favorite pokemon was added to the map!" = "%@, dein Favorit, wurde der Karte hinzugefügt!";
+"[Pokemon] your favorite pokemon was added to the map!" = "%@ , il tuo Favorito! È stato aggiunto alla Mappa!";
 
