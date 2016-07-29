@@ -813,7 +813,7 @@
                     default:
                         break;
                 }
-
+                
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationGym.guardPokemonID]]];
                 imageView.frame = CGRectMake(0, 0, 50, 50);
                 imageView.contentMode = UIViewContentModeScaleAspectFit;
