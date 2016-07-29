@@ -40,6 +40,8 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 ## TODO
 - [ ] Make the app totaly independent
 - [ ] Regroup pokestops annotations to reduce CPU usage
+- [ ] Real notification (work on the server part ?)
+- [ ] Update pokestop and gym annotations
 - [x] Change scan position
 
 ## Android Version
