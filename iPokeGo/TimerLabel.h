@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TimeLabel.h"
 
+extern NSString * const TimerLabelUpdateNotification;
+
 @interface TimerLabel : TimeLabel
 
 @end
