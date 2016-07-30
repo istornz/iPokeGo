@@ -3283,6 +3283,11 @@
 						DevelopmentTeam = C6D6DBHW5C;
 						DevelopmentTeamName = "Dimitri Dessus";
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					27F385701D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;

@@ -38,6 +38,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
 @property(weak, nonatomic) IBOutlet UIButton *radarButton;
 @property(nonatomic, retain) IBOutlet MKMapView *mapview;
+@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(strong, nonatomic) NSString *requestStr;

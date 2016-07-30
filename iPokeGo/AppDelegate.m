@@ -22,6 +22,12 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
+    // Notifications
+    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
     return YES;
 }
 
@@ -44,6 +50,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [application setApplicationIconBadgeNumber:0];
 }
 
 
@@ -51,5 +58,22 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark Local notification delegate
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState appState = UIApplicationStateActive;
+    if ([application respondsToSelector:@selector(applicationState)])
+        appState = application.applicationState;
+    
+    if (appState != UIApplicationStateActive)
+    {
+        NSLog(@"Notification touched !");
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showAnnotationFromLocalNotif"
+                                                            object:self
+                                                          userInfo:notification.userInfo];
+    }
+}
 
 @end

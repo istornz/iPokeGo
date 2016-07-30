@@ -28,6 +28,7 @@
 #define SWITCH_VIBRATION    2
 
 #define MAP_SCALE           0.02
+#define MAP_SCALE_ANNOT     0.001
 
 #define TEAM_BLUE           1
 #define TEAM_RED            2

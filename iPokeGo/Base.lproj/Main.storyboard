@@ -10,7 +10,7 @@
         <!--iPokeGO-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -99,7 +99,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="server" translatesAutoresizingMaskIntoConstraints="NO" id="BzD-XH-y05">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="server" translatesAutoresizingMaskIntoConstraints="NO" id="BzD-XH-y05">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="gjy-ht-ilD"/>
                                                     </constraints>
@@ -111,7 +112,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com:5000" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2Np-Qc-YrV">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://example.com:5000" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2Np-Qc-YrV">
+                                                    <frame key="frameInset" minX="142" minY="6" width="264" height="32"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                                                 </textField>
@@ -236,7 +238,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="FiD-0P-urX">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="FiD-0P-urX">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="K6N-Xx-jmq"/>
                                                     </constraints>
@@ -245,7 +248,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0mr-K7-1mv">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0mr-K7-1mv">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="O1X-Vh-oMJ"/>
                                                     </connections>
@@ -269,7 +273,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pokestop" translatesAutoresizingMaskIntoConstraints="NO" id="8RY-h8-Vcc">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pokestop" translatesAutoresizingMaskIntoConstraints="NO" id="8RY-h8-Vcc">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="v0r-Pw-A0j"/>
                                                     </constraints>
@@ -278,7 +283,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xR5-W0-bBc">
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xR5-W0-bBc">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="fsS-gu-D0S"/>
                                                     </connections>
@@ -302,7 +308,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gym" translatesAutoresizingMaskIntoConstraints="NO" id="5xx-4w-XG9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="gym" translatesAutoresizingMaskIntoConstraints="NO" id="5xx-4w-XG9">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="k1t-O1-Kmg"/>
                                                     </constraints>
@@ -311,7 +318,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-94-vC7">
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-94-vC7">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="Bpd-cB-xXR"/>
                                                     </connections>
@@ -335,7 +343,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hide_common" translatesAutoresizingMaskIntoConstraints="NO" id="EP2-LN-thq">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="hide_common" translatesAutoresizingMaskIntoConstraints="NO" id="EP2-LN-thq">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="9QC-cA-gNW"/>
                                                     </constraints>
@@ -344,7 +353,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNu-bZ-VQt">
+                                                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNu-bZ-VQt">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="DuV-WH-88f"/>
                                                     </connections>
@@ -368,7 +378,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="jyj-BA-Cbu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="jyj-BA-Cbu">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="LA8-LB-cdo"/>
                                                     </constraints>
@@ -377,7 +388,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aid-HS-5Rm">
+                                                <switch opaque="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aid-HS-5Rm">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="nt7-gL-6ZO"/>
                                                     </connections>
@@ -401,7 +413,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="distance" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-8P-E7p">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="distance" translatesAutoresizingMaskIntoConstraints="NO" id="Pim-8P-E7p">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="OAo-HN-110"/>
                                                     </constraints>
@@ -410,7 +423,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccs-Mc-qNU">
+                                                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccs-Mc-qNU">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="0Gi-DE-R7O"/>
                                                     </connections>
@@ -434,7 +448,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="Ksc-35-4Uy">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="Ksc-35-4Uy">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="2ID-yE-z0f"/>
                                                     </constraints>
@@ -443,7 +458,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-TR-O7P">
+                                                <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gni-TR-O7P">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="oKd-Ob-jzr"/>
                                                     </connections>
@@ -467,7 +483,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="T9K-XO-RJD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="T9K-XO-RJD">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="vRA-6U-UTc"/>
                                                     </constraints>
@@ -476,7 +493,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXD-9b-d5b">
+                                                <switch opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXD-9b-d5b">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="ZlE-uu-2jY"/>
                                                     </connections>
@@ -572,7 +590,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notifications" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-lz-79d">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="notifications" translatesAutoresizingMaskIntoConstraints="NO" id="FEZ-lz-79d">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="NEM-c9-PIB"/>
                                                     </constraints>
@@ -581,7 +600,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amc-ai-1tS">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="amc-ai-1tS">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="ZyL-Ci-XtE"/>
                                                         <action selector="switchAction:" destination="wh6-tH-e6J" eventType="valueChanged" id="nvV-H3-hhu"/>
@@ -606,7 +626,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="Qve-VO-iEE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="favorite" translatesAutoresizingMaskIntoConstraints="NO" id="Qve-VO-iEE">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="E5F-xj-St4"/>
                                                     </constraints>
@@ -615,7 +636,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3W-AZ-iEi">
+                                                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S3W-AZ-iEi">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="stz-nj-NOt"/>
                                                         <action selector="switchAction:" destination="wh6-tH-e6J" eventType="valueChanged" id="ehw-Zf-T9h"/>
@@ -640,7 +662,8 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vibration" translatesAutoresizingMaskIntoConstraints="NO" id="ayl-Bb-svU">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="vibration" translatesAutoresizingMaskIntoConstraints="NO" id="ayl-Bb-svU">
+                                                    <frame key="frameInset" minX="8" minY="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="UeL-fF-CgQ"/>
                                                     </constraints>
@@ -649,7 +672,8 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4BL-vh-OIN">
+                                                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4BL-vh-OIN">
+                                                    <frame key="frameInset" minX="357" minY="7" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="swicthsAction:" destination="CoE-At-s1E" eventType="valueChanged" id="7ck-kl-8qM"/>
                                                         <action selector="switchAction:" destination="wh6-tH-e6J" eventType="valueChanged" id="p1z-2B-CHd"/>

@@ -121,6 +121,12 @@
 
 -(void)launchTimers
 {
+    UIApplication  *app = [UIApplication sharedApplication];
+    self.bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }];
+    
     if(![self.timerData isValid])
     {
         NSLog(@"[+] Starting data timer...");
@@ -144,29 +150,37 @@
 
 -(void)initObserver
 {
-    [[NSNotificationCenter defaultCenter]
-                                    addObserver:self
-                                    selector:@selector(hideAnnotations)
-                                    name:@"HideRefresh"
-                                    object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideAnnotations)
+                                                 name:@"HideRefresh"
+                                               object:nil];
     
-    [[NSNotificationCenter defaultCenter]
-                                    addObserver:self
-                                    selector:@selector(loadSavedData)
-                                    name:@"LoadSaveData"
-                                    object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadSavedData)
+                                                 name:@"LoadSaveData"
+                                               object:nil];
     
-    [[NSNotificationCenter defaultCenter]
-                                    addObserver:self
-                                    selector:@selector(launchTimers)
-                                    name:@"LaunchTimers"
-                                    object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(launchTimers)
+                                                 name:@"LaunchTimers"
+                                               object:nil];
     
-    [[NSNotificationCenter defaultCenter]
-                                    addObserver:self
-                                    selector:@selector(refreshPokemons)
-                                    name:@"RefreshPokemons"
-                                    object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshPokemons)
+                                                 name:@"RefreshPokemons"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAnnotationLocalNotif:)
+                                                 name:@"showAnnotationFromLocalNotif"
+                                               object:nil];
+    // Launch hack bacground mode
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(appBackgrounding:)
+                                                 name: UIApplicationDidEnterBackgroundNotification
+                                               object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(appForegrounding:)
+                                                 name: UIApplicationWillEnterForegroundNotification
+                                               object: nil];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
@@ -410,6 +424,13 @@
 
 -(void)loadData
 {
+    /*
+    NSTimeInterval backgroundTimeRemaining = [[UIApplication sharedApplication] backgroundTimeRemaining];
+    
+    if (backgroundTimeRemaining != DBL_MAX)
+        NSLog(@"Remaining time before background mode ending = %0.2f sec.", backgroundTimeRemaining);
+    */
+    
     //Loading in background
     
     /*************************************/
@@ -452,7 +473,7 @@
                                                    if ([ann isKindOfClass:[PokemonAnnotation class]])
                                                    {
                                                        PokemonAnnotation *myAnn = (PokemonAnnotation *)ann;
-                                                       if ((myAnn.coordinate.latitude == [self.pokemons[i][@"latitude"] floatValue]) && (myAnn.coordinate.longitude == [self.pokemons[i][@"longitude"] floatValue]))
+                                                       if ((myAnn.coordinate.latitude == [self.pokemons[i][@"latitude"] doubleValue]) && (myAnn.coordinate.longitude == [self.pokemons[i][@"longitude"] doubleValue]))
                                                        {
                                                            annFound = YES;
                                                            break;
@@ -463,7 +484,7 @@
                                                if (!annFound)
                                                {
                                                    PokemonAnnotation *point = [[PokemonAnnotation alloc] init];
-                                                   CLLocationCoordinate2D pokemonLocation = CLLocationCoordinate2DMake([self.pokemons[i][@"latitude"] floatValue], [self.pokemons[i][@"longitude"] floatValue]);
+                                                   CLLocationCoordinate2D pokemonLocation = CLLocationCoordinate2DMake([self.pokemons[i][@"latitude"] doubleValue], [self.pokemons[i][@"longitude"] doubleValue]);
 
                                                    NSString *disapearTime = [self.pokemons[i] valueForKey:@"disappear_time"];
                                                    double milliTime = disapearTime.doubleValue;
@@ -526,6 +547,8 @@
                                                                            
                                                                            [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
                                                                            
+                                                                           [self launchNotification:point.title isFav:point.isFav lat:[self.pokemons[i][@"latitude"] doubleValue] lng:[self.pokemons[i][@"longitude"] doubleValue]];
+                                                                           
                                                                            __weak typeof(self) weakSelf = self;
                                                                            self.notification.notificationTappedBlock = ^(void) {
                                                                                [weakSelf.mapview showAnnotations:@[point] animated:YES];
@@ -545,6 +568,8 @@
                                                                            }
                                                                            
                                                                            [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
+                                                                           
+                                                                           [self launchNotification:point.title isFav:point.isFav lat:[self.pokemons[i][@"latitude"] doubleValue] lng:[self.pokemons[i][@"longitude"] doubleValue]];
                                                                            
                                                                            __weak typeof(self) weakSelf = self;
                                                                            self.notification.notificationTappedBlock = ^(void) {
@@ -579,7 +604,7 @@
                                                    if ([ann isKindOfClass:[PokestopAnnotation class]])
                                                    {
                                                        PokestopAnnotation *myAnn = (PokestopAnnotation *)ann;
-                                                       if ((myAnn.coordinate.latitude == [self.pokestops[i][@"latitude"] floatValue]) && (myAnn.coordinate.longitude == [self.pokestops[i][@"longitude"] floatValue]))
+                                                       if ((myAnn.coordinate.latitude == [self.pokestops[i][@"latitude"] doubleValue]) && (myAnn.coordinate.longitude == [self.pokestops[i][@"longitude"] doubleValue]))
                                                        {
                                                            annFound = YES;
                                                            break;
@@ -590,7 +615,7 @@
                                                if (!annFound)
                                                {
                                                    PokestopAnnotation *point = [[PokestopAnnotation alloc] init];
-                                                   CLLocationCoordinate2D pokestopLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] floatValue], [self.pokestops[i][@"longitude"] floatValue]);
+                                                   CLLocationCoordinate2D pokestopLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] doubleValue], [self.pokestops[i][@"longitude"] doubleValue]);
                                                    
                                                    point.coordinate = pokestopLocation;
                                                    point.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
@@ -622,7 +647,7 @@
                                                    if ([ann isKindOfClass:[GymAnnotation class]])
                                                    {
                                                        GymAnnotation *myAnn = (GymAnnotation *)ann;
-                                                       if ((myAnn.coordinate.latitude == [self.gyms[i][@"latitude"] floatValue]) && (myAnn.coordinate.longitude == [self.gyms[i][@"longitude"] floatValue]))
+                                                       if ((myAnn.coordinate.latitude == [self.gyms[i][@"latitude"] doubleValue]) && (myAnn.coordinate.longitude == [self.gyms[i][@"longitude"] doubleValue]))
                                                        {
                                                            annFound = YES;
                                                            break;
@@ -633,7 +658,7 @@
                                                if (!annFound)
                                                {
                                                    GymAnnotation *point = [[GymAnnotation alloc] init];
-                                                   CLLocationCoordinate2D gymLocation = CLLocationCoordinate2DMake([self.gyms[i][@"latitude"] floatValue], [self.gyms[i][@"longitude"] floatValue]);
+                                                   CLLocationCoordinate2D gymLocation = CLLocationCoordinate2DMake([self.gyms[i][@"latitude"] doubleValue], [self.gyms[i][@"longitude"] doubleValue]);
                                                    
                                                    point.coordinate     = gymLocation;
                                                    point.title          = NSLocalizedString(@"Gym", @"The title of a gym annotation on the map.");
@@ -1013,7 +1038,6 @@
                             [self.mapview removeAnnotation:annotation];
                         }];
                     }
-                    
                 }
             }
         });
@@ -1038,7 +1062,6 @@
     }
 }
 
-
 - (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     TimeLabel *timeLabel;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
@@ -1050,8 +1073,6 @@
     [timeLabel setDate:annotation.expirationDate];
     return timeLabel;
 }
-
-
 
 - (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
@@ -1067,6 +1088,73 @@
     DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(-7, 45, 50, 10)];
     [distanceLabel setDistance:distance];
     return distanceLabel;
+}
+
+-(void)launchNotification:(NSString *)pokemonTitle isFav:(BOOL)fav lat:(double)lat lng:(double)lng
+{
+    NSString *message   = nil;
+    NSString *soundName = nil;
+    
+    if(fav)
+    {
+        message     = [NSString stringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , pokemonTitle];
+        soundName   = @"favoritePokemon.mp3";
+    }
+    else
+    {
+        message = [NSString stringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , pokemonTitle];
+        soundName   = @"ding.mp3";
+    }
+    
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObjects:@[[NSNumber numberWithDouble:lat], [NSNumber numberWithDouble:lng]] forKeys:@[@"latitude", @"longitude"]];
+    
+    UILocalNotification *localN         = [[UILocalNotification alloc] init];
+    localN.fireDate                     = [NSDate date];
+    localN.alertBody                    = message;
+    localN.timeZone                     = [NSTimeZone defaultTimeZone];
+    localN.soundName                    = soundName;
+    localN.userInfo                     = infoDict;
+    localN.applicationIconBadgeNumber   = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localN];
+}
+
+#pragma mark - Receive local notification
+
+-(void)showAnnotationLocalNotif:(NSNotification *)notification
+{
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude     = [[notification.userInfo objectForKey:@"latitude"] doubleValue];
+    coordinate.longitude    = [[notification.userInfo objectForKey:@"longitude"] doubleValue];
+    
+    region.center = coordinate;
+    region.span.latitudeDelta   = MAP_SCALE_ANNOT;
+    region.span.longitudeDelta  = MAP_SCALE_ANNOT;
+    
+    [self.mapview setRegion:region animated:YES];
+}
+
+#pragma mark - Hack background mode
+
+//TODO: Find a legal way to make the background task infinite or more longer than 3min
+- (void)appBackgrounding:(NSNotification *)notification {
+    // This is an hack to run the app indefinitely in background mode
+    [self keepAlive];
+}
+
+- (void)keepAlive {
+    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+        [self keepAlive];
+    }];
+}
+
+- (void)appForegrounding: (NSNotification *)notification {
+    if (self.bgTask != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }
 }
 
 @end
