@@ -169,7 +169,9 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint_id IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
-    NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
+    }
     for (NSManagedObject *itemToDelete in itemsToDelete) {
         [context deleteObject:itemToDelete];
     }
@@ -206,7 +208,9 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
-    NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
+    }
     for (NSManagedObject *itemToDelete in itemsToDelete) {
         [context deleteObject:itemToDelete];
     }
@@ -243,7 +247,9 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
-    NSLog(@"Deleting %@ gyms", @(itemsToDelete.count));
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ gyms", @(itemsToDelete.count));
+    }
     for (NSManagedObject *itemToDelete in itemsToDelete) {
         [context deleteObject:itemToDelete];
     }

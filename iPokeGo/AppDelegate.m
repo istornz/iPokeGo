@@ -134,7 +134,9 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
         [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"self.disappears < %@" argumentArray:@[[NSDate date]]]];
         [itemsToDeleteRequest setIncludesPropertyValues:NO];
         NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
-        NSLog(@"Purging %@ old pokemon", @(itemsToDelete.count));
+        if (itemsToDelete.count > 0) {
+            NSLog(@"Purging %@ old pokemon", @(itemsToDelete.count));
+        }
         for (NSManagedObject *itemToDelete in itemsToDelete) {
             [context deleteObject:itemToDelete];
         }
