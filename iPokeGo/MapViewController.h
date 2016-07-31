@@ -15,7 +15,7 @@
 #import "SVPulsingAnnotationView.h"
 #import "global.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UIPopoverControllerDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
 @property(weak, nonatomic) IBOutlet UIButton *radarButton;
