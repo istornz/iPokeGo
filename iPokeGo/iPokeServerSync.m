@@ -17,14 +17,6 @@
 
 static NSURLSession *iPokeServerSyncSharedSession;
 
-- (instancetype)init {
-    if (self = [super init]) {
-        isFirstReload = YES;
-    }
-    
-    return self;
-}
-
 + (NSURLSession *)sharedSession
 {
     static dispatch_once_t onceToken;
@@ -108,15 +100,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
         [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
-        
-        if(isFirstReload)
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:MapViewRefreshMap
-                                                                object:self
-                                                              userInfo:nil];
-            isFirstReload = NO;
-        }
-        
     }];
     [task resume];
 }
