@@ -11,6 +11,7 @@
 
 extern NSString * const SettingsChangedNotification;
 extern NSString * const ServerChangedNotification;
+extern NSString * const BackgroundSettingChangedNotification;
 
 @interface SettingsTableViewController : UITableViewController
 

@@ -17,6 +17,7 @@
 
 NSString * const SettingsChangedNotification = @"Poke.SettingsChangedNotification";
 NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
+NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSettingChangedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,6 +128,7 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
         
     } else if (sender == self.backgroundSwitch) {
         [prefs setObject:[NSNumber numberWithBool:self.backgroundSwitch.on] forKey:@"run_in_background"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];
         
     }
 }

@@ -14,14 +14,14 @@
 #import "PokemonNotifier.h"
 #import "SettingsTableViewController.h"
 
-@interface AppDelegate()
+@interface AppDelegate() <CLLocationManagerDelegate>
 
 @property NSTimer *dateUpdateTimer;
 @property NSTimer *dataFetchTimer;
 @property NSTimer *dataCleanTimer;
 @property iPokeServerSync *server;
 @property PokemonNotifier *notifier;
-@property UIBackgroundTaskIdentifier bgTask;
+@property CLLocationManager *backgroundManager;
 
 @end
 
@@ -32,6 +32,7 @@ NSString * const AppDelegateNotificationTapped = @"Poke.AppDelegateNotificationT
 static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
 static NSTimeInterval AppDelegateTimerCleanFrequency = 1.0;
 static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
+static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSDictionary* defaults = @{@"display_onlyfav": @"NO",
@@ -46,8 +47,25 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
     
     self.server = [[iPokeServerSync alloc] init];
     self.notifier = [[PokemonNotifier alloc] init];
+    self.backgroundManager = [[CLLocationManager alloc] init];
     
+    //used for keeping the app alive in the background
+    self.backgroundManager.delegate = self;
+    self.backgroundManager.pausesLocationUpdatesAutomatically = NO;
+    self.backgroundManager.activityType = CLActivityTypeFitness;
+    self.backgroundManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; //lets try to keep this light
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
+        BOOL backgroundUpdate = YES;
+        NSMethodSignature* signature = [[CLLocationManager class] instanceMethodSignatureForSelector:@selector(setAllowsBackgroundLocationUpdates:)];
+        NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:signature];
+        [invocation setTarget:self.backgroundManager];
+        [invocation setSelector:@selector(setAllowsBackgroundLocationUpdates:)];
+        [invocation setArgument:&backgroundUpdate atIndex:2];
+        [invocation invoke];
+    }
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverChanged:) name:ServerChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBackgrounder) name:BackgroundSettingChangedNotification object:nil];
     
     return YES;
 }
@@ -72,14 +90,21 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
     [self.dateUpdateTimer invalidate];
     self.dateUpdateTimer = nil;
     
-    //these need to go back in if the background hack is removed
-//    [self.dataFetchTimer invalidate];
-//    self.dataFetchTimer = nil;
-//    
-//    [self.dataCleanTimer invalidate];
-//    self.dataCleanTimer = nil;
+    //we can kill this in the background, the server should keep things clean
+    [self.dataCleanTimer invalidate];
+    self.dataCleanTimer = nil;
     
-    [self keepAlive];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"run_in_background"]) {
+        [self.dataFetchTimer invalidate];
+        self.dataFetchTimer = nil;
+        
+    } else {
+        //if we're going into the background lets try to slow down the notifications a bit to save battery
+        //for now we'll use once every 20 seconds or so for a check
+        [self.dataFetchTimer invalidate];
+        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequencyBackground target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -160,20 +185,29 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
 
 #pragma mark - Hack background mode
 
-//TODO: Find a legal way to make the background task infinite or more longer than 3min
-- (void)keepAlive {
-    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
-        [self keepAlive];
-    }];
+- (void)updateBackgrounder
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"run_in_background"]) {
+        [self.backgroundManager requestAlwaysAuthorization];
+        [self.backgroundManager startUpdatingLocation];
+        
+    } else {
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+            [self.backgroundManager stopUpdatingLocation];
+        }
+    }
 }
 
-- (void)appForegrounding: (NSNotification *)notification {
-    if (self.bgTask != UIBackgroundTaskInvalid) {
-        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways && [[NSUserDefaults standardUserDefaults] boolForKey:@"run_in_background"]) {
+        [self.backgroundManager startUpdatingLocation];
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    //Nothing to do here, it's just a keepalive
 }
 
 @end

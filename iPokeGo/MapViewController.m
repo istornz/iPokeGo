@@ -107,20 +107,19 @@
 {
     [super viewWillDisappear:animated];
     
-    self.pokemonFetchResultController.delegate = nil;
-    self.gymFetchResultController.delegate = nil;
-    self.pokestopFetchResultController.delegate = nil;
-    self.pokemonFetchResultController = nil;
-    self.gymFetchResultController = nil;
-    self.pokestopFetchResultController = nil;
+    [self disconnectUpdates];
 }
 
 - (void)appSwitchedToActiveState
 {
+    [self reloadMap];
     [self checkGPS];
 }
 
-- (void)appSwitchedToBackgroundState { }
+- (void)appSwitchedToBackgroundState
+{
+    [self disconnectUpdates];
+}
 
 -(void)checkGPS
 {
@@ -603,6 +602,16 @@
         
         [self.mapview addAnnotations:annotations];
     });
+}
+
+- (void)disconnectUpdates
+{
+    self.pokemonFetchResultController.delegate = nil;
+    self.gymFetchResultController.delegate = nil;
+    self.pokestopFetchResultController.delegate = nil;
+    self.pokemonFetchResultController = nil;
+    self.gymFetchResultController = nil;
+    self.pokestopFetchResultController = nil;
 }
 
 #pragma mark - Load helpers
