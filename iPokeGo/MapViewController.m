@@ -502,6 +502,7 @@
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"encounter" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSMutableArray *predicates = [[NSMutableArray alloc] init];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_onlyfav"]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"identifier IN %@" argumentArray:@[favorites]]];
@@ -528,6 +529,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_gyms"]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Gym"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
         NSError *error = nil;
@@ -545,6 +547,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_pokestops"]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PokeStop"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
         NSError *error = nil;
