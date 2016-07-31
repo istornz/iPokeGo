@@ -29,6 +29,10 @@ extern NSString * const ServerChangedNotification;
 @property(weak, nonatomic) IBOutlet UILabel *pokestopsLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *pokestopsSwitch;
 
+@property(weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property(weak, nonatomic) IBOutlet UILabel *backgroundLabel;
+@property(weak, nonatomic) IBOutlet UISwitch *backgroundSwitch;
+
 @property(weak, nonatomic) IBOutlet UIImageView *gymsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *gymsLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *gymsSwitch;

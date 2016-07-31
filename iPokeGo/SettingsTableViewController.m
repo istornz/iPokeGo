@@ -22,6 +22,15 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
     [super viewDidLoad];
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"pokemon_favorite"] count] == 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"display_onlyfav"];
+    }
     
     [self readSavedState];
 }
@@ -40,6 +49,9 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
     [self.distanceSwitch setOn:[prefs boolForKey:@"display_distance"]];
     [self.timeSwitch setOn:[prefs boolForKey:@"display_time"]];
     [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
+    [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
+    
+    self.viewOnlyFavoriteSwitch.enabled = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pokemon_favorite"] count] > 0;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -86,60 +98,36 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    switch (sender.tag) {
-        case SWITCH_POKEMON:
-            [prefs setObject:[NSNumber numberWithBool:self.pokemonsSwitch.on] forKey:@"display_pokemons"];
-            break;
-        case SWITCH_POKESTOPS:
-            [prefs setObject:[NSNumber numberWithBool:self.pokestopsSwitch.on] forKey:@"display_pokestops"];
-            break;
-        case SWITCH_GYMS:
-            [prefs setObject:[NSNumber numberWithBool:self.gymsSwitch.on] forKey:@"display_gyms"];
-            break;
-        case SWITCH_COMMON:
-            [prefs setObject:[NSNumber numberWithBool:self.commonSwitch.on] forKey:@"display_common"];
-            break;
-        case SWITCH_DISTANCE:
-            [prefs setObject:[NSNumber numberWithBool:self.distanceSwitch.on] forKey:@"display_distance"];
-            break;
-        case SWITCH_TIME:
+    if (sender == self.pokemonsSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.pokemonsSwitch.on] forKey:@"display_pokemons"];
+        
+    } else if (sender == self.gymsSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.gymsSwitch.on] forKey:@"display_gyms"];
+        
+    } else if (sender == self.commonSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.commonSwitch.on] forKey:@"display_common"];
+        
+    } else if (sender == self.distanceSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.distanceSwitch.on] forKey:@"display_distance"];
+        
+    } else if (sender == self.timeSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.timeSwitch.on] forKey:@"display_time"];
+        
+    } else if (sender == self.timeTimerSwitch) {
+        //confusing when the user enabled this but doesn't see anything because display_time isn't on
+        //enable that as a byproduct of enabling this
+        if (self.timeTimerSwitch.on) {
+            self.timeSwitch.on = YES;
             [prefs setObject:[NSNumber numberWithBool:self.timeSwitch.on] forKey:@"display_time"];
-            break;
-        case SWITCH_TIMETIMER:
-            [prefs setObject:[NSNumber numberWithBool:self.timeTimerSwitch.on] forKey:@"display_timer"];
-            break;
-        case SWITCH_ONLYFAV:
-            if(self.viewOnlyFavoriteSwitch.on)
-            {
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                NSArray *pokemonListSaved = [defaults objectForKey:@"pokemon_favorite"];
-                
-                if([pokemonListSaved count] == 0)
-                {
-                    [self.viewOnlyFavoriteSwitch setOn:NO];
-                    
-                    UIAlertController *alert = [UIAlertController
-                                                alertControllerWithTitle:NSLocalizedString(@"Be carreful !", @"The title of an alert that tells the user, that no favorite pokemon is already set.")
-                                                message:NSLocalizedString(@"You don't have any favorite pokemon.\nPlease go add some Pokemon in Settings", @"The message of an alert that tells the user, that no favorite pokemon is already set.")
-                                                preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *ok = [UIAlertAction
-                                         actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
-                                         style:UIAlertActionStyleDefault
-                                         handler:nil];
-                    
-                    [alert addAction:ok];
-                    
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
-            }
-            
-            [prefs setObject:[NSNumber numberWithBool:self.viewOnlyFavoriteSwitch.on] forKey:@"display_onlyfav"];
-            
-            break;
-        default:
-            // Nothing
-            break;
+        }
+        [prefs setObject:[NSNumber numberWithBool:self.timeTimerSwitch.on] forKey:@"display_timer"];
+        
+    } else if (sender == self.viewOnlyFavoriteSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.viewOnlyFavoriteSwitch.on] forKey:@"display_onlyfav"];
+        
+    } else if (sender == self.backgroundSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.backgroundSwitch.on] forKey:@"run_in_background"];
+        
     }
 }
 
