@@ -4425,7 +4425,6 @@
 				0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 				8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */,
-				CLANG_ENABLE_MODULES = YES;
 				811143091D4D598F00901851 /* PokeStop+CoreDataProperties.m in Sources */,
 				811142FE1D4D596700901851 /* Pokemon+CoreDataClass.m in Sources */,
 				0256E3831D473D6A00CEEE3F /* TimeLabel.m in Sources */,
