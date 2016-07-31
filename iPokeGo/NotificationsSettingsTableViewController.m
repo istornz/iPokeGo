@@ -65,8 +65,6 @@
             // Nothing
             break;
     }
-    
-    [prefs synchronize];
 }
 
 @end

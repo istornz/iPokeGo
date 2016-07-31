@@ -78,7 +78,6 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
         }
     }
     
-    [prefs synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -142,8 +141,6 @@ NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
             // Nothing
             break;
     }
-    
-    [prefs synchronize];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

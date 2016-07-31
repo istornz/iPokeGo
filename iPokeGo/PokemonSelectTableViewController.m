@@ -114,8 +114,6 @@
 -(IBAction)saveAction:(id)sender
 {
     [[NSUserDefaults standardUserDefaults] setObject:self.pokemonSelected forKey:self.preferenceKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
