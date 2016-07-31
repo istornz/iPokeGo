@@ -35,8 +35,6 @@
 
 @implementation MapViewController
 
-NSString * const MapViewRefreshMap = @"Poke.MapViewRefreshMap";
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -55,8 +53,6 @@ NSString * const MapViewRefreshMap = @"Poke.MapViewRefreshMap";
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMap) name:MapViewRefreshMap object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
