@@ -28,6 +28,7 @@
         
     } else if ((id)values[@"lure_expiration"] != [NSNull null] && [values[@"lure_expiration"] integerValue] > 0) {
         NSDate *lureExpiration = [NSDate dateWithTimeIntervalSince1970:[values[@"lure_expiration"] integerValue] / 1000];
+        
         if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:lureExpiration]) {
             self.lureExpiration = lureExpiration;
         }
