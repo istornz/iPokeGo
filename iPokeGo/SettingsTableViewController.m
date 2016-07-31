@@ -129,7 +129,8 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     } else if (sender == self.backgroundSwitch) {
         [prefs setObject:[NSNumber numberWithBool:self.backgroundSwitch.on] forKey:@"run_in_background"];
         [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];
-        
+    } else if (sender == self.pokestopsSwitch) {
+        [prefs setObject:[NSNumber numberWithBool:self.pokestopsSwitch.on] forKey:@"display_pokestops"];
     }
 }
 
