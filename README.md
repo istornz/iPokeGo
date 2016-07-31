@@ -28,14 +28,15 @@ Of course notification works well on the Apple Watch !
 You will have no more reason of all not to catch them ;)
 
 ## Installation
-1. Install Xcode
-2. Open *iPokeGo.xcodeproj* in Xcode
-3. Choose your own itunes account under *Signing > Team*
-4. Change the identifier in Xcode from 'com.dimitri-dessus.iPokeGo' to something like 'com.YOUR_NAME.iPokeGo'. 
-5. Plug in your device and at the top select it in the dropdown
-6. Hit the play button it should compile and transfer over to the device pluged in and open
-7. If this is the first app you install under your own itunes account you will need to approve it. On your device under *Setting > General > Profiles* click trust.
-8. Unplug and enjoy the app
+1. Download the latest IPA file.
+2. Download [Cydia impactor](http://www.cydiaimpactor.com/) available for Mac/Windows and Linux.
+3. Connect your iDevice to your computer.
+3. Open Cydia impactor and drag the ipa file into the window.
+4. Enter your Apple ID email address and click "OK".
+5. Input your Apple ID password and click "OK" too.
+6. The app is now installed on your device but you can't launch it, so go in "Settings" app, "General" tab and "Device Management".
+7. Tap the new profile created and trust it.
+8. You are now able to run the app on your device !
 
 ## Configuration
 On settings, please enter the address of your server.
