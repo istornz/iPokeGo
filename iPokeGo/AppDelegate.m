@@ -18,6 +18,19 @@
 @implementation AppDelegate
 
 static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSDictionary* defaults = @{@"display_onlyfav": @"YES",
+                               @"display_common": @"NO",
+                               @"display_pokemons": @"YES",
+                               @"display_pokestops": @"NO",
+                               @"display_gyms" : @"NO",
+                               @"display_distance" : @"NO",
+                               @"display_time" : @"NO",
+                               @"display_timer" : @"NO"};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
