@@ -158,8 +158,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSString *entityName = NSStringFromClass(Pokemon.class);
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    NSString *primaryKey = @"encounter";
-    NSString *serverPrimaryKey = @"encounter_id";
+    NSString *serverPrimaryKey = @"spawnpoint_id";
     NSArray *foundIdentifiers = [rawPokemon valueForKey:serverPrimaryKey];
     if (!foundIdentifiers) {
         foundIdentifiers = @[];
@@ -167,7 +166,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
     [itemsToDeleteRequest setEntity:entity];
-    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (self.%@ IN %@)" argumentArray:@[primaryKey, foundIdentifiers]]];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint_id IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
     NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
@@ -180,7 +179,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
     
     for (NSDictionary *rawValues in rawPokemon) {
-        Pokemon *pokemon = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%@ = %@" argumentArray:@[primaryKey, rawValues[serverPrimaryKey]]]] firstObject];
+        Pokemon *pokemon = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"spawnpoint = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
         if (!pokemon) {
             pokemon = [[Pokemon alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         }
@@ -196,7 +195,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSString *entityName = NSStringFromClass(PokeStop.class);
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    NSString *primaryKey = @"identifier";
     NSString *serverPrimaryKey = @"pokestop_id";
     NSArray *foundIdentifiers = [rawStops valueForKey:serverPrimaryKey];
     if (!foundIdentifiers) {
@@ -205,7 +203,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
     [itemsToDeleteRequest setEntity:entity];
-    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (self.%@ IN %@)" argumentArray:@[primaryKey, foundIdentifiers]]];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
     NSLog(@"Deleting %@ pokemon", @(itemsToDelete.count));
@@ -218,7 +216,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
     
     for (NSDictionary *rawValues in rawStops) {
-        PokeStop *pokestop = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%@ = %@" argumentArray:@[primaryKey, rawValues[serverPrimaryKey]]]] firstObject];
+        PokeStop *pokestop = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
         if (!pokestop) {
             pokestop = [[PokeStop alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         }
@@ -234,7 +232,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSString *entityName = NSStringFromClass(Gym.class);
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    NSString *primaryKey = @"identifier";
     NSString *serverPrimaryKey = @"gym_id";
     NSArray *foundIdentifiers = [rawGyms valueForKey:serverPrimaryKey];
     if (!foundIdentifiers) {
@@ -243,7 +240,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
     [itemsToDeleteRequest setEntity:entity];
-    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (self.%@ IN %@)" argumentArray:@[primaryKey, foundIdentifiers]]];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
     NSLog(@"Deleting %@ gyms", @(itemsToDelete.count));
@@ -256,7 +253,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
     
     for (NSDictionary *rawValues in rawGyms) {
-        Gym *gym = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%@ = %@" argumentArray:@[primaryKey, rawValues[serverPrimaryKey]]]] firstObject];
+        Gym *gym = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
         if (!gym) {
             gym = [[Gym alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         }

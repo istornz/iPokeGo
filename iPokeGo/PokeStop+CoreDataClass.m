@@ -7,6 +7,7 @@
 //
 
 #import "PokeStop+CoreDataClass.h"
+#import "PokeStop+CoreDataProperties.h"
 
 @implementation PokeStop
 
@@ -22,14 +23,13 @@
         self.identifier = values[@"pokestop_id"];
     }
     
-    if (self.lureExpiration != nil && (values[@"lure_expiration"] == nil || [values[@"lure_expiration"] isEqual:[NSNull null]])) {
+    if (self.lureExpiration != nil && ((id)values[@"lure_expiration"] == [NSNull null] || [values[@"lure_expiration"] integerValue] <= 0)) {
         self.lureExpiration = nil;
         
-    } else if (values[@"lure_expiration"] != nil && ![values[@"lure_expiration"] isEqual:[NSNull null]]) {
+    } else if ((id)values[@"lure_expiration"] != [NSNull null] && [values[@"lure_expiration"] integerValue] > 0) {
         NSDate *lureExpiration = [NSDate dateWithTimeIntervalSince1970:[values[@"lure_expiration"] integerValue] / 1000];
         if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:lureExpiration]) {
             self.lureExpiration = lureExpiration;
-            //TODO this is update more often than I'd expect
         }
     }
     if (!self.latitude) {

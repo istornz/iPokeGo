@@ -15,7 +15,7 @@
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="spawnpoint" attributeType="String" syncable="YES"/>
+        <attribute name="spawnpoint" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="PokeStop" representedClassName="PokeStop" syncable="YES">
         <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>

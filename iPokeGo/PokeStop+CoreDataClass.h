@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) CLLocationCoordinate2D location;
 - (void)syncToValues:(NSDictionary *)values;
-- (void)setLocation:(CLLocationCoordinate2D)location;
 
 @end
 
