@@ -10,10 +10,6 @@
 
 @implementation Gym (CoreDataProperties)
 
-+ (NSFetchRequest<Gym *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"Gym"];
-}
-
 @dynamic identifier;
 @dynamic latitude;
 @dynamic longitude;

@@ -10,10 +10,6 @@
 
 @implementation Pokemon (CoreDataProperties)
 
-+ (NSFetchRequest<Pokemon *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"Pokemon"];
-}
-
 @dynamic disappears;
 @dynamic encounter;
 @dynamic identifier;

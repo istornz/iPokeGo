@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Pokemon (CoreDataProperties)
 
-+ (NSFetchRequest<Pokemon *> *)fetchRequest;
-
 @property (nullable, nonatomic, copy) NSDate *disappears;
 @property (nullable, nonatomic, copy) NSString *encounter;
 @property (nonatomic) int32_t identifier;

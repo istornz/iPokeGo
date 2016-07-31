@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PokeStop (CoreDataProperties)
 
-+ (NSFetchRequest<PokeStop *> *)fetchRequest;
-
 @property (nullable, nonatomic, copy) NSString *identifier;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;

@@ -10,10 +10,6 @@
 
 @implementation PokeStop (CoreDataProperties)
 
-+ (NSFetchRequest<PokeStop *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"PokeStop"];
-}
-
 @dynamic identifier;
 @dynamic latitude;
 @dynamic longitude;
