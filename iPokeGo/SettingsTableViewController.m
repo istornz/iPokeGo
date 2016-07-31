@@ -16,6 +16,7 @@
 @implementation SettingsTableViewController
 
 NSString * const SettingsChangedNotification = @"Poke.SettingsChangedNotification";
+NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,9 +70,12 @@ NSString * const SettingsChangedNotification = @"Poke.SettingsChangedNotificatio
 -(IBAction)saveAction:(UIBarButtonItem *)sender
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if([self.serverField.text length] > 0)
-    {
-        [prefs setObject:self.serverField.text forKey:@"server_addr"];
+    NSString *server = [self.serverField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if([server length] > 0) {
+        if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+            [prefs setObject:self.serverField.text forKey:@"server_addr"];
+        }
     }
     
     [prefs synchronize];

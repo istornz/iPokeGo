@@ -12,6 +12,7 @@
 #import "CoreDataPersistance.h"
 #import "CoreDataEntities.h"
 #import "PokemonNotifier.h"
+#import "SettingsTableViewController.h"
 
 @interface AppDelegate()
 
@@ -45,6 +46,8 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
     
     self.server = [[iPokeServerSync alloc] init];
     self.notifier = [[PokemonNotifier alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverChanged:) name:ServerChangedNotification object:nil];
     
     return YES;
 }
@@ -89,7 +92,6 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
     
     if (!self.dataFetchTimer) {
         [self refreshDataFromServer];
-        [self.server fetchData];
         self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequency target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
     }
@@ -147,6 +149,11 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
 - (void)updateDateText
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:TimerLabelUpdateNotification object:nil];
+}
+
+- (void)serverChanged:(NSNotification *)notification
+{
+    [self refreshDataFromServer];
 }
 
 #pragma mark - Hack background mode

@@ -10,6 +10,7 @@
 #import "global.h"
 
 extern NSString * const SettingsChangedNotification;
+extern NSString * const ServerChangedNotification;
 
 @interface SettingsTableViewController : UITableViewController
 
