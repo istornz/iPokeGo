@@ -60,8 +60,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
     // Notifications
     if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
     {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|
-                                                       UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
     
     self.notifier.mapViewController = ((UINavigationController *)self.window.rootViewController).viewControllers.firstObject;

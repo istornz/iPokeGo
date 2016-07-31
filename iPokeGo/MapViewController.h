@@ -16,6 +16,9 @@
 #import "global.h"
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+{
+    BOOL isMapMoved;
+}
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
 @property(weak, nonatomic) IBOutlet UIButton *radarButton;

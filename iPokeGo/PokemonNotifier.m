@@ -65,6 +65,12 @@
         sound   = self.pokemonAppearSound;
     }
     
+    //creating a region to zoom on the pokemon
+    MKCoordinateRegion region;
+    region.center = pokemon.location;
+    region.span.latitudeDelta   = MAP_SCALE_ANNOT;
+    region.span.longitudeDelta  = MAP_SCALE_ANNOT;
+    
     //pre iOS 10 notifications aren't shown when the app is active, so only show them in BG
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         NSDictionary *infoDict = [NSDictionary dictionaryWithObjects:@[@(pokemon.location.latitude), @(pokemon.location.longitude)] forKeys:@[@"latitude", @"longitude"]];
@@ -94,7 +100,8 @@
         
         [notification displayNotificationWithMessage:message forDuration:4.5f];
         notification.notificationTappedBlock = ^(void) {
-            [self.mapViewController.mapview setCenterCoordinate:pokemon.location animated:YES];
+            [self.mapViewController.mapview setRegion:region animated:YES];
+            //[self.mapViewController.mapview setCenterCoordinate:pokemon.location animated:YES];
         };
     }
 }

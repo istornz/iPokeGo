@@ -39,6 +39,7 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         [self loadLocalization];
+        isMapMoved = NO;
     }
     return self;
 }
@@ -358,7 +359,11 @@
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    [self.mapview setCenterCoordinate:userLocation.location.coordinate animated:YES];
+    //Prevents follow the user's position after the first update
+    if(!isMapMoved) {
+        [self.mapview setCenterCoordinate:userLocation.location.coordinate animated:YES];
+        isMapMoved = YES;
+    }
 }
 
 #pragma mark - FRC Delegate
@@ -528,6 +533,7 @@
 }
 
 - (void)reloadMap {
+    NSLog(@"Reloading map...");
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.mapview removeAnnotations:self.mapview.annotations];
     });

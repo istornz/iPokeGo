@@ -127,7 +127,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request = [request stringByReplacingOccurrencesOfString:@"%%pokestops_display%%" withString:display_pokestops_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:display_gyms_str];
     
-    NSLog(@"%@", request);
+    //NSLog(@"%@", request);
     
     return [NSURL URLWithString:request];
 }
