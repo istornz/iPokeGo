@@ -30,6 +30,7 @@
 
 @property CLLocationManager *locationManager;
 @property NSArray *animatedPokestopLured;
+@property NSDictionary *localization;
 
 @end
 

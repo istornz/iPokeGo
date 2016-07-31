@@ -21,8 +21,6 @@
 @property(weak, nonatomic) IBOutlet UIButton *radarButton;
 @property(weak, nonatomic) IBOutlet MKMapView *mapview;
 
-@property(strong, nonatomic) NSDictionary *localization;
-
 -(IBAction)locationAction:(id)sender;
 -(IBAction)radarAction:(id)sender;
 
