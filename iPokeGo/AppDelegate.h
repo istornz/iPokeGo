@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "MapViewController.h"
 
+extern NSString * const AppDelegateNotificationTapped;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

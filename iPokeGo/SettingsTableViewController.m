@@ -15,6 +15,8 @@
 
 @implementation SettingsTableViewController
 
+NSString * const SettingsChangedNotification = @"Poke.SettingsChangedNotification";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -73,6 +75,7 @@
     }
     
     [prefs synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

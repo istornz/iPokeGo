@@ -8,16 +8,30 @@
 
 #import "AppDelegate.h"
 #import "TimerLabel.h"
+#import "iPokeServerSync.h"
+#import "CoreDataPersistance.h"
+#import "CoreDataEntities.h"
+#import "PokemonNotifier.h"
 
 @interface AppDelegate()
 
-@property (nonatomic) NSTimer *dateUpdateTimer;
+@property NSTimer *dateUpdateTimer;
+@property NSTimer *dataFetchTimer;
+@property NSTimer *dataCleanTimer;
+@property iPokeServerSync *server;
+@property PokemonNotifier *notifier;
+@property UIBackgroundTaskIdentifier bgTask;
 
 @end
 
 @implementation AppDelegate
 
+NSString * const AppDelegateNotificationTapped = @"Poke.AppDelegateNotificationTapped";
+
 static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
+static NSTimeInterval AppDelegateTimerCleanFrequency = 1.0;
+static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
+
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSDictionary* defaults = @{@"display_onlyfav": @"YES",
                                @"display_common": @"NO",
@@ -29,12 +43,13 @@ static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
                                @"display_timer" : @"NO"};
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
+    self.server = [[iPokeServerSync alloc] init];
+    self.notifier = [[PokemonNotifier alloc] init];
+    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.15 green:0.20 blue:0.23 alpha:1.0]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -42,44 +57,48 @@ static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
     // Notifications
     if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
     {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|
+                                                       UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
+    
+    self.notifier.mapViewController = ((UINavigationController *)self.window.rootViewController).viewControllers.firstObject;
     
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    
     [self.dateUpdateTimer invalidate];
     self.dateUpdateTimer = nil;
+    
+    //these need to go back in if the background hack is removed
+//    [self.dataFetchTimer invalidate];
+//    self.dataFetchTimer = nil;
+//    
+//    [self.dataCleanTimer invalidate];
+//    self.dataCleanTimer = nil;
+    
+    [self keepAlive];
 }
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [application setApplicationIconBadgeNumber:0];
     
     [self updateDateText];
     self.dateUpdateTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerRefreshFrequency target:self selector:@selector(updateDateText) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.dateUpdateTimer forMode:NSRunLoopCommonModes];
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    if (!self.dataFetchTimer) {
+        [self refreshDataFromServer];
+        [self.server fetchData];
+        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequency target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
+    }
+    
+    if (!self.dataCleanTimer) {
+        [self cleanData];
+        self.dataCleanTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerCleanFrequency target:self selector:@selector(cleanData) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:self.dataCleanTimer forMode:NSDefaultRunLoopMode];
+    }
 }
 
 #pragma mark Local notification delegate
@@ -87,22 +106,63 @@ static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     UIApplicationState appState = UIApplicationStateActive;
-    if ([application respondsToSelector:@selector(applicationState)])
+    if ([application respondsToSelector:@selector(applicationState)]) {
         appState = application.applicationState;
+    }
     
-    if (appState != UIApplicationStateActive)
-    {
+    if (appState != UIApplicationStateActive) {
         NSLog(@"Notification touched !");
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showAnnotationFromLocalNotif"
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateNotificationTapped
                                                             object:self
                                                           userInfo:notification.userInfo];
     }
 }
 
+- (void)refreshDataFromServer
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.server fetchData];
+    });
+}
+
+- (void)cleanData
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
+        NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
+        [itemsToDeleteRequest setEntity:[NSEntityDescription entityForName:NSStringFromClass([Pokemon class]) inManagedObjectContext:context]];
+        [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"self.disappears < %@" argumentArray:@[[NSDate date]]]];
+        [itemsToDeleteRequest setIncludesPropertyValues:NO];
+        NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
+        NSLog(@"Purging %@ old pokemon", @(itemsToDelete.count));
+        for (NSManagedObject *itemToDelete in itemsToDelete) {
+            [context deleteObject:itemToDelete];
+        }
+        [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
+    });
+}
+
 - (void)updateDateText
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:TimerLabelUpdateNotification object:nil];
+}
+
+#pragma mark - Hack background mode
+
+//TODO: Find a legal way to make the background task infinite or more longer than 3min
+- (void)keepAlive {
+    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+        [self keepAlive];
+    }];
+}
+
+- (void)appForegrounding: (NSNotification *)notification {
+    if (self.bgTask != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }
 }
 
 @end

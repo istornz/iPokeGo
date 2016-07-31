@@ -7,11 +7,15 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "CoreDataEntities.h"
 
 @interface GymAnnotation : MKPointAnnotation
 
-@property int gymsID;
+@property NSString *gymID;
+@property int teamID;
 @property int guardPokemonID;
-@property int gym_points;
+@property int gymPoints;
+
+- (instancetype)initWithGym:(Gym *)gym;
 
 @end
