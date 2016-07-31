@@ -34,7 +34,7 @@ static NSTimeInterval AppDelegateTimerCleanFrequency = 1.0;
 static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSDictionary* defaults = @{@"display_onlyfav": @"YES",
+    NSDictionary* defaults = @{@"display_onlyfav": @"NO",
                                @"display_common": @"NO",
                                @"display_pokemons": @"YES",
                                @"display_pokestops": @"NO",
