@@ -47,7 +47,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 
 ## Compatibility
 - iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
-- Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/tree/V2.0)
+- Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/releases)
 
 ## TODO
 - [ ] Make the app totaly independent
