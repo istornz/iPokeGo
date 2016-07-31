@@ -65,4 +65,5 @@ NSString * const TimerLabelUpdateNotification = @"Poke.TimerLabelUpdateNotificat
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 @end

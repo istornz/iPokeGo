@@ -2011,6 +2011,8 @@
 		58CA35381D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		58CA35391D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/pokemon.json; sourceTree = "<group>"; };
 		58CA353A1D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		81BF6EF01D4D5AA6000C090E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		81BF6EFA1D4D5B76000C090E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
 		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3280,8 +3282,8 @@
 				TargetAttributes = {
 					27F385571D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = C6D6DBHW5C;
-						DevelopmentTeamName = "Dimitri Dessus";
+						DevelopmentTeam = 7N763849AW;
+						DevelopmentTeamName = "Nicolas Desmarets (Personal Team)";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -4378,6 +4380,7 @@
 				AEFA37FF1D49292D00DEE95C /* de */,
 				AE1E273F1D4A8F4900FA1BA0 /* it */,
 				58CA35381D4B792C003B7F85 /* ru */,
+				81BF6EFA1D4D5B76000C090E /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -4410,6 +4413,7 @@
 				AEFA380B1D49293400DEE95C /* de */,
 				AE1E27401D4A8F4900FA1BA0 /* it */,
 				58CA353A1D4B792C003B7F85 /* ru */,
+				81BF6EF01D4D5AA6000C090E /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4510,7 +4514,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ndesmarets-dev.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4523,7 +4527,7 @@
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dimitri-dessus.iPokeGo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ndesmarets-dev.iPokeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
