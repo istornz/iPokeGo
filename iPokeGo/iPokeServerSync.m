@@ -166,7 +166,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
     [itemsToDeleteRequest setEntity:entity];
-    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint_id IN %@)" argumentArray:@[foundIdentifiers]]];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint IN %@)" argumentArray:@[foundIdentifiers]]];
     [itemsToDeleteRequest setIncludesPropertyValues:NO];
     NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
     if (itemsToDelete.count > 0) {
