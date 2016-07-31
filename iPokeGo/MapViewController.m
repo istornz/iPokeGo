@@ -19,7 +19,6 @@
 
 @interface MapViewController() <NSFetchedResultsControllerDelegate>
 
-@property NSDictionary *localization;
 @property NSFetchedResultsController *gymFetchResultController;
 @property NSFetchedResultsController *pokemonFetchResultController;
 @property NSFetchedResultsController *pokestopFetchResultController;

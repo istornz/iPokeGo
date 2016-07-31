@@ -58,10 +58,10 @@
     AVAudioPlayer *sound = nil;
     
     if([pokemon isFav]) {
-        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , pokemon.name];
+        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.mapViewController.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
         sound   = self.pokemonAppearSound;
     } else {
-        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , pokemon.name];
+        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.mapViewController.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
         sound   = self.pokemonAppearSound;
     }
     
