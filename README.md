@@ -3,29 +3,18 @@
 This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo4.jpg" width="270" height="480"/>
-<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo6.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo2.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
-- Show/Hide Pokemons,Pokestops and Gyms.
-- Change radar position.
-- Drive destination to capture a specific pokemon.
-- Notification on status bar when a new pokemon was added on the map.
-- Real notification working on iDevice and Apple Watch.
-- Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired).
-- Add any server (heroku, your server, jelastic and more...).
-- See distance and remaining time on each pokemons.
-- Possibility to show/hide common pokemon in a list.
-
-## Now with real push notification !
-<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo5.jpg" width="270" height="480"/>
-<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/applewatch/iPokeGOWatch2.png" width="230" height="422"/>
-
-With the latest version of iPokeGO, you can be notified when a new pokemon appear anywhere. It's now possible to play Pokemon GO and be directly warned !
-
-Of course notification works well on the Apple Watch !
-
-You will have no more reason of all not to catch them ;)
+- Show/Hide Pokemons,Pokestops and Gyms
+- Change radar position
+- Drive destination to capture a specific pokemon
+- Notification on status bar when a new pokemon was added on the map
+- Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired)
+- Add any server
+- See distance and remaining time on each pokemons
+- Possibility to show/hide common pokemon in a list
 
 ## Installation
 1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
@@ -50,10 +39,9 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 
 ## TODO
 - [ ] Make the app totaly independent
-- [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
+- [ ] Regroup pokestops annotations to reduce CPU usage
+- [ ] Real notification (work on the server part ?)
 - [ ] Update pokestop and gym annotations
-- [ ] Find a way to do some background task without hack
-- [x] Real notification
 - [x] Change scan position
 
 ## Android Version

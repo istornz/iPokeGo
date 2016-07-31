@@ -12,5 +12,8 @@
 
 @property int pokestopID;
 @property NSString *lure;
+////// BEGIN MINE LAST_MODIFIED
+@property NSString *last_modified;
+////// END MINE LAST_MODIFIED
 
 @end

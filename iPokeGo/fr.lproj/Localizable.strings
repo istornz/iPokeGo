@@ -1,0 +1,59 @@
+/* The message of an alert, that tells the user that he/she denied location access to the app. */
+"Location denied, please go in settings to allow this app to use your location" = "Localisation interdite, merci d'aller dans les réglages pour autoriser cette application à utiliser la localisation.";
+
+/* The title of an alert, that tells the user that he/she denied location access to the app. */
+"Location service denied" = "Localisation désactivée";
+
+/* A common affirmative action title, like 'OK' in english. */
+"OK" = "OK";
+
+/* The message of an alert that tells the user, that no server was set. */
+"Please go in settings to enter server address" = "Merci d'aller dans les réglages pour entrer l'adresse du serveur.";
+
+/* The title of an alert that tells the user, that no server was set. */
+"Server not set" = "Serveur non défini";
+
+/* The title of the Pokémon selection for common Pokémon. */
+"Common" = "Communs";
+
+/* The title of the Pokémon selection for favorite Pokémon. */
+"Favorite" = "Favoris";
+
+/* The title of a Pokéstop annotation on the map. */
+"Pokestop" = "Pokéstop";
+
+/* The message of a not Lured Pokéstop annotation on the map. */
+"Not lured" = "Non fleuri";
+
+/* The message of a Lured Pokéstop annotation on the map. */
+"Lured until" = "Fleuri jusqu'à %@";
+
+/* The title of a annotation callout for a Pokémon lured. */
+"%@ (Pokestop)" = "%@ (Pokéstop)";
+
+/* The title of an uncontested gym annotation on the map. */
+"Uncontested Gym" = "Arène non revendiquée";
+
+/* The title of an blue gym annotation on the map. */
+"Blue Gym" = "Arène bleue";
+
+/* The title of an red gym annotation on the map. */
+"Red Gym" = "Arène rouge";
+
+/* The title of an yellow gym annotation on the map. */
+"Yellow Gym" = "Arène jaune";
+
+/* The description of a gym annotation on the map with points. */
+"Gym points: %d" = "Prestige : %d";
+
+/* The hint in a annotation callout that indicates when a Pokémon disappears. */
+"Disappears at" = "Disparait à %@";
+
+/* The hint that a certain Pokémon appeared on the map. */
+"[Pokemon] was added to the map!" = "%@ a été ajouté sur la carte !";
+
+/* The hint that a favorite Pokémon appeared on the map. */
+"[Pokemon] your favorite pokemon was added to the map!" = "%@, votre Pokémon favori, apparait sur la carte !";
+
+/* The title of an annotation on the map to scan the location. */
+"Scan location" = "Zone de scan";

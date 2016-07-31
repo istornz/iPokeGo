@@ -121,12 +121,13 @@
 
 -(void)launchTimers
 {
-    UIApplication  *app = [UIApplication sharedApplication];
+
+	UIApplication  *app = [UIApplication sharedApplication];
     self.bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
         [app endBackgroundTask:self.bgTask];
         self.bgTask = UIBackgroundTaskInvalid;
     }];
-    
+
     if(![self.timerData isValid])
     {
         NSLog(@"[+] Starting data timer...");
@@ -186,8 +187,7 @@
     [self.mapview addGestureRecognizer:longPressGesture];
 }
 
-#pragma mark Long gesture press
-
+////// BEGIN MINE handleLongPressGesture
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
     
     if (sender.state == UIGestureRecognizerStateBegan)
@@ -196,31 +196,47 @@
         
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
-        CGPoint point = [sender locationInView:self.mapview];
-        CLLocationCoordinate2D locCoord = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
-        
-        ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-        radar = locCoord;
-        
-        [prefs setObject:[NSNumber numberWithDouble:locCoord.latitude] forKey:@"radar_lat"];
-        [prefs setObject:[NSNumber numberWithDouble:locCoord.longitude] forKey:@"radar_long"];
-        
-        [prefs synchronize];
-        
-        dropPin.coordinate = locCoord;
-        dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
-        
-        for (int i = 0; i < [self.mapview.annotations count]; i++) {
-            MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+        if(radar.latitude == 0){
+            CGPoint point = [sender locationInView:self.mapview];
+            CLLocationCoordinate2D locCoord = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
             
-            if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
-                [self.mapview removeAnnotation:annotation];
+            ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
+            radar = locCoord;
+            
+            [prefs setObject:[NSNumber numberWithDouble:locCoord.latitude] forKey:@"radar_lat"];
+            [prefs setObject:[NSNumber numberWithDouble:locCoord.longitude] forKey:@"radar_long"];
+            
+            [prefs synchronize];
+            
+            dropPin.coordinate = locCoord;
+            dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
+            
+            for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                
+                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
+                    [self.mapview removeAnnotation:annotation];
+            }
+            
+            [self sendNewLocationToServer:locCoord.latitude and:locCoord.longitude];
+            [self.mapview addAnnotation:dropPin];
+        }else{
+            for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                
+                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
+                    [self.mapview removeAnnotation:annotation];
+            }
+            radar.latitude = 0;
+            radar.longitude = 0;
+            [prefs removeObjectForKey:@"radar_lat"];
+            [prefs removeObjectForKey:@"radar_long"];
+            [prefs synchronize];
+            [self sendNewLocationToServer:self.mapview.userLocation.coordinate.latitude and:self.mapview.userLocation.coordinate.longitude];
         }
-        
-        [self sendNewLocationToServer:locCoord.latitude and:locCoord.longitude];
-        [self.mapview addAnnotation:dropPin];
     }
 }
+////// END MINE handleLongPressGesture
 
 -(void)sendNewLocationToServer:(CLLocationDegrees)latitude and:(CLLocationDegrees)longitude
 {
@@ -430,7 +446,7 @@
     if (backgroundTimeRemaining != DBL_MAX)
         NSLog(@"Remaining time before background mode ending = %0.2f sec.", backgroundTimeRemaining);
     */
-    
+   
     //Loading in background
     
     /*************************************/
@@ -561,6 +577,9 @@
                                                                        if(isNormalNotificationActivated)
                                                                        {
                                                                            self.notification = [CWStatusBarNotification new];
+                                                                           self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.15 green:0.20 blue:0.23 alpha:1.0];;
+                                                                           self.notification.notificationLabelTextColor = [UIColor whiteColor];
+
                                                                            [pokemonAppearSound play];
                                                                            if(isVibrationActivated)
                                                                            {
@@ -588,6 +607,143 @@
                                                
                                            }
                                        }
+                                       
+                                       ////// BEGIN MINE POKEMON LURED
+                                       self.pokestops = jsonData[@"pokestops"];
+                                       
+                                       if([self.pokestops count] > 0)
+                                       {
+                                           for (int i = 0; i < [self.pokestops count]; i++) {
+                                               if(![[self.pokestops[i] valueForKey:@"active_pokemon_id"] isKindOfClass:[NSNull class]])
+                                               {
+                                                   for (id<MKAnnotation> ann in self.mapview.annotations)
+                                                   {
+                                                       annFound = NO;
+                                                       if ([ann isKindOfClass:[PokemonAnnotation class]])
+                                                       {
+                                                           PokemonAnnotation *myAnn = (PokemonAnnotation *)ann;
+                                                           if ((myAnn.coordinate.latitude == [self.pokestops[i][@"latitude"] doubleValue] + 0.0002) && (myAnn.coordinate.longitude == [self.pokestops[i][@"longitude"] doubleValue] + 0.0002))
+                                                           {
+                                                               annFound = YES;
+                                                               break;
+                                                           }
+                                                       }
+                                                   }
+                                               } else {
+                                                   annFound = YES;
+                                               }
+                                               
+                                               if (!annFound)
+                                               {
+                                                   PokemonAnnotation *point = [[PokemonAnnotation alloc] init];
+                                                   CLLocationCoordinate2D pokemonLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] doubleValue] + 0.0002, [self.pokestops[i][@"longitude"] doubleValue] + 0.0002);
+                                                   
+                                                   NSString *disapearTime = [self.pokestops[i] valueForKey:@"lure_expiration"];
+                                                   double milliTime = disapearTime.doubleValue;
+                                                   
+                                                   NSDate *date = [NSDate dateWithTimeIntervalSince1970:(milliTime / 1000)];
+                                                   
+                                                   NSString *key    = [self.pokestops[i] objectForKey:@"active_pokemon_id"];
+                                                   
+                                                   BOOL isPokemonVeryCommonPokemon = [self isPokemonVeryCommon:[NSString stringWithFormat:@"%@", key]];
+                                                   
+                                                   if([date timeIntervalSinceNow] > 0.0)
+                                                   {
+                                                       if((isPokemonVeryCommonPokemon == YES) && (isHideVeryCommonActivated == YES))
+                                                       {
+                                                           // Nothing to do
+                                                           // Option "hide very common" activated and the pokemon is very common
+                                                       }
+                                                       else
+                                                       {
+                                                           point.isFav          = [self isPokemonFavorite:key];
+                                                           if((isViewOnlyFav == true) && (point.isFav == false))
+                                                           {
+                                                               // Nothing to do
+                                                               // Option "view only fav" activated and the pokemon is not in fav list
+                                                           }
+                                                           else
+                                                           {
+                                                               point.hidePokemon    = isPokemonVeryCommonPokemon;
+                                                               point.spawnpointID   = [self.pokestops[i] objectForKey:@"pokestop_id"];
+                                                               point.expirationDate = date;
+                                                               
+                                                               point.coordinate     = pokemonLocation;
+                                                               point.title       = [NSString localizedStringWithFormat:NSLocalizedString(@"%@ (Pokestop)", @"The title of a annotation callout for a Pokémon lured."), [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]]];
+                                                               point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Disappears at", @"The hint in a annotation callout that indicates when a Pokémon disappears."), [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
+                                                               point.pokemonID      = [[self.pokestops[i] valueForKey:@"active_pokemon_id"] intValue];
+                                                               
+                                                               [self.mapview addAnnotation:point];
+                                                               
+                                                               if(!firstConnection)
+                                                               {
+                                                                   NSString *notificationMessage = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]]];
+                                                                   
+                                                                   if(point.isFav)
+                                                                   {
+                                                                       NSLog(@"FAV Pokemon added on map !!");
+                                                                       
+                                                                       notificationMessage = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]]];
+                                                                       
+                                                                       if(isFavNotificationActivated)
+                                                                       {
+                                                                           self.notification = [CWStatusBarNotification new];
+                                                                           self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];;
+                                                                           self.notification.notificationLabelTextColor = [UIColor whiteColor];
+                                                                           
+                                                                           [pokemonFavAppearSound play];
+                                                                           if(isVibrationActivated)
+                                                                           {
+                                                                               AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+                                                                           }
+                                                                           
+                                                                           [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
+                                                                           
+                                                                           [self launchNotification:[self.localization objectForKey:[NSString stringWithFormat:@"%@", key]] isFav:point.isFav lat:[self.pokestops[i][@"latitude"] doubleValue] + 0.0002 lng:[self.pokestops[i][@"longitude"] doubleValue] + 0.0002];
+                                                                           
+                                                                           __weak typeof(self) weakSelf = self;
+                                                                           self.notification.notificationTappedBlock = ^(void) {
+                                                                               [weakSelf.mapview showAnnotations:@[point] animated:YES];
+                                                                           };
+                                                                       }
+                                                                   }
+                                                                   else
+                                                                   {
+                                                                       NSLog(@"Pokemon added on map %@", [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]]);
+                                                                       if(isNormalNotificationActivated)
+                                                                       {
+                                                                           self.notification = [CWStatusBarNotification new];
+                                                                           self.notification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.15 green:0.20 blue:0.23 alpha:1.0];;
+                                                                           self.notification.notificationLabelTextColor = [UIColor whiteColor];
+                                                                           [pokemonAppearSound play];
+                                                                           if(isVibrationActivated)
+                                                                           {
+                                                                               AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+                                                                           }
+                                                                           
+                                                                           [self.notification displayNotificationWithMessage:notificationMessage forDuration:4.5f];
+                                                                           
+                                                                           [self launchNotification:[self.localization objectForKey:[NSString stringWithFormat:@"%@", key]] isFav:point.isFav lat:[self.pokestops[i][@"latitude"] doubleValue] + 0.0002 lng:[self.pokestops[i][@"longitude"] doubleValue] + 0.0002];
+
+                                                                           __weak typeof(self) weakSelf = self;
+                                                                           self.notification.notificationTappedBlock = ^(void) {
+                                                                               [weakSelf.mapview showAnnotations:@[point] animated:YES];
+                                                                           };
+                                                                       }
+                                                                   }
+                                                                   
+                                                                   
+                                                               }
+                                                           }
+                                                       }
+                                                       
+                                                   }
+                                               }
+                                               
+                                           }
+                                       }
+                                       ////// END MINE POKEMON LURED
+                                    
                                    }
                                    
                                    if([self.display_pokestops_str isEqualToString:@"true"])
@@ -601,13 +757,28 @@
                                                
                                                for (id<MKAnnotation> ann in self.mapview.annotations)
                                                {
+                                                   ////// BEGIN MINE
+                                                   annFound = NO;
+                                                   ////// END MINE
                                                    if ([ann isKindOfClass:[PokestopAnnotation class]])
                                                    {
                                                        PokestopAnnotation *myAnn = (PokestopAnnotation *)ann;
                                                        if ((myAnn.coordinate.latitude == [self.pokestops[i][@"latitude"] doubleValue]) && (myAnn.coordinate.longitude == [self.pokestops[i][@"longitude"] doubleValue]))
                                                        {
-                                                           annFound = YES;
-                                                           break;
+                                                           ////// BEGIN MINE TEST MAJ POKESTOP
+                                                           NSString *lureStr = [NSString stringWithFormat:@"%@", myAnn.lure];
+                                                           if( (([[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]]) && (![lureStr isEqualToString:@"none"])) || ((![[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]]) && ([lureStr isEqualToString:@"none"])) )
+                                                           {
+                                                               [self.mapview removeAnnotation:myAnn];
+                                                               NSLog(@"Pokestop changed");
+                                                               break;
+                                                           }
+                                                           else
+                                                           {
+                                                               annFound = YES;
+                                                               break;
+                                                           }
+                                                           ////// END MINE TEST MAJ POKESTOP
                                                        }
                                                    }
                                                }
@@ -618,14 +789,25 @@
                                                    CLLocationCoordinate2D pokestopLocation = CLLocationCoordinate2DMake([self.pokestops[i][@"latitude"] doubleValue], [self.pokestops[i][@"longitude"] doubleValue]);
                                                    
                                                    point.coordinate = pokestopLocation;
-                                                   point.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
-                                                   point.subtitle   = NSLocalizedString(@"This is a pokestop", @"The message of a Pokéstop annotation on the map.");
+                                                   ////// BEGIN MINE CHANGE
+                                                   point.last_modified = [self.pokestops[i] valueForKey:@"last_modified"];
                                                    point.pokestopID = [[self.pokestops[i] valueForKey:@"pokestop_id"] intValue];
-                                                   
-                                                   if([[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]])
+                                                   point.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
+                                                   if([[self.pokestops[i] valueForKey:@"lure_expiration"] isKindOfClass:[NSNull class]]){
                                                        point.lure       = @"none";
+                                                       point.subtitle = NSLocalizedString(@"Not lured", @"The description of a Pokéstop not lured annotation on the map.");
+                                                   }
                                                    else
-                                                       point.lure       = [self.pokestops[i] valueForKey:@"lure_expiration"];
+                                                   {
+                                                       point.lure = [self.pokestops[i] valueForKey:@"lure_expiration"];
+                                                       NSString *last_modified = [self.pokestops[i] valueForKey:@"last_modified"];
+                                                       double milliTime = last_modified.doubleValue;
+                                                       milliTime = (milliTime / 1000) + 1800;
+                                                       NSDate *date = [NSDate dateWithTimeIntervalSince1970:milliTime];
+                                                       point.subtitle = [NSString localizedStringWithFormat:NSLocalizedString(@"Lured until", @"The hint in a annotation callout that indicates when a Pokéstop become not lured."), [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
+                                                   }
+                                                   ////// END MINE CHANGE
+                                                   point.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
                                                    
                                                    [self.mapview addAnnotation:point];
                                                }
@@ -644,13 +826,27 @@
                                                
                                                for (id<MKAnnotation> ann in self.mapview.annotations)
                                                {
+                                                   ////// BEGIN MINE
+                                                   annFound = NO;
+                                                   ////// END MINE
                                                    if ([ann isKindOfClass:[GymAnnotation class]])
                                                    {
                                                        GymAnnotation *myAnn = (GymAnnotation *)ann;
                                                        if ((myAnn.coordinate.latitude == [self.gyms[i][@"latitude"] doubleValue]) && (myAnn.coordinate.longitude == [self.gyms[i][@"longitude"] doubleValue]))
                                                        {
-                                                           annFound = YES;
-                                                           break;
+                                                           ////// BEGIN MINE TEST MAJ GYM
+                                                           if( (myAnn.gymsID != [[self.gyms[i] valueForKey:@"team_id"] intValue]) || (myAnn.guardPokemonID != [[self.gyms[i] valueForKey:@"guard_pokemon_id"] intValue]) || (myAnn.gym_points != [[self.gyms[i] valueForKey:@"gym_points"] intValue])  )
+                                                           {
+                                                               [self.mapview removeAnnotation:myAnn];
+                                                               NSLog(@"Gym changed");
+                                                               break;
+                                                           }
+                                                           else
+                                                           {
+                                                               annFound = YES;
+                                                               break;
+                                                           }
+                                                           ////// END MINE TEST MAJ GYM
                                                        }
                                                    }
                                                }
@@ -661,9 +857,24 @@
                                                    CLLocationCoordinate2D gymLocation = CLLocationCoordinate2DMake([self.gyms[i][@"latitude"] doubleValue], [self.gyms[i][@"longitude"] doubleValue]);
                                                    
                                                    point.coordinate     = gymLocation;
-                                                   point.title          = NSLocalizedString(@"Gym", @"The title of a gym annotation on the map.");
-                                                   point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Gym points: %d", @"The description of a gym annotation on the map with points."), [self.gyms[i][@"gym_points"] intValue]];
+                                                   ////// BEGIN MINE TITLE GYM
                                                    point.gymsID         = [[self.gyms[i] valueForKey:@"team_id"] intValue];
+                                                   switch (point.gymsID) {
+                                                       case TEAM_BLUE:
+                                                           point.title = NSLocalizedString(@"Blue Gym", @"The title of a blue gym annotation on the map.");
+                                                           break;
+                                                       case TEAM_RED:
+                                                           point.title = NSLocalizedString(@"Red Gym", @"The title of a red gym annotation on the map.");
+                                                           break;
+                                                       case TEAM_YELLOW:
+                                                           point.title = NSLocalizedString(@"Yellow Gym", @"The title of a yellow gym annotation on the map.");
+                                                           break;
+                                                       default:
+                                                           point.title = NSLocalizedString(@"Uncontested Gym", @"The title of an uncontested gym annotation on the map.");
+                                                           break;
+                                                   }
+                                                   ////// END MINE TITLE GYM
+                                                   point.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Gym points: %d", @"The description of a gym annotation on the map with points."), [self.gyms[i][@"gym_points"] intValue]];
                                                    point.guardPokemonID = [[self.gyms[i] valueForKey:@"guard_pokemon_id"] intValue];
                                                    point.gym_points     = [[self.gyms[i] valueForKey:@"gym_points"] intValue];
                                                    
@@ -841,11 +1052,27 @@
         else if ([annotation isKindOfClass:[GymAnnotation class]])
         {
             GymAnnotation *annotationGym = annotation;
-            view = [mapView dequeueReusableAnnotationViewWithIdentifier:[NSString stringWithFormat:@"%d",annotationGym.gymsID]];
+            ////// BEGIN MINE GYM IDENTIFIER
+            view = [mapView dequeueReusableAnnotationViewWithIdentifier:[NSString stringWithFormat:@"%d+%d",annotationGym.gymsID,annotationGym.guardPokemonID]];
+            ////// END MINE GYM IDENTIFIER
             if (!view) {
                 
-                view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[NSString stringWithFormat:@"%d",annotationGym.gymsID]];
+                ////// BEGIN MINE DRIVE BUTTON
+                UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
+                UIImage *btnImage   = [UIImage imageNamed:@"drive"];
+                button.frame = CGRectMake(0, 0, 30, 30);
+                [button setImage:btnImage forState:UIControlStateNormal];
+                ////// END MINE DRIVE BUTTON
+                
+                ////// BEGIN MINE GYM IDENTIFIER
+                view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[NSString stringWithFormat:@"%d+%d",annotationGym.gymsID,annotationGym.guardPokemonID]];
+                ////// END MINE GYM IDENTIFIER
                 view.canShowCallout = YES;
+                
+                ////// BEGIN MINE DRIVE BUTTON
+                view.rightCalloutAccessoryView = button;
+                ////// END MINE DRIVE BUTTON
+                
                 UIImage *gymImage = [UIImage imageNamed:@"Gym.png"];
                 
                 switch (annotationGym.gymsID) {
@@ -861,11 +1088,21 @@
                     default:
                         break;
                 }
-                
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationGym.guardPokemonID]]];
-                imageView.frame = CGRectMake(0, 0, 50, 50);
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
-                view.leftCalloutAccessoryView = imageView;
+                ////// BEGIN MINE VIEW GUARDPOKEMON
+                if(annotationGym.gymsID != 0){
+                    UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
+                    int x = (annotationGym.guardPokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
+                    int y = annotationGym.guardPokemonID;
+                    while(y%SPRITESHEET_COLS != 0) y++;
+                    y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
+                    CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+                    CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
+                    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+                    imageView.image = [UIImage imageWithCGImage:imageRef];
+                    CGImageRelease(imageRef);
+                    view.leftCalloutAccessoryView = imageView;
+                }
+                ////// END MINE VIEW GUARDPOKEMON
                 view.image = gymImage;
             }
         }
@@ -877,9 +1114,20 @@
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:lureStr];
             
             if (!view) {
+
+                ////// BEGIN MINE DRIVE BUTTON
+                UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
+                UIImage *btnImage   = [UIImage imageNamed:@"drive"];
+                button.frame = CGRectMake(0, 0, 30, 30);
+                [button setImage:btnImage forState:UIControlStateNormal];
+                ////// END MINE DRIVE BUTTON
                 
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:lureStr];
                 view.canShowCallout = YES;
+
+                ////// BEGIN MINE DRIVE BUTTON
+                view.rightCalloutAccessoryView = button;
+                ////// END MINE DRIVE BUTTON
                 
                 UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
                 
@@ -1038,6 +1286,7 @@
                             [self.mapview removeAnnotation:annotation];
                         }];
                     }
+                    
                 }
             }
         });
@@ -1065,9 +1314,13 @@
 - (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     TimeLabel *timeLabel;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
-        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
+        ////// BEGIN MINE
+        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(0, frame.size.height - 5, frame.size.width, 20)];
+        ////// END MINE
     } else {
-        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
+        ////// BEGIN MINE
+        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(0, frame.size.height - 5, frame.size.width, 20)];
+        ////// END MINE
         
     }
     [timeLabel setDate:annotation.expirationDate];
@@ -1084,9 +1337,10 @@
     }
 
     CLLocationDistance distance = [pokemonLocation distanceFromLocation:baseLocation];
-    
-    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(-7, 45, 50, 10)];
+    ////// BEGIN MINE
+    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(0, frame.size.height - 60, frame.size.width, 20)];
     [distanceLabel setDistance:distance];
+    ////// END MINE
     return distanceLabel;
 }
 

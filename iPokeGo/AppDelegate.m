@@ -25,6 +25,9 @@ static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.15 green:0.20 blue:0.23 alpha:1.0]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    ////// BEGIN MINE
+    [[UINavigationBar appearance] setTranslucent:NO];
+    ////// END MINE
     
     // Notifications
     if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
@@ -57,8 +60,7 @@ static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [application setApplicationIconBadgeNumber:0];
-    
+	[application setApplicationIconBadgeNumber:0];
     [self updateDateText];
     self.dateUpdateTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerRefreshFrequency target:self selector:@selector(updateDateText) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.dateUpdateTimer forMode:NSRunLoopCommonModes];
