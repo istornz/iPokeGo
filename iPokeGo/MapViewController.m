@@ -40,6 +40,11 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         [self loadLocalization];
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToActiveState) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToBackgroundState) name:UIApplicationWillResignActiveNotification object:nil];
     }
     return self;
 }
@@ -53,6 +58,17 @@
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
+    
+    //default to the last known position
+    NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
+    if([mapLocation count] > 0) {
+        MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake([[mapLocation objectForKey:@"latitude"] doubleValue],
+                                                                                      [[mapLocation objectForKey:@"longitude"] doubleValue]),
+                                                           MKCoordinateSpanMake([[mapLocation objectForKey:@"latitudeDelta"] doubleValue],
+                                                                                [[mapLocation objectForKey:@"longitudeDelta"] doubleValue]));
+        
+        [self.mapview setRegion:region animated:NO];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,55 +107,49 @@
 {
     [super viewWillDisappear:animated];
     
-    self.pokemonFetchResultController.delegate = nil;
-    self.gymFetchResultController.delegate = nil;
-    self.pokestopFetchResultController.delegate = nil;
-    self.pokemonFetchResultController = nil;
-    self.gymFetchResultController = nil;
-    self.pokestopFetchResultController = nil;
+    [self disconnectUpdates];
+}
+
+- (void)appSwitchedToActiveState
+{
+    [self reloadMap];
+    [self checkGPS];
+}
+
+- (void)appSwitchedToBackgroundState
+{
+    [self disconnectUpdates];
 }
 
 -(void)checkGPS
 {
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
-    {
-        if([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"] && [self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
-            [self.locationManager requestWhenInUseAuthorization];
-        }
-    }
-    else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
-    {
-        //Location Services is off from settings
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:NSLocalizedString(@"Location service denied", @"The title of an alert, that tells the user that he/she denied location access to the app.")
-                                    message:NSLocalizedString(@"Location denied, please go in settings to allow this app to use your location", @"The message of an alert, that tells the user that he/she denied location access to the app.")
-                                    preferredStyle:UIAlertControllerStyleAlert];
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestWhenInUseAuthorization];
         
-        UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
-                             style:UIAlertActionStyleDefault
-                             handler:nil];
+    } else if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            //lets only show this once per app run so users can't get spammed
+            //Location Services is off from settings
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:NSLocalizedString(@"Location service denied", @"The title of an alert, that tells the user that he/she denied location access to the app.")
+                                        message:NSLocalizedString(@"Location denied, please go in settings to allow this app to use your location", @"The message of an alert, that tells the user that he/she denied location access to the app.")
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ok = [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction *action) {
+                                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                 }];
+            
+            [alert addAction:ok];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+        });
         
-        [alert addAction:ok];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    
-    NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
-    if([mapLocation count] > 0) {
-        MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake([[mapLocation objectForKey:@"latitude"] doubleValue],
-                                                                                      [[mapLocation objectForKey:@"longitude"] doubleValue]),
-                                                           MKCoordinateSpanMake([[mapLocation objectForKey:@"latitudeDelta"] doubleValue],
-                                                                                [[mapLocation objectForKey:@"longitudeDelta"] doubleValue]));
-        
-        [self.mapview setRegion:region animated:YES];
-    }
-    else
-    {
-        [self performSelector:@selector(locationAction:) withObject:nil afterDelay:0];
+    } else {
+        [self.locationManager startUpdatingLocation];
     }
 }
 
@@ -357,14 +367,28 @@
     [endingItem openInMapsWithLaunchOptions:launchOptions];
 }
 
-- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    //Prevents follow the user's position after the first update
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self.mapview setCenterCoordinate:userLocation.location.coordinate animated:YES];
+#pragma mark - CLLocationManager delegate
 
-    });
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    for (CLLocation *location in locations) {
+        //make sure it is reasonably fresh, say the last 30 seconds
+        if ([location.timestamp timeIntervalSinceNow] > -30) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                [self.mapview setRegion:region animated:YES];
+            });
+            [self.locationManager stopUpdatingLocation];
+            break;
+        }
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        [self.locationManager startUpdatingLocation];
+    }
 }
 
 #pragma mark - FRC Delegate
@@ -580,6 +604,16 @@
     });
 }
 
+- (void)disconnectUpdates
+{
+    self.pokemonFetchResultController.delegate = nil;
+    self.gymFetchResultController.delegate = nil;
+    self.pokestopFetchResultController.delegate = nil;
+    self.pokemonFetchResultController = nil;
+    self.gymFetchResultController = nil;
+    self.pokestopFetchResultController = nil;
+}
+
 #pragma mark - Load helpers
 
 -(void)loadLocalization {
@@ -646,7 +680,7 @@
 
 -(void)locationAction:(id)sender
 {
-    [self.mapview setRegion:MKCoordinateRegionMake(self.mapview.userLocation.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    [self checkGPS];
 }
 
 -(void)radarAction:(id)sender

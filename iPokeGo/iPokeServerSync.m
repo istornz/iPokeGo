@@ -94,7 +94,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
             NSLog(@"Error processing server's data: %@", error);
             return;
         }
-        
+        NSLog(@"Fetched data");
         NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
         [self processPokemonFromJSON:jsonData[@"pokemons"] usingContext:context];
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
