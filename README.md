@@ -28,7 +28,7 @@ Of course notification works well on the Apple Watch !
 You will have no more reason of all not to catch them ;)
 
 ## Installation
-1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
+1. Install Xcode
 2. Open *iPokeGo.xcodeproj* in Xcode
 3. Choose your own itunes account under *Signing > Team*
 4. Change the identifier in Xcode from 'com.dimitri-dessus.iPokeGo' to something like 'com.YOUR_NAME.iPokeGo'. 
@@ -51,7 +51,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 ## TODO
 - [ ] Make the app totaly independent
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
-- [ ] Update pokestop and gym annotations
+- [x] Update pokestop and gym annotations
 - [ ] Find a way to do some background task without hack
 - [x] Real notification
 - [x] Change scan position

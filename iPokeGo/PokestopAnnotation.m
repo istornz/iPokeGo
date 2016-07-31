@@ -10,4 +10,20 @@
 
 @implementation PokestopAnnotation
 
+- (instancetype)initWithPokestop:(PokeStop *)pokeStop
+{
+    if (self = [super init]) {
+        self.coordinate = pokeStop.location;
+        self.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
+        self.subtitle   = NSLocalizedString(@"This is a pokestop", @"The message of a Pokéstop annotation on the map.");
+        self.pokestopID = pokeStop.identifier;
+        self.hasLure = pokeStop.lureExpiration != nil;
+    }
+    return self;
+}
+
+
+
+
+
 @end

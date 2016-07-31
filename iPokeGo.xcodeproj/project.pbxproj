@@ -984,6 +984,16 @@
 		27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F4244B1D4684B8007ADEE4 /* ScanPin.png */; };
 		27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4244D1D469710007ADEE4 /* AudioToolbox.framework */; };
 		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
+		81055B8F1D4D3DC20071FDD2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81055B8D1D4D3DC20071FDD2 /* Model.xcdatamodeld */; };
+		81055BAC1D4D413D0071FDD2 /* iPokeServerSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 81055BAB1D4D413D0071FDD2 /* iPokeServerSync.m */; };
+		81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 81055BAE1D4D46790071FDD2 /* CoreDataPersistance.m */; };
+		811142FE1D4D596700901851 /* Pokemon+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 811142FA1D4D596700901851 /* Pokemon+CoreDataClass.m */; };
+		811142FF1D4D596700901851 /* Pokemon+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 811142FC1D4D596700901851 /* Pokemon+CoreDataProperties.m */; };
+		811143081D4D598F00901851 /* PokeStop+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 811143011D4D598F00901851 /* PokeStop+CoreDataClass.m */; };
+		811143091D4D598F00901851 /* PokeStop+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 811143031D4D598F00901851 /* PokeStop+CoreDataProperties.m */; };
+		8111430A1D4D598F00901851 /* Gym+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 811143051D4D598F00901851 /* Gym+CoreDataClass.m */; };
+		8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 811143071D4D598F00901851 /* Gym+CoreDataProperties.m */; };
+		81771E081D4DA47B004DC881 /* PokemonNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 81771E071D4DA47B004DC881 /* PokemonNotifier.m */; };
 		A0847DB01D46D12200215DC9 /* icons-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = A0847DAF1D46D12100215DC9 /* icons-hd.png */; };
 		AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F01D47D04200DEE95C /* pokemon.json */; };
 		AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F61D49252100DEE95C /* Localizable.strings */; };
@@ -2011,6 +2021,26 @@
 		58CA35381D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		58CA35391D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/pokemon.json; sourceTree = "<group>"; };
 		58CA353A1D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		81055B8E1D4D3DC20071FDD2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		81055BAA1D4D413D0071FDD2 /* iPokeServerSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPokeServerSync.h; sourceTree = "<group>"; };
+		81055BAB1D4D413D0071FDD2 /* iPokeServerSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPokeServerSync.m; sourceTree = "<group>"; };
+		81055BAD1D4D46790071FDD2 /* CoreDataPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataPersistance.h; sourceTree = "<group>"; };
+		81055BAE1D4D46790071FDD2 /* CoreDataPersistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataPersistance.m; sourceTree = "<group>"; };
+		811142F91D4D596700901851 /* Pokemon+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pokemon+CoreDataClass.h"; sourceTree = "<group>"; };
+		811142FA1D4D596700901851 /* Pokemon+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pokemon+CoreDataClass.m"; sourceTree = "<group>"; };
+		811142FB1D4D596700901851 /* Pokemon+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pokemon+CoreDataProperties.h"; sourceTree = "<group>"; };
+		811142FC1D4D596700901851 /* Pokemon+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pokemon+CoreDataProperties.m"; sourceTree = "<group>"; };
+		811143001D4D598F00901851 /* PokeStop+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PokeStop+CoreDataClass.h"; sourceTree = "<group>"; };
+		811143011D4D598F00901851 /* PokeStop+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PokeStop+CoreDataClass.m"; sourceTree = "<group>"; };
+		811143021D4D598F00901851 /* PokeStop+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PokeStop+CoreDataProperties.h"; sourceTree = "<group>"; };
+		811143031D4D598F00901851 /* PokeStop+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PokeStop+CoreDataProperties.m"; sourceTree = "<group>"; };
+		811143041D4D598F00901851 /* Gym+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gym+CoreDataClass.h"; sourceTree = "<group>"; };
+		811143051D4D598F00901851 /* Gym+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gym+CoreDataClass.m"; sourceTree = "<group>"; };
+		811143061D4D598F00901851 /* Gym+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gym+CoreDataProperties.h"; sourceTree = "<group>"; };
+		811143071D4D598F00901851 /* Gym+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Gym+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8111430C1D4D5ACA00901851 /* CoreDataEntities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataEntities.h; sourceTree = "<group>"; };
+		81771E061D4DA47B004DC881 /* PokemonNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonNotifier.h; sourceTree = "<group>"; };
+		81771E071D4DA47B004DC881 /* PokemonNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonNotifier.m; sourceTree = "<group>"; };
 		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
 		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3129,24 +3159,19 @@
 		27F3855A1D4130B30004A1B3 /* iPokeGo */ = {
 			isa = PBXGroup;
 			children = (
-				273604571D440B0900194BAF /* Custom classes */,
-				273604541D44093A00194BAF /* Sounds */,
-				272FCEA71D423F74003ED548 /* Localizations */,
-				27F385951D4182BC0004A1B3 /* Images */,
 				27F385941D4139CA0004A1B3 /* global.h */,
 				27F3855E1D4130B30004A1B3 /* AppDelegate.h */,
 				27F3855F1D4130B30004A1B3 /* AppDelegate.m */,
 				275B4E1B1D4562FA00ED8348 /* Annotations */,
-				276FD5581D457AD5006E4B96 /* Settings */,
-				27F385611D4130B30004A1B3 /* MapViewController.h */,
-				27F385621D4130B30004A1B3 /* MapViewController.m */,
-				27F385641D4130B30004A1B3 /* Main.storyboard */,
-				27F385671D4130B30004A1B3 /* Assets.xcassets */,
+				81771E041D4D85F2004DC881 /* Controllers */,
+				273604571D440B0900194BAF /* Custom classes */,
+				81055B901D4D3DCF0071FDD2 /* Data Layer */,
 				27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */,
-				27F3856C1D4130B30004A1B3 /* Info.plist */,
-				AEFA37F61D49252100DEE95C /* Localizable.strings */,
-				0256E3801D473D4900CEEE3F /* Views */,
+				27F385641D4130B30004A1B3 /* Main.storyboard */,
+				81771E051D4D8623004DC881 /* Resources */,
+				81055BA91D4D41130071FDD2 /* Server */,
 				27F3855B1D4130B30004A1B3 /* Supporting Files */,
+				0256E3801D473D4900CEEE3F /* Views */,
 			);
 			path = iPokeGo;
 			sourceTree = "<group>";
@@ -3154,6 +3179,7 @@
 		27F3855B1D4130B30004A1B3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				27F3856C1D4130B30004A1B3 /* Info.plist */,
 				27F3855C1D4130B30004A1B3 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -3211,6 +3237,62 @@
 				27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */,
 			);
 			name = SVPulsingAnnotationView;
+			sourceTree = "<group>";
+		};
+		81055B901D4D3DCF0071FDD2 /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+				811143001D4D598F00901851 /* PokeStop+CoreDataClass.h */,
+				811143011D4D598F00901851 /* PokeStop+CoreDataClass.m */,
+				811143021D4D598F00901851 /* PokeStop+CoreDataProperties.h */,
+				811143031D4D598F00901851 /* PokeStop+CoreDataProperties.m */,
+				811143041D4D598F00901851 /* Gym+CoreDataClass.h */,
+				811143051D4D598F00901851 /* Gym+CoreDataClass.m */,
+				811143061D4D598F00901851 /* Gym+CoreDataProperties.h */,
+				811143071D4D598F00901851 /* Gym+CoreDataProperties.m */,
+				811142F91D4D596700901851 /* Pokemon+CoreDataClass.h */,
+				811142FA1D4D596700901851 /* Pokemon+CoreDataClass.m */,
+				811142FB1D4D596700901851 /* Pokemon+CoreDataProperties.h */,
+				811142FC1D4D596700901851 /* Pokemon+CoreDataProperties.m */,
+				81055B8D1D4D3DC20071FDD2 /* Model.xcdatamodeld */,
+				81055BAD1D4D46790071FDD2 /* CoreDataPersistance.h */,
+				81055BAE1D4D46790071FDD2 /* CoreDataPersistance.m */,
+				8111430C1D4D5ACA00901851 /* CoreDataEntities.h */,
+			);
+			name = "Data Layer";
+			sourceTree = "<group>";
+		};
+		81055BA91D4D41130071FDD2 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				81055BAA1D4D413D0071FDD2 /* iPokeServerSync.h */,
+				81055BAB1D4D413D0071FDD2 /* iPokeServerSync.m */,
+				81771E061D4DA47B004DC881 /* PokemonNotifier.h */,
+				81771E071D4DA47B004DC881 /* PokemonNotifier.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		81771E041D4D85F2004DC881 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				27F385611D4130B30004A1B3 /* MapViewController.h */,
+				27F385621D4130B30004A1B3 /* MapViewController.m */,
+				276FD5581D457AD5006E4B96 /* Settings */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		81771E051D4D8623004DC881 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27F385671D4130B30004A1B3 /* Assets.xcassets */,
+				27F385951D4182BC0004A1B3 /* Images */,
+				AEFA37F61D49252100DEE95C /* Localizable.strings */,
+				272FCEA71D423F74003ED548 /* Localizations */,
+				273604541D44093A00194BAF /* Sounds */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4323,18 +4405,28 @@
 				0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */,
 				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,
 				277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */,
+				8111430A1D4D598F00901851 /* Gym+CoreDataClass.m in Sources */,
 				27F385931D4138730004A1B3 /* SettingsTableViewController.m in Sources */,
+				81055B8F1D4D3DC20071FDD2 /* Model.xcdatamodeld in Sources */,
 				2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */,
+				811142FF1D4D596700901851 /* Pokemon+CoreDataProperties.m in Sources */,
 				0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */,
 				27F385631D4130B30004A1B3 /* MapViewController.m in Sources */,
 				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
+				81771E081D4DA47B004DC881 /* PokemonNotifier.m in Sources */,
+				811143081D4D598F00901851 /* PokeStop+CoreDataClass.m in Sources */,
 				276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */,
 				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
+				81055BAC1D4D413D0071FDD2 /* iPokeServerSync.m in Sources */,
 				277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
+				81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */,
 				0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
+				8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */,
+				811143091D4D598F00901851 /* PokeStop+CoreDataProperties.m in Sources */,
+				811142FE1D4D596700901851 /* Pokemon+CoreDataClass.m in Sources */,
 				0256E3831D473D6A00CEEE3F /* TimeLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4615,6 +4707,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		81055B8D1D4D3DC20071FDD2 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				81055B8E1D4D3DC20071FDD2 /* Model.xcdatamodel */,
+			);
+			currentVersion = 81055B8E1D4D3DC20071FDD2 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 27F385501D4130B30004A1B3 /* Project object */;
 }

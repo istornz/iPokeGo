@@ -10,57 +10,32 @@
 
 @interface PokemonSelectTableViewController ()
 
+@property(strong, nonatomic) NSMutableArray *pokemonID;
+@property(strong, nonatomic) NSMutableArray *pokemonSelected;
+@property(strong, nonatomic) NSDictionary *localization;
+
 @end
 
 @implementation PokemonSelectTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.pokemonID          = [[NSMutableArray alloc] init];
-    self.pokemonChecked     = [[NSMutableArray alloc] init];
-    found                   = NO;
-    
-    [self loadLocalization];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *pokemonListSaved = [defaults objectForKey:self.preferenceKey];
-    
-    if([pokemonListSaved count] > 0)
-        self.pokemonSelected    = [[NSMutableArray alloc] initWithArray:pokemonListSaved];
-    else
-        self.pokemonSelected    = [[NSMutableArray alloc] init];
-    
-    for (int i = 1; i < (POKEMON_NUMBER + 1); i++)
-    {
-        [self.pokemonID addObject:[NSString stringWithFormat:@"%d", i]];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
         
-        if([pokemonListSaved count] > 0)
-        {
-            found = NO;
-            for (NSString *pokemonIDSaved in pokemonListSaved) {
-                if (pokemonIDSaved == [NSString stringWithFormat:@"%d", i]) {
-                    found = YES;
-                    break;
-                }
-            }
-            
-            if(found)
-                [self.pokemonChecked addObject:[NSNumber numberWithBool:YES]];
-            else
-                [self.pokemonChecked addObject:[NSNumber numberWithBool:NO]];
-        }
-        else
-        {
-            
-            [self.pokemonChecked addObject:[NSNumber numberWithBool:NO]];
+        [self loadLocalization];
+        self.pokemonID = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.localization.count; i++) {
+            [self.pokemonID addObject:@(i)];
         }
     }
+    return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.pokemonSelected = [NSMutableArray arrayWithArray:[defaults objectForKey:self.preferenceKey]];
 }
 
 #pragma mark - Table view data source
@@ -75,6 +50,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSString *pokemonID = [NSString stringWithFormat:@"%@", @(indexPath.row + 1)];
     PokemonTableViewCell *cell      = [tableView dequeueReusableCellWithIdentifier:@"pokemoncell" forIndexPath:indexPath];
     NSString *key                   = [NSString stringWithFormat:@"%d", ((int)indexPath.row + 1)];
     
@@ -97,26 +73,25 @@
     cell.pokemonimageView.image = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     
-    if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue])
+    if ([self.pokemonSelected containsObject:pokemonID]) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    else
+    } else {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *pokemonID = [NSString stringWithFormat:@"%@", @(indexPath.row + 1)];
     PokemonTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    if([[self.pokemonChecked objectAtIndex:indexPath.row] boolValue]) {
-        [self.pokemonChecked replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:NO]];
-        [self.pokemonSelected removeObject:[self.pokemonID objectAtIndex:indexPath.row]];
+    if ([self.pokemonSelected containsObject:pokemonID]) {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [self.pokemonSelected removeObject:pokemonID];
     } else {
-        [self.pokemonChecked replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
-        [self.pokemonSelected addObject:[self.pokemonID objectAtIndex:indexPath.row]];
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [self.pokemonSelected addObject:pokemonID];
     }
 }
 
@@ -138,10 +113,7 @@
 
 -(IBAction)saveAction:(id)sender
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:self.pokemonSelected forKey:self.preferenceKey];
-    [prefs synchronize];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:self.pokemonSelected forKey:self.preferenceKey];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

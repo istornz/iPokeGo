@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "global.h"
 
+extern NSString * const SettingsChangedNotification;
+extern NSString * const ServerChangedNotification;
+
 @interface SettingsTableViewController : UITableViewController
 
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *fermerButton;
