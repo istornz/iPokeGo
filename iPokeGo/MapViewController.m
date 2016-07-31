@@ -30,6 +30,7 @@
 
 @property CLLocationManager *locationManager;
 @property NSArray *animatedPokestopLured;
+@property NSArray *pokemonImages;
 @property NSDictionary *localization;
 
 @end
@@ -55,6 +56,7 @@
     
     [self loadNavBar];
     [self loadAnimatedImages];
+    [self loadPokemonImages];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
@@ -216,7 +218,6 @@
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
             
             if (!view) {
-                
                 UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
                 UIImage *btnImage   = [UIImage imageNamed:@"drive"];
                 button.frame = CGRectMake(0, 0, 30, 30);
@@ -225,25 +226,13 @@
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
                 view.canShowCallout = YES;
                 view.rightCalloutAccessoryView = button;
-                
-                UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
-                
-                /* Spritesheet has 7 columns */
-                int x = (annotationPokemon.pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
-                
-                int y = annotationPokemon.pokemonID;
-                
-                while(y%SPRITESHEET_COLS != 0) y++;
-                
-                y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
-                
-                CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-                
-                CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
-                view.image = [UIImage imageWithCGImage:imageRef];
-                
-                view.frame = CGRectMake(0, 0, IMAGE_SIZE*1.5, IMAGE_SIZE*1.5);
-                CGImageRelease(imageRef);
+                if ([self.pokemonImages count] > annotationPokemon.pokemonID) {
+                    view.image = self.pokemonImages[annotationPokemon.pokemonID - 1];
+                    view.frame = CGRectMake(0, 0, IMAGE_SIZE*1.5, IMAGE_SIZE*1.5);                    
+                } else {
+                    NSLog(@"Unknown pokemon image needed: %@", @(annotationPokemon.pokemonID));
+                    view.image = nil;
+                }
                 
                 if([defaults boolForKey:@"display_time"]) {
                     [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
@@ -677,6 +666,26 @@
                                    [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
                                    [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
                                    [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"]];
+}
+
+- (void)loadPokemonImages
+{
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
+    CGImageRef spriteSheet = [largeImage CGImage];
+    for (int pokemonID = 1; pokemonID <= 151; pokemonID++) {
+        /* Spritesheet has 7 columns */
+        int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
+        int y = pokemonID;
+        
+        while(y%SPRITESHEET_COLS != 0) y++;
+        y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
+        CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+        CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
+        [images addObject:[UIImage imageWithCGImage:imageRef]];
+        CGImageRelease(imageRef);
+    }
+    self.pokemonImages = images;
 }
 
 #pragma mark - Actions
