@@ -39,7 +39,6 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         [self loadLocalization];
-        isMapMoved = NO;
     }
     return self;
 }
@@ -360,10 +359,11 @@
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     //Prevents follow the user's position after the first update
-    if(!isMapMoved) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         [self.mapview setCenterCoordinate:userLocation.location.coordinate animated:YES];
-        isMapMoved = YES;
-    }
+
+    });
 }
 
 #pragma mark - FRC Delegate
