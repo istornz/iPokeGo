@@ -56,6 +56,9 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - [x] Real notification
 - [x] Change scan position
 
+## Others
+If you want to edit storyboard file and compile with Xcode 7 on iOS 10 beta, please move the iOS 10 developer image inside Xcode 7 folder [refer to this link](http://stackoverflow.com/a/31013217)
+
 ## Android Version
 There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. All Android related prs and issues please refer to this [repo](https://github.com/omkarmoghe/Pokemap).
 
