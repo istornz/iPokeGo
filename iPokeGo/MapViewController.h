@@ -15,6 +15,8 @@
 #import "SVPulsingAnnotationView.h"
 #import "global.h"
 
+extern NSString * const MapViewRefreshMap;
+
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 {
     BOOL isMapMoved;

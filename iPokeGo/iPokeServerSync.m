@@ -10,11 +10,20 @@
 #import "CoreDataEntities.h"
 #import "CoreDataPersistance.h"
 #import "global.h"
+#import "MapViewController.h"
 #import "iPokeServerSync.h"
 
 @implementation iPokeServerSync
 
 static NSURLSession *iPokeServerSyncSharedSession;
+
+- (instancetype)init {
+    if (self = [super init]) {
+        isFirstReload = YES;
+    }
+    
+    return self;
+}
 
 + (NSURLSession *)sharedSession
 {
@@ -99,6 +108,14 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
         [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
+        
+        if(isFirstReload)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:MapViewRefreshMap
+                                                                object:self
+                                                              userInfo:nil];
+            isFirstReload = NO;
+        }
         
     }];
     [task resume];

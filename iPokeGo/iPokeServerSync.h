@@ -10,6 +10,9 @@
 @import CoreLocation;
 
 @interface iPokeServerSync : NSObject
+{
+    BOOL isFirstReload;
+}
 
 - (void)fetchData;
 - (void)setLocation:(CLLocationCoordinate2D)location;
