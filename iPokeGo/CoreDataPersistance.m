@@ -103,7 +103,7 @@
         if (context.parentContext) {
             [context.parentContext performBlockAndWait:^{
                 NSError *parentError;
-                success = [context save:&parentError];
+                success = [context.parentContext save:&parentError];
                 if (!success) {
                     NSLog(@"Error saving parent context: %@", error);
                     [context.parentContext rollback];
