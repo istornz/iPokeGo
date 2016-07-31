@@ -177,10 +177,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (void)serverChanged:(NSNotification *)notification
 {
-    [self.dataFetchTimer invalidate];
     [self refreshDataFromServer];
-    self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequency target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
 }
 
 #pragma mark - Hack background mode
