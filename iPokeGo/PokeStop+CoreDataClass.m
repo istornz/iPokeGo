@@ -23,16 +23,17 @@
         self.identifier = values[@"pokestop_id"];
     }
     
-    if (self.lureExpiration != nil && ((id)values[@"lure_expiration"] == [NSNull null] || [values[@"lure_expiration"] integerValue] <= 0)) {
+    if (self.lureExpiration != nil && (id)values[@"lure_expiration"] == [NSNull null]) {
         self.lureExpiration = nil;
         
-    } else if ((id)values[@"lure_expiration"] != [NSNull null] && [values[@"lure_expiration"] integerValue] > 0) {
-        NSDate *lureExpiration = [NSDate dateWithTimeIntervalSince1970:[values[@"lure_expiration"] integerValue] / 1000];
-        
-        if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:lureExpiration]) {
-            self.lureExpiration = lureExpiration;
+    } else if ((id)values[@"lure_expiration"] != [NSNull null]) {
+        NSNumber *expiration = values[@"lure_expiration"];
+        NSDate *exirationDate = [NSDate dateWithTimeIntervalSince1970:[expiration doubleValue] / 1000.0];
+        if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:exirationDate]) {
+            self.lureExpiration = exirationDate;
         }
     }
+    
     if (!self.latitude) {
         self.latitude = [((NSNumber *)values[@"latitude"]) doubleValue];
     }
