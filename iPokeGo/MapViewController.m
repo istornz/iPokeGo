@@ -459,7 +459,6 @@
 
 #pragma mark - Fetch Results Controller setup
 
-
 - (NSFetchedResultsController *)newPokemonFetchResultsControllersForCurrentPreferences
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_pokemons"]) {
