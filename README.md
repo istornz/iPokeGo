@@ -28,7 +28,7 @@ Of course notification works well on the Apple Watch !
 You will have no more reason of all not to catch them ;)
 
 ## Installation
-1. Install **Xcode 8 beta** <https://developer.apple.com/download/>
+1. Install Xcode
 2. Open *iPokeGo.xcodeproj* in Xcode
 3. Choose your own itunes account under *Signing > Team*
 4. Change the identifier in Xcode from 'com.dimitri-dessus.iPokeGo' to something like 'com.YOUR_NAME.iPokeGo'. 
