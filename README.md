@@ -51,7 +51,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 ## TODO
 - [ ] Make the app totaly independent
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
-- [ ] Update pokestop and gym annotations
+- [x] Update pokestop and gym annotations
 - [ ] Find a way to do some background task without hack
 - [x] Real notification
 - [x] Change scan position
