@@ -14,12 +14,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
+#import "SettingsTableViewController.h"
 
 @interface PokemonNotifier() <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *pokemonFetchResultsController;
 @property AVAudioPlayer *pokemonAppearSound;
 @property AVAudioPlayer *pokemonFavAppearSound;
+@property BOOL incomingIsFromNewConnection;
 
 @end
 
@@ -48,6 +50,11 @@
         
         self.pokemonAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonAppearSound error:nil];
         self.pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
+        
+        //we want to hide notifications for normal pokemon in two conditions:
+        //if they've changed the server address, or if this is the first connection in a long time
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverChanged) name:ServerChangedNotification object:nil];
+        self.incomingIsFromNewConnection = YES;
     }
     return self;
 }
@@ -106,6 +113,11 @@
     }
 }
 
+- (void)serverChanged
+{
+    self.incomingIsFromNewConnection = YES;
+}
+
 #pragma mark - FRC Delegate
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -118,7 +130,7 @@
                 if ([[NSUserDefaults standardUserDefaults] boolForKey:@"fav_notification"] && [pokemon isFav]) {
                     [self displayNotificationForPokemon:pokemon];
                 }
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"norm_notification"]) {
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"norm_notification"] && !self.incomingIsFromNewConnection) {
                     [self displayNotificationForPokemon:pokemon];
                 }
                 
@@ -132,10 +144,12 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    self.incomingIsFromNewConnection = NO;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    
 }
 
 @end
