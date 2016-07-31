@@ -54,5 +54,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Required to enable background fetching of Pokemon.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Required to show where you are on the map.</string>
 </dict>
 </plist>
