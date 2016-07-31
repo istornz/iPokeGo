@@ -52,7 +52,14 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
     
-    self.viewOnlyFavoriteSwitch.enabled = [[[NSUserDefaults standardUserDefaults] objectForKey:@"pokemon_favorite"] count] > 0;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+       // Run in background thread to prevent little freeze
+        if ([[prefs objectForKey:@"pokemon_favorite"] count] > 0) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.viewOnlyFavoriteSwitch setOn:YES];
+            });
+        }
+    });
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
