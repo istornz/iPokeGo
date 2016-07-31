@@ -14,12 +14,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
+#import "SettingsTableViewController.h"
 
 @interface PokemonNotifier() <NSFetchedResultsControllerDelegate>
 
 @property NSFetchedResultsController *pokemonFetchResultsController;
 @property AVAudioPlayer *pokemonAppearSound;
 @property AVAudioPlayer *pokemonFavAppearSound;
+@property BOOL incomingIsFromNewConnection;
+@property NSDictionary *localization;
 
 @end
 
@@ -48,8 +51,30 @@
         
         self.pokemonAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonAppearSound error:nil];
         self.pokemonFavAppearSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrlPokemonFavAppearSound error:nil];
+        
+        //we want to hide notifications for normal pokemon in two conditions:
+        //if they've changed the server address, or if this is the first connection in a long time
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverChanged) name:ServerChangedNotification object:nil];
+        self.incomingIsFromNewConnection = YES;
+        
+        [self loadLocalization];
     }
     return self;
+}
+
+-(void)loadLocalization {
+    NSError *error;
+    
+    NSURL *filePath = [[NSBundle mainBundle] URLForResource:@"pokemon" withExtension:@"json"];
+    
+    self.localization = [[NSDictionary alloc] init];
+    
+    NSString *stringPath = [filePath absoluteString];
+    NSData *localizationData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringPath]];
+    
+    self.localization = [NSJSONSerialization JSONObjectWithData:localizationData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&error];
 }
 
 -(void)displayNotificationForPokemon:(Pokemon *)pokemon
@@ -58,10 +83,10 @@
     AVAudioPlayer *sound = nil;
     
     if([pokemon isFav]) {
-        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.mapViewController.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
+        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
         sound   = self.pokemonAppearSound;
     } else {
-        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.mapViewController.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
+        message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
         sound   = self.pokemonAppearSound;
     }
     
@@ -106,6 +131,11 @@
     }
 }
 
+- (void)serverChanged
+{
+    self.incomingIsFromNewConnection = YES;
+}
+
 #pragma mark - FRC Delegate
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -118,7 +148,7 @@
                 if ([[NSUserDefaults standardUserDefaults] boolForKey:@"fav_notification"] && [pokemon isFav]) {
                     [self displayNotificationForPokemon:pokemon];
                 }
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"norm_notification"]) {
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"norm_notification"] && !self.incomingIsFromNewConnection) {
                     [self displayNotificationForPokemon:pokemon];
                 }
                 
@@ -132,10 +162,12 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    self.incomingIsFromNewConnection = NO;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    
 }
 
 @end
