@@ -119,7 +119,13 @@
         }
         [sound play];
         
-        if([[NSUserDefaults standardUserDefaults] boolForKey:@"vibration"]) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        BOOL vibration = YES; // Default value
+        
+        if([prefs valueForKey:@"vibration"] != nil)
+            vibration = [prefs boolForKey:@"vibration"];
+        
+        if(vibration) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         }
         
@@ -145,10 +151,21 @@
         {
             if ([anObject isKindOfClass:[Pokemon class]]) {
                 Pokemon *pokemon = (Pokemon *)anObject;
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"fav_notification"] && [pokemon isFav]) {
+                
+                NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
+                BOOL fav_notification   = YES; // Default value
+                BOOL norm_notification  = YES; // Default value
+                
+                if([prefs valueForKey:@"fav_notification"] != nil)
+                    fav_notification = [prefs boolForKey:@"fav_notification"]; // Object not set
+                
+                if([prefs valueForKey:@"norm_notification"] != nil)
+                    norm_notification = [prefs boolForKey:@"norm_notification"]; // Object not set
+                
+                if (fav_notification && [pokemon isFav]) {
                     [self displayNotificationForPokemon:pokemon];
                 }
-                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"norm_notification"] && !self.incomingIsFromNewConnection) {
+                if (norm_notification && !self.incomingIsFromNewConnection) {
                     [self displayNotificationForPokemon:pokemon];
                 }
                 
