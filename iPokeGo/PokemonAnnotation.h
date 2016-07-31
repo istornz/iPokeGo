@@ -15,5 +15,8 @@
 @property BOOL isFav;
 @property NSDate *expirationDate;
 @property NSString *spawnpointID;
+@property NSString *encounterID;
+
+-(PokemonAnnotation *)initWithJson:(NSDictionary *)data;
 
 @end
