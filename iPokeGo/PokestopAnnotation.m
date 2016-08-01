@@ -26,11 +26,12 @@
         self.pokestopID = pokeStop.identifier;
         self.hasLure    = ((pokeStop.lureExpiration != nil) && ([pokeStop.lureExpiration timeIntervalSinceNow] > 0.0));
         
-        if(self.hasLure)
+        if(self.hasLure) {
             self.subtitle   = [NSString localizedStringWithFormat:NSLocalizedString(@"Lure expires at %@", @"The hint in a annotation callout that indicates when a Pokémon disappears."),
                                [formatter stringFromDate:pokeStop.lureExpiration]];
-        else
-            self.subtitle   = [NSString localizedStringWithFormat:NSLocalizedString(@"This is a pokestop", @"The hint in a annotation callout that indicates when the lure disappears."), [formatter stringFromDate:pokeStop.lureExpiration]];
+        } else {
+            self.subtitle   = nil;
+        }
     }
     return self;
 }
