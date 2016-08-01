@@ -290,7 +290,6 @@
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
                 view.canShowCallout = YES;
                 UIImage *gymImage = [UIImage imageNamed:@"Gym.png"];
-                
                 switch (annotationGym.teamID) {
                     case TEAM_BLUE:
                         gymImage = [UIImage imageNamed:@"Mystic.png"];
@@ -304,21 +303,20 @@
                     default:
                         break;
                 }
-                
-                if ([self.pokemonImages count] > annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
-                    UIImageView *imageView = [[UIImageView alloc] initWithImage:self.pokemonImages[annotationGym.guardPokemonID - 1]];
-                    imageView.frame = CGRectMake(0, 0, 50, 50);
-                    imageView.contentMode = UIViewContentModeScaleAspectFit;
-                    view.leftCalloutAccessoryView = imageView;
-                    view.image = gymImage;
-                    
-                } else if (annotationGym.guardPokemonID != 0) {
-                    NSLog(@"Unknown pokemon image needed: %@", @(annotationGym.guardPokemonID));
-                    view.image = nil;
-                }
-                
-                
+                view.image = gymImage;
             }
+            
+            if ([self.pokemonImages count] > annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:self.pokemonImages[annotationGym.guardPokemonID - 1]];
+                imageView.frame = CGRectMake(0, 0, 50, 50);
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                view.leftCalloutAccessoryView = imageView;
+                
+            } else if (annotationGym.guardPokemonID != 0) {
+                NSLog(@"Unknown pokemon image needed: %@", @(annotationGym.guardPokemonID));
+                view.image = nil;
+            }
+            
             view.hidden = self.mapview.region.span.latitudeDelta >= .20;
         }
         else if ([annotation isKindOfClass:[PokestopAnnotation class]])
