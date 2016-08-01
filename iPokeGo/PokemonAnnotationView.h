@@ -16,9 +16,10 @@
 @interface PokemonAnnotationView : MKAnnotationView
 
 @property (weak) TimeLabel* timeLabel;
+@property (weak) TimerLabel* timerLabel;
 @property (weak) DistanceLabel* distanceLabel;
 
 - (instancetype)initWithAnnotation:(PokemonAnnotation *)annotation currentLocation:(CLLocation *)location reuseIdentifier:(NSString *)reuseIdentifier;
-- (void)setAnnotation:(id<MKAnnotation>)annotation andCurrentLocation:(CLLocation *)location;
+- (void)setAnnotation:(id<MKAnnotation>)annotation withLocation:(CLLocation *)location;
 
 @end

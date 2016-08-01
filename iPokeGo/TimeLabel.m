@@ -21,10 +21,15 @@
     return self;
 }
 
-- (void)setDate:(NSDate*)date {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-
+- (void)setDate:(NSDate*)date
+{
+    static NSDateFormatter *formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"HH:mm"];
+    });
+    
     self.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
 }
 
