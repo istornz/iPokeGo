@@ -19,12 +19,12 @@
 		277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
 		2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2788622C1D4226D300CCF60E /* PokestopAnnotation.m */; };
+		2798B9DB1D4F8CEC00B33BE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */; };
 		27F3855D1D4130B30004A1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855C1D4130B30004A1B3 /* main.m */; };
 		27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855F1D4130B30004A1B3 /* AppDelegate.m */; };
 		27F385631D4130B30004A1B3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385621D4130B30004A1B3 /* MapViewController.m */; };
 		27F385661D4130B30004A1B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F385641D4130B30004A1B3 /* Main.storyboard */; };
 		27F385681D4130B30004A1B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F385671D4130B30004A1B3 /* Assets.xcassets */; };
-		27F3856B1D4130B30004A1B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */; };
 		27F385761D4130B30004A1B3 /* iPokeGoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385751D4130B30004A1B3 /* iPokeGoTests.m */; };
 		27F385811D4130B30004A1B3 /* iPokeGoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385801D4130B30004A1B3 /* iPokeGoUITests.m */; };
 		27F385901D4133580004A1B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F3858F1D4133580004A1B3 /* MapKit.framework */; };
@@ -91,6 +91,7 @@
 		277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonTableViewCell.m; sourceTree = "<group>"; };
 		2788622B1D4226D300CCF60E /* PokestopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopAnnotation.h; sourceTree = "<group>"; };
 		2788622C1D4226D300CCF60E /* PokestopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopAnnotation.m; sourceTree = "<group>"; };
+		2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27F385581D4130B30004A1B3 /* iPokeGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPokeGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F3855C1D4130B30004A1B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27F3855E1D4130B30004A1B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		27F385621D4130B30004A1B3 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		27F385651D4130B30004A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27F385671D4130B30004A1B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		27F3856A1D4130B30004A1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27F3856C1D4130B30004A1B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F385711D4130B30004A1B3 /* iPokeGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPokeGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F385751D4130B30004A1B3 /* iPokeGoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPokeGoTests.m; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 				81771E041D4D85F2004DC881 /* Controllers */,
 				273604571D440B0900194BAF /* Custom classes */,
 				81055B901D4D3DCF0071FDD2 /* Data Layer */,
-				27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */,
+				2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */,
 				27F385641D4130B30004A1B3 /* Main.storyboard */,
 				81771E051D4D8623004DC881 /* Resources */,
 				81055BA91D4D41130071FDD2 /* Server */,
@@ -543,10 +543,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */,
-				27F3856B1D4130B30004A1B3 /* LaunchScreen.storyboard in Resources */,
 				AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */,
 				273604561D44094700194BAF /* ding.mp3 in Resources */,
 				AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */,
+				2798B9DB1D4F8CEC00B33BE5 /* LaunchScreen.storyboard in Resources */,
 				27F385681D4130B30004A1B3 /* Assets.xcassets in Resources */,
 				27F385661D4130B30004A1B3 /* Main.storyboard in Resources */,
 			);
@@ -648,14 +648,6 @@
 				58CA35381D4B792C003B7F85 /* ru */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		27F385691D4130B30004A1B3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				27F3856A1D4130B30004A1B3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		AEFA37F01D47D04200DEE95C /* pokemon.json */ = {
@@ -775,6 +767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -788,6 +781,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
