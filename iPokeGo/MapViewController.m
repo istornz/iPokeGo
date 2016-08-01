@@ -474,23 +474,24 @@ static CLLocationDegrees DeltaHideText = 0.1;
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     NSArray *annotations = [self.mapview annotations];
-    NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
-    NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
-    NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
-   
-    //make sure we're on the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.mapview removeAnnotations:gymsToRemove];
-        [self.mapview removeAnnotations:pokestopsToRemove];
-        [self.mapview removeAnnotations:pokemonToRemove];
-        [self.mapview addAnnotations:self.annotationsToAdd];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
+        NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
+        NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
         
-        [self.annotationsToAdd removeAllObjects];
-        [self.annotationsPokeStopsToDelete removeAllObjects];
-        [self.annotationsPokemonToDelete removeAllObjects];
-        [self.annotationsGymsToDelete removeAllObjects];
-    });
-}
+        //make sure we're on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mapview removeAnnotations:gymsToRemove];
+            [self.mapview removeAnnotations:pokestopsToRemove];
+            [self.mapview removeAnnotations:pokemonToRemove];
+            [self.mapview addAnnotations:self.annotationsToAdd];
+            
+            [self.annotationsToAdd removeAllObjects];
+            [self.annotationsPokeStopsToDelete removeAllObjects];
+            [self.annotationsPokemonToDelete removeAllObjects];
+            [self.annotationsGymsToDelete removeAllObjects];
+        });
+    });}
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
