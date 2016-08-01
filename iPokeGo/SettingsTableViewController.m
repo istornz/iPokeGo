@@ -82,11 +82,6 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
 	}
 }
 
--(IBAction)closeAction:(UIBarButtonItem *)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 -(IBAction)saveAction:(UIBarButtonItem *)sender
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -94,7 +89,7 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     if([server length] > 0) {
         if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
-            [prefs setObject:self.serverField.text forKey:@"server_addr"];
+            [prefs setObject:server forKey:@"server_addr"];
         }
     }
     

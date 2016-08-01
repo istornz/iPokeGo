@@ -574,11 +574,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="n4v-qt-5L6">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Uqc-xu-UoW">
-                            <connections>
-                                <action selector="closeAction:" destination="CoE-At-s1E" id="9pG-cz-NgI"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="m43-dh-gzf">
                             <connections>
                                 <action selector="saveAction:" destination="CoE-At-s1E" id="3SK-Mq-UnH"/>
@@ -597,7 +592,6 @@
                         <outlet property="distanceImageView" destination="Pim-8P-E7p" id="4xJ-yV-EVp"/>
                         <outlet property="distanceLabel" destination="f3D-0y-G02" id="vpJ-MF-1cE"/>
                         <outlet property="distanceSwitch" destination="ccs-Mc-qNU" id="5DF-V6-tm3"/>
-                        <outlet property="fermerButton" destination="Uqc-xu-UoW" id="lfl-DQ-gIE"/>
                         <outlet property="gymsImageView" destination="5xx-4w-XG9" id="wEf-FN-B29"/>
                         <outlet property="gymsLabel" destination="l0T-Vk-KFi" id="9Od-S2-2mf"/>
                         <outlet property="gymsSwitch" destination="BgY-94-vC7" id="Jpz-Ni-3I7"/>
@@ -865,7 +859,7 @@
         <image name="favorite" width="51" height="51"/>
         <image name="gym" width="51" height="51"/>
         <image name="hide_common" width="51" height="51"/>
-        <image name="infinity" width="51" height="22"/>
+        <image name="infinity" width="50" height="50"/>
         <image name="location" width="218" height="218"/>
         <image name="notifications" width="51" height="51"/>
         <image name="pokemon" width="51" height="51"/>
