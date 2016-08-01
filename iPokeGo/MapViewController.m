@@ -252,6 +252,7 @@
                 
             } else {
                 //we might be have dequed an existing view, so we need to make sure the custom labels are up to date
+                view.annotation = annotationPokemon;
                 if ([defaults boolForKey:@"display_time"]) {
                     if (![view viewWithTag:timeTag]) {
                         UIView *timeLabelView = [self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
@@ -304,6 +305,8 @@
                         break;
                 }
                 view.image = gymImage;
+            } else {
+                view.annotation = annotationGym;
             }
             
             if ([self.pokemonImages count] > annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
@@ -342,6 +345,8 @@
                 }
                 
                 view.image = pokestopImage;
+            } else {
+                view.annotation = annotationPokestop;
             }
             view.hidden = self.mapview.region.span.latitudeDelta >= .20;
         }
