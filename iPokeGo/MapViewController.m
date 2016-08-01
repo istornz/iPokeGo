@@ -79,9 +79,6 @@
     
     [self reloadMap];
     [self checkGPS];
-    
-    iPokeServerSync *server = [[iPokeServerSync alloc] init];
-    [server callSearchControlValue];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -128,6 +125,9 @@
 
 -(void)checkGPS
 {
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server callSearchControlValue];
+    
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
         
@@ -710,10 +710,16 @@
 - (void) serverStatusRefreshed:(NSNotification*)notif {
     NSLog(@"notif userInfo: %@",[notif.userInfo objectForKey:@"val"]);
     BOOL searchControlEnabled = [[notif.userInfo objectForKey:@"val"] boolValue];
-    if (searchControlEnabled) {
-        [self.searchControlToggleSwitch setOn:YES animated:YES];
+    if (self.searchControlToggleSwitch != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (searchControlEnabled) {
+                [self.searchControlToggleSwitch setOn:YES animated:YES];
+            } else {
+                [self.searchControlToggleSwitch setOn:NO animated:YES];
+            }
+        });
     } else {
-        [self.searchControlToggleSwitch setOn:NO animated:YES];
+        NSLog(@"attempted to update search control toggle while switch control was not yet loaded");
     }
 }
 
