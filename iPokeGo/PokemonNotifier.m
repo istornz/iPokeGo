@@ -31,6 +31,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
+        request.fetchBatchSize = 50;
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"encounter" ascending:YES]]];
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;

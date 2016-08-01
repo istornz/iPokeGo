@@ -12,13 +12,21 @@
 
 - (instancetype)initWithPokemon:(Pokemon *)pokemon andLocalization:(NSDictionary *)localization
 {
+    static NSDateFormatter *formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterNoStyle;
+        formatter.timeStyle = NSDateFormatterMediumStyle;
+    });
+    
     if (self = [super init]) {
         self.spawnpointID   = pokemon.spawnpoint;
         self.expirationDate = pokemon.disappears;
         self.coordinate     = pokemon.location;
         self.title          = [localization objectForKey:[NSString stringWithFormat:@"%@", @(pokemon.identifier)]];
         self.subtitle       = [NSString localizedStringWithFormat:NSLocalizedString(@"Disappears at", @"The hint in a annotation callout that indicates when a Pokémon disappears."),
-                                [NSDateFormatter localizedStringFromDate:pokemon.disappears dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
+                                [formatter stringFromDate:pokemon.disappears]];
         self.pokemonID      = pokemon.identifier;
     }
     return self;
