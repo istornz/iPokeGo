@@ -27,11 +27,21 @@
         self.lureExpiration = nil;
         
     } else if ((id)values[@"lure_expiration"] != [NSNull null]) {
-        NSNumber *expiration = values[@"lure_expiration"];
-        NSDate *exirationDate = [NSDate dateWithTimeIntervalSince1970:[expiration doubleValue] / 1000.0];
-        if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:exirationDate]) {
-            self.lureExpiration = exirationDate;
-        }
+        
+        // Expiration time is calculed by adding expiration time
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            NSDate *now = [NSDate date];
+            
+            NSDate *lureModified = [NSDate dateWithTimeIntervalSince1970:[values[@"last_modified"] doubleValue] / 1000.0];
+            NSTimeInterval time_until_expire = [now timeIntervalSinceDate:lureModified];
+            
+            NSDate *lureExpiration = [now dateByAddingTimeInterval:time_until_expire];
+            
+            if (!self.lureExpiration || ![self.lureExpiration isEqualToDate:lureExpiration]) {
+                self.lureExpiration = lureExpiration;
+            }
+        });
     }
     
     if (self.luredPokemonID != 0 && (id)values[@"active_pokemon_id"] == [NSNull null]) {
