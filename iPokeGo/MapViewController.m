@@ -37,6 +37,8 @@
 
 @implementation MapViewController
 
+static CGFloat PokemonIconSize = 45;
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -231,7 +233,7 @@
                 view.rightCalloutAccessoryView = button;
                 if ([self.pokemonImages count] > annotationPokemon.pokemonID) {
                     view.image = self.pokemonImages[annotationPokemon.pokemonID - 1];
-                    view.frame = CGRectMake(0, 0, IMAGE_SIZE*1.5, IMAGE_SIZE*1.5);                    
+                    view.frame = CGRectMake(0, 0, PokemonIconSize, PokemonIconSize);
                 } else {
                     NSLog(@"Unknown pokemon image needed: %@", @(annotationPokemon.pokemonID));
                     view.image = nil;
@@ -311,8 +313,7 @@
             
             if ([self.pokemonImages count] > annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:self.pokemonImages[annotationGym.guardPokemonID - 1]];
-                imageView.frame = CGRectMake(0, 0, 50, 50);
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
+                imageView.frame = CGRectMake(0, 0, PokemonIconSize, PokemonIconSize);
                 view.leftCalloutAccessoryView = imageView;
                 
             } else if (annotationGym.guardPokemonID != 0) {
@@ -701,17 +702,26 @@
     NSMutableArray *images = [[NSMutableArray alloc] init];
     UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
     CGImageRef spriteSheet = [largeImage CGImage];
+    CGSize size = CGSizeMake(PokemonIconSize * [[UIScreen mainScreen] scale], PokemonIconSize * [[UIScreen mainScreen] scale]);
+    
     for (int pokemonID = 1; pokemonID <= 151; pokemonID++) {
-        /* Spritesheet has 7 columns */
-        int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
-        int y = pokemonID;
-        
-        while(y%SPRITESHEET_COLS != 0) y++;
-        y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
-        CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-        CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
-        [images addObject:[UIImage imageWithCGImage:imageRef]];
-        CGImageRelease(imageRef);
+        @autoreleasepool {
+            /* Spritesheet has 7 columns */
+            int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
+            int y = pokemonID;
+            
+            while(y%SPRITESHEET_COLS != 0) y++;
+            y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
+            CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+            CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
+            UIImage *image = [UIImage imageWithCGImage:imageRef];
+            UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
+            [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+            CGImageRelease(imageRef);
+            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [images addObject:newImage];
+        }
     }
     self.pokemonImages = images;
 }
