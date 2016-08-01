@@ -29,12 +29,19 @@
 
 NSString * const AppDelegateNotificationTapped = @"Poke.AppDelegateNotificationTapped";
 
+dispatch_queue_t AppDelegateCleanerQueue;
+dispatch_queue_t AppDelegateFetcherQueue;
 static NSTimeInterval AppDelegateTimerRefreshFrequency = 1.0;
 static NSTimeInterval AppDelegateTimerCleanFrequency = 1.0;
 static NSTimeInterval AppDelegatServerRefreshFrequency = 5.0;
 static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    AppDelegateCleanerQueue = dispatch_queue_create("iPoke.cleaner", NULL);
+    AppDelegateFetcherQueue = dispatch_queue_create("iPoke.fetcher", NULL);
+    dispatch_set_target_queue(AppDelegateCleanerQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
+    dispatch_set_target_queue(AppDelegateFetcherQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
+    
     NSDictionary* defaults = @{@"display_onlyfav": @"NO",
                                @"display_common": @"NO",
                                @"display_pokemons": @"YES",
@@ -149,14 +156,14 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (void)refreshDataFromServer
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(AppDelegateFetcherQueue, ^{
         [self.server fetchData];
     });
 }
 
 - (void)cleanData
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(AppDelegateCleanerQueue, ^{
         NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
         NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
         [itemsToDeleteRequest setEntity:[NSEntityDescription entityForName:NSStringFromClass([Pokemon class]) inManagedObjectContext:context]];
