@@ -55,6 +55,18 @@ NSString * const TimerLabelUpdateNotification = @"Poke.TimerLabelUpdateNotificat
     }
 }
 
+- (void)setHidden:(BOOL)hidden
+{
+    super.hidden = hidden;
+    if (hidden) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:TimerLabelUpdateNotification object:nil];
+    } else {
+        [self setup];
+        NSTimeInterval expiredIn = [self.expiryDate timeIntervalSinceNow];
+        [self setTimeInterval:expiredIn];
+    }
+}
+
 - (void)setTimeInterval:(NSTimeInterval)timeInterval {
     NSInteger integerValue = (NSInteger)timeInterval;
     uint8_t minutes = integerValue / 60;
