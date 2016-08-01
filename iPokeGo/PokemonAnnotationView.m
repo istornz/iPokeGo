@@ -64,7 +64,7 @@
             [self addSubview:timerLabelView];
             self.timerLabel = timerLabelView;
         } else {
-            [self.timeLabel setDate:annotation.expirationDate];
+            [self.timerLabel setDate:annotation.expirationDate];
         }
     } else {
         [self.timerLabel removeFromSuperview];
