@@ -25,7 +25,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
 
-    self.attributedText = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]].outlinedAttributedString;
+    self.text = [NSString stringWithFormat:@"%@", [formatter stringFromDate:date]];
 }
 
 @end

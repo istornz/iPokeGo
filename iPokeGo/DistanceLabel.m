@@ -8,6 +8,7 @@
 
 #import "DistanceLabel.h"
 #import "NSString+Formatting.h"
+@import CoreLocation;
 
 @implementation DistanceLabel
 
@@ -21,8 +22,10 @@
     return self;
 }
 
-- (void)setDistance:(double)distance {
-    self.attributedText = [NSString stringWithFormat:@"%.0fm", distance].outlinedAttributedString;
+- (void)setDistanceBetweenUser:(CLLocation *)user andLocation:(CLLocation *)location
+{
+    CLLocationDistance distance = [user distanceFromLocation:location];
+    self.text = [NSString stringWithFormat:@"%.0fm", distance];
 }
 
 @end

@@ -58,7 +58,6 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property (weak, nonatomic) IBOutlet UILabel *timeTimerLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *timeTimerSwitch;
 
--(IBAction)closeAction:(UIBarButtonItem *)sender;
 -(IBAction)saveAction:(UIBarButtonItem *)sender;
 -(IBAction)swicthsAction:(UISwitch *)sender;
 

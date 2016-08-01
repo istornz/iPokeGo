@@ -13,6 +13,7 @@
 
 @property NSString *pokestopID;
 @property BOOL hasLure;
+@property int luredPokemonID;
 
 - (instancetype)initWithPokestop:(PokeStop *)pokeStop;
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@import CoreLocation;
 
 @interface DistanceLabel : UILabel
 
-- (void)setDistance:(double)distance;
+- (void)setDistanceBetweenUser:(CLLocation *)user andLocation:(CLLocation *)location;
 
 @end

@@ -18,7 +18,7 @@
 - (void)syncToValues:(NSDictionary *)values
 {
     if (self.identifier == 0) {
-        self.identifier = [values[@"pokemon_id"] integerValue];
+        self.identifier = [values[@"pokemon_id"] intValue];
     }
     NSTimeInterval disappearsTime = [values[@"disappear_time"] doubleValue] / 1000.0;
     if (!self.disappears || self.disappears.timeIntervalSince1970 != disappearsTime) {

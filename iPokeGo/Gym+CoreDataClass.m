@@ -30,11 +30,11 @@
     if (self.team != [((NSNumber *)values[@"team_id"]) integerValue]) {
         self.team = [((NSNumber *)values[@"team_id"]) integerValue];
     }
-    if (self.points != [((NSNumber *)values[@"gym_points"]) integerValue]) {
-        self.points = [((NSNumber *)values[@"gym_points"]) integerValue];
+    if (self.points != [((NSNumber *)values[@"gym_points"]) intValue]) {
+        self.points = [((NSNumber *)values[@"gym_points"]) intValue];
     }
-    if (self.guardingPokemonIdentifier != [((NSNumber *)values[@"guard_pokemon_id"]) integerValue]) {
-        self.guardingPokemonIdentifier = [((NSNumber *)values[@"guard_pokemon_id"]) integerValue];
+    if (self.guardingPokemonIdentifier != [((NSNumber *)values[@"guard_pokemon_id"]) intValue]) {
+        self.guardingPokemonIdentifier = [((NSNumber *)values[@"guard_pokemon_id"]) intValue];
     }
 }
 

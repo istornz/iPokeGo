@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (nullable, nonatomic, copy) NSDate *lureExpiration;
+@property (nonatomic) int32_t luredPokemonID;
 
 @end
 

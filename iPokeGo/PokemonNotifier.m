@@ -31,6 +31,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
+        request.fetchBatchSize = 50;
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"encounter" ascending:YES]]];
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
@@ -120,12 +121,7 @@
         [sound play];
         
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        BOOL vibration = YES; // Default value
-        
-        if([prefs valueForKey:@"vibration"] != nil)
-            vibration = [prefs boolForKey:@"vibration"];
-        
-        if(vibration) {
+        if([prefs boolForKey:@"vibration"]) {
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         }
         
@@ -153,19 +149,10 @@
                 Pokemon *pokemon = (Pokemon *)anObject;
                 
                 NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
-                BOOL fav_notification   = YES; // Default value
-                BOOL norm_notification  = YES; // Default value
-                
-                if([prefs valueForKey:@"fav_notification"] != nil)
-                    fav_notification = [prefs boolForKey:@"fav_notification"]; // Object not set
-                
-                if([prefs valueForKey:@"norm_notification"] != nil)
-                    norm_notification = [prefs boolForKey:@"norm_notification"]; // Object not set
-                
-                if (fav_notification && [pokemon isFav]) {
+                if ([prefs boolForKey:@"fav_notification"] && [pokemon isFav]) {
                     [self displayNotificationForPokemon:pokemon];
                 }
-                if (norm_notification && !self.incomingIsFromNewConnection) {
+                if ([prefs boolForKey:@"norm_notification"] && !self.incomingIsFromNewConnection) {
                     [self displayNotificationForPokemon:pokemon];
                 }
                 

@@ -12,17 +12,27 @@
 
 - (instancetype)initWithPokestop:(PokeStop *)pokeStop
 {
+    static NSDateFormatter *formatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterNoStyle;
+        formatter.timeStyle = NSDateFormatterMediumStyle;
+    });
+    
     if (self = [super init]) {
         self.coordinate = pokeStop.location;
         self.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
         self.pokestopID = pokeStop.identifier;
         self.hasLure    = ((pokeStop.lureExpiration != nil) && ([pokeStop.lureExpiration timeIntervalSinceNow] > 0.0));
+        self.luredPokemonID = self.hasLure && pokeStop.luredPokemonID > 0;
         
-        if(self.hasLure)
+        if(self.hasLure) {
             self.subtitle   = [NSString localizedStringWithFormat:NSLocalizedString(@"Lure expires at %@", @"The hint in a annotation callout that indicates when a Pokémon disappears."),
-                               [NSDateFormatter localizedStringFromDate:pokeStop.lureExpiration dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
-        else
-            self.subtitle   = [NSString localizedStringWithFormat:NSLocalizedString(@"This is a pokestop", @"The hint in a annotation callout that indicates when the lure disappears."), [NSDateFormatter localizedStringFromDate:pokeStop.lureExpiration dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle]];
+                               [formatter stringFromDate:pokeStop.lureExpiration]];
+        } else {
+            self.subtitle   = nil;
+        }
     }
     return self;
 }

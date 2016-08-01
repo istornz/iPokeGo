@@ -7,13 +7,13 @@
 //
 
 #import "MapViewController.h"
-#import "TimeLabel.h"
-#import "TimerLabel.h"
-#import "DistanceLabel.h"
 #import "CoreDataPersistance.h"
 #import "CoreDataEntities.h"
 #import "SettingsTableViewController.h"
 #import "iPokeServerSync.h"
+#import "GymAnnotationView.h"
+#import "PokeStopAnnotationView.h"
+#import "PokemonAnnotationView.h"
 #import <AudioToolbox/AudioServices.h>
 @import CoreData;
 
@@ -29,12 +29,15 @@
 @property NSMutableArray *annotationsPokeStopsToDelete;
 
 @property CLLocationManager *locationManager;
-@property NSArray *animatedPokestopLured;
 @property NSDictionary *localization;
+@property CLLocationDegrees oldLatitudeDelta;
 
 @end
 
 @implementation MapViewController
+
+static CLLocationDegrees DeltaHideAllIcons = 0.2;
+static CLLocationDegrees DeltaHideText = 0.1;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -53,8 +56,9 @@
 {
     [super viewDidLoad];
     
+    self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
+    
     [self loadNavBar];
-    [self loadAnimatedImages];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
@@ -185,18 +189,15 @@
 
 #pragma mark - Mapview delegate
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    NSArray *annotations = self.mapview.annotations;
-    for (int i = 0; i < [annotations count]; i++) {
-        id<MKAnnotation> annotation = (MKPointAnnotation *)[annotations objectAtIndex:i];
-        if (self.mapview.region.span.latitudeDelta > .20) {
-            if([annotation isKindOfClass:[PokemonAnnotation class]] || [annotation isKindOfClass:[GymAnnotation class]] || [annotation isKindOfClass:[PokestopAnnotation class]]) {
-                [[self.mapview viewForAnnotation:annotation] setHidden:YES];
-            }
-        } else {
-            [[self.mapview viewForAnnotation:annotation] setHidden:NO];
-        }
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if ((self.mapview.region.span.latitudeDelta < DeltaHideText && self.oldLatitudeDelta > DeltaHideText) || (self.mapview.region.span.latitudeDelta > DeltaHideText && self.oldLatitudeDelta < DeltaHideText) ||
+        (self.mapview.region.span.latitudeDelta < DeltaHideAllIcons && self.oldLatitudeDelta > DeltaHideAllIcons) || (self.mapview.region.span.latitudeDelta > DeltaHideAllIcons && self.oldLatitudeDelta < DeltaHideAllIcons)) {
+        NSArray *annotations = self.mapview.annotations;
+        [self.mapview removeAnnotations:annotations];
+        [self.mapview addAnnotations:annotations];
     }
+    self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSDictionary *mapRegion = [[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithDouble:self.mapview.region.center.latitude], [NSNumber numberWithDouble:self.mapview.region.center.longitude], [NSNumber numberWithDouble:self.mapview.region.span.latitudeDelta], [NSNumber numberWithDouble:self.mapview.region.span.longitudeDelta]] forKeys:@[@"latitude", @"longitude", @"latitudeDelta", @"longitudeDelta"]];
@@ -207,73 +208,21 @@
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
     MKAnnotationView *view = nil;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ((id<MKAnnotation>)annotation != mapView.userLocation) {
         if([annotation isKindOfClass:[PokemonAnnotation class]])
         {
             PokemonAnnotation *annotationPokemon = annotation;
             NSString *reuse = [NSString stringWithFormat:@"pokemon_%@", @(annotationPokemon.pokemonID)];
-            view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
-            
+            view = (PokemonAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
+                        
             if (!view) {
-                
-                UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
-                UIImage *btnImage   = [UIImage imageNamed:@"drive"];
-                button.frame = CGRectMake(0, 0, 30, 30);
-                [button setImage:btnImage forState:UIControlStateNormal];
-                
-                view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
-                view.canShowCallout = YES;
-                view.rightCalloutAccessoryView = button;
-                
-                UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
-                
-                /* Spritesheet has 7 columns */
-                int x = (annotationPokemon.pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
-                
-                int y = annotationPokemon.pokemonID;
-                
-                while(y%SPRITESHEET_COLS != 0) y++;
-                
-                y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
-                
-                CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-                
-                CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
-                view.image = [UIImage imageWithCGImage:imageRef];
-                
-                view.frame = CGRectMake(0, 0, IMAGE_SIZE*1.5, IMAGE_SIZE*1.5);
-                CGImageRelease(imageRef);
-                
-                if([defaults boolForKey:@"display_time"]) {
-                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
-                }
-                
-                if([defaults boolForKey:@"display_distance"]) {
-                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
-                }
-                
-                
+                view = [[PokemonAnnotationView alloc] initWithAnnotation:annotationPokemon currentLocation:[self currentLocation] reuseIdentifier:reuse];
             } else {
-                // TODO: Its just for 'live' view update when settings changed, probably need to optimise
-                for (UIView *subView in view.subviews) {
-                    if ([subView isKindOfClass:[TimeLabel class]]) {
-                        [subView removeFromSuperview];
-                    }
-                    if ([subView isKindOfClass:[DistanceLabel class]]) {
-                        [subView removeFromSuperview];
-                    }
-                }
-                
-                if([defaults boolForKey:@"display_time"]) {
-                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
-                }
-                
-                if([defaults boolForKey:@"display_distance"]) {
-                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
-                }
+                view.annotation = annotationPokemon;
             }
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
+            ((PokemonAnnotationView *)view).timeLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
+            ((PokemonAnnotationView *)view).distanceLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
         }
         else if ([annotation isKindOfClass:[GymAnnotation class]])
         {
@@ -281,31 +230,12 @@
             NSString *reuse = [NSString stringWithFormat:@"gym_%@", @(annotationGym.teamID)];
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
             if (!view) {
-                view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
-                view.canShowCallout = YES;
-                UIImage *gymImage = [UIImage imageNamed:@"Gym.png"];
-                
-                switch (annotationGym.teamID) {
-                    case TEAM_BLUE:
-                        gymImage = [UIImage imageNamed:@"Mystic.png"];
-                        break;
-                    case TEAM_RED:
-                        gymImage = [UIImage imageNamed:@"Valor.png"];
-                        break;
-                    case TEAM_YELLOW:
-                        gymImage = [UIImage imageNamed:@"Instinct.png"];
-                        break;
-                    default:
-                        break;
-                }
-                
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", annotationGym.guardPokemonID]]];
-                imageView.frame = CGRectMake(0, 0, 50, 50);
-                imageView.contentMode = UIViewContentModeScaleAspectFit;
-                view.leftCalloutAccessoryView = imageView;
-                view.image = gymImage;
+                view = [[GymAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
+            } else {
+                view.annotation = annotationGym;
             }
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
         }
         else if ([annotation isKindOfClass:[PokestopAnnotation class]])
         {
@@ -314,24 +244,12 @@
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
             
             if (!view) {
-                view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
-                view.canShowCallout = YES;
-                
-                UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
-                
-                if(annotationPokestop.hasLure)
-                {
-                    UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-                    animatedImageView.animationImages = self.animatedPokestopLured;
-                    animatedImageView.animationDuration = 1.0f;
-                    [animatedImageView setFrame:CGRectMake(0, 0, 30, 30)];
-                    [animatedImageView startAnimating];
-                    [view addSubview: animatedImageView];
-                }
-                
-                view.image = pokestopImage;
+                view = [[PokeStopAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
+            } else {
+                view.annotation = annotation;
             }
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
         }
         else if ([annotation isKindOfClass:[ScanAnnotation class]])
         {
@@ -339,11 +257,6 @@
             if (!view) {
                 pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
                 pulsingView.canShowCallout = YES;
-                
-                CGPoint point = view.center;
-                point.x = (point.x + 20);
-                point.y = (point.y + 20);
-                
                 pulsingView.annotationColor = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
             }
             
@@ -460,23 +373,24 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     NSArray *annotations = [self.mapview annotations];
-    NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
-    NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
-    NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
-   
-    //make sure we're on the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.mapview removeAnnotations:gymsToRemove];
-        [self.mapview removeAnnotations:pokestopsToRemove];
-        [self.mapview removeAnnotations:pokemonToRemove];
-        [self.mapview addAnnotations:self.annotationsToAdd];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
+        NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
+        NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
         
-        [self.annotationsToAdd removeAllObjects];
-        [self.annotationsPokeStopsToDelete removeAllObjects];
-        [self.annotationsPokemonToDelete removeAllObjects];
-        [self.annotationsGymsToDelete removeAllObjects];
-    });
-}
+        //make sure we're on the main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mapview removeAnnotations:gymsToRemove];
+            [self.mapview removeAnnotations:pokestopsToRemove];
+            [self.mapview removeAnnotations:pokemonToRemove];
+            [self.mapview addAnnotations:self.annotationsToAdd];
+            
+            [self.annotationsToAdd removeAllObjects];
+            [self.annotationsPokeStopsToDelete removeAllObjects];
+            [self.annotationsPokemonToDelete removeAllObjects];
+            [self.annotationsGymsToDelete removeAllObjects];
+        });
+    });}
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
@@ -502,6 +416,7 @@
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"encounter" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSMutableArray *predicates = [[NSMutableArray alloc] init];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_onlyfav"]) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"identifier IN %@" argumentArray:@[favorites]]];
@@ -528,6 +443,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_gyms"]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Gym"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
         NSError *error = nil;
@@ -545,6 +461,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_pokestops"]) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PokeStop"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
         NSError *error = nil;
@@ -635,7 +552,7 @@
 {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-    UIImage* image = [UIImage imageNamed:@"logo_app.png"];
+    UIImage* image = [UIImage imageNamed:@"logo_app"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
@@ -646,34 +563,6 @@
     [titleView addSubview:imageView];
     
     self.navigationItem.titleView = imageView;
-}
-
--(void)loadAnimatedImages
-{
-    self.animatedPokestopLured = @[[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0021_Frame-3.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0020_Frame-4.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0019_Frame-5.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0018_Frame-6.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0017_Frame-7.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0016_Frame-8.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0015_Frame-9.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0014_Frame-10.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0013_Frame-11.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0012_Frame-12.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0011_Frame-13.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0010_Frame-14.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0009_Frame-15.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0008_Frame-16.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0007_Frame-17.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0006_Frame-18.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0005_Frame-19.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0004_Frame-20.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0003_Frame-21.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"]];
 }
 
 #pragma mark - Actions
@@ -694,32 +583,13 @@
 
 #pragma mark - Misc
 
-- (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
-    TimeLabel *timeLabel;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
-        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
-    } else {
-        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
-        
-    }
-    [timeLabel setDate:annotation.expirationDate];
-    return timeLabel;
-}
-
-- (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
-    CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
-    
+- (CLLocation *)currentLocation
+{
     CLLocation *baseLocation = self.mapview.userLocation.location;
-    
     if (!baseLocation) {
         baseLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
     }
-    
-    CLLocationDistance distance = [pokemonLocation distanceFromLocation:baseLocation];
-    
-    DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(-7, 45, 50, 10)];
-    [distanceLabel setDistance:distance];
-    return distanceLabel;
+    return baseLocation;
 }
 
 -(void)showAnnotationLocalNotif:(NSNotification *)notification

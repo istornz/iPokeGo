@@ -14,56 +14,26 @@
 
 @implementation NotificationsSettingsTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self readSavedState];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)readSavedState
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    if([prefs objectForKey:@"norm_notification"] == nil)
-        [self.normalNotificationSwitch setOn:YES]; // Not already set
-    else
-        [self.normalNotificationSwitch setOn:[prefs boolForKey:@"norm_notification"]];
-    
-    if([prefs objectForKey:@"fav_notification"] == nil)
-        [self.favoriteNotificationSwitch setOn:YES]; // Not already set
-    else
-        [self.favoriteNotificationSwitch setOn:[prefs boolForKey:@"fav_notification"]];
-    
-    if([prefs objectForKey:@"vibration"] == nil)
-        [self.vibrationSwitch setOn:YES]; // Not already set
-    else
-        [self.vibrationSwitch setOn:[prefs boolForKey:@"vibration"]];
-    
+    self.normalNotificationSwitch.on = [prefs boolForKey:@"norm_notification"];
+    self.favoriteNotificationSwitch.on = [prefs boolForKey:@"fav_notification"];
+    self.vibrationSwitch.on = [prefs boolForKey:@"vibration"];
 }
 
 -(IBAction)switchAction:(UISwitch *)sender
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    switch (sender.tag) {
-        case SWITCH_NOTIFI_NORM:
-            [prefs setObject:[NSNumber numberWithBool:self.normalNotificationSwitch.on] forKey:@"norm_notification"];
-            break;
-        case SWITCH_NOTIFI_FAV:
-            [prefs setObject:[NSNumber numberWithBool:self.favoriteNotificationSwitch.on] forKey:@"fav_notification"];
-            break;
-        case SWITCH_VIBRATION:
-            [prefs setObject:[NSNumber numberWithBool:self.vibrationSwitch.on] forKey:@"vibration"];
-            break;
-            
-        default:
-            // Nothing
-            break;
+    if (sender == self.normalNotificationSwitch) {
+        [prefs setBool:self.normalNotificationSwitch.on forKey:@"norm_notification"];
+    } else if (sender == self.favoriteNotificationSwitch) {
+        [prefs setBool:self.favoriteNotificationSwitch.on forKey:@"fav_notification"];
+    } else if (sender == self.vibrationSwitch) {
+        [prefs setBool:self.vibrationSwitch.on forKey:@"vibration"];
     }
 }
 

@@ -176,15 +176,18 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [context deleteObject:itemToDelete];
     }
     
-    NSFetchRequest *knownItemsRequest = [[NSFetchRequest alloc] init];
-    [knownItemsRequest setEntity:[NSEntityDescription  entityForName:entityName inManagedObjectContext:context]];
-    NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
+    //we can shortcut and save processing in the background with pokemon since they can't be updated, only added / removed
+    //only look for new pokemon
+    NSFetchRequest *knownIDsRequest = [[NSFetchRequest alloc] init];
+    [knownIDsRequest setEntity:entity];
+    [knownIDsRequest setResultType:NSDictionaryResultType];
+    [knownIDsRequest setReturnsDistinctResults:YES];
+    [knownIDsRequest setPropertiesToFetch:@[@"spawnpoint"]];
+    NSArray *knownPokemonIDs = [[context executeFetchRequest:knownIDsRequest error:nil] valueForKey:@"spawnpoint"];
     
-    for (NSDictionary *rawValues in rawPokemon) {
-        Pokemon *pokemon = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"spawnpoint = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
-        if (!pokemon) {
-            pokemon = [[Pokemon alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-        }
+    NSArray *newPokemon = [rawPokemon filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint_id IN %@)" argumentArray:@[knownPokemonIDs]]];
+    for (NSDictionary *rawValues in newPokemon) {
+        Pokemon *pokemon = [[Pokemon alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         [pokemon syncToValues:rawValues];
     }
 }
