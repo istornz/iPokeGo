@@ -218,7 +218,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
             if (!view) {
                 view = [[PokemonAnnotationView alloc] initWithAnnotation:annotationPokemon currentLocation:[self currentLocation] reuseIdentifier:reuse];
             } else {
-                view.annotation = annotationPokemon;
+                [((PokemonAnnotationView *)view) setAnnotation:annotation withLocation:[self currentLocation]];
             }
             view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
             ((PokemonAnnotationView *)view).timeLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;

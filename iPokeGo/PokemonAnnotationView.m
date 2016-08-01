@@ -30,23 +30,23 @@
         self.frame = CGRectMake(0, 0, 45, 45);
         self.location = location;
         
-        [self updateForAnnotation:annotation andLocation:location];
+        [self updateForAnnotation:annotation withLocation:location];
     }
     return self;
 }
 
-- (void)setAnnotation:(id<MKAnnotation>)annotation andCurrentLocation:(CLLocation *)location
+- (void)setAnnotation:(id<MKAnnotation>)annotation withLocation:(CLLocation *)location
 {
     self.location = location;
     super.annotation = annotation;
     
-    [self updateForAnnotation:annotation andLocation:location];
+    [self updateForAnnotation:annotation withLocation:location];
 }
 
-- (void)updateForAnnotation:(PokemonAnnotation *)annotation andLocation:(CLLocation *)location
+- (void)updateForAnnotation:(PokemonAnnotation *)annotation withLocation:(CLLocation *)location
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults boolForKey:@"display_time"]) {
+    if ([defaults boolForKey:@"display_time"] && ![defaults boolForKey:@"display_timer"]) {
         if (!self.timeLabel) {
             TimeLabel *timeLabelView = [self timeLabelForAnnotation:annotation withContainerFrame:self.frame];
             [self addSubview:timeLabelView];
@@ -56,6 +56,18 @@
         }
     } else {
         [self.timeLabel removeFromSuperview];
+    }
+    
+    if ([defaults boolForKey:@"display_timer"]) {
+        if (!self.timerLabel) {
+            TimerLabel *timerLabelView = [self timerLabelForAnnotation:annotation withContainerFrame:self.frame];
+            [self addSubview:timerLabelView];
+            self.timerLabel = timerLabelView;
+        } else {
+            [self.timeLabel setDate:annotation.expirationDate];
+        }
+    } else {
+        [self.timerLabel removeFromSuperview];
     }
     
     if ([defaults boolForKey:@"display_distance"]) {
@@ -73,15 +85,15 @@
 }
 
 - (TimeLabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
-    TimeLabel *timeLabel;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
-        timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
-    } else {
-        timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
-        
-    }
+    TimeLabel *timeLabel = [[TimeLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
     [timeLabel setDate:annotation.expirationDate];
     return timeLabel;
+}
+
+- (TimerLabel*)timerLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
+    TimerLabel *timerLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
+    [timerLabel setDate:annotation.expirationDate];
+    return timerLabel;
 }
 
 - (DistanceLabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame andCurrentLocation:(CLLocation *)location {

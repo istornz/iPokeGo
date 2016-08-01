@@ -71,7 +71,11 @@ NSString * const TimerLabelUpdateNotification = @"Poke.TimerLabelUpdateNotificat
     NSInteger integerValue = (NSInteger)timeInterval;
     uint8_t minutes = integerValue / 60;
     uint8_t seconds = integerValue % 60;
-    self.text = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    if (timeInterval > 0) {
+        self.text = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    } else {
+        self.text = @"-";
+    }
 }
 
 - (void)dealloc {
