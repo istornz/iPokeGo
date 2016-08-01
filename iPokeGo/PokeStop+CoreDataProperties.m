@@ -14,5 +14,6 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic lureExpiration;
+@dynamic luredPokemonID;
 
 @end

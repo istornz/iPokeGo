@@ -34,6 +34,12 @@
         }
     }
     
+    if (self.luredPokemonID != 0 && (id)values[@"active_pokemon_id"] == [NSNull null]) {
+        self.luredPokemonID = 0;
+        
+    } else if ((id)values[@"active_pokemon_id"] != [NSNull null]) {
+        self.luredPokemonID = [((NSNumber *)values[@"active_pokemon_id"]) intValue];
+    }
     if (!self.latitude) {
         self.latitude = [((NSNumber *)values[@"latitude"]) doubleValue];
     }

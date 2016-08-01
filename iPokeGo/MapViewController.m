@@ -311,7 +311,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
                 view.leftCalloutAccessoryView = imageView;
                 
             } else {
-                view.image = nil;
+                view.leftCalloutAccessoryView = nil;
             }
             
             view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
@@ -341,6 +341,16 @@ static CLLocationDegrees DeltaHideText = 0.1;
                 } else {
                     view.image = [UIImage imageNamed:@"PokestopUnlured"];
                 }
+                
+                if (annotationPokestop.luredPokemonID && annotationPokestop.luredPokemonID != 0) {
+                    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(annotationPokestop.luredPokemonID)]]];
+                    imageView.frame = CGRectMake(0, 0, 45, 45);
+                    view.leftCalloutAccessoryView = imageView;
+                    
+                } else {
+                    view.leftCalloutAccessoryView = nil;
+                }
+
                 
             } else {
                 view.annotation = annotationPokestop;
