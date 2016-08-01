@@ -14,9 +14,10 @@
 
 @implementation NotificationsSettingsTableViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     self.normalNotificationSwitch.on = [prefs boolForKey:@"norm_notification"];
     self.favoriteNotificationSwitch.on = [prefs boolForKey:@"fav_notification"];

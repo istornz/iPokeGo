@@ -28,11 +28,6 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"pokemon_favorite"] count] == 0) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"display_onlyfav"];
-    }
-    
     [self readSavedState];
 }
 
@@ -120,21 +115,21 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     if (sender == self.pokemonsSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.pokemonsSwitch.on] forKey:@"display_pokemons"];
+        [prefs setBool:self.pokemonsSwitch.on forKey:@"display_pokemons"];
         
     } else if (sender == self.gymsSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.gymsSwitch.on] forKey:@"display_gyms"];
+        [prefs setBool:self.gymsSwitch.on forKey:@"display_gyms"];
         
     } else if (sender == self.commonSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.commonSwitch.on] forKey:@"display_common"];
+        [prefs setBool:self.commonSwitch.on forKey:@"display_common"];
         
     } else if (sender == self.distanceSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.distanceSwitch.on] forKey:@"display_distance"];
+        [prefs setBool:self.distanceSwitch.on forKey:@"display_distance"];
         
     } else if (sender == self.timeSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.timeSwitch.on] forKey:@"display_time"];
+        [prefs setBool:self.timeSwitch.on forKey:@"display_time"];
         if (!self.timeSwitch.on && [prefs boolForKey:@"display_timer"]) {
-            [prefs setObject:@(NO) forKey:@"display_timer"];
+            [prefs setBool:NO forKey:@"display_timer"];
             self.timeTimerSwitch.on = NO;
         }
         
@@ -143,18 +138,19 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         //enable that as a byproduct of enabling this
         if (self.timeTimerSwitch.on) {
             self.timeSwitch.on = YES;
-            [prefs setObject:[NSNumber numberWithBool:self.timeSwitch.on] forKey:@"display_time"];
+            [prefs setBool:self.timeSwitch.on forKey:@"display_time"];
         }
-        [prefs setObject:[NSNumber numberWithBool:self.timeTimerSwitch.on] forKey:@"display_timer"];
+        [prefs setBool:self.timeTimerSwitch.on forKey:@"display_timer"];
         
     } else if (sender == self.viewOnlyFavoriteSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.viewOnlyFavoriteSwitch.on] forKey:@"display_onlyfav"];
+        [prefs setBool:self.viewOnlyFavoriteSwitch.on forKey:@"display_onlyfav"];
         
     } else if (sender == self.backgroundSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.backgroundSwitch.on] forKey:@"run_in_background"];
+        [prefs setBool:self.backgroundSwitch.on forKey:@"run_in_background"];
         [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];
+        
     } else if (sender == self.pokestopsSwitch) {
-        [prefs setObject:[NSNumber numberWithBool:self.pokestopsSwitch.on] forKey:@"display_pokestops"];
+        [prefs setBool:self.pokestopsSwitch.on forKey:@"display_pokestops"];
     }
 }
 
