@@ -643,14 +643,13 @@
     UIImage* image = [UIImage imageNamed:@"logo_app.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
+    CGRect frame = CGRectMake(0, 0, 90, 20);
     imageView.frame = frame;
     
-    UIView* titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    imageView.frame = titleView.bounds;
+    UIView* titleView = [[UIView alloc] initWithFrame:imageView.frame];
     [titleView addSubview:imageView];
     
-    self.navigationItem.titleView = imageView;
+    self.navigationItem.titleView = titleView;
 }
 
 -(void)loadAnimatedImages
