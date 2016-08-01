@@ -48,11 +48,11 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        //This threading is masking some other issue, TODO figure out why favs count was blowing up for some people
         NSArray *favs = [prefs objectForKey:@"pokemon_favorite"];
         NSInteger count = [favs count];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.viewOnlyFavoriteSwitch.enabled = count > 0;
+            // Using the setter, it seems to work well
+            [self.viewOnlyFavoriteSwitch setOn:count > 0];
         });
     });
 }
