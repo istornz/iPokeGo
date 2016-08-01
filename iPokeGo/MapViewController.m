@@ -31,6 +31,7 @@
 @property CLLocationManager *locationManager;
 @property NSArray *animatedPokestopLured;
 @property NSDictionary *localization;
+@property (weak, nonatomic) IBOutlet UISwitch *searchControlToggleSwitch;
 
 @end
 
@@ -69,6 +70,7 @@
         
         [self.mapview setRegion:region animated:NO];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverStatusRefreshed:) name:SERVER_SEARCH_STAT object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,6 +79,9 @@
     
     [self reloadMap];
     [self checkGPS];
+    
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server callSearchControlValue];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -689,6 +694,26 @@
         CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
                                                                      [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
         [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    }
+}
+
+- (IBAction)searchControlToggled:(UISwitch *)sender {
+    NSString* searchControlValue = @"on";
+    
+    if (!sender.isOn) {
+        searchControlValue = @"off";
+    }
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server setSearchControl:searchControlValue];
+}
+
+- (void) serverStatusRefreshed:(NSNotification*)notif {
+    NSLog(@"notif userInfo: %@",[notif.userInfo objectForKey:@"val"]);
+    BOOL searchControlEnabled = [[notif.userInfo objectForKey:@"val"] boolValue];
+    if (searchControlEnabled) {
+        [self.searchControlToggleSwitch setOn:YES animated:YES];
+    } else {
+        [self.searchControlToggleSwitch setOn:NO animated:YES];
     }
 }
 

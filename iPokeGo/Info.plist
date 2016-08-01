@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>iPokéGo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,8 +27,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Required to enable background fetching of Pokemon.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To make the app work</string>
+	<string>Required to show where you are on the map.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -54,9 +58,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Required to enable background fetching of Pokemon.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Required to show where you are on the map.</string>
 </dict>
 </plist>

@@ -32,4 +32,8 @@
 #define SERVER_API_DATA     @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
 #define SERVER_API_LOCA     @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
 
+#define SERVER_API_SEARCH     @"%%server_addr%%/search_control?action=%%value%%"
+#define SERVER_API_SEARCH_GET     @"%%server_addr%%/search_control"
+#define SERVER_SEARCH_STAT      @"ServerSearchControlStatus"
+
 #endif /* global_h */
