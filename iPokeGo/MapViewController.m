@@ -704,25 +704,27 @@ static CGFloat PokemonIconSize = 45;
     CGImageRef spriteSheet = [largeImage CGImage];
     CGSize size = CGSizeMake(PokemonIconSize * [[UIScreen mainScreen] scale], PokemonIconSize * [[UIScreen mainScreen] scale]);
     
+    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0, size.height);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
     for (int pokemonID = 1; pokemonID <= 151; pokemonID++) {
-        @autoreleasepool {
-            /* Spritesheet has 7 columns */
-            int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
-            int y = pokemonID;
-            
-            while(y%SPRITESHEET_COLS != 0) y++;
-            y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
-            CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-            CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
-            UIImage *image = [UIImage imageWithCGImage:imageRef];
-            UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
-            [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-            CGImageRelease(imageRef);
-            UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            [images addObject:newImage];
-        }
+        /* Spritesheet has 7 columns */
+        int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
+        int y = pokemonID;
+        
+        while(y%SPRITESHEET_COLS != 0) y++;
+        y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
+        CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
+        CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
+        CGContextClearRect(context, CGRectMake(0, 0, size.width, size.height));
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), imageRef);
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        CGImageRelease(imageRef);
+        [images addObject:newImage];
     }
+    UIGraphicsEndImageContext();
+    
     self.pokemonImages = images;
 }
 
