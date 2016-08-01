@@ -128,18 +128,9 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         
     } else if (sender == self.timeSwitch) {
         [prefs setBool:self.timeSwitch.on forKey:@"display_time"];
-        if (!self.timeSwitch.on && [prefs boolForKey:@"display_timer"]) {
-            [prefs setBool:NO forKey:@"display_timer"];
-            self.timeTimerSwitch.on = NO;
-        }
-        
+		self.timeTimerSwitch.enabled = self.timeSwitch.on;
+			
     } else if (sender == self.timeTimerSwitch) {
-        //confusing when the user enabled this but doesn't see anything because display_time isn't on
-        //enable that as a byproduct of enabling this
-        if (self.timeTimerSwitch.on) {
-            self.timeSwitch.on = YES;
-            [prefs setBool:self.timeSwitch.on forKey:@"display_time"];
-        }
         [prefs setBool:self.timeTimerSwitch.on forKey:@"display_timer"];
         
     } else if (sender == self.viewOnlyFavoriteSwitch) {
