@@ -19,33 +19,6 @@
 		277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
 		2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2788622C1D4226D300CCF60E /* PokestopAnnotation.m */; };
-		27917DE11D4A1AEA00A9E6BE /* settings_icons.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917DE01D4A1AEA00A9E6BE /* settings_icons.png */; };
-		27917DE31D4A33AE00A9E6BE /* logo_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917DE21D4A33AE00A9E6BE /* logo_app.png */; };
-		27B525F31D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */; };
-		27B525F41D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */; };
-		27B525F51D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */; };
-		27B525F61D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */; };
-		27B525F71D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */; };
-		27B525F81D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */; };
-		27B525F91D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */; };
-		27B525FA1D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */; };
-		27B525FB1D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */; };
-		27B525FC1D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */; };
-		27B525FD1D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */; };
-		27B525FE1D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */; };
-		27B525FF1D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */; };
-		27B526001D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */; };
-		27B526011D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */; };
-		27B526021D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */; };
-		27B526031D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */; };
-		27B526041D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */; };
-		27B526051D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */; };
-		27B526061D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */; };
-		27B526071D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */; };
-		27B526081D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */; };
-		27B526091D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */; };
-		27B5260A1D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */; };
-		27ED26BB1D4387230056E366 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 27ED23291D4387220056E366 /* egg.png */; };
 		27F3855D1D4130B30004A1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855C1D4130B30004A1B3 /* main.m */; };
 		27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855F1D4130B30004A1B3 /* AppDelegate.m */; };
 		27F385631D4130B30004A1B3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385621D4130B30004A1B3 /* MapViewController.m */; };
@@ -58,7 +31,6 @@
 		27F385931D4138730004A1B3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F385921D4138730004A1B3 /* SettingsTableViewController.m */; };
 		27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */; };
 		27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424491D468394007ADEE4 /* ScanAnnotation.m */; };
-		27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F4244B1D4684B8007ADEE4 /* ScanPin.png */; };
 		27F4244E1D469710007ADEE4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F4244D1D469710007ADEE4 /* AudioToolbox.framework */; };
 		27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */; };
 		81055B8F1D4D3DC20071FDD2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81055B8D1D4D3DC20071FDD2 /* Model.xcdatamodeld */; };
@@ -116,33 +88,6 @@
 		277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonTableViewCell.m; sourceTree = "<group>"; };
 		2788622B1D4226D300CCF60E /* PokestopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopAnnotation.h; sourceTree = "<group>"; };
 		2788622C1D4226D300CCF60E /* PokestopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopAnnotation.m; sourceTree = "<group>"; };
-		27917DE01D4A1AEA00A9E6BE /* settings_icons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icons.png; sourceTree = "<group>"; };
-		27917DE21D4A33AE00A9E6BE /* logo_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_app.png; sourceTree = "<group>"; };
-		27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0000_Frame-24.png"; sourceTree = "<group>"; };
-		27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0001_Frame-23.png"; sourceTree = "<group>"; };
-		27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0002_Frame-22.png"; sourceTree = "<group>"; };
-		27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0003_Frame-21.png"; sourceTree = "<group>"; };
-		27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0004_Frame-20.png"; sourceTree = "<group>"; };
-		27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0005_Frame-19.png"; sourceTree = "<group>"; };
-		27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0006_Frame-18.png"; sourceTree = "<group>"; };
-		27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0007_Frame-17.png"; sourceTree = "<group>"; };
-		27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0008_Frame-16.png"; sourceTree = "<group>"; };
-		27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0009_Frame-15.png"; sourceTree = "<group>"; };
-		27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0010_Frame-14.png"; sourceTree = "<group>"; };
-		27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0011_Frame-13.png"; sourceTree = "<group>"; };
-		27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0012_Frame-12.png"; sourceTree = "<group>"; };
-		27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0013_Frame-11.png"; sourceTree = "<group>"; };
-		27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0014_Frame-10.png"; sourceTree = "<group>"; };
-		27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0015_Frame-9.png"; sourceTree = "<group>"; };
-		27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0016_Frame-8.png"; sourceTree = "<group>"; };
-		27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0017_Frame-7.png"; sourceTree = "<group>"; };
-		27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0018_Frame-6.png"; sourceTree = "<group>"; };
-		27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0019_Frame-5.png"; sourceTree = "<group>"; };
-		27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0020_Frame-4.png"; sourceTree = "<group>"; };
-		27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0021_Frame-3.png"; sourceTree = "<group>"; };
-		27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0022_Frame-2.png"; sourceTree = "<group>"; };
-		27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pokespot-Lured_0023_Frame-1.png"; sourceTree = "<group>"; };
-		27ED23291D4387220056E366 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = egg.png; path = Pokemons/larger/egg.png; sourceTree = "<group>"; };
 		27F385581D4130B30004A1B3 /* iPokeGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPokeGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F3855C1D4130B30004A1B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27F3855E1D4130B30004A1B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -167,7 +112,6 @@
 		27F38F1D1D4185B40004A1B3 /* PokemonAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonAnnotation.m; sourceTree = "<group>"; };
 		27F424481D468394007ADEE4 /* ScanAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanAnnotation.h; sourceTree = "<group>"; };
 		27F424491D468394007ADEE4 /* ScanAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanAnnotation.m; sourceTree = "<group>"; };
-		27F4244B1D4684B8007ADEE4 /* ScanPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScanPin.png; sourceTree = "<group>"; };
 		27F4244D1D469710007ADEE4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		27F4244F1D469A68007ADEE4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		27F424551D46A246007ADEE4 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
@@ -197,7 +141,6 @@
 		815EBB5C1D4EE34800773636 /* SpriteSplitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteSplitter.m; sourceTree = "<group>"; };
 		81771E061D4DA47B004DC881 /* PokemonNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonNotifier.h; sourceTree = "<group>"; };
 		81771E071D4DA47B004DC881 /* PokemonNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonNotifier.m; sourceTree = "<group>"; };
-		A0847DAF1D46D12100215DC9 /* icons-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-hd.png"; path = "Pokemons/larger/icons-hd.png"; sourceTree = "<group>"; };
 		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37F11D47D04800DEE95C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/pokemon.json; sourceTree = "<group>"; };
@@ -317,57 +260,6 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		27814C601D4221A40032F237 /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				27B525DA1D4A4F1600D1DC17 /* PokestopLuredAnimated */,
-				27917DE21D4A33AE00A9E6BE /* logo_app.png */,
-				27917DE01D4A1AEA00A9E6BE /* settings_icons.png */,
-				27F4244B1D4684B8007ADEE4 /* ScanPin.png */,
-			);
-			name = Others;
-			sourceTree = "<group>";
-		};
-		27B525DA1D4A4F1600D1DC17 /* PokestopLuredAnimated */ = {
-			isa = PBXGroup;
-			children = (
-				27B525DB1D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png */,
-				27B525DC1D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png */,
-				27B525DD1D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png */,
-				27B525DE1D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png */,
-				27B525DF1D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png */,
-				27B525E01D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png */,
-				27B525E11D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png */,
-				27B525E21D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png */,
-				27B525E31D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png */,
-				27B525E41D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png */,
-				27B525E51D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png */,
-				27B525E61D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png */,
-				27B525E71D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png */,
-				27B525E81D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png */,
-				27B525E91D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png */,
-				27B525EA1D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png */,
-				27B525EB1D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png */,
-				27B525EC1D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png */,
-				27B525ED1D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png */,
-				27B525EE1D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png */,
-				27B525EF1D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png */,
-				27B525F01D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png */,
-				27B525F11D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png */,
-				27B525F21D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png */,
-			);
-			name = PokestopLuredAnimated;
-			sourceTree = "<group>";
-		};
-		27ED1F971D4387140056E366 /* larger */ = {
-			isa = PBXGroup;
-			children = (
-				A0847DAF1D46D12100215DC9 /* icons-hd.png */,
-				27ED23291D4387220056E366 /* egg.png */,
-			);
-			name = larger;
-			sourceTree = "<group>";
-		};
 		27F3854F1D4130B30004A1B3 = {
 			isa = PBXGroup;
 			children = (
@@ -446,23 +338,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		27F385951D4182BC0004A1B3 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				27814C601D4221A40032F237 /* Others */,
-				27F385961D4182C10004A1B3 /* Pokemons */,
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
-		27F385961D4182C10004A1B3 /* Pokemons */ = {
-			isa = PBXGroup;
-			children = (
-				27ED1F971D4387140056E366 /* larger */,
-			);
-			name = Pokemons;
-			sourceTree = "<group>";
-		};
 		27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,7 +397,6 @@
 				815EBB5B1D4EE34800773636 /* SpriteSplitter.h */,
 				815EBB5C1D4EE34800773636 /* SpriteSplitter.m */,
 				27F385671D4130B30004A1B3 /* Assets.xcassets */,
-				27F385951D4182BC0004A1B3 /* Images */,
 				AEFA37F61D49252100DEE95C /* Localizable.strings */,
 				272FCEA71D423F74003ED548 /* Localizations */,
 				273604541D44093A00194BAF /* Sounds */,
@@ -653,41 +527,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27B526001D4A4F2D00D1DC17 /* Pokespot-Lured_0013_Frame-11.png in Resources */,
-				27B525F71D4A4F2D00D1DC17 /* Pokespot-Lured_0004_Frame-20.png in Resources */,
-				27B526091D4A4F2D00D1DC17 /* Pokespot-Lured_0022_Frame-2.png in Resources */,
-				27B526031D4A4F2D00D1DC17 /* Pokespot-Lured_0016_Frame-8.png in Resources */,
-				27B525FA1D4A4F2D00D1DC17 /* Pokespot-Lured_0007_Frame-17.png in Resources */,
-				27B5260A1D4A4F2D00D1DC17 /* Pokespot-Lured_0023_Frame-1.png in Resources */,
-				27B526051D4A4F2D00D1DC17 /* Pokespot-Lured_0018_Frame-6.png in Resources */,
-				27B525FF1D4A4F2D00D1DC17 /* Pokespot-Lured_0012_Frame-12.png in Resources */,
-				27B526081D4A4F2D00D1DC17 /* Pokespot-Lured_0021_Frame-3.png in Resources */,
-				27B525F41D4A4F2D00D1DC17 /* Pokespot-Lured_0001_Frame-23.png in Resources */,
-				27B526011D4A4F2D00D1DC17 /* Pokespot-Lured_0014_Frame-10.png in Resources */,
-				27F4244C1D4684B8007ADEE4 /* ScanPin.png in Resources */,
-				27B525F81D4A4F2D00D1DC17 /* Pokespot-Lured_0005_Frame-19.png in Resources */,
 				273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */,
-				27B526021D4A4F2D00D1DC17 /* Pokespot-Lured_0015_Frame-9.png in Resources */,
 				27F3856B1D4130B30004A1B3 /* LaunchScreen.storyboard in Resources */,
-				27917DE31D4A33AE00A9E6BE /* logo_app.png in Resources */,
-				27B525FB1D4A4F2D00D1DC17 /* Pokespot-Lured_0008_Frame-16.png in Resources */,
-				27B526041D4A4F2D00D1DC17 /* Pokespot-Lured_0017_Frame-7.png in Resources */,
 				AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */,
-				27B525FC1D4A4F2D00D1DC17 /* Pokespot-Lured_0009_Frame-15.png in Resources */,
-				27B525F51D4A4F2D00D1DC17 /* Pokespot-Lured_0002_Frame-22.png in Resources */,
 				273604561D44094700194BAF /* ding.mp3 in Resources */,
-				27B526071D4A4F2D00D1DC17 /* Pokespot-Lured_0020_Frame-4.png in Resources */,
-				27B525FD1D4A4F2D00D1DC17 /* Pokespot-Lured_0010_Frame-14.png in Resources */,
-				27ED26BB1D4387230056E366 /* egg.png in Resources */,
-				27B525FE1D4A4F2D00D1DC17 /* Pokespot-Lured_0011_Frame-13.png in Resources */,
-				27917DE11D4A1AEA00A9E6BE /* settings_icons.png in Resources */,
 				AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */,
-				27B526061D4A4F2D00D1DC17 /* Pokespot-Lured_0019_Frame-5.png in Resources */,
-				27B525F61D4A4F2D00D1DC17 /* Pokespot-Lured_0003_Frame-21.png in Resources */,
-				27B525F31D4A4F2D00D1DC17 /* Pokespot-Lured_0000_Frame-24.png in Resources */,
 				27F385681D4130B30004A1B3 /* Assets.xcassets in Resources */,
 				27F385661D4130B30004A1B3 /* Main.storyboard in Resources */,
-				27B525F91D4A4F2D00D1DC17 /* Pokespot-Lured_0006_Frame-18.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -329,30 +329,11 @@ static CLLocationDegrees DeltaHideText = 0.1;
                 if(annotationPokestop.hasLure) {
                     view.image = [UIImage imageNamed:@"PokestopLured"];
                     UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-                    animatedImageView.animationImages = @[[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0021_Frame-3.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0020_Frame-4.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0019_Frame-5.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0018_Frame-6.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0017_Frame-7.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0016_Frame-8.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0015_Frame-9.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0014_Frame-10.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0013_Frame-11.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0012_Frame-12.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0011_Frame-13.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0010_Frame-14.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0009_Frame-15.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0008_Frame-16.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0007_Frame-17.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0006_Frame-18.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0005_Frame-19.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0004_Frame-20.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0003_Frame-21.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
-                                                         [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"]];
+                    NSMutableArray *images = [[NSMutableArray alloc] init];
+                    for (int i = 0; i < 24; i++) {
+                        [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"PokestopLuredAnimation-%@", @(i)]]];
+                    }
+                    animatedImageView.animationImages = images;
                     animatedImageView.animationDuration = 1.0f;
                     [animatedImageView startAnimating];
                     [view addSubview: animatedImageView];
@@ -671,7 +652,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
 {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-    UIImage* image = [UIImage imageNamed:@"logo_app.png"];
+    UIImage* image = [UIImage imageNamed:@"logo_app"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
