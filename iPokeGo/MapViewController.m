@@ -326,9 +326,8 @@ static CLLocationDegrees DeltaHideText = 0.1;
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
                 view.canShowCallout = YES;
                 
-                UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
-                
-                if(annotationPokestop.hasLure) {
+                if(!annotationPokestop.hasLure) {
+                    view.image = [UIImage imageNamed:@"PokestopLured"];
                     UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
                     animatedImageView.animationImages = @[[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
                                                          [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
@@ -358,9 +357,11 @@ static CLLocationDegrees DeltaHideText = 0.1;
                     [animatedImageView setFrame:CGRectMake(0, 0, 30, 30)];
                     [animatedImageView startAnimating];
                     [view addSubview: animatedImageView];
+                    
+                } else {
+                    view.image = [UIImage imageNamed:@"PokestopUnlured"];
                 }
                 
-                view.image = pokestopImage;
             } else {
                 view.annotation = annotationPokestop;
             }
