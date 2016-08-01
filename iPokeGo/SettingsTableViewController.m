@@ -54,6 +54,7 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self.timeSwitch setOn:[prefs boolForKey:@"display_time"]];
     [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
+    [self.viewOnlyLuredSwitch setOn:[prefs boolForKey:@"display_onlylured"]];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -84,7 +85,7 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         server = [NSString stringWithFormat:@"http://%@", server];
         self.serverField.text = server;
     }
-    /*
+    
     if ([server length] == 0 || [server containsString:@"//127.0.0.1"] || [server containsString:@"//localhost"] || [server containsString:@"//10."] || [server containsString:@"//192.168."]) {
         UIAlertController *alert = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(@"Invalid server address", @"Alert warning the user that the server address was invalid")
@@ -104,7 +105,6 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
             [prefs setObject:server forKey:@"server_addr"];
         }
     }
-     */
     
     if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
@@ -141,6 +141,8 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     } else if (sender == self.viewOnlyFavoriteSwitch) {
         [prefs setBool:self.viewOnlyFavoriteSwitch.on forKey:@"display_onlyfav"];
         
+    } else if (sender == self.viewOnlyLuredSwitch) {
+        [prefs setBool:self.viewOnlyLuredSwitch.on forKey:@"display_onlylured"];
     } else if (sender == self.backgroundSwitch) {
         [prefs setBool:self.backgroundSwitch.on forKey:@"run_in_background"];
         [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];

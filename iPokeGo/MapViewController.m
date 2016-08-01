@@ -462,6 +462,10 @@ static CLLocationDegrees DeltaHideText = 0.1;
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PokeStop"];
         [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
         request.fetchBatchSize = 50;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_onlylured"]) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"lureExpiration != nil"];
+            [request setPredicate:predicate];
+        }
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
         frc.delegate = self;
         NSError *error = nil;

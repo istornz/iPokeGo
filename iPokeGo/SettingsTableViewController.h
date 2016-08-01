@@ -46,6 +46,10 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property (weak, nonatomic) IBOutlet UILabel *viewOnlyFavoriteLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *viewOnlyFavoriteSwitch;
 
+@property (weak, nonatomic) IBOutlet UIImageView *viewOnlyLuredImageView;
+@property (weak, nonatomic) IBOutlet UILabel *viewOnlyLuredLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *viewOnlyLuredSwitch;
+
 @property (weak, nonatomic) IBOutlet UIImageView *distanceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *distanceSwitch;
