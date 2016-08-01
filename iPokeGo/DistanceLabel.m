@@ -22,7 +22,7 @@
 }
 
 - (void)setDistance:(double)distance {
-    self.attributedText = [NSString stringWithFormat:@"%.0fm", distance].outlinedAttributedString;
+    self.text = [NSString stringWithFormat:@"%.0fm", distance];
 }
 
 @end
