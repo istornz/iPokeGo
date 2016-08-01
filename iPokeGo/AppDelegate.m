@@ -97,7 +97,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"run_in_background"]) {
         [self.dataFetchTimer invalidate];
         self.dataFetchTimer = nil;
-        
+        [self.server setSearchControl:@"off"];
     } else {
         //if we're going into the background lets try to slow down the notifications a bit to save battery
         //for now we'll use once every 20 seconds or so for a check

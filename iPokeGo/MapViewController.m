@@ -31,6 +31,7 @@
 @property CLLocationManager *locationManager;
 @property NSArray *animatedPokestopLured;
 @property NSDictionary *localization;
+@property (weak, nonatomic) IBOutlet UISwitch *searchControlToggleSwitch;
 
 @end
 
@@ -69,6 +70,7 @@
         
         [self.mapview setRegion:region animated:NO];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverStatusRefreshed:) name:SERVER_SEARCH_STAT object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -123,6 +125,9 @@
 
 -(void)checkGPS
 {
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server callSearchControlValue];
+    
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestWhenInUseAuthorization];
         
@@ -638,14 +643,13 @@
     UIImage* image = [UIImage imageNamed:@"logo_app.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
+    CGRect frame = CGRectMake(0, 0, 90, 20);
     imageView.frame = frame;
     
-    UIView* titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    imageView.frame = titleView.bounds;
+    UIView* titleView = [[UIView alloc] initWithFrame:imageView.frame];
     [titleView addSubview:imageView];
     
-    self.navigationItem.titleView = imageView;
+    self.navigationItem.titleView = titleView;
 }
 
 -(void)loadAnimatedImages
@@ -689,6 +693,29 @@
         CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
                                                                      [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
         [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    }
+}
+
+- (IBAction)searchControlToggled:(UISwitch *)sender {
+    NSString* searchControlValue = @"on";
+    
+    if (!sender.isOn) {
+        searchControlValue = @"off";
+    }
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server setSearchControl:searchControlValue];
+}
+
+- (void) serverStatusRefreshed:(NSNotification*)notif {
+    BOOL searchControlEnabled = [[notif.userInfo objectForKey:@"val"] boolValue];
+    if (self.searchControlToggleSwitch != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (searchControlEnabled) {
+                [self.searchControlToggleSwitch setOn:YES animated:YES];
+            } else {
+                [self.searchControlToggleSwitch setOn:NO animated:YES];
+            }
+        });
     }
 }
 
