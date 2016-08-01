@@ -29,15 +29,11 @@
 @property NSMutableArray *annotationsPokeStopsToDelete;
 
 @property CLLocationManager *locationManager;
-@property NSArray *animatedPokestopLured;
-@property NSArray *pokemonImages;
 @property NSDictionary *localization;
 
 @end
 
 @implementation MapViewController
-
-static CGFloat PokemonIconSize = 45;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -57,8 +53,6 @@ static CGFloat PokemonIconSize = 45;
     [super viewDidLoad];
     
     [self loadNavBar];
-    [self loadAnimatedImages];
-    [self loadPokemonImages];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
@@ -231,13 +225,8 @@ static CGFloat PokemonIconSize = 45;
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
                 view.canShowCallout = YES;
                 view.rightCalloutAccessoryView = button;
-                if ([self.pokemonImages count] > annotationPokemon.pokemonID) {
-                    view.image = self.pokemonImages[annotationPokemon.pokemonID - 1];
-                    view.frame = CGRectMake(0, 0, PokemonIconSize, PokemonIconSize);
-                } else {
-                    NSLog(@"Unknown pokemon image needed: %@", @(annotationPokemon.pokemonID));
-                    view.image = nil;
-                }
+                view.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(annotationPokemon.pokemonID)]];
+                view.frame = CGRectMake(0, 0, 45, 45);
                 
                 if([defaults boolForKey:@"display_time"]) {
                     UIView *timeLabelView = [self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
@@ -311,13 +300,12 @@ static CGFloat PokemonIconSize = 45;
                 view.annotation = annotationGym;
             }
             
-            if ([self.pokemonImages count] > annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
-                UIImageView *imageView = [[UIImageView alloc] initWithImage:self.pokemonImages[annotationGym.guardPokemonID - 1]];
-                imageView.frame = CGRectMake(0, 0, PokemonIconSize, PokemonIconSize);
+            if (annotationGym.guardPokemonID && annotationGym.guardPokemonID != 0) {
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(annotationGym.guardPokemonID)]]];
+                imageView.frame = CGRectMake(0, 0, 45, 45);
                 view.leftCalloutAccessoryView = imageView;
                 
-            } else if (annotationGym.guardPokemonID != 0) {
-                NSLog(@"Unknown pokemon image needed: %@", @(annotationGym.guardPokemonID));
+            } else {
                 view.image = nil;
             }
             
@@ -335,10 +323,32 @@ static CGFloat PokemonIconSize = 45;
                 
                 UIImage *pokestopImage = [UIImage imageNamed:@"Pstop.png"];
                 
-                if(annotationPokestop.hasLure)
-                {
+                if(annotationPokestop.hasLure) {
                     UIImageView* animatedImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-                    animatedImageView.animationImages = self.animatedPokestopLured;
+                    animatedImageView.animationImages = @[[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0021_Frame-3.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0020_Frame-4.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0019_Frame-5.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0018_Frame-6.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0017_Frame-7.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0016_Frame-8.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0015_Frame-9.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0014_Frame-10.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0013_Frame-11.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0012_Frame-12.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0011_Frame-13.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0010_Frame-14.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0009_Frame-15.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0008_Frame-16.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0007_Frame-17.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0006_Frame-18.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0005_Frame-19.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0004_Frame-20.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0003_Frame-21.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
+                                                         [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"]];
                     animatedImageView.animationDuration = 1.0f;
                     [animatedImageView setFrame:CGRectMake(0, 0, 30, 30)];
                     [animatedImageView startAnimating];
@@ -667,65 +677,6 @@ static CGFloat PokemonIconSize = 45;
     [titleView addSubview:imageView];
     
     self.navigationItem.titleView = imageView;
-}
-
--(void)loadAnimatedImages
-{
-    self.animatedPokestopLured = @[[UIImage imageNamed:@"Pokespot-Lured_0023_Frame-1.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0022_Frame-2.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0021_Frame-3.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0020_Frame-4.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0019_Frame-5.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0018_Frame-6.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0017_Frame-7.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0016_Frame-8.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0015_Frame-9.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0014_Frame-10.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0013_Frame-11.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0012_Frame-12.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0011_Frame-13.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0010_Frame-14.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0009_Frame-15.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0008_Frame-16.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0007_Frame-17.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0006_Frame-18.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0005_Frame-19.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0004_Frame-20.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0003_Frame-21.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0002_Frame-22.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0001_Frame-23.png"],
-                                   [UIImage imageNamed:@"Pokespot-Lured_0000_Frame-24.png"]];
-}
-
-- (void)loadPokemonImages
-{
-    NSMutableArray *images = [[NSMutableArray alloc] init];
-    UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
-    CGImageRef spriteSheet = [largeImage CGImage];
-    CGSize size = CGSizeMake(PokemonIconSize * [[UIScreen mainScreen] scale], PokemonIconSize * [[UIScreen mainScreen] scale]);
-    
-    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(context, 0, size.height);
-    CGContextScaleCTM(context, 1.0f, -1.0f);
-    for (int pokemonID = 1; pokemonID <= 151; pokemonID++) {
-        /* Spritesheet has 7 columns */
-        int x = (pokemonID - 1)%SPRITESHEET_COLS*SPRITE_SIZE;
-        int y = pokemonID;
-        
-        while(y%SPRITESHEET_COLS != 0) y++;
-        y = (y/SPRITESHEET_COLS - 1) * SPRITE_SIZE;
-        CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-        CGImageRef imageRef = CGImageCreateWithImageInRect(spriteSheet, cropRect);
-        CGContextClearRect(context, CGRectMake(0, 0, size.width, size.height));
-        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), imageRef);
-        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-        CGImageRelease(imageRef);
-        [images addObject:newImage];
-    }
-    UIGraphicsEndImageContext();
-    
-    self.pokemonImages = images;
 }
 
 #pragma mark - Actions

@@ -23,7 +23,7 @@
         
         [self loadLocalization];
         self.pokemonID = [[NSMutableArray alloc] init];
-        for (int i = 0; i < self.localization.count; i++) {
+        for (int i = 0; i < POKEMON_NUMBER; i++) {
             [self.pokemonID addObject:@(i)];
         }
     }
@@ -56,22 +56,7 @@
     
     cell.pokemonName.text           = [self.localization objectForKey:[NSString stringWithFormat:@"%@", key]];
 
-    UIImage *largeImage = [UIImage imageNamed : @"icons-hd.png"];
-    
-    /* Spritesheet has 7 columns */
-    int x = indexPath.row%SPRITESHEET_COLS*SPRITE_SIZE;
-    
-    int y = (int)indexPath.row + 1;
-    
-    while(y%SPRITESHEET_COLS != 0) y++;
-    
-    y = ((y/SPRITESHEET_COLS) -1) * SPRITE_SIZE;
-    
-    CGRect cropRect = CGRectMake(x, y, SPRITE_SIZE, SPRITE_SIZE);
-    
-    CGImageRef imageRef = CGImageCreateWithImageInRect([largeImage CGImage], cropRect);
-    cell.pokemonimageView.image = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
+    cell.pokemonimageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(indexPath.row + 1)]];
     
     if ([self.pokemonSelected containsObject:pokemonID]) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
