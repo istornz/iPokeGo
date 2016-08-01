@@ -30,10 +30,14 @@
 
 @property CLLocationManager *locationManager;
 @property NSDictionary *localization;
+@property CLLocationDegrees oldLatitudeDelta;
 
 @end
 
 @implementation MapViewController
+
+static CLLocationDegrees DeltaHideAllIcons = 0.2;
+static CLLocationDegrees DeltaHideText = 0.1;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -51,6 +55,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
     
     [self loadNavBar];
     
@@ -183,18 +189,15 @@
 
 #pragma mark - Mapview delegate
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    NSArray *annotations = self.mapview.annotations;
-    for (int i = 0; i < [annotations count]; i++) {
-        id<MKAnnotation> annotation = (MKPointAnnotation *)[annotations objectAtIndex:i];
-        if (self.mapview.region.span.latitudeDelta > .20) {
-            if([annotation isKindOfClass:[PokemonAnnotation class]] || [annotation isKindOfClass:[GymAnnotation class]] || [annotation isKindOfClass:[PokestopAnnotation class]]) {
-                [[self.mapview viewForAnnotation:annotation] setHidden:YES];
-            }
-        } else {
-            [[self.mapview viewForAnnotation:annotation] setHidden:NO];
-        }
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    if ((self.mapview.region.span.latitudeDelta < DeltaHideText && self.oldLatitudeDelta > DeltaHideText) || (self.mapview.region.span.latitudeDelta > DeltaHideText && self.oldLatitudeDelta < DeltaHideText) ||
+        (self.mapview.region.span.latitudeDelta < DeltaHideAllIcons && self.oldLatitudeDelta > DeltaHideAllIcons) || (self.mapview.region.span.latitudeDelta > DeltaHideAllIcons && self.oldLatitudeDelta < DeltaHideAllIcons)) {
+        NSArray *annotations = self.mapview.annotations;
+        [self.mapview removeAnnotations:annotations];
+        [self.mapview addAnnotations:annotations];
     }
+    self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSDictionary *mapRegion = [[NSDictionary alloc] initWithObjects:@[[NSNumber numberWithDouble:self.mapview.region.center.latitude], [NSNumber numberWithDouble:self.mapview.region.center.longitude], [NSNumber numberWithDouble:self.mapview.region.span.latitudeDelta], [NSNumber numberWithDouble:self.mapview.region.span.longitudeDelta]] forKeys:@[@"latitude", @"longitude", @"latitudeDelta", @"longitudeDelta"]];
@@ -271,7 +274,9 @@
                     [[view viewWithTag:distanceTag] removeFromSuperview];
                 }
             }
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
+            [view viewWithTag:timeTag].hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
+            [view viewWithTag:distanceTag].hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
         }
         else if ([annotation isKindOfClass:[GymAnnotation class]])
         {
@@ -309,7 +314,7 @@
                 view.image = nil;
             }
             
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
         }
         else if ([annotation isKindOfClass:[PokestopAnnotation class]])
         {
@@ -359,7 +364,7 @@
             } else {
                 view.annotation = annotationPokestop;
             }
-            view.hidden = self.mapview.region.span.latitudeDelta >= .20;
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
         }
         else if ([annotation isKindOfClass:[ScanAnnotation class]])
         {
