@@ -286,16 +286,16 @@ static CLLocationDegrees DeltaHideText = 0.1;
             if (!view) {
                 view = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuse];
                 view.canShowCallout = YES;
-                UIImage *gymImage = [UIImage imageNamed:@"Gym.png"];
+                UIImage *gymImage = [UIImage imageNamed:@"GymUnowned"];
                 switch (annotationGym.teamID) {
                     case TEAM_BLUE:
-                        gymImage = [UIImage imageNamed:@"Mystic.png"];
+                        gymImage = [UIImage imageNamed:@"GumMystic"];
                         break;
                     case TEAM_RED:
-                        gymImage = [UIImage imageNamed:@"Valor.png"];
+                        gymImage = [UIImage imageNamed:@"GymValor"];
                         break;
                     case TEAM_YELLOW:
-                        gymImage = [UIImage imageNamed:@"Instinct.png"];
+                        gymImage = [UIImage imageNamed:@"GymInstinct"];
                         break;
                     default:
                         break;
