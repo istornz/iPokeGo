@@ -217,6 +217,9 @@
             NSString *reuse = [NSString stringWithFormat:@"pokemon_%@", @(annotationPokemon.pokemonID)];
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuse];
             
+            NSInteger timeTag = 10;
+            NSInteger distanceTag = 11;
+            
             if (!view) {
                 UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
                 UIImage *btnImage   = [UIImage imageNamed:@"drive"];
@@ -235,31 +238,45 @@
                 }
                 
                 if([defaults boolForKey:@"display_time"]) {
-                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                    UIView *timeLabelView = [self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
+                    timeLabelView.tag = timeTag;
+                    [view addSubview:timeLabelView];
                 }
                 
                 if([defaults boolForKey:@"display_distance"]) {
-                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                    UIView *distaneView = [self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
+                    distaneView.tag = distanceTag;
+                    [view addSubview:distaneView];
                 }
                 
                 
             } else {
-                // TODO: Its just for 'live' view update when settings changed, probably need to optimise
-                for (UIView *subView in view.subviews) {
-                    if ([subView isKindOfClass:[TimeLabel class]]) {
-                        [subView removeFromSuperview];
+                //we might be have dequed an existing view, so we need to make sure the custom labels are up to date
+                if ([defaults boolForKey:@"display_time"]) {
+                    if (![view viewWithTag:timeTag]) {
+                        UIView *timeLabelView = [self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
+                        timeLabelView.tag = timeTag;
+                        [view addSubview:timeLabelView];
+                    } else {
+                        TimeLabel *label = [view viewWithTag:timeTag];
+                        [label setDate:annotationPokemon.expirationDate];
                     }
-                    if ([subView isKindOfClass:[DistanceLabel class]]) {
-                        [subView removeFromSuperview];
-                    }
+                } else {
+                    [[view viewWithTag:timeTag] removeFromSuperview];
                 }
                 
-                if([defaults boolForKey:@"display_time"]) {
-                    [view addSubview:[self timeLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
-                }
-                
-                if([defaults boolForKey:@"display_distance"]) {
-                    [view addSubview:[self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame]];
+                if ([defaults boolForKey:@"display_distance"]) {
+                    if (![view viewWithTag:distanceTag]) {
+                        UIView *distaneView = [self distanceLabelForAnnotation:annotationPokemon withContainerFrame:view.frame];
+                        distaneView.tag = distanceTag;
+                        [view addSubview:distaneView];
+                    } else {
+                        DistanceLabel *label = [view viewWithTag:distanceTag];
+                        CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
+                        [label setDistanceBetweenUser:[self currentLocation] andLocation:pokemonLocation];
+                    }
+                } else {
+                    [[view viewWithTag:distanceTag] removeFromSuperview];
                 }
             }
             view.hidden = self.mapview.region.span.latitudeDelta >= .20;
@@ -714,7 +731,16 @@
 
 #pragma mark - Misc
 
-- (UILabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
+- (CLLocation *)currentLocation
+{
+    CLLocation *baseLocation = self.mapview.userLocation.location;
+    if (!baseLocation) {
+        baseLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
+    }
+    return baseLocation;
+}
+
+- (TimeLabel*)timeLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     TimeLabel *timeLabel;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_timer"]) {
         timeLabel = [[TimerLabel alloc] initWithFrame:CGRectMake(13, -1, 40, 10)];
@@ -726,19 +752,10 @@
     return timeLabel;
 }
 
-- (UILabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
+- (DistanceLabel*)distanceLabelForAnnotation:(PokemonAnnotation*)annotation withContainerFrame:(CGRect)frame {
     CLLocation *pokemonLocation = [[CLLocation alloc] initWithLatitude:annotation.coordinate.latitude longitude:annotation.coordinate.longitude];
-    
-    CLLocation *baseLocation = self.mapview.userLocation.location;
-    
-    if (!baseLocation) {
-        baseLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
-    }
-    
-    CLLocationDistance distance = [pokemonLocation distanceFromLocation:baseLocation];
-    
     DistanceLabel *distanceLabel = [[DistanceLabel alloc] initWithFrame:CGRectMake(-7, 45, 50, 10)];
-    [distanceLabel setDistance:distance];
+    [distanceLabel setDistanceBetweenUser:[self currentLocation] andLocation:pokemonLocation];
     return distanceLabel;
 }
 
