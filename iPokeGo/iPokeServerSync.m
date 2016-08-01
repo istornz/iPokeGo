@@ -75,23 +75,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            if (data != nil) {
-                NSError* err2 = nil;
-                NSDictionary* dataStr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err2];
-                if (dataStr != nil && dataStr[@"status"] != nil) {
-                    NSLog(@"(http): Search control changed to %@ !",searchControlValue);
-                }
-            } else {
-                NSLog(@"(http): Error changing search control, server returned with nil data");
-            }
-            
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if (httpResponse.statusCode != 200) {
-                NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
-                return;
-            }
-        }
         
         if (error) {
             NSLog(@"Error reading server's data: %@", error);
@@ -114,14 +97,12 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSURL *url = [self buildSearchControlURLWithValue:@""];
     if (!url) {
-        NSLog(@"search control GET called with nil URL");
         return;
     }
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"GET"];
-    NSLog(@"search control GET called with URL: %@",request.URL.absoluteString);
     
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
         BOOL switchedOn = NO;
@@ -134,15 +115,9 @@ static NSURLSession *iPokeServerSyncSharedSession;
             NSError* err2 = nil;
             NSDictionary* dataStr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err2];
             if (dataStr != nil && dataStr[@"status"] != nil) {
-                BOOL statusStr = [dataStr[@"status"] boolValue];
+                BOOL statusB = [dataStr[@"status"] boolValue];
                 NSLog(@"Search control refreshed, read as %@ !",dataStr[@"status"]);
-            
-                if(statusStr) {
-                    NSLog(@"Search control GET, changed to %@ !",dataStr);
-                    switchedOn = YES;
-                }
-            } else {
-                NSLog(@"Server search control GET, server returned bad data");
+                switchedOn = statusB;
             }
         }
         
@@ -254,7 +229,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
     }
     
     NSString* request = [[SERVER_API_SEARCH stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr] stringByReplacingOccurrencesOfString:@"%%value%%" withString:value];
-    NSLog(@"using request %@ for search control",request);
     return [NSURL URLWithString:request];
 }
 

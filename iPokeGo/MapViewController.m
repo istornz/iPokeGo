@@ -707,7 +707,6 @@
 }
 
 - (void) serverStatusRefreshed:(NSNotification*)notif {
-    NSLog(@"notif userInfo: %@",[notif.userInfo objectForKey:@"val"]);
     BOOL searchControlEnabled = [[notif.userInfo objectForKey:@"val"] boolValue];
     if (self.searchControlToggleSwitch != nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -717,8 +716,6 @@
                 [self.searchControlToggleSwitch setOn:NO animated:YES];
             }
         });
-    } else {
-        NSLog(@"attempted to update search control toggle while switch control was not yet loaded");
     }
 }
 
