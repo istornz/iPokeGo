@@ -31,6 +31,14 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self readSavedState];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSArray *favs = [[NSUserDefaults standardUserDefaults] objectForKey:@"pokemon_favorite"];
+    self.viewOnlyFavoriteSwitch.enabled = [favs count] > 0;
+}
+
 -(void)readSavedState
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -46,15 +54,6 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self.timeSwitch setOn:[prefs boolForKey:@"display_time"]];
     [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSArray *favs = [prefs objectForKey:@"pokemon_favorite"];
-        NSInteger count = [favs count];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Using the setter, it seems to work well
-            [self.viewOnlyFavoriteSwitch setOn:count > 0];
-        });
-    });
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -85,7 +84,7 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         server = [NSString stringWithFormat:@"http://%@", server];
         self.serverField.text = server;
     }
-    
+    /*
     if ([server length] == 0 || [server containsString:@"//127.0.0.1"] || [server containsString:@"//localhost"] || [server containsString:@"//10."] || [server containsString:@"//192.168."]) {
         UIAlertController *alert = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(@"Invalid server address", @"Alert warning the user that the server address was invalid")
@@ -104,6 +103,12 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
             [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
             [prefs setObject:server forKey:@"server_addr"];
         }
+    }
+     */
+    
+    if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+        [prefs setObject:server forKey:@"server_addr"];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
