@@ -120,6 +120,10 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         
     } else if (sender == self.timeSwitch) {
         [prefs setObject:[NSNumber numberWithBool:self.timeSwitch.on] forKey:@"display_time"];
+        if (!self.timeSwitch.on && [prefs boolForKey:@"display_timer"]) {
+            [prefs setObject:@(NO) forKey:@"display_timer"];
+            self.timeTimerSwitch.on = NO;
+        }
         
     } else if (sender == self.timeTimerSwitch) {
         //confusing when the user enabled this but doesn't see anything because display_time isn't on
