@@ -25,7 +25,7 @@
         self.title      = NSLocalizedString(@"Pokestop", @"The title of a Pokéstop annotation on the map.");
         self.pokestopID = pokeStop.identifier;
         self.hasLure    = ((pokeStop.lureExpiration != nil) && ([pokeStop.lureExpiration timeIntervalSinceNow] > 0.0));
-        self.luredPokemonID = self.hasLure && pokeStop.luredPokemonID > 0;
+        self.luredPokemonID = (self.hasLure && pokeStop.luredPokemonID > 0) ? pokeStop.luredPokemonID : 0;
         
         if(self.hasLure) {
             self.subtitle   = [NSString localizedStringWithFormat:NSLocalizedString(@"Lure expires at %@", @"The hint in a annotation callout that indicates when a Pokémon disappears."),
@@ -36,9 +36,6 @@
     }
     return self;
 }
-
-
-
 
 
 @end
