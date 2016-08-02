@@ -13,4 +13,5 @@
 
 @property (weak) MapViewController *mapViewController;
 
+- (void)notificationTapped:withNotification;
 @end
