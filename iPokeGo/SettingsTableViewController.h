@@ -24,11 +24,9 @@ extern NSString * const BackgroundSettingChangedNotification;
 
 @property(weak, nonatomic) IBOutlet UIImageView *pokemonsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *pokemonsLabel;
-@property(weak, nonatomic) IBOutlet UISwitch *pokemonsSwitch;
 
 @property(weak, nonatomic) IBOutlet UIImageView *pokestopsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *pokestopsLabel;
-@property(weak, nonatomic) IBOutlet UISwitch *pokestopsSwitch;
 
 @property(weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property(weak, nonatomic) IBOutlet UILabel *backgroundLabel;
@@ -36,31 +34,6 @@ extern NSString * const BackgroundSettingChangedNotification;
 
 @property(weak, nonatomic) IBOutlet UIImageView *gymsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *gymsLabel;
-@property(weak, nonatomic) IBOutlet UISwitch *gymsSwitch;
-
-@property(weak, nonatomic) IBOutlet UIImageView *commonImageView;
-@property(weak, nonatomic) IBOutlet UILabel *commonLabel;
-@property(weak, nonatomic) IBOutlet UISwitch *commonSwitch;
-
-@property (weak, nonatomic) IBOutlet UIImageView *viewOnlyFavoriteImageView;
-@property (weak, nonatomic) IBOutlet UILabel *viewOnlyFavoriteLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *viewOnlyFavoriteSwitch;
-
-@property (weak, nonatomic) IBOutlet UIImageView *viewOnlyLuredImageView;
-@property (weak, nonatomic) IBOutlet UILabel *viewOnlyLuredLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *viewOnlyLuredSwitch;
-
-@property (weak, nonatomic) IBOutlet UIImageView *distanceImageView;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *distanceSwitch;
-
-@property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *timeSwitch;
-
-@property (weak, nonatomic) IBOutlet UIImageView *timeTimerImageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeTimerLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *timeTimerSwitch;
 
 -(IBAction)saveAction:(UIBarButtonItem *)sender;
 -(IBAction)swicthsAction:(UISwitch *)sender;

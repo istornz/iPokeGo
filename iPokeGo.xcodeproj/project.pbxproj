@@ -15,6 +15,9 @@
 		273604561D44094700194BAF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604551D44094700194BAF /* ding.mp3 */; };
 		273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 273604631D440E4900194BAF /* CWStatusBarNotification.m */; };
 		273604661D441B7B00194BAF /* favoritePokemon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604651D441B7B00194BAF /* favoritePokemon.mp3 */; };
+		276B89851D50FA83008164FE /* PokemonsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B89841D50FA83008164FE /* PokemonsSettingsTableViewController.m */; };
+		276B89881D50FA8B008164FE /* PokestopsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B89871D50FA8B008164FE /* PokestopsSettingsTableViewController.m */; };
+		276B898B1D50FA97008164FE /* GymsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276B898A1D50FA97008164FE /* GymsSettingsTableViewController.m */; };
 		276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */; };
 		277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
@@ -83,6 +86,12 @@
 		273604621D440E4900194BAF /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
 		273604631D440E4900194BAF /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
 		273604651D441B7B00194BAF /* favoritePokemon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = favoritePokemon.mp3; sourceTree = "<group>"; };
+		276B89831D50FA83008164FE /* PokemonsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonsSettingsTableViewController.h; sourceTree = "<group>"; };
+		276B89841D50FA83008164FE /* PokemonsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonsSettingsTableViewController.m; sourceTree = "<group>"; };
+		276B89861D50FA8B008164FE /* PokestopsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopsSettingsTableViewController.h; sourceTree = "<group>"; };
+		276B89871D50FA8B008164FE /* PokestopsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopsSettingsTableViewController.m; sourceTree = "<group>"; };
+		276B89891D50FA97008164FE /* GymsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymsSettingsTableViewController.h; sourceTree = "<group>"; };
+		276B898A1D50FA97008164FE /* GymsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GymsSettingsTableViewController.m; sourceTree = "<group>"; };
 		276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsSettingsTableViewController.h; sourceTree = "<group>"; };
 		276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsSettingsTableViewController.m; sourceTree = "<group>"; };
 		277209DA1D441CAA0008B7FA /* PokemonSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonSelectTableViewController.h; sourceTree = "<group>"; };
@@ -262,15 +271,61 @@
 			name = Annotations;
 			sourceTree = "<group>";
 		};
+		276B898C1D50FB08008164FE /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */,
+				276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
+		276B898D1D50FB0E008164FE /* Pokemons */ = {
+			isa = PBXGroup;
+			children = (
+				276B89831D50FA83008164FE /* PokemonsSettingsTableViewController.h */,
+				276B89841D50FA83008164FE /* PokemonsSettingsTableViewController.m */,
+			);
+			name = Pokemons;
+			sourceTree = "<group>";
+		};
+		276B898E1D50FB15008164FE /* Pokestops */ = {
+			isa = PBXGroup;
+			children = (
+				276B89861D50FA8B008164FE /* PokestopsSettingsTableViewController.h */,
+				276B89871D50FA8B008164FE /* PokestopsSettingsTableViewController.m */,
+			);
+			name = Pokestops;
+			sourceTree = "<group>";
+		};
+		276B898F1D50FB1B008164FE /* Gyms */ = {
+			isa = PBXGroup;
+			children = (
+				276B89891D50FA97008164FE /* GymsSettingsTableViewController.h */,
+				276B898A1D50FA97008164FE /* GymsSettingsTableViewController.m */,
+			);
+			name = Gyms;
+			sourceTree = "<group>";
+		};
+		276B89901D50FB22008164FE /* Pokemon select list */ = {
+			isa = PBXGroup;
+			children = (
+				277209DA1D441CAA0008B7FA /* PokemonSelectTableViewController.h */,
+				277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */,
+			);
+			name = "Pokemon select list";
+			sourceTree = "<group>";
+		};
 		276FD5581D457AD5006E4B96 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
 				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
-				277209DA1D441CAA0008B7FA /* PokemonSelectTableViewController.h */,
-				277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */,
-				276FD5551D45742A006E4B96 /* NotificationsSettingsTableViewController.h */,
-				276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */,
+				276B89901D50FB22008164FE /* Pokemon select list */,
+				276B898C1D50FB08008164FE /* Notifications */,
+				276B898D1D50FB0E008164FE /* Pokemons */,
+				276B898E1D50FB15008164FE /* Pokestops */,
+				276B898F1D50FB1B008164FE /* Gyms */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -573,6 +628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				276B89881D50FA8B008164FE /* PokestopsSettingsTableViewController.m in Sources */,
 				27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */,
 				0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */,
 				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,
@@ -589,11 +645,13 @@
 				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
 				81771E081D4DA47B004DC881 /* PokemonNotifier.m in Sources */,
 				815EBB5D1D4EE34800773636 /* SpriteSplitter.m in Sources */,
+				276B89851D50FA83008164FE /* PokemonsSettingsTableViewController.m in Sources */,
 				811143081D4D598F00901851 /* PokeStop+CoreDataClass.m in Sources */,
 				276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */,
 				81C963751D4F27A200DD6592 /* PokemonAnnotationView.m in Sources */,
 				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
+				276B898B1D50FA97008164FE /* GymsSettingsTableViewController.m in Sources */,
 				81055BAC1D4D413D0071FDD2 /* iPokeServerSync.m in Sources */,
 				277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
