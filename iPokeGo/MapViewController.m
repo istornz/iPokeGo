@@ -38,6 +38,7 @@
 
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
+BOOL regionChangeRequested = YES;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -288,10 +289,13 @@ static CLLocationDegrees DeltaHideText = 0.1;
     for (CLLocation *location in locations) {
         //make sure it is reasonably fresh, say the last 30 seconds
         if ([location.timestamp timeIntervalSinceNow] > -30) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
-                [self.mapview setRegion:region animated:YES];
-            });
+            if(regionChangeRequested) {
+                regionChangeRequested = NO;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                    [self.mapview setRegion:region animated:YES];
+                });
+            }
             [self.locationManager stopUpdatingLocation];
             break;
         }
@@ -574,6 +578,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
 
 -(void)locationAction:(id)sender
 {
+    regionChangeRequested = YES;
     [self checkGPS];
 }
 
