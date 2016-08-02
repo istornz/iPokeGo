@@ -133,6 +133,15 @@
     }
 }
 
+- (void) notificationTapped:(NSNotification *)notification
+{
+    MKCoordinateRegion region;
+    region.center = CLLocationCoordinate2DMake([[notification.userInfo  objectForKey:@"latitude"] doubleValue], [[notification.userInfo objectForKey:@"longitude"] doubleValue]);
+    region.span.latitudeDelta   = MAP_SCALE_ANNOT;
+    region.span.longitudeDelta  = MAP_SCALE_ANNOT;
+    [self.mapViewController.mapview setRegion:region animated:YES];
+}
+
 - (void)serverChanged
 {
     self.incomingIsFromNewConnection = YES;

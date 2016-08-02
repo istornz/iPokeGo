@@ -76,6 +76,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverChanged:) name:ServerChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBackgrounder) name:BackgroundSettingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationTapped:) name:AppDelegateNotificationTapped object:nil];
     
     return YES;
 }
@@ -152,6 +153,11 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
                                                             object:self
                                                           userInfo:notification.userInfo];
     }
+}
+
+-(void)notificationTapped:(NSNotification *)notification
+{
+    [self.notifier notificationTapped:notification];
 }
 
 - (void)refreshDataFromServer
