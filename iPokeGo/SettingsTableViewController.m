@@ -86,26 +86,6 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
         self.serverField.text = server;
     }
     
-    if ([server length] == 0 || [server containsString:@"//127.0.0.1"] || [server containsString:@"//localhost"] || [server containsString:@"//10."] || [server containsString:@"//192.168."]) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:NSLocalizedString(@"Invalid server address", @"Alert warning the user that the server address was invalid")
-                                    message:NSLocalizedString(@"Please change your server address to one that is reachable on the internet.", @"Ask the user to use a URL that will work through the internet")
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction
-                          actionWithTitle:NSLocalizedString(@"OK", @"A common affirmative action title, like 'OK' in english.")
-                          style:UIAlertActionStyleDefault
-                          handler:nil]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-        
-    } else {
-        if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
-            [prefs setObject:server forKey:@"server_addr"];
-        }
-    }
-    
     if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
         [prefs setObject:server forKey:@"server_addr"];
