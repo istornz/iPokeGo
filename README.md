@@ -50,6 +50,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/releases)
 
 ## TODO
+- [ ] Add possibility to follow user location (same as website)
 - [ ] Add a server status page
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
 - [x] Update pokestop and gym annotations
