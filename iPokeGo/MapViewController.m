@@ -222,6 +222,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
             }
             view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
             ((PokemonAnnotationView *)view).timeLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
+            ((PokemonAnnotationView *)view).timerLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
             ((PokemonAnnotationView *)view).distanceLabel.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideText;
         }
         else if ([annotation isKindOfClass:[GymAnnotation class]])
