@@ -561,17 +561,14 @@ BOOL regionChangeRequested = YES;
 {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-    UIImage* image = [UIImage imageNamed:@"logo_app"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_app"]];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    CGRect frame = CGRectMake((self.view.center.x - 10), 0.0, 0, 20);
-    imageView.frame = frame;
     
-    UIView* titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 89, 20)];
     imageView.frame = titleView.bounds;
     [titleView addSubview:imageView];
     
-    self.navigationItem.titleView = imageView;
+    self.navigationItem.titleView = titleView;
 }
 
 #pragma mark - Actions
