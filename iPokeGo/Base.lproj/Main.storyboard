@@ -5,6 +5,7 @@
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--iPokeGO-->
@@ -61,13 +62,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="iPokeGO" id="9hh-uV-Y8u">
-                        <barButtonItem key="rightBarButtonItem" image="settings" id="QgY-d3-dyb">
-                            <connections>
-                                <segue destination="J9n-1T-uXc" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="QgY-d3-dyb" id="EX8-FF-kLb">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="settings" id="QgY-d3-dyb">
+                                <connections>
+                                    <segue destination="J9n-1T-uXc" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="QgY-d3-dyb" id="EX8-FF-kLb">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="map_type" id="2HB-3n-OFc">
+                                <connections>
+                                    <action selector="maptypeAction:" destination="BYZ-38-t0r" id="nE1-Oy-dh8"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="locationButton" destination="HkD-yX-MDg" id="AFg-Gb-kg4"/>
@@ -1104,6 +1112,7 @@
         <image name="infinity" width="50" height="50"/>
         <image name="location" width="218" height="218"/>
         <image name="lured" width="50" height="50"/>
+        <image name="map_type" width="22" height="22"/>
         <image name="notifications" width="51" height="51"/>
         <image name="pokemon" width="51" height="51"/>
         <image name="pokestop" width="51" height="51"/>

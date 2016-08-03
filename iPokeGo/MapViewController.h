@@ -23,5 +23,6 @@
 
 -(IBAction)locationAction:(id)sender;
 -(IBAction)radarAction:(id)sender;
+-(IBAction)maptypeAction:(id)sender;
 
 @end

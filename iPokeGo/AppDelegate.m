@@ -52,7 +52,8 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
                                @"display_timer" : @"NO",
                                @"vibration": @"YES",
                                @"fav_notification": @"YES",
-                               @"norm_notification": @"NO" };
+                               @"norm_notification": @"NO",
+                               @"map_type_standard": @"YES" };
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     self.server = [[iPokeServerSync alloc] init];

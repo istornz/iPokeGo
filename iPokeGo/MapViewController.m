@@ -82,6 +82,7 @@ BOOL regionChangeRequested = YES;
     
     [self reloadMap];
     [self checkGPS];
+    [self loadMapPreferences];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -156,6 +157,12 @@ BOOL regionChangeRequested = YES;
     } else {
         [self.locationManager startUpdatingLocation];
     }
+}
+
+-(void)loadMapPreferences
+{
+    // I invert bool value because enum is inverted
+    [self.mapview setMapType:![[NSUserDefaults standardUserDefaults] boolForKey:@"map_type_standard"]];
 }
 
 #pragma mark - Gesture recognizers
@@ -586,6 +593,41 @@ BOOL regionChangeRequested = YES;
                                                                      [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
         [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
     }
+}
+
+-(void)maptypeAction:(id)sender
+{
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:NSLocalizedString(@"Select the map type", @"The title of an alert that tells the user to select a new type of map")
+                                message:NSLocalizedString(@"Please select a mode", @"The message of an alert that tells the user to select a new type of map")
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *standard = [UIAlertAction
+                         actionWithTitle:NSLocalizedString(@"Standard", @"A button to set standard mode on map")
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [self.mapview setMapType:(MKMapTypeStandard)];
+                             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"map_type_standard"];
+                         }];
+    UIAlertAction *satelite = [UIAlertAction
+                             actionWithTitle:NSLocalizedString(@"Satellite", @"A button to set sattelite mode on map")
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [self.mapview setMapType:(MKMapTypeSatellite)];
+                                 [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"map_type_standard"];
+                             }];
+    UIAlertAction *cancel = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Cancel", @"A button to destroy the alert without saving")
+                               style:UIAlertActionStyleCancel
+                               handler:nil];
+    
+    [alert addAction:standard];
+    [alert addAction:satelite];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Misc
