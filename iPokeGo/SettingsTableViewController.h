@@ -22,6 +22,14 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property(weak, nonatomic) IBOutlet UILabel *serverLabel;
 @property(weak, nonatomic) IBOutlet UITextField *serverField;
 
+@property(weak, nonatomic) IBOutlet UIImageView *usernameImageView;
+@property(weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property(weak, nonatomic) IBOutlet UITextField *usernameField;
+
+@property(weak, nonatomic) IBOutlet UIImageView *passwordImageView;
+@property(weak, nonatomic) IBOutlet UILabel *passwordLabel;
+@property(weak, nonatomic) IBOutlet UITextField *passwordField;
+
 @property(weak, nonatomic) IBOutlet UIImageView *pokemonsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *pokemonsLabel;
 

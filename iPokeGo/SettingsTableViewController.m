@@ -36,6 +36,8 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     self.serverField.text = [prefs valueForKey:@"server_addr"];
+	self.usernameField.text = [prefs valueForKey:@"server_user"];
+	self.passwordField.text = [prefs valueForKey:@"server_pass"];
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
 }
@@ -63,15 +65,28 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
 -(IBAction)saveAction:(UIBarButtonItem *)sender
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *server = [self.serverField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (![server containsString:@"://"] && [server length] > 0) {
-        server = [NSString stringWithFormat:@"http://%@", server];
-        self.serverField.text = server;
+	
+	NSString *server_addr = [self.serverField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (![server_addr containsString:@"://"] && server_addr.length > 0) {
+        server_addr = [NSString stringWithFormat:@"http://%@", server_addr];
+        self.serverField.text = server_addr;
     }
-    
-    if (![[prefs objectForKey:@"server_addr"] isEqualToString:server]) {
+	
+	NSString *server_user = self.usernameField.text;
+	if (![[prefs objectForKey:@"server_user"] isEqualToString:server_user]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+		[prefs setObject:server_user forKey:@"server_user"];
+	}
+	
+	NSString *server_pass = self.passwordField.text;
+	if (![[prefs objectForKey:@"server_pass"] isEqualToString:server_user]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+		[prefs setObject:server_pass forKey:@"server_pass"];
+	}
+	
+    if (![[prefs objectForKey:@"server_addr"] isEqualToString:server_addr]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
-        [prefs setObject:server forKey:@"server_addr"];
+        [prefs setObject:server_addr forKey:@"server_addr"];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
