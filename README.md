@@ -1,6 +1,6 @@
 
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo)
-This is a client for the Pokemap server (https://github.com/AHAAAAAAA/PokemonGo-Map)
+This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo4.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo6.jpg" width="270" height="480"/>
@@ -47,7 +47,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 
 ## Compatibility
 - iDevice : This app works with all iPhone/iPod Touch and iPad, you only need iOS 8 or more.
-- Server : Please use latest stable version (https://github.com/AHAAAAAAA/PokemonGo-Map/releases)
+- Server : Please use latest stable version (https://github.com/PokemonGoMap/PokemonGo-Map/releases)
 
 ## TODO
 - [ ] Add possibility to follow user location (same as website)
@@ -76,4 +76,4 @@ Using this software is against the ToS and can get you banned. Use at your own r
 Building off [Mila432](https://github.com/Mila432/Pokemon_Go_API)'s PokemonGo API, [tejado's additions](https://github.com/tejado/pokemongo-api-demo), [leegao's additions](https://github.com/leegao/pokemongo-api-demo/tree/simulation) and [Flask-GoogleMaps](https://github.com/rochacbruno/Flask-GoogleMaps).
 
 ---
-For instructions, please refer to [the wiki](https://github.com/AHAAAAAAA/PokemonGo-Map/wiki)
+For instructions, please refer to [the wiki](https://github.com/PokemonGoMap/PokemonGo-Map/wiki)
