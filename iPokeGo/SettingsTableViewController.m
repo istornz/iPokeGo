@@ -109,4 +109,16 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == self.serverField)
+        [self.usernameField becomeFirstResponder];
+    else if(textField == self.usernameField)
+        [self.passwordField becomeFirstResponder];
+    else
+        [textField resignFirstResponder];
+    
+    return YES;
+}
+
 @end

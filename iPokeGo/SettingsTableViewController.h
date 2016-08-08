@@ -13,7 +13,7 @@ extern NSString * const SettingsChangedNotification;
 extern NSString * const ServerChangedNotification;
 extern NSString * const BackgroundSettingChangedNotification;
 
-@interface SettingsTableViewController : UITableViewController
+@interface SettingsTableViewController : UITableViewController <UITextFieldDelegate>
 
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *fermerButton;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
