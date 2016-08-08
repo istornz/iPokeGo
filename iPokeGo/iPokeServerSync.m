@@ -38,7 +38,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     if (!url) {
         return;
     }
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSMutableURLRequest *request = [self buildRequestWithURL:url];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -71,7 +71,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     if (!url) {
         return;
     }
-    NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:[self buildRequestWithURL:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode != 200) {
@@ -146,6 +146,25 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
     
     return [NSURL URLWithString:request];
+}
+
+- (NSMutableURLRequest *)buildRequestWithURL:(NSURL *)url
+{
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+	NSString *server_user           = [defaults objectForKey:@"server_user"];
+	NSString *server_pass           = [defaults objectForKey:@"server_pass"];
+	
+	if (server_user.length > 0 || server_pass.length > 0) {
+		NSString *authStr = [NSString stringWithFormat:@"%@:%@", server_user, server_pass];
+		NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+		NSString *authValue = [NSString stringWithFormat: @"Basic %@",[authData base64EncodedStringWithOptions:0]];
+		
+		[request setValue:authValue forHTTPHeaderField:@"Authorization"];
+	}
+	
+	return request;
 }
 
 #pragma mark - Sync to CoreData logic
