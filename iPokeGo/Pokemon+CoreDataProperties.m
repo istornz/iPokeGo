@@ -17,5 +17,6 @@
 @dynamic longitude;
 @dynamic name;
 @dynamic spawnpoint;
+@dynamic rarity;
 
 @end

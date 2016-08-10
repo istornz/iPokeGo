@@ -40,6 +40,9 @@
     if (!self.spawnpoint) {
         self.spawnpoint = values[@"spawnpoint_id"];
     }
+    if (!self.rarity) {
+        self.rarity = values[@"pokemon_rarity"];
+    }
 }
 
 - (BOOL)isFav

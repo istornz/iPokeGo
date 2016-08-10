@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) double longitude;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *spawnpoint;
+@property (nullable, nonatomic, copy) NSString *rarity;
 
 @end
 

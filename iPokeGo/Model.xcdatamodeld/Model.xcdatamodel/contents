@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11198.3" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Gym" representedClassName="Gym" syncable="YES">
-        <attribute name="guardingPokemonIdentifier" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="guardingPokemonIdentifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="points" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="team" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="team" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Pokemon" representedClassName="Pokemon" syncable="YES">
-        <attribute name="disappears" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="disappears" attributeType="Date" syncable="YES"/>
         <attribute name="encounter" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="identifier" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="identifier" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="rarity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spawnpoint" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="PokeStop" representedClassName="PokeStop" syncable="YES">
         <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="luredPokemonID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="lureExpiration" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="luredPokemonID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lureExpiration" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
         <element name="Gym" positionX="-36" positionY="9" width="128" height="135"/>
-        <element name="Pokemon" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Pokemon" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="PokeStop" positionX="-54" positionY="-9" width="128" height="120"/>
     </elements>
 </model>
