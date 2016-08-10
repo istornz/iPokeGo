@@ -10,7 +10,7 @@
 #import "global.h"
 #import "PokemonTableViewCell.h"
 
-@interface PokemonSelectTableViewController : UITableViewController
+@interface PokemonSelectTableViewController : UITableViewController <UISearchResultsUpdating>
 
 @property(strong, nonatomic) NSString *preferenceKey;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
