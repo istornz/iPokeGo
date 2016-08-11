@@ -43,6 +43,8 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property(weak, nonatomic) IBOutlet UIImageView *gymsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *gymsLabel;
 
+@property(weak, nonatomic) IBOutlet UILabel *footerLabel;
+
 -(IBAction)saveAction:(UIBarButtonItem *)sender;
 -(IBAction)swicthsAction:(UISwitch *)sender;
 

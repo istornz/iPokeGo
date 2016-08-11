@@ -95,9 +95,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="rje-O7-Gbw">
-                            <rect key="frame" x="0.0" y="472" width="600" height="0.0"/>
+                            <rect key="frame" x="0.0" y="472" width="600" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iPokeGO footer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQN-Gd-2RU">
+                                    <rect key="frame" x="251.5" y="18" width="98.5" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="qQN-Gd-2RU" firstAttribute="centerY" secondItem="rje-O7-Gbw" secondAttribute="centerY" id="Kiu-wK-cM2"/>
+                                <constraint firstItem="qQN-Gd-2RU" firstAttribute="centerX" secondItem="rje-O7-Gbw" secondAttribute="centerX" id="MKf-je-EOk"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="Global" id="WOD-rI-XQR">
@@ -417,6 +429,7 @@
                         <outlet property="backgroundImageView" destination="emW-79-jnT" id="IO7-iB-R5m"/>
                         <outlet property="backgroundLabel" destination="HHC-l9-650" id="0LF-Qv-e1a"/>
                         <outlet property="backgroundSwitch" destination="5Af-DR-pMf" id="z4e-qn-nif"/>
+                        <outlet property="footerLabel" destination="qQN-Gd-2RU" id="x31-jZ-tfH"/>
                         <outlet property="gymsImageView" destination="5xx-4w-XG9" id="wEf-FN-B29"/>
                         <outlet property="gymsLabel" destination="l0T-Vk-KFi" id="9Od-S2-2mf"/>
                         <outlet property="passwordField" destination="iaO-dQ-Krh" id="Mm8-MP-Id6"/>
@@ -437,7 +450,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHK-BQ-fH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="186.65667166416793"/>
+            <point key="canvasLocation" x="1876" y="186"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="zno-hK-F4A">

@@ -22,6 +22,9 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     [super viewDidLoad];
     
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+    NSString *versionInfo = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.footerLabel.text = [NSString stringWithFormat:@"iPokeGO v%@\nCopyright (c) 2016 Dimitri Dessus\nMade with ♥️", versionInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated
