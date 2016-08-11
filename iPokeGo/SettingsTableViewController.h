@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "global.h"
 
+#define CELL_INDEX_DRIVINGMODE 4
+
 extern NSString * const SettingsChangedNotification;
 extern NSString * const ServerChangedNotification;
 extern NSString * const BackgroundSettingChangedNotification;
@@ -29,6 +31,8 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property(weak, nonatomic) IBOutlet UIImageView *passwordImageView;
 @property(weak, nonatomic) IBOutlet UILabel *passwordLabel;
 @property(weak, nonatomic) IBOutlet UITextField *passwordField;
+
+@property(weak, nonatomic) IBOutlet UILabel *drivingModeLabel;
 
 @property(weak, nonatomic) IBOutlet UIImageView *pokemonsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *pokemonsLabel;

@@ -280,11 +280,12 @@ BOOL regionChangeRequested = YES;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     CLLocationCoordinate2D endingCoord = CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude);
+    NSString *drivingMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"driving_mode"];
     MKPlacemark *endLocation = [[MKPlacemark alloc] initWithCoordinate:endingCoord addressDictionary:nil];
     MKMapItem *endingItem = [[MKMapItem alloc] initWithPlacemark:endLocation];
     
     NSMutableDictionary *launchOptions = [[NSMutableDictionary alloc] init];
-    [launchOptions setObject:MKLaunchOptionsDirectionsModeDriving forKey:MKLaunchOptionsDirectionsModeKey];
+    [launchOptions setObject:drivingMode forKey:MKLaunchOptionsDirectionsModeKey];
     
     [endingItem openInMapsWithLaunchOptions:launchOptions];
 }

@@ -42,6 +42,15 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
 	self.passwordField.text = [prefs valueForKey:@"server_pass"];
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
+    
+    NSString *drivingMode = [prefs objectForKey:@"driving_mode"];
+    if ([drivingMode isEqualToString:@"MKLaunchOptionsDirectionsModeTransit"])
+        self.drivingModeLabel.text = NSLocalizedString(@"transit", nil);
+    else if ([drivingMode isEqualToString:@"MKLaunchOptionsDirectionsModeWalking"])
+        self.drivingModeLabel.text = NSLocalizedString(@"walk", nil);
+    else
+        self.drivingModeLabel.text = NSLocalizedString(@"car", nil);
+    
 }
 
 -(IBAction)saveAction:(UIBarButtonItem *)sender
@@ -89,6 +98,53 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(indexPath.row == CELL_INDEX_DRIVINGMODE)
+    {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(@"Select a drive mode", @"The title of an alert that tells the user to select a new drive mode")
+                                    message:NSLocalizedString(@"Please select a mode", @"The message of an alert that tells the user to select a new drive mode")
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *drive = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Drive", @"A button to set driving mode on map")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [[NSUserDefaults standardUserDefaults] setObject:@"MKLaunchOptionsDirectionsModeDriving" forKey:@"driving_mode"];
+                                       self.drivingModeLabel.text = NSLocalizedString(@"car", nil);
+                                   }];
+        UIAlertAction *bike = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Transit", @"A button to set transit mode on map")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [[NSUserDefaults standardUserDefaults] setObject:@"MKLaunchOptionsDirectionsModeTransit" forKey:@"driving_mode"];
+                                       self.drivingModeLabel.text = NSLocalizedString(@"transit", nil);
+                                   }];
+        UIAlertAction *walk = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Walk", @"A button to set walking mode on map")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [[NSUserDefaults standardUserDefaults] setObject:@"MKLaunchOptionsDirectionsModeWalking" forKey:@"driving_mode"];
+                                       self.drivingModeLabel.text = NSLocalizedString(@"walk", nil);
+                                   }];
+        UIAlertAction *cancel = [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"Cancel", @"A button to destroy the alert without saving")
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        
+        [alert addAction:drive];
+        [alert addAction:bike];
+        [alert addAction:walk];
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
