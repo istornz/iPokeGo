@@ -8,6 +8,7 @@
 
 @import CoreLocation;
 #import <MapKit/MapKit.h>
+#import "global.h"
 #import "PokemonAnnotation.h"
 #import "TimeLabel.h"
 #import "TimerLabel.h"
