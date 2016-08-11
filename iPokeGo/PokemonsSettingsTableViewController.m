@@ -79,4 +79,24 @@
     [prefs synchronize];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showPokemonSelect"]) {
+        PokemonSelectTableViewController *destViewController = segue.destinationViewController;
+        
+        switch (((UITableViewCell *)sender).tag) {
+            case SELECT_COMMON:
+                destViewController.title = NSLocalizedString(@"Common", @"The title of the Pokémon selection for common Pokémon.") ;
+                destViewController.preferenceKey = @"pokemon_common";
+                break;
+            case SELECT_FAVORITE:
+                destViewController.title = NSLocalizedString(@"Favorite", @"The title of the Pokémon selection for favorite Pokémon.");
+                destViewController.preferenceKey = @"pokemon_favorite";
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "SettingsTableViewController.h"
-#import "PokemonSelectTableViewController.h"
 
 @interface SettingsTableViewController ()
 
@@ -15,9 +14,9 @@
 
 @implementation SettingsTableViewController
 
-NSString * const SettingsChangedNotification = @"Poke.SettingsChangedNotification";
-NSString * const ServerChangedNotification = @"Poke.ServerChangedNotification";
-NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSettingChangedNotification";
+NSString * const SettingsChangedNotification            = @"Poke.SettingsChangedNotification";
+NSString * const ServerChangedNotification              = @"Poke.ServerChangedNotification";
+NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSettingChangedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,33 +32,13 @@ NSString * const BackgroundSettingChangedNotification = @"Poke.BackgroundSetting
 
 -(void)readSavedState
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
     
-    self.serverField.text = [prefs valueForKey:@"server_addr"];
+    self.serverField.text   = [prefs valueForKey:@"server_addr"];
 	self.usernameField.text = [prefs valueForKey:@"server_user"];
 	self.passwordField.text = [prefs valueForKey:@"server_pass"];
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if([segue.identifier isEqualToString:@"showPokemonSelect"]) {
-		PokemonSelectTableViewController *destViewController = segue.destinationViewController;
-
-		switch (((UITableViewCell *)sender).tag) {
-			case SELECT_COMMON:
-				destViewController.title = NSLocalizedString(@"Common", @"The title of the Pokémon selection for common Pokémon.") ;
-				destViewController.preferenceKey = @"pokemon_common";
-				break;
-			case SELECT_FAVORITE:
-				destViewController.title = NSLocalizedString(@"Favorite", @"The title of the Pokémon selection for favorite Pokémon.");
-				destViewController.preferenceKey = @"pokemon_favorite";
-				break;
-			default:
-				break;
-		}
-	}
 }
 
 -(IBAction)saveAction:(UIBarButtonItem *)sender

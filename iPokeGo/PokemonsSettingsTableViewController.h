@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "PokemonSelectTableViewController.h"
 
 @interface PokemonsSettingsTableViewController : UITableViewController
 
