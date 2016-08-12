@@ -85,7 +85,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == kCommonRangeCell || indexPath.row == kFavoriteRangeCell) {
-        if(!self.pickerIndexPath) {
+        if(!self.pickerIndexPath || self.pickerIndexPath.row - 1 != indexPath.row) {
             switch (indexPath.row) {
                 case kCommonRangeCell:
                     self.pickerIndexPath = [NSIndexPath indexPathForRow:kCommonRangePicker inSection:0];
