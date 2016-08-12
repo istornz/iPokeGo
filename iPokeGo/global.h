@@ -36,7 +36,8 @@
 #define TEAM_COLOR_YELLOW   [UIColor colorWithRed:0.97 green:0.82 blue:0.19 alpha:1.0]
 #define TEAM_COLOR_GRAY     [UIColor colorWithRed:0.15 green:0.20 blue:0.23 alpha:1.0]
 
-#define SERVER_API_DATA     @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
-#define SERVER_API_LOCA     @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
+#define SERVER_API_DATA_POKEMONGOMAP    @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
+#define SERVER_API_DATA_POGOM           @"%%server_addr%%/map-data?pokemon=%%pokemon_display%%&gyms=%%gyms_display%%"
+#define SERVER_API_LOCA                 @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
 
 #endif /* global_h */
