@@ -1,0 +1,114 @@
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "110-t6-E3T"; */
+"110-t6-E3T.text" = "顯示係地圖上面";
+
+/* Class = "UITextField"; placeholder = "http://example.com:5000"; ObjectID = "2Np-Qc-YrV"; */
+"2Np-Qc-YrV.placeholder" = "http://example.com:5000";
+
+/* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
+"4fQ-bY-gce.text" = "一般通知";
+
+/* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "6Vg-GV-d5c"; */
+"6Vg-GV-d5c.text" = "常見精靈";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6vJ-Q1-RjN"; */
+"6vJ-Q1-RjN.text" = "標籤";
+
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
+"7ko-iA-AHA.text" = "震動";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "8Xl-BM-0fo"; */
+"8Xl-BM-0fo.text" = "通知";
+
+/* Class = "UINavigationItem"; title = "iPokeGO"; ObjectID = "9hh-uV-Y8u"; */
+"9hh-uV-Y8u.title" = "iPokeGO";
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "ADn-WN-2UQ"; */
+"ADn-WN-2UQ.text" = "顯示係地圖上面";
+
+/* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
+"Chl-3V-xZU.title" = "喜愛嘅精靈";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "Gb4-Rk-D27"; */
+"Gb4-Rk-D27.text" = "用戶名";
+
+/* Class = "UILabel"; text = "Run in Background"; ObjectID = "HHC-l9-650"; */
+"HHC-l9-650.text" = "係背景運行呢個程式";
+
+/* Class = "UILabel"; text = "Bulbizarre"; ObjectID = "JXZ-XW-o1E"; */
+"JXZ-XW-o1E.text" = "奇異種子";
+
+/* Class = "UILabel"; text = "Show Time"; ObjectID = "LTX-Ru-39e"; */
+"LTX-Ru-39e.text" = "顯示精靈幾點鐘消失";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "LVj-cE-dT0"; */
+"LVj-cE-dT0.text" = "伺服器";
+
+/* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "Mlh-iI-ATM"; */
+"Mlh-iI-ATM.text" = "用倒數嘅方式表示精靈幾時消失";
+
+/* Class = "UINavigationItem"; title = "Gyms"; ObjectID = "Oya-6D-eNY"; */
+"Oya-6D-eNY.title" = "道場";
+
+/* Class = "UILabel"; text = "Show only lured"; ObjectID = "P1m-Cn-XzO"; */
+"P1m-Cn-XzO.text" = "只顯示落櫻嘅Pokéstops";
+
+/* Class = "UILabel"; text = "Hide Common"; ObjectID = "Urz-pq-T1Q"; */
+"Urz-pq-T1Q.text" = "隱藏常見精靈";
+
+/* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
+"VTm-hq-lXv.headerTitle" = "顯示設定";
+
+/* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
+"WOD-rI-XQR.headerTitle" = "整體設定";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "acs-Ve-8xd"; */
+"acs-Ve-8xd.text" = "密碼";
+
+/* Class = "UINavigationItem"; title = "Pokémons"; ObjectID = "dSR-Ua-HzP"; */
+"dSR-Ua-HzP.title" = "小精靈";
+
+/* Class = "UITextField"; placeholder = "empty"; ObjectID = "eQJ-ya-TYN"; */
+"eQJ-ya-TYN.placeholder" = "空白";
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "gu6-i9-B1Q"; */
+"gu6-i9-B1Q.text" = "顯示係地圖上面";
+
+/* Class = "UILabel"; text = "Show Distance"; ObjectID = "hWQ-kq-428"; */
+"hWQ-kq-428.text" = "顯示距離";
+
+/* Class = "UITextField"; placeholder = "empty"; ObjectID = "iaO-dQ-Krh"; */
+"iaO-dQ-Krh.placeholder" = "空白";
+
+/* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "ki1-kr-sA7"; */
+"ki1-kr-sA7.title" = "通知";
+
+/* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
+"l0T-Vk-KFi.text" = "道場";
+
+/* Class = "UILabel"; text = "Pokémon"; ObjectID = "ltF-Ma-tNo"; */
+"ltF-Ma-tNo.text" = "小精靈";
+
+/* Class = "UILabel"; text = "Pokéstops"; ObjectID = "md8-IQ-yAP"; */
+"md8-IQ-yAP.text" = "Pokéstops";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "n4v-qt-5L6"; */
+"n4v-qt-5L6.title" = "設定";
+
+/* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "q1n-9N-4HT"; */
+"q1n-9N-4HT.text" = "喜愛嘅精靈";
+
+/* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
+"qL9-xq-yVt.text" = "喜愛小精靈出現通知";
+
+/* Class = "UILabel"; text = "iPokeGO footer"; ObjectID = "qQN-Gd-2RU"; */
+"qQN-Gd-2RU.text" = "iPokeGO footer";
+
+/* Class = "UILabel"; text = "Show only favorite"; ObjectID = "sP8-on-Svr"; */
+"sP8-on-Svr.text" = "只顯示喜愛嘅精靈";
+
+/* Class = "UINavigationItem"; title = "Pokéstops"; ObjectID = "uIg-hy-G3Q"; */
+"uIg-hy-G3Q.title" = "Pokéstops";
+
+/* Class = "UILabel"; text = "Drive mode"; ObjectID = "zeM-yd-YUy"; */
+"zeM-yd-YUy.text" = "駕駛模式";
