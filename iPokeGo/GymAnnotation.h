@@ -15,6 +15,7 @@
 @property int teamID;
 @property int guardPokemonID;
 @property int gymPoints;
+@property int gymLvl;
 
 - (instancetype)initWithGym:(Gym *)gym;
 
