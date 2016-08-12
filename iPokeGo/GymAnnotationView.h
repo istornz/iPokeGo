@@ -8,6 +8,8 @@
 
 #import <MapKit/MapKit.h>
 #import "GymAnnotation.h"
+#import "global.h"
+#import "TagLabel.h"
 
 @interface GymAnnotationView : MKAnnotationView
 

@@ -14,20 +14,34 @@
 - (instancetype)initWithAnnotation:(GymAnnotation *)annotation reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
         self.canShowCallout = YES;
+        
+        TagLabel *tagLabelView = [[TagLabel alloc] init];
+        [tagLabelView setLabelText:[NSString stringWithFormat:@"LVL %d", annotation.gymLvl]];
+        
+        UIColor *bgColorTag;
         switch (annotation.teamID) {
             case TEAM_BLUE:
-                self.image = [UIImage imageNamed:@"GymMystic"];
+                self.image  = [UIImage imageNamed:@"GymMystic"];
+                bgColorTag  = TEAM_COLOR_BLUE;
                 break;
             case TEAM_RED:
-                self.image = [UIImage imageNamed:@"GymValor"];
+                self.image  = [UIImage imageNamed:@"GymValor"];
+                bgColorTag  = TEAM_COLOR_RED;
                 break;
             case TEAM_YELLOW:
-                self.image = [UIImage imageNamed:@"GymInstinct"];
+                self.image  = [UIImage imageNamed:@"GymInstinct"];
+                bgColorTag  = TEAM_COLOR_YELLOW;
                 break;
             default:
-                self.image = [UIImage imageNamed:@"GymUnowned"];
+                self.image  = [UIImage imageNamed:@"GymUnowned"];
+                bgColorTag  = TEAM_COLOR_GRAY;
                 break;
         }
+        
+        [tagLabelView setBackgroundColor:bgColorTag];
+        
+        self.rightCalloutAccessoryView = tagLabelView;
+        
         [self updateForAnnotation:annotation];
     }
     return self;
