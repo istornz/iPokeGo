@@ -161,8 +161,10 @@ BOOL regionChangeRequested = YES;
 
 -(void)loadMapPreferences
 {
-    // I invert bool value because enum is inverted
-    [self.mapview setMapType:![[NSUserDefaults standardUserDefaults] boolForKey:@"map_type_standard"]];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"map_type_standard"])
+        [self.mapview setMapType:MKMapTypeStandard];
+    else
+        [self.mapview setMapType:MKMapTypeHybridFlyover];
 }
 
 #pragma mark - Gesture recognizers
@@ -616,7 +618,7 @@ BOOL regionChangeRequested = YES;
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
-                                 [self.mapview setMapType:(MKMapTypeSatellite)];
+                                 [self.mapview setMapType:(MKMapTypeHybridFlyover)];
                                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"map_type_standard"];
                              }];
     UIAlertAction *cancel = [UIAlertAction
