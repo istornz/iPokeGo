@@ -112,12 +112,12 @@ static NSURLSession *iPokeServerSyncSharedSession;
     BOOL display_pokemons           = [defaults boolForKey:@"display_pokemons"];
     BOOL display_pokestops          = [defaults boolForKey:@"display_pokestops"];
     BOOL display_gyms               = [defaults boolForKey:@"display_gyms"];
+    NSString *request               = [defaults valueForKey:@"server_type"];
     
     if([server_addr length] == 0) {
         return nil;
     }
     
-    NSString *request                = SERVER_API_DATA;
     NSString *display_pokemons_str   = display_pokemons ? @"true" : @"false";
     NSString *display_pokestops_str  = display_pokestops ? @"true" : @"false";
     NSString *display_gyms_str       = display_gyms ? @"true" : @"false";

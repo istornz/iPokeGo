@@ -51,6 +51,12 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     else
         self.drivingModeLabel.text = NSLocalizedString(@"Car", nil);
     
+    NSString *serverType = [prefs valueForKey:@"server_type"];
+    if ([serverType isEqualToString:SERVER_API_DATA_POGOM])
+        self.serverTypeLabel.text = @"Pogom";
+    else
+        self.serverTypeLabel.text = @"PokemonGo-Map";
+    
 }
 
 -(IBAction)saveAction:(UIBarButtonItem *)sender
@@ -99,7 +105,46 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.row == CELL_INDEX_DRIVINGMODE)
+    if(indexPath.row == CELL_INDEX_SERVERTYPE && indexPath.section == 0)
+    {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(@"Select a server type", @"The title of an alert that tells the user to select a server type")
+                                    message:NSLocalizedString(@"Please select a type", @"The message of an alert that tells the user to select a new server type")
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *pokemongomap = [UIAlertAction
+                                actionWithTitle:@"PokemonGo-Map"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    [[NSUserDefaults standardUserDefaults] setObject:SERVER_API_DATA_POKEMONGOMAP forKey:@"server_type"];
+                                    self.serverTypeLabel.text = @"PokemonGo-Map";
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+                                }];
+        UIAlertAction *pogom = [UIAlertAction
+                               actionWithTitle:@"Pogom"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   [[NSUserDefaults standardUserDefaults] setObject:SERVER_API_DATA_POGOM forKey:@"server_type"];
+                                   self.serverTypeLabel.text = @"Pogom";
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+                               }];
+        UIAlertAction *cancel = [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"Cancel", @"A button to destroy the alert without saving")
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        
+        [alert addAction:pokemongomap];
+        [alert addAction:pogom];
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if(indexPath.row == CELL_INDEX_DRIVINGMODE && indexPath.section == 0)
     {
         UIAlertController *alert = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(@"Select a drive mode", @"The title of an alert that tells the user to select a new drive mode")

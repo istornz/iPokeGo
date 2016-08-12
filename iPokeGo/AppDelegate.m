@@ -57,7 +57,8 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
                                @"driving_mode": @"MKLaunchOptionsDirectionsModeDriving",
                                @"only_notify_in_range": @"FALSE",
                                @"common_notification_range": @"100",
-                               @"favorite_notification_range": @"2500"};
+                               @"favorite_notification_range": @"2500",
+                               @"server_type": SERVER_API_DATA_POKEMONGOMAP};
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
     self.server = [[iPokeServerSync alloc] init];
