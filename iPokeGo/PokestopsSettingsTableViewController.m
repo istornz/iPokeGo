@@ -38,6 +38,7 @@
     
     [self.isVisiblePokestopsOnMapSwitch setOn:[prefs boolForKey:@"display_pokestops"]];
     [self.viewOnlyLuredSwitch setOn:[prefs boolForKey:@"display_onlylured"]];
+    [self.viewOnlyLuredSwitch setEnabled:[prefs boolForKey:@"display_onlylured"]];
 }
 
 -(IBAction)swicthsAction:(UISwitch *)sender
@@ -46,6 +47,7 @@
     
     if (sender == self.isVisiblePokestopsOnMapSwitch) {
         [prefs setBool:self.isVisiblePokestopsOnMapSwitch.on forKey:@"display_pokestops"];
+        [self.viewOnlyLuredSwitch setEnabled:self.isVisiblePokestopsOnMapSwitch.on];
     } else if (sender == self.viewOnlyLuredSwitch) {
         [prefs setBool:self.viewOnlyLuredSwitch.on forKey:@"display_onlylured"];
     }

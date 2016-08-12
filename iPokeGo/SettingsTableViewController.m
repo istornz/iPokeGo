@@ -45,11 +45,11 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     
     NSString *drivingMode = [prefs objectForKey:@"driving_mode"];
     if ([drivingMode isEqualToString:@"MKLaunchOptionsDirectionsModeTransit"])
-        self.drivingModeLabel.text = NSLocalizedString(@"transit", nil);
+        self.drivingModeLabel.text = NSLocalizedString(@"Transit", nil);
     else if ([drivingMode isEqualToString:@"MKLaunchOptionsDirectionsModeWalking"])
-        self.drivingModeLabel.text = NSLocalizedString(@"walk", nil);
+        self.drivingModeLabel.text = NSLocalizedString(@"Walk", nil);
     else
-        self.drivingModeLabel.text = NSLocalizedString(@"car", nil);
+        self.drivingModeLabel.text = NSLocalizedString(@"Car", nil);
     
 }
 

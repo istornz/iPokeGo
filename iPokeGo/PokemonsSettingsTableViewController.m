@@ -50,6 +50,7 @@
     [self.distanceSwitch setOn:[prefs boolForKey:@"display_distance"]];
     [self.timeSwitch setOn:[prefs boolForKey:@"display_time"]];
     [self.timeTimerSwitch setOn:[prefs boolForKey:@"display_timer"]];
+    [self.timeTimerSwitch setEnabled:[prefs boolForKey:@"display_time"]];
 }
 
 -(IBAction)swicthsAction:(UISwitch *)sender
@@ -66,12 +67,7 @@
         [prefs setBool:self.distanceSwitch.on forKey:@"display_distance"];
     } else if (sender == self.timeSwitch) {
         [prefs setBool:self.timeSwitch.on forKey:@"display_time"];
-        
-        if(self.timeSwitch.on)
-            self.timeTimerSwitch.enabled = YES;
-        else
-            self.timeTimerSwitch.enabled = NO;
-        
+        [self.timeTimerSwitch setEnabled:self.timeSwitch.on];
     } else if (sender == self.timeTimerSwitch) {
         [prefs setBool:self.timeTimerSwitch.on forKey:@"display_timer"];
     }
