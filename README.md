@@ -1,5 +1,5 @@
 
-# Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo)
+# Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/istornz)
 This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo7.jpg" width="270" height="480"/>
@@ -68,7 +68,7 @@ There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. 
 iPokeGo is released under the MIT license. See LICENSE for details.
 Thx to @ryanmclachlan for the beautiful UI Design !
 
-#[Official Website] (https://jz6.github.io/PoGoMap/#)
+#[Official Website] (https://pokemongomap.github.io/PoGoMapWebsite/)
 Live visualization of all pokemon (with option to show gyms and pokestops) in your area. This is a proof of concept that we can load all nearby pokemon given a location. Currently runs on a Flask server displaying a Google Map with markers on it.
 
 Using this software is against the ToS and can get you banned. Use at your own risk.
@@ -76,4 +76,6 @@ Using this software is against the ToS and can get you banned. Use at your own r
 Building off [Mila432](https://github.com/Mila432/Pokemon_Go_API)'s PokemonGo API, [tejado's additions](https://github.com/tejado/pokemongo-api-demo), [leegao's additions](https://github.com/leegao/pokemongo-api-demo/tree/simulation) and [Flask-GoogleMaps](https://github.com/rochacbruno/Flask-GoogleMaps).
 
 ---
-For instructions, please refer to [the wiki](https://github.com/PokemonGoMap/PokemonGo-Map/wiki)
+<a href="https://www.paypal.me/istornz"><img src="http://dimitridessus.fr/img/iPokeGo/buy-me-a-coffee.png" width="170"/></a>
+
+For instructions, please refer to [the wiki](https://pgm.readthedocs.io/en/develop/)

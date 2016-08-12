@@ -29,6 +29,7 @@
 #define COLOR_UNCOMMON      [UIColor colorWithRed:0.54 green:0.54 blue:0.35 alpha:1.0]
 #define COLOR_RARE          [UIColor colorWithRed:0.94 green:0.50 blue:0.19 alpha:1.0]
 #define COLOR_VERYRARE      [UIColor colorWithRed:0.75 green:0.19 blue:0.16 alpha:1.0]
+#define COLOR_ULTRARARE     [UIColor colorWithRed:0.63 green:0.25 blue:0.63 alpha:1.0]
 
 #define SERVER_API_DATA     @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%"
 #define SERVER_API_LOCA     @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
