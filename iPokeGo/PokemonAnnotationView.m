@@ -30,18 +30,8 @@
         self.frame = CGRectMake(0, 0, 45, 45);
         self.location = location;
         
-        UILabel *lbl1 = [[UILabel alloc] init];
-        lbl1.textColor = [UIColor whiteColor];
-        lbl1.textAlignment = NSTextAlignmentCenter;
-        lbl1.layer.cornerRadius = 5.0f;
-        lbl1.layer.masksToBounds = YES;
-        lbl1.text = annotation.rarity.uppercaseString;
-        lbl1.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-        [lbl1 sizeToFit];
-        CGRect frameLbl= lbl1.frame;
-        frameLbl.size.height += 10;
-        frameLbl.size.width += 10;
-        lbl1.frame = frameLbl;
+        TagLabel *tagLabelView = [[TagLabel alloc] init];
+        [tagLabelView setLabelText:annotation.rarity.uppercaseString];
         
         UIColor *bgColor = COLOR_COMMON;
         if([annotation.rarity isEqualToString:@"Uncommon"])
@@ -52,10 +42,10 @@
             bgColor = COLOR_VERYRARE;
         else if([annotation.rarity isEqualToString:@"Ultra Rare"])
             bgColor = COLOR_ULTRARARE;
-            
-        lbl1.backgroundColor = bgColor;
+
+        [tagLabelView setBackgroundColor:bgColor];
         
-        self.leftCalloutAccessoryView = lbl1;
+        self.leftCalloutAccessoryView = tagLabelView;
         
         [self updateForAnnotation:annotation withLocation:location];
     }
