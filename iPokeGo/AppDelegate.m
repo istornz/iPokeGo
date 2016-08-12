@@ -66,6 +66,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     self.backgroundManager.pausesLocationUpdatesAutomatically = NO;
     self.backgroundManager.activityType = CLActivityTypeFitness;
     self.backgroundManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; //lets try to keep this light
+    self.backgroundManager.distanceFilter = 50; //50 meters to update app location
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
         BOOL backgroundUpdate = YES;
         NSMethodSignature* signature = [[CLLocationManager class] instanceMethodSignatureForSelector:@selector(setAllowsBackgroundLocationUpdates:)];

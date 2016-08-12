@@ -15,6 +15,7 @@
 #import "PokeStopAnnotationView.h"
 #import "PokemonAnnotationView.h"
 #import <AudioToolbox/AudioServices.h>
+#import "FollowLocationHelper.h"
 @import CoreData;
 
 @interface MapViewController() <NSFetchedResultsControllerDelegate>
@@ -32,13 +33,14 @@
 @property NSDictionary *localization;
 @property CLLocationDegrees oldLatitudeDelta;
 
+@property FollowLocationHelper *followLocationHelper;
+
 @end
 
 @implementation MapViewController
 
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
-BOOL regionChangeRequested = YES;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -58,6 +60,7 @@ BOOL regionChangeRequested = YES;
     [super viewDidLoad];
     
     self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
+    self.followLocationHelper = [[FollowLocationHelper alloc] init];
     
     [self loadNavBar];
     
@@ -165,19 +168,28 @@ BOOL regionChangeRequested = YES;
     [self.mapview setMapType:![[NSUserDefaults standardUserDefaults] boolForKey:@"map_type_standard"]];
 }
 
+- (void)updateLocationInServer:(CLLocation *)location{
+    NSLog(@"Set new location in server");
+    [self.followLocationHelper updateLocation:location];
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server setLocation:location.coordinate];
+}
+
 #pragma mark - Gesture recognizers
 
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
     
     if (sender.state == UIGestureRecognizerStateBegan)
     {
+        [self.locationManager stopUpdatingLocation];
+        
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
         CGPoint point = [sender locationInView:self.mapview];
-        CLLocationCoordinate2D location = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
+        CLLocationCoordinate2D coordinate = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
         
         ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-        dropPin.coordinate = location;
+        dropPin.coordinate = coordinate;
         dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
         
         for (int i = 0; i < [self.mapview.annotations count]; i++) {
@@ -187,11 +199,11 @@ BOOL regionChangeRequested = YES;
         }
         [self.mapview addAnnotation:dropPin];
         
-        iPokeServerSync *server = [[iPokeServerSync alloc] init];
-        [server setLocation:location];
+        CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 timestamp:[NSDate date]];
+        [self updateLocationInServer:location];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:location.latitude] forKey:@"radar_lat"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:location.longitude] forKey:@"radar_long"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"radar_lat"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
     }
 }
 
@@ -297,15 +309,13 @@ BOOL regionChangeRequested = YES;
     for (CLLocation *location in locations) {
         //make sure it is reasonably fresh, say the last 30 seconds
         if ([location.timestamp timeIntervalSinceNow] > -30) {
-            if(regionChangeRequested) {
-                regionChangeRequested = NO;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
-                    [self.mapview setRegion:region animated:YES];
-                });
+            if ([self.followLocationHelper mustUpdateLocation:location]){
+                [self updateLocationInServer:location];
             }
-            [self.locationManager stopUpdatingLocation];
-            break;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                [self.mapview setRegion:region animated:YES];
+            });
         }
     }
 }
@@ -583,7 +593,19 @@ BOOL regionChangeRequested = YES;
 
 -(void)locationAction:(id)sender
 {
-    regionChangeRequested = YES;
+    // remove scan annotation from map
+    for (id <MKAnnotation> annotation in self.mapview.annotations)
+    {
+        if ([annotation isKindOfClass:[ScanAnnotation class]])
+        {
+            [self.mapview removeAnnotation:annotation];
+        }
+        
+    }
+    // remove scan location coordinates from user defaults
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
+    
     [self checkGPS];
 }
 
