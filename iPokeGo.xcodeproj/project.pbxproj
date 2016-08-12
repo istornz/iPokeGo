@@ -21,6 +21,7 @@
 		276FD5571D45742A006E4B96 /* NotificationsSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276FD5561D45742A006E4B96 /* NotificationsSettingsTableViewController.m */; };
 		277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */; };
 		277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */; };
+		2785D1181D5E153A004FC688 /* TagLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2785D1171D5E153A004FC688 /* TagLabel.m */; };
 		2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2788622C1D4226D300CCF60E /* PokestopAnnotation.m */; };
 		2798B9DB1D4F8CEC00B33BE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */; };
 		27F3855D1D4130B30004A1B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3855C1D4130B30004A1B3 /* main.m */; };
@@ -98,6 +99,8 @@
 		277209DB1D441CAA0008B7FA /* PokemonSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonSelectTableViewController.m; sourceTree = "<group>"; };
 		277209DD1D441E1F0008B7FA /* PokemonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokemonTableViewCell.h; sourceTree = "<group>"; };
 		277209DE1D441E1F0008B7FA /* PokemonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokemonTableViewCell.m; sourceTree = "<group>"; };
+		2785D1161D5E153A004FC688 /* TagLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagLabel.h; sourceTree = "<group>"; };
+		2785D1171D5E153A004FC688 /* TagLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagLabel.m; sourceTree = "<group>"; };
 		2788622B1D4226D300CCF60E /* PokestopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopAnnotation.h; sourceTree = "<group>"; };
 		2788622C1D4226D300CCF60E /* PokestopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopAnnotation.m; sourceTree = "<group>"; };
 		2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				0256E3821D473D6A00CEEE3F /* TimeLabel.m */,
 				0256E3841D473D7800CEEE3F /* TimerLabel.h */,
 				0256E3851D473D7800CEEE3F /* TimerLabel.m */,
+				2785D1161D5E153A004FC688 /* TagLabel.h */,
+				2785D1171D5E153A004FC688 /* TagLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				81C9636F1D4F254A00DD6592 /* GymAnnotationView.m in Sources */,
 				811142FF1D4D596700901851 /* Pokemon+CoreDataProperties.m in Sources */,
 				0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */,
+				2785D1181D5E153A004FC688 /* TagLabel.m in Sources */,
 				27F385631D4130B30004A1B3 /* MapViewController.m in Sources */,
 				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
 				81771E081D4DA47B004DC881 /* PokemonNotifier.m in Sources */,
