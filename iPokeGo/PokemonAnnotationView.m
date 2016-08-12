@@ -50,6 +50,8 @@
             bgColor = COLOR_RARE;
         else if([annotation.rarity isEqualToString:@"Very Rare"])
             bgColor = COLOR_VERYRARE;
+        else if([annotation.rarity isEqualToString:@"Ultra Rare"])
+            bgColor = COLOR_ULTRARARE;
             
         lbl1.backgroundColor = bgColor;
         
