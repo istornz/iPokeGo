@@ -43,6 +43,7 @@ static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
 BOOL regionChangeRequested = YES;
 BOOL followLocationEnabled = NO;
+BOOL flagIsPanning = NO;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -257,8 +258,14 @@ BOOL followLocationEnabled = NO;
 }
 
 - (void)handlePanGesture:(UIGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        flagIsPanning = YES;
+        if (gestureRecognizer.numberOfTouches == 1){
+            [self enableFollowLocation:NO];
+        }
+    }
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        [self enableFollowLocation:NO];
+        flagIsPanning = NO;
     }
 }
 
@@ -369,10 +376,9 @@ BOOL followLocationEnabled = NO;
                 if ([self.followLocationHelper mustUpdateLocation:location]){
                     [self updateLocationInServer:location];
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
-                    [self.mapview setRegion:region animated:YES];
-                });
+                if (!flagIsPanning){
+                    [self.mapview setCenterCoordinate:location.coordinate animated:YES];
+                }
             }else{
                 if(regionChangeRequested) {
                     regionChangeRequested = NO;
