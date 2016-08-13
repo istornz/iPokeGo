@@ -82,6 +82,8 @@
 		0256E38B1D474C5A00CEEE3F /* DistanceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceLabel.m; sourceTree = "<group>"; };
 		0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatting.h"; sourceTree = "<group>"; };
 		0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatting.m"; sourceTree = "<group>"; };
+		095DAA6F1D5FB6E000377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		095DAA711D5FB77700377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymAnnotation.h; sourceTree = "<group>"; };
 		2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GymAnnotation.m; sourceTree = "<group>"; };
 		273604551D44094700194BAF /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 				AE1E273F1D4A8F4900FA1BA0 /* it */,
 				58CA35381D4B792C003B7F85 /* ru */,
 				6A7221381D5DCB5900E522B6 /* zh-Hant-HK */,
+				095DAA711D5FB77700377BB0 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				AE1E27401D4A8F4900FA1BA0 /* it */,
 				58CA353A1D4B792C003B7F85 /* ru */,
 				6A7221391D5DCB5900E522B6 /* zh-Hant-HK */,
+				095DAA6F1D5FB6E000377BB0 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
