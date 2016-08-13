@@ -15,9 +15,10 @@
 #import "PokeStopAnnotationView.h"
 #import "PokemonAnnotationView.h"
 #import <AudioToolbox/AudioServices.h>
+#import "FollowLocationHelper.h"
 @import CoreData;
 
-@interface MapViewController() <NSFetchedResultsControllerDelegate>
+@interface MapViewController() <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
 @property NSFetchedResultsController *gymFetchResultController;
 @property NSFetchedResultsController *pokemonFetchResultController;
@@ -32,6 +33,8 @@
 @property NSDictionary *localization;
 @property CLLocationDegrees oldLatitudeDelta;
 
+@property FollowLocationHelper *followLocationHelper;
+
 @end
 
 @implementation MapViewController
@@ -39,6 +42,8 @@
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
 BOOL regionChangeRequested = YES;
+BOOL followLocationEnabled = NO;
+BOOL flagIsPanning = NO;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -58,11 +63,22 @@ BOOL regionChangeRequested = YES;
     [super viewDidLoad];
     
     self.oldLatitudeDelta = self.mapview.region.span.latitudeDelta;
+    self.followLocationHelper = [[FollowLocationHelper alloc] init];
     
     [self loadNavBar];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
+    
+    UILongPressGestureRecognizer *longPressGPSButtonGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGPSButtonGesture:)];
+    [self.locationButton addGestureRecognizer:longPressGPSButtonGesture];
+    
+    [self enableFollowLocation:NO];
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [panGesture setDelegate:self];
+    [self.mapview addGestureRecognizer:panGesture];
+    
     
     //default to the last known position
     NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
@@ -167,19 +183,36 @@ BOOL regionChangeRequested = YES;
         [self.mapview setMapType:MKMapTypeHybridFlyover];
 }
 
+- (void)updateLocationInServer:(CLLocation *)location
+{
+    NSLog(@"Set new location in server");
+    [self.followLocationHelper updateLocation:location];
+    iPokeServerSync *server = [[iPokeServerSync alloc] init];
+    [server setLocation:location.coordinate];
+}
+
+- (void)enableFollowLocation:(BOOL)enable
+{
+    NSLog(@"Enable follow location %s", enable ? "YES" : "NO");
+    followLocationEnabled = enable;
+    self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
+}
+
 #pragma mark - Gesture recognizers
 
 -(void)handleLongPressGesture:(UIGestureRecognizer*)sender {
     
     if (sender.state == UIGestureRecognizerStateBegan)
     {
+        [self enableFollowLocation:NO];
+        
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
         CGPoint point = [sender locationInView:self.mapview];
-        CLLocationCoordinate2D location = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
+        CLLocationCoordinate2D coordinate = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
         
         ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-        dropPin.coordinate = location;
+        dropPin.coordinate = coordinate;
         dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
         
         for (int i = 0; i < [self.mapview.annotations count]; i++) {
@@ -189,13 +222,55 @@ BOOL regionChangeRequested = YES;
         }
         [self.mapview addAnnotation:dropPin];
         
-        iPokeServerSync *server = [[iPokeServerSync alloc] init];
-        [server setLocation:location];
+        CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 timestamp:[NSDate date]];
+        [self updateLocationInServer:location];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:location.latitude] forKey:@"radar_lat"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:location.longitude] forKey:@"radar_long"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"radar_lat"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
     }
 }
+
+-(void)handleLongPressGPSButtonGesture:(UIGestureRecognizer*)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        
+        [self enableFollowLocation:YES];
+        
+        // remove scan annotation from map
+        for (id <MKAnnotation> annotation in self.mapview.annotations)
+        {
+            if ([annotation isKindOfClass:[ScanAnnotation class]])
+            {
+                [self.mapview removeAnnotation:annotation];
+            }
+            
+        }
+        // remove scan location coordinates from user defaults
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
+        
+        [self checkGPS];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handlePanGesture:(UIGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        flagIsPanning = YES;
+        if (gestureRecognizer.numberOfTouches == 1){
+            [self enableFollowLocation:NO];
+        }
+    }
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        flagIsPanning = NO;
+    }
+}
+
 
 #pragma mark - Mapview delegate
 
@@ -299,15 +374,24 @@ BOOL regionChangeRequested = YES;
     for (CLLocation *location in locations) {
         //make sure it is reasonably fresh, say the last 30 seconds
         if ([location.timestamp timeIntervalSinceNow] > -30) {
-            if(regionChangeRequested) {
-                regionChangeRequested = NO;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
-                    [self.mapview setRegion:region animated:YES];
-                });
+            if (followLocationEnabled){
+                if ([self.followLocationHelper mustUpdateLocation:location]){
+                    [self updateLocationInServer:location];
+                }
+                if (!flagIsPanning){
+                    [self.mapview setCenterCoordinate:location.coordinate animated:YES];
+                }
+            }else{
+                if(regionChangeRequested) {
+                    regionChangeRequested = NO;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                        [self.mapview setRegion:region animated:YES];
+                    });
+                }
+                [self.locationManager stopUpdatingLocation];
+                break;
             }
-            [self.locationManager stopUpdatingLocation];
-            break;
         }
     }
 }
