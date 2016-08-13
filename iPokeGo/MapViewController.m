@@ -18,7 +18,7 @@
 #import "FollowLocationHelper.h"
 @import CoreData;
 
-@interface MapViewController() <NSFetchedResultsControllerDelegate>
+@interface MapViewController() <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
 
 @property NSFetchedResultsController *gymFetchResultController;
 @property NSFetchedResultsController *pokemonFetchResultController;
@@ -73,6 +73,11 @@ BOOL followLocationEnabled = NO;
     [self.locationButton addGestureRecognizer:longPressGPSButtonGesture];
     
     [self enableFollowLocation:NO];
+    
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [panGesture setDelegate:self];
+    [self.mapview addGestureRecognizer:panGesture];
+    
     
     //default to the last known position
     NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
@@ -244,6 +249,16 @@ BOOL followLocationEnabled = NO;
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
         
         [self checkGPS];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handlePanGesture:(UIGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        [self enableFollowLocation:NO];
     }
 }
 
