@@ -41,6 +41,8 @@
 
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
+BOOL regionChangeRequested = YES;
+BOOL followLocationEnabled = NO;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -66,6 +68,11 @@ static CLLocationDegrees DeltaHideText = 0.1;
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
+    
+    UILongPressGestureRecognizer *longPressGPSButtonGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGPSButtonGesture:)];
+    [self.locationButton addGestureRecognizer:longPressGPSButtonGesture];
+    
+    [self enableFollowLocation:NO];
     
     //default to the last known position
     NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
@@ -168,11 +175,19 @@ static CLLocationDegrees DeltaHideText = 0.1;
     [self.mapview setMapType:![[NSUserDefaults standardUserDefaults] boolForKey:@"map_type_standard"]];
 }
 
-- (void)updateLocationInServer:(CLLocation *)location{
+- (void)updateLocationInServer:(CLLocation *)location
+{
     NSLog(@"Set new location in server");
     [self.followLocationHelper updateLocation:location];
     iPokeServerSync *server = [[iPokeServerSync alloc] init];
     [server setLocation:location.coordinate];
+}
+
+- (void)enableFollowLocation:(BOOL)enable
+{
+    NSLog(@"Enable follow location %s", enable ? "YES" : "NO");
+    followLocationEnabled = enable;
+    self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
 }
 
 #pragma mark - Gesture recognizers
@@ -181,7 +196,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
     
     if (sender.state == UIGestureRecognizerStateBegan)
     {
-        [self.locationManager stopUpdatingLocation];
+        [self enableFollowLocation:NO];
         
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
@@ -206,6 +221,32 @@ static CLLocationDegrees DeltaHideText = 0.1;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
     }
 }
+
+-(void)handleLongPressGPSButtonGesture:(UIGestureRecognizer*)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        
+        [self enableFollowLocation:YES];
+        
+        // remove scan annotation from map
+        for (id <MKAnnotation> annotation in self.mapview.annotations)
+        {
+            if ([annotation isKindOfClass:[ScanAnnotation class]])
+            {
+                [self.mapview removeAnnotation:annotation];
+            }
+            
+        }
+        // remove scan location coordinates from user defaults
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
+        
+        [self checkGPS];
+    }
+}
+
 
 #pragma mark - Mapview delegate
 
@@ -309,13 +350,25 @@ static CLLocationDegrees DeltaHideText = 0.1;
     for (CLLocation *location in locations) {
         //make sure it is reasonably fresh, say the last 30 seconds
         if ([location.timestamp timeIntervalSinceNow] > -30) {
-            if ([self.followLocationHelper mustUpdateLocation:location]){
-                [self updateLocationInServer:location];
+            if (followLocationEnabled){
+                if ([self.followLocationHelper mustUpdateLocation:location]){
+                    [self updateLocationInServer:location];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                    [self.mapview setRegion:region animated:YES];
+                });
+            }else{
+                if(regionChangeRequested) {
+                    regionChangeRequested = NO;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
+                        [self.mapview setRegion:region animated:YES];
+                    });
+                }
+                [self.locationManager stopUpdatingLocation];
+                break;
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE));
-                [self.mapview setRegion:region animated:YES];
-            });
         }
     }
 }
@@ -593,19 +646,7 @@ static CLLocationDegrees DeltaHideText = 0.1;
 
 -(void)locationAction:(id)sender
 {
-    // remove scan annotation from map
-    for (id <MKAnnotation> annotation in self.mapview.annotations)
-    {
-        if ([annotation isKindOfClass:[ScanAnnotation class]])
-        {
-            [self.mapview removeAnnotation:annotation];
-        }
-        
-    }
-    // remove scan location coordinates from user defaults
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
-    
+    regionChangeRequested = YES;
     [self checkGPS];
 }
 
