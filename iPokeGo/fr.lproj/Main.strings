@@ -1,0 +1,135 @@
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "110-t6-E3T"; */
+"110-t6-E3T.text" = "Voir sur la carte";
+
+/* Class = "UITextField"; placeholder = "http://example.com:5000"; ObjectID = "2Np-Qc-YrV"; */
+"2Np-Qc-YrV.placeholder" = "http://example.com:5000";
+
+/* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
+"4fQ-bY-gce.text" = "Notification normale";
+
+/* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "6Vg-GV-d5c"; */
+"6Vg-GV-d5c.text" = "Pokémon commun";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6vJ-Q1-RjN"; */
+"6vJ-Q1-RjN.text" = "Label";
+
+/* Class = "UILabel"; text = "Only Notify In Range"; ObjectID = "7ko-iA-AHA"; */
+"7ko-iA-AHA.text" = "Notification dans la zone";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "8Xl-BM-0fo"; */
+"8Xl-BM-0fo.text" = "Notifications";
+
+/* Class = "UILabel"; text = "Range"; ObjectID = "96z-YX-YPc"; */
+"96z-YX-YPc.text" = "Zone";
+
+/* Class = "UINavigationItem"; title = "iPokeGO"; ObjectID = "9hh-uV-Y8u"; */
+"9hh-uV-Y8u.title" = "iPokeGO";
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "ADn-WN-2UQ"; */
+"ADn-WN-2UQ.text" = "Voir sur la carte";
+
+/* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
+"Chl-3V-xZU.title" = "Favoris";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GNt-l5-Ggl"; */
+"GNt-l5-Ggl.text" = "Label";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "Gb4-Rk-D27"; */
+"Gb4-Rk-D27.text" = "Login";
+
+/* Class = "UILabel"; text = "Run in Background"; ObjectID = "HHC-l9-650"; */
+"HHC-l9-650.text" = "En arrière-plan";
+
+/* Class = "UILabel"; text = "Bulbizarre"; ObjectID = "JXZ-XW-o1E"; */
+"JXZ-XW-o1E.text" = "Bulbizarre";
+
+/* Class = "UILabel"; text = "Show Time"; ObjectID = "LTX-Ru-39e"; */
+"LTX-Ru-39e.text" = "Voir l'heure";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "LVj-cE-dT0"; */
+"LVj-cE-dT0.text" = "Serveur";
+
+/* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "Mlh-iI-ATM"; */
+"Mlh-iI-ATM.text" = "Temps restant au lieu de l'heure";
+
+/* Class = "UINavigationItem"; title = "Gyms"; ObjectID = "Oya-6D-eNY"; */
+"Oya-6D-eNY.title" = "Arène";
+
+/* Class = "UILabel"; text = "Show only lured"; ObjectID = "P1m-Cn-XzO"; */
+"P1m-Cn-XzO.text" = "Leures seulement";
+
+/* Class = "UILabel"; text = "Range"; ObjectID = "QIm-iD-I1b"; */
+"QIm-iD-I1b.text" = "Zone";
+
+/* Class = "UILabel"; text = "Hide Common"; ObjectID = "Urz-pq-T1Q"; */
+"Urz-pq-T1Q.text" = "Hide Common";
+
+/* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
+"VTm-hq-lXv.headerTitle" = "Viewing";
+
+/* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
+"WOD-rI-XQR.headerTitle" = "Global";
+
+/* Class = "UILabel"; text = "Server type"; ObjectID = "aF6-t6-3tY"; */
+"aF6-t6-3tY.text" = "Server type";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "acs-Ve-8xd"; */
+"acs-Ve-8xd.text" = "Password";
+
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "b1T-HP-5bO"; */
+"b1T-HP-5bO.text" = "Vibration";
+
+/* Class = "UINavigationItem"; title = "Pokémons"; ObjectID = "dSR-Ua-HzP"; */
+"dSR-Ua-HzP.title" = "Pokémons";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dsi-Um-IFR"; */
+"dsi-Um-IFR.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Empty"; ObjectID = "eQJ-ya-TYN"; */
+"eQJ-ya-TYN.placeholder" = "Vide";
+
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "gu6-i9-B1Q"; */
+"gu6-i9-B1Q.text" = "Voir sur la carte";
+
+/* Class = "UILabel"; text = "Show Distance"; ObjectID = "hWQ-kq-428"; */
+"hWQ-kq-428.text" = "Voir la distance";
+
+/* Class = "UITextField"; placeholder = "Empty"; ObjectID = "iaO-dQ-Krh"; */
+"iaO-dQ-Krh.placeholder" = "Vide";
+
+/* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "ki1-kr-sA7"; */
+"ki1-kr-sA7.title" = "Notifications";
+
+/* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
+"l0T-Vk-KFi.text" = "Arènes";
+
+/* Class = "UILabel"; text = "Pokémons"; ObjectID = "ltF-Ma-tNo"; */
+"ltF-Ma-tNo.text" = "Pokémons";
+
+/* Class = "UILabel"; text = "Pokéstops"; ObjectID = "md8-IQ-yAP"; */
+"md8-IQ-yAP.text" = "Pokéstops";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "n4v-qt-5L6"; */
+"n4v-qt-5L6.title" = "Paramètres";
+
+/* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "q1n-9N-4HT"; */
+"q1n-9N-4HT.text" = "Pokémon favoris";
+
+/* Class = "UILabel"; text = "Favorite Notification"; ObjectID = "qL9-xq-yVt"; */
+"qL9-xq-yVt.text" = "Notification des favoris";
+
+/* Class = "UILabel"; text = "iPokeGO footer"; ObjectID = "qQN-Gd-2RU"; */
+"qQN-Gd-2RU.text" = "iPokeGO footer";
+
+/* Class = "UILabel"; text = "Show only favorite"; ObjectID = "sP8-on-Svr"; */
+"sP8-on-Svr.text" = "Seulement les favoris";
+
+/* Class = "UINavigationItem"; title = "Pokéstops"; ObjectID = "uIg-hy-G3Q"; */
+"uIg-hy-G3Q.title" = "Pokéstops";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wQQ-UU-P4I"; */
+"wQQ-UU-P4I.text" = "Label";
+
+/* Class = "UILabel"; text = "Drive mode"; ObjectID = "zeM-yd-YUy"; */
+"zeM-yd-YUy.text" = "Mode conduite";
