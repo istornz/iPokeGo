@@ -27,7 +27,7 @@
 {
     [super viewWillAppear:animated];
 
-    self.rangePickerRanges = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500];
+    self.rangePickerRanges = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500, @5000, @10000, @25000];
     self.pickerCellRowHeight = CGRectGetHeight(self.commonRangePicker.frame);
     
     self.commonRangePicker.delegate = self;
@@ -152,7 +152,13 @@
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"%dm", [[self.rangePickerRanges objectAtIndex:row] intValue]];
+    int value = [[self.rangePickerRanges objectAtIndex:row] intValue];
+    
+    if(value) {
+        return [NSString stringWithFormat:@"%dm", value];
+    } else {
+        return @"∞m";
+    }
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
