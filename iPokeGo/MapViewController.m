@@ -15,6 +15,7 @@
 #import "PokeStopAnnotationView.h"
 #import "PokemonAnnotationView.h"
 #import <AudioToolbox/AudioServices.h>
+#import "CWStatusBarNotification.h"
 #import "FollowLocationHelper.h"
 @import CoreData;
 
@@ -41,9 +42,9 @@
 
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
-BOOL regionChangeRequested = YES;
-BOOL followLocationEnabled = NO;
-BOOL flagIsPanning = NO;
+BOOL regionChangeRequested      = YES;
+BOOL followLocationEnabled      = NO;
+BOOL flagIsPanning              = NO;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -193,9 +194,25 @@ BOOL flagIsPanning = NO;
 
 - (void)enableFollowLocation:(BOOL)enable
 {
-    NSLog(@"Enable follow location %s", enable ? "YES" : "NO");
-    followLocationEnabled = enable;
-    self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
+    if(followLocationEnabled != enable) {
+        NSLog(@"Enable follow location %s", enable ? "YES" : "NO");
+        followLocationEnabled = enable;
+        self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
+        
+        CWStatusBarNotification *notification = [CWStatusBarNotification new];
+        NSString *notifMsg = nil;
+        if(followLocationEnabled) {
+            notifMsg = @"Follow location enabled";
+            notification.notificationLabelBackgroundColor = NOTIF_FOLLOW_GREEN_COLOR;
+            
+        } else {
+            notifMsg = @"Follow location disabled";
+            notification.notificationLabelBackgroundColor = NOTIF_FOLLOW_RED_COLOR;
+        }
+        
+        [notification displayNotificationWithMessage:notifMsg
+                                         forDuration:1.0f];
+    }
 }
 
 #pragma mark - Gesture recognizers
