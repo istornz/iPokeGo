@@ -232,6 +232,8 @@ BOOL flagIsPanning              = NO;
         dropPin.coordinate = coordinate;
         dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
         
+        [self.radarButton setHidden:NO];
+        
         for (int i = 0; i < [self.mapview.annotations count]; i++) {
             MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
             if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
