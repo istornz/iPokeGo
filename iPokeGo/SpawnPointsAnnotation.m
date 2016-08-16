@@ -15,7 +15,7 @@
     if (self = [super init]) {
         self.coordinate     = spawnPoint.location;
         self.title          = spawnPoint.identifier;
-        self.spawnpointsID  = spawnPoint.identifier;
+        self.spawnpointID   = spawnPoint.identifier;
     }
     return self;
 }

@@ -11,7 +11,7 @@
 
 @interface SpawnPointsAnnotation : MKPointAnnotation
 
-@property NSString *spawnpointsID;
+@property NSString *spawnpointID;
 - (instancetype)initWithSpawnPoints:(SpawnPoints *)spawnpoint;
 
 @end
