@@ -99,6 +99,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [self processPokemonFromJSON:jsonData[@"pokemons"] usingContext:context];
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
         [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
+        [self processSpawnPointsFromJSON:jsonData[@"spawnpoints"] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
     }];
     [task resume];
@@ -112,22 +113,25 @@ static NSURLSession *iPokeServerSyncSharedSession;
     BOOL display_pokemons           = [defaults boolForKey:@"display_pokemons"];
     BOOL display_pokestops          = [defaults boolForKey:@"display_pokestops"];
     BOOL display_gyms               = [defaults boolForKey:@"display_gyms"];
+    BOOL display_spawnpoints        = [defaults boolForKey:@"display_spawnpoints"];
     NSString *request               = [defaults valueForKey:@"server_type"];
     
     if([server_addr length] == 0) {
         return nil;
     }
     
-    NSString *display_pokemons_str   = display_pokemons ? @"true" : @"false";
-    NSString *display_pokestops_str  = display_pokestops ? @"true" : @"false";
-    NSString *display_gyms_str       = display_gyms ? @"true" : @"false";
+    NSString *display_pokemons_str      = display_pokemons ? @"true" : @"false";
+    NSString *display_pokestops_str     = display_pokestops ? @"true" : @"false";
+    NSString *display_gyms_str          = display_gyms ? @"true" : @"false";
+    NSString *display_spawnpoints_str   = display_spawnpoints ? @"true" : @"false";
     
     request = [request stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     request = [request stringByReplacingOccurrencesOfString:@"%%pokemon_display%%" withString:display_pokemons_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%pokestops_display%%" withString:display_pokestops_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:display_gyms_str];
+    request = [request stringByReplacingOccurrencesOfString:@"%%spawnpoints_display%%" withString:display_spawnpoints_str];
     
-    //NSLog(@"%@", request);
+    NSLog(@"%@", request);
     
     return [NSURL URLWithString:request];
 }
@@ -286,6 +290,46 @@ static NSURLSession *iPokeServerSyncSharedSession;
             gym = [[Gym alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         }
         [gym syncToValues:rawValues];
+    }
+}
+
+- (void)processSpawnPointsFromJSON:(NSArray *)rawSpawnPoints usingContext:(NSManagedObjectContext *)context
+{
+    if (!rawSpawnPoints) {
+        return;
+    }
+    
+    NSString *entityName = NSStringFromClass(SpawnPoints.class);
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    NSString *serverPrimaryKey = @"spawnpoint_id";
+    NSArray *foundIdentifiers = [rawSpawnPoints valueForKey:serverPrimaryKey];
+    if (!foundIdentifiers) {
+        foundIdentifiers = @[];
+    }
+    
+    NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
+    [itemsToDeleteRequest setEntity:entity];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
+    [itemsToDeleteRequest setIncludesPropertyValues:NO];
+    NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ spawnpoints", @(itemsToDelete.count));
+    }
+    for (NSManagedObject *itemToDelete in itemsToDelete) {
+        [context deleteObject:itemToDelete];
+    }
+    
+    NSFetchRequest *knownItemsRequest = [[NSFetchRequest alloc] init];
+    [knownItemsRequest setEntity:[NSEntityDescription  entityForName:entityName inManagedObjectContext:context]];
+    NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
+    
+    for (NSDictionary *rawValues in rawSpawnPoints) {
+        SpawnPoints *spawnpoint = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
+        if (!spawnpoint) {
+            spawnpoint = [[SpawnPoints alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        }
+        
+        [spawnpoint syncToValues:rawValues];
     }
 }
 

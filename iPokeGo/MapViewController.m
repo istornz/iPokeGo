@@ -14,6 +14,7 @@
 #import "GymAnnotationView.h"
 #import "PokeStopAnnotationView.h"
 #import "PokemonAnnotationView.h"
+#import "SpawnPointsAnnotationView.h"
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "FollowLocationHelper.h"
@@ -24,11 +25,13 @@
 @property NSFetchedResultsController *gymFetchResultController;
 @property NSFetchedResultsController *pokemonFetchResultController;
 @property NSFetchedResultsController *pokestopFetchResultController;
+@property NSFetchedResultsController *spawnpointsFetchResultController;
 
 @property NSMutableArray *annotationsToAdd;
 @property NSMutableArray *annotationsPokemonToDelete;
 @property NSMutableArray *annotationsGymsToDelete;
 @property NSMutableArray *annotationsPokeStopsToDelete;
+@property NSMutableArray *annotationsSpawnpointsToDelete;
 
 @property CLLocationManager *locationManager;
 @property NSDictionary *localization;
@@ -367,6 +370,19 @@ BOOL flagIsPanning              = NO;
             
             view = pulsingView;
         }
+        else if ([annotation isKindOfClass:[SpawnPointsAnnotation class]])
+        {
+            SpawnPointsAnnotation *annotationSpawnpoint = annotation;
+            view = [mapView dequeueReusableAnnotationViewWithIdentifier:@"spawnpoint"];
+            
+            if (!view) {
+                view = [[SpawnPointsAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"spawnpoint"];
+            } else {
+                view.annotation = annotation;
+            }
+            
+            view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
+        }
         
     }
     
@@ -574,6 +590,24 @@ BOOL flagIsPanning              = NO;
     return nil;
 }
 
+- (NSFetchedResultsController *)newSpawnPointsFetchResultsControllersForCurrentPreferences
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_spawnpoints"]) {
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SpawnPoints"];
+        [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
+        NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
+        frc.delegate = self;
+        NSError *error = nil;
+        if (![frc performFetch:&error]) {
+            NSLog(@"Error performing fetch request for spawnpoints listing: %@", error);
+        }
+        
+        return frc;
+    }
+    return nil;
+}
+
 - (NSFetchedResultsController *)newPokestopFetchResultsControllersForCurrentPreferences
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"display_pokestops"]) {
@@ -608,6 +642,8 @@ BOOL flagIsPanning              = NO;
     self.gymFetchResultController = [self newGymFetchResultsControllersForCurrentPreferences];
     self.pokestopFetchResultController.delegate = nil;
     self.pokestopFetchResultController = [self newPokestopFetchResultsControllersForCurrentPreferences];
+    self.spawnpointsFetchResultController.delegate = nil;
+    self.spawnpointsFetchResultController = [self newSpawnPointsFetchResultsControllersForCurrentPreferences];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableArray *annotations = [[NSMutableArray alloc] init];
@@ -626,6 +662,12 @@ BOOL flagIsPanning              = NO;
         if (self.pokestopFetchResultController) {
             for (PokeStop *pokeStop in self.pokestopFetchResultController.fetchedObjects) {
                 PokestopAnnotation *point = [[PokestopAnnotation alloc] initWithPokestop:pokeStop];
+                [annotations addObject:point];
+            }
+        }
+        if (self.spawnpointsFetchResultController) {
+            for (SpawnPoints *spawnpoint in self.spawnpointsFetchResultController.fetchedObjects) {
+                SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
                 [annotations addObject:point];
             }
         }
@@ -648,9 +690,11 @@ BOOL flagIsPanning              = NO;
     self.pokemonFetchResultController.delegate = nil;
     self.gymFetchResultController.delegate = nil;
     self.pokestopFetchResultController.delegate = nil;
+    self.spawnpointsFetchResultController.delegate = nil;
     self.pokemonFetchResultController = nil;
     self.gymFetchResultController = nil;
     self.pokestopFetchResultController = nil;
+    self.spawnpointsFetchResultController = nil;
 }
 
 #pragma mark - Load helpers
