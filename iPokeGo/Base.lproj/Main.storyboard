@@ -957,7 +957,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hide_annotation" translatesAutoresizingMaskIntoConstraints="NO" id="nYS-Xo-efs">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hide_spawnpoint" translatesAutoresizingMaskIntoConstraints="NO" id="nYS-Xo-efs">
                                                     <rect key="frame" x="8" y="8" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="DXF-mt-Eru"/>
@@ -1561,6 +1561,7 @@
         <image name="gym" width="51" height="51"/>
         <image name="hide_annotation" width="48" height="48"/>
         <image name="hide_common" width="51" height="51"/>
+        <image name="hide_spawnpoint" width="52" height="52"/>
         <image name="infinity" width="50" height="50"/>
         <image name="license" width="48" height="48"/>
         <image name="location" width="218" height="218"/>
