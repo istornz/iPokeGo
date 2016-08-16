@@ -689,6 +689,8 @@ BOOL flagIsPanning              = NO;
             dropPin.coordinate = location;
             dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
             [annotations addObject:dropPin];
+            
+            [self.radarButton setHidden:NO];
         }
         
         [self.mapview addAnnotations:annotations];
