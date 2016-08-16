@@ -453,6 +453,9 @@ BOOL flagIsPanning              = NO;
             } else if ([anObject isKindOfClass:[PokeStop class]]) {
                 PokeStop *pokeStop = (PokeStop *)anObject;
                 [self.annotationsPokeStopsToDelete addObject:pokeStop.identifier];
+            } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
+                SpawnPoints *spawnPoints = (SpawnPoints *)anObject;
+                [self.annotationsSpawnpointsToDelete addObject:spawnPoints.identifier];
             }
             break;
         }
@@ -472,6 +475,10 @@ BOOL flagIsPanning              = NO;
                 PokeStop *pokeStop = (PokeStop *)anObject;
                 PokestopAnnotation *point = [[PokestopAnnotation alloc] initWithPokestop:pokeStop];
                 [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
+                SpawnPoints *spawnPoint = (SpawnPoints *)anObject;
+                SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnPoint];
+                [self.annotationsToAdd addObject:point];
             }
             break;
         }
@@ -488,7 +495,6 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsGymsToDelete addObject:gym.identifier];
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
                 [self.annotationsToAdd addObject:point];
-                
                 
             } else if ([anObject isKindOfClass:[PokeStop class]]) {
                 PokeStop *pokeStop = (PokeStop *)anObject;
