@@ -9,13 +9,15 @@ This is a client for the Pokemap server (https://github.com/PokemonGoMap/Pokemon
 ## Features
 - Show/Hide Pokemons,Pokestops and Gyms.
 - Change radar position.
-- Drive destination to capture a specific pokemon.
+- Drive destination to capture a specific pokemon (bike, walk and transit).
 - Notification on status bar when a new pokemon was added on the map.
 - Real notification working on iDevice and Apple Watch.
 - Possibility to make a favorite list of pokemon (when a favorite pokemon was added on map, a notification more visible is fired).
 - Add any server (heroku, your server, jelastic and more...).
 - See distance and remaining time on each pokemons.
 - Possibility to show/hide common pokemon in a list.
+- Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- Possibility to follow user location.
 
 ## Now with real push notification !
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo5.jpg" width="270" height="480"/>
@@ -50,7 +52,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - Server : Please use latest stable version (https://github.com/PokemonGoMap/PokemonGo-Map/releases)
 
 ## TODO
-- [ ] Add possibility to follow user location (same as website)
+- [x] Add possibility to follow user location (same as website)
 - [ ] Add a server status page
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
 - [x] Update pokestop and gym annotations
