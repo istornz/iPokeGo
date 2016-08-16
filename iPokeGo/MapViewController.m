@@ -372,7 +372,6 @@ BOOL flagIsPanning              = NO;
         }
         else if ([annotation isKindOfClass:[SpawnPointsAnnotation class]])
         {
-            SpawnPointsAnnotation *annotationSpawnpoint = annotation;
             view = [mapView dequeueReusableAnnotationViewWithIdentifier:@"spawnpoint"];
             
             if (!view) {
