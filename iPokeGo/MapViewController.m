@@ -501,6 +501,11 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsPokeStopsToDelete addObject:pokeStop.identifier];
                 PokestopAnnotation *point = [[PokestopAnnotation alloc] initWithPokestop:pokeStop];
                 [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
+                SpawnPoints *spawnpoint = (SpawnPoints *)anObject;
+                [self.annotationsSpawnpointsToDelete addObject:spawnpoint.identifier];
+                SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
+                [self.annotationsToAdd addObject:point];
             }
             break;
         }
