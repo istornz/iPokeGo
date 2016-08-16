@@ -45,6 +45,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     NSDictionary* defaults = @{@"display_onlyfav": @"NO",
                                @"display_common": @"NO",
                                @"display_pokemons": @"YES",
+                               @"display_spawnpoints" : @"NO",
                                @"display_pokestops": @"NO",
                                @"display_gyms" : @"NO",
                                @"display_distance" : @"NO",
