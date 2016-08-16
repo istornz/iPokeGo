@@ -646,6 +646,12 @@ BOOL flagIsPanning              = NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableArray *annotations = [[NSMutableArray alloc] init];
+        if (self.spawnpointsFetchResultController) {
+            for (SpawnPoints *spawnpoint in self.spawnpointsFetchResultController.fetchedObjects) {
+                SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
+                [annotations addObject:point];
+            }
+        }
         if (self.pokemonFetchResultController) {
             for (Pokemon *pokemon in self.pokemonFetchResultController.fetchedObjects) {
                 PokemonAnnotation *point = [[PokemonAnnotation alloc] initWithPokemon:pokemon andLocalization:self.localization];
@@ -661,12 +667,6 @@ BOOL flagIsPanning              = NO;
         if (self.pokestopFetchResultController) {
             for (PokeStop *pokeStop in self.pokestopFetchResultController.fetchedObjects) {
                 PokestopAnnotation *point = [[PokestopAnnotation alloc] initWithPokestop:pokeStop];
-                [annotations addObject:point];
-            }
-        }
-        if (self.spawnpointsFetchResultController) {
-            for (SpawnPoints *spawnpoint in self.spawnpointsFetchResultController.fetchedObjects) {
-                SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
                 [annotations addObject:point];
             }
         }
