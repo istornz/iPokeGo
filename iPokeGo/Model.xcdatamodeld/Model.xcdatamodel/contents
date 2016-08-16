@@ -25,9 +25,15 @@
         <attribute name="luredPokemonID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="lureExpiration" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
+    <entity name="SpawnPoints" representedClassName="SpawnPoints" syncable="YES">
+        <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Gym" positionX="-36" positionY="9" width="128" height="135"/>
         <element name="Pokemon" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="PokeStop" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="SpawnPoints" positionX="-45" positionY="45" width="128" height="90"/>
     </elements>
 </model>

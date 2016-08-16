@@ -12,6 +12,7 @@
 #import "GymAnnotation.h"
 #import "PokestopAnnotation.h"
 #import "ScanAnnotation.h"
+#import "SpawnPointsAnnotation.h"
 #import "SVPulsingAnnotationView.h"
 #import "global.h"
 
