@@ -363,6 +363,7 @@ BOOL flagIsPanning              = NO;
         }
         else if ([annotation isKindOfClass:[ScanAnnotation class]])
         {
+            ScanAnnotation *annotationScan = annotation;
             SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"scan"];
             if (!view) {
                 pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
@@ -458,6 +459,9 @@ BOOL flagIsPanning              = NO;
             } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
                 SpawnPoints *spawnPoints = (SpawnPoints *)anObject;
                 [self.annotationsSpawnpointsToDelete addObject:spawnPoints.identifier];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanLocations = (ScanLocations *)anObject;
+                [self.annotationsLocationsToDelete addObject:scanLocations.identifier];
             }
             break;
         }
@@ -480,6 +484,10 @@ BOOL flagIsPanning              = NO;
             } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
                 SpawnPoints *spawnPoint = (SpawnPoints *)anObject;
                 SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnPoint];
+                [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanLocation = (ScanLocations *)anObject;
+                ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanLocation];
                 [self.annotationsToAdd addObject:point];
             }
             break;
@@ -508,6 +516,11 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsSpawnpointsToDelete addObject:spawnpoint.identifier];
                 SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
                 [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanlocation = (ScanLocations *)anObject;
+                [self.annotationsLocationsToDelete addObject:scanlocation.identifier];
+                ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
+                [self.annotationsToAdd addObject:point];
             }
             break;
         }
@@ -523,27 +536,31 @@ BOOL flagIsPanning              = NO;
         NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
         NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
         NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
+        NSArray *scanlocationToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.scanLocationID IN %@" argumentArray:@[[ScanAnnotation class], self.annotationsLocationsToDelete]]];
         
         //make sure we're on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mapview removeAnnotations:gymsToRemove];
             [self.mapview removeAnnotations:pokestopsToRemove];
             [self.mapview removeAnnotations:pokemonToRemove];
+            [self.mapview removeAnnotations:scanlocationToRemove];
             [self.mapview addAnnotations:self.annotationsToAdd];
             
             [self.annotationsToAdd removeAllObjects];
             [self.annotationsPokeStopsToDelete removeAllObjects];
             [self.annotationsPokemonToDelete removeAllObjects];
             [self.annotationsGymsToDelete removeAllObjects];
+            [self.annotationsLocationsToDelete removeAllObjects];
         });
     });}
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    self.annotationsToAdd = [[NSMutableArray alloc] init];
-    self.annotationsPokemonToDelete = [[NSMutableArray alloc] init];
-    self.annotationsGymsToDelete = [[NSMutableArray alloc] init];
-    self.annotationsPokeStopsToDelete = [[NSMutableArray alloc] init];
+    self.annotationsToAdd               = [[NSMutableArray alloc] init];
+    self.annotationsPokemonToDelete     = [[NSMutableArray alloc] init];
+    self.annotationsGymsToDelete        = [[NSMutableArray alloc] init];
+    self.annotationsPokeStopsToDelete   = [[NSMutableArray alloc] init];
+    self.annotationsLocationsToDelete   = [[NSMutableArray alloc] init];
 }
 
 #pragma mark - Fetch Results Controller setup
