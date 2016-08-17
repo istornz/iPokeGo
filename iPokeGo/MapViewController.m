@@ -833,10 +833,26 @@ BOOL flagIsPanning              = NO;
 
 -(void)radarAction:(id)sender
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"]) {
-        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
-                                                                     [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
-        [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    // get region of all scan location annotations
+    MKMapRect region = MKMapRectNull;
+    for (int i = 0; i < [self.mapview.annotations count]; i++) {
+        MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+        if([annotation isKindOfClass:[ScanAnnotation class]]){
+            CLLocationCoordinate2D location = annotation.coordinate;
+            MKMapPoint p = MKMapPointForCoordinate(location);
+            region = MKMapRectUnion(region, MKMapRectMake(p.x, p.y, 0, 0));
+        }
+    }
+
+    if(!MKMapRectIsNull(region)){
+        if (region.size.width == 0 && region.size.height == 0){
+            CLLocationCoordinate2D location = MKCoordinateForMapPoint(region.origin);
+            [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+        }else{
+            MKCoordinateRegion regionMap = [self.mapview regionThatFits:MKCoordinateRegionForMapRect(region)];
+            regionMap.span = MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE);
+            [self.mapview setRegion:regionMap animated:YES];
+        }
     }
 }
 
