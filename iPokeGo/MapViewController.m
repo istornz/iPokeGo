@@ -416,6 +416,7 @@ BOOL flagIsPanning              = NO;
         //Send request to remove
         iPokeServerSync *server = [[iPokeServerSync alloc] init];
         [server removeLocation:endingCoord];
+        [self.mapview removeAnnotation:view.annotation];
     }
     else
     {

@@ -87,7 +87,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
             
             if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
                 NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
-                    NSLog(@"Position changed !");
                 return;
             }
         }
