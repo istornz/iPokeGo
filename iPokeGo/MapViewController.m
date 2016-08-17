@@ -241,7 +241,6 @@ BOOL flagIsPanning              = NO;
         [self.radarButton setHidden:NO];
         
         CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 timestamp:[NSDate date]];
-        [self.mapview addAnnotation:dropPin];
         
         if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])
         {
@@ -251,8 +250,23 @@ BOOL flagIsPanning              = NO;
                     [self.mapview removeAnnotation:annotation];
             }
             
+            [self.mapview addAnnotation:dropPin];
+            
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"radar_lat"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
+        }
+        else
+        {
+            for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
+                    ScanAnnotation *pos = self.mapview.annotations[i];
+                    if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude))
+                    [self.mapview removeAnnotation:annotation];
+                }
+            }
+            
+            [self.mapview addAnnotation:dropPin];
         }
         
         [self updateLocationInServer:location];
