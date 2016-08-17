@@ -71,6 +71,35 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [task resume];
 }
 
+-(void)removeLocation:(CLLocationCoordinate2D)location
+{
+    NSURL *url = [self buildRemoveLocationRequestURLWithLocation:location];
+    if (!url) {
+        return;
+    }
+    NSLog(@"%@", url);
+    NSMutableURLRequest *request = [self buildRequestWithURL:url];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"DELETE"];
+    NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            
+            if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
+                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
+                    NSLog(@"Position changed !");
+                return;
+            }
+        }
+        
+        if (error) {
+            NSLog(@"Error reading server's data: %@", error);
+            return;
+        }
+    }];
+    [task resume];
+}
+
 -(void)fetchData
 {
     NSURL *url = [self buildLoadDataRequestURL];
@@ -167,6 +196,23 @@ static NSURLSession *iPokeServerSyncSharedSession;
         request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
         request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
     }
+    
+    return [NSURL URLWithString:request];
+}
+
+- (NSURL *)buildRemoveLocationRequestURLWithLocation:(CLLocationCoordinate2D)location
+{
+    // Only for pogom server
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    
+    if([server_addr length] == 0) {
+        return nil;
+    }
+    
+    NSString *request = [SERVER_API_LOCAREMOVE_POGOM stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+    request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
+    request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
     
     return [NSURL URLWithString:request];
 }

@@ -18,6 +18,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "FollowLocationHelper.h"
+#import "TagButton.h"
 @import CoreData;
 
 @interface MapViewController() <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
@@ -369,9 +370,10 @@ BOOL flagIsPanning              = NO;
         {
             SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"scan"];
             if (!view) {
-                pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
-                pulsingView.canShowCallout  = YES;
-                pulsingView.annotationColor = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
+                pulsingView                             = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
+                pulsingView.canShowCallout              = YES;
+                pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initWithText:NSLocalizedString(@"DELETE", nil)];
+                pulsingView.annotationColor             = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
             }
             
             view = pulsingView;
@@ -397,14 +399,24 @@ BOOL flagIsPanning              = NO;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     CLLocationCoordinate2D endingCoord = CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude);
-    NSString *drivingMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"driving_mode"];
-    MKPlacemark *endLocation = [[MKPlacemark alloc] initWithCoordinate:endingCoord addressDictionary:nil];
-    MKMapItem *endingItem = [[MKMapItem alloc] initWithPlacemark:endLocation];
     
-    NSMutableDictionary *launchOptions = [[NSMutableDictionary alloc] init];
-    [launchOptions setObject:drivingMode forKey:MKLaunchOptionsDirectionsModeKey];
-    
-    [endingItem openInMapsWithLaunchOptions:launchOptions];
+    if([view isKindOfClass:[SVPulsingAnnotationView class]])
+    {
+        //Send request to remove
+        iPokeServerSync *server = [[iPokeServerSync alloc] init];
+        [server removeLocation:endingCoord];
+    }
+    else
+    {
+        NSString *drivingMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"driving_mode"];
+        MKPlacemark *endLocation = [[MKPlacemark alloc] initWithCoordinate:endingCoord addressDictionary:nil];
+        MKMapItem *endingItem = [[MKMapItem alloc] initWithPlacemark:endLocation];
+        
+        NSMutableDictionary *launchOptions = [[NSMutableDictionary alloc] init];
+        [launchOptions setObject:drivingMode forKey:MKLaunchOptionsDirectionsModeKey];
+        
+        [endingItem openInMapsWithLaunchOptions:launchOptions];
+    }
 }
 
 #pragma mark - CLLocationManager delegate

@@ -28,6 +28,7 @@
 		2798B9DB1D4F8CEC00B33BE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */; };
 		27C2BF901D646A99005F1677 /* ScanLocations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF8D1D646A99005F1677 /* ScanLocations+CoreDataProperties.m */; };
 		27C2BF911D646A99005F1677 /* ScanLocations+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF8F1D646A99005F1677 /* ScanLocations+CoreDataClass.m */; };
+		27C2BF991D648D81005F1677 /* TagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF981D648D81005F1677 /* TagButton.m */; };
 		27DE81901D61D55C00F5F87E /* LicensesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE818F1D61D55C00F5F87E /* LicensesViewController.m */; };
 		27DE81921D61D59400F5F87E /* licenses.html in Resources */ = {isa = PBXBuildFile; fileRef = 27DE81911D61D59400F5F87E /* licenses.html */; };
 		27DFD2491D631B2200298D31 /* SpawnPoints+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DFD2461D631B2200298D31 /* SpawnPoints+CoreDataProperties.m */; };
@@ -123,6 +124,8 @@
 		27C2BF8D1D646A99005F1677 /* ScanLocations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ScanLocations+CoreDataProperties.m"; sourceTree = "<group>"; };
 		27C2BF8E1D646A99005F1677 /* ScanLocations+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ScanLocations+CoreDataClass.h"; sourceTree = "<group>"; };
 		27C2BF8F1D646A99005F1677 /* ScanLocations+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ScanLocations+CoreDataClass.m"; sourceTree = "<group>"; };
+		27C2BF971D648D81005F1677 /* TagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagButton.h; sourceTree = "<group>"; };
+		27C2BF981D648D81005F1677 /* TagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagButton.m; sourceTree = "<group>"; };
 		27DE818E1D61D55C00F5F87E /* LicensesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicensesViewController.h; sourceTree = "<group>"; };
 		27DE818F1D61D55C00F5F87E /* LicensesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicensesViewController.m; sourceTree = "<group>"; };
 		27DE81911D61D59400F5F87E /* licenses.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = licenses.html; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				0256E3851D473D7800CEEE3F /* TimerLabel.m */,
 				2785D1161D5E153A004FC688 /* TagLabel.h */,
 				2785D1171D5E153A004FC688 /* TagLabel.m */,
+				27C2BF971D648D81005F1677 /* TagButton.h */,
+				27C2BF981D648D81005F1677 /* TagButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -739,6 +744,7 @@
 			files = (
 				276B89881D50FA8B008164FE /* PokestopsSettingsTableViewController.m in Sources */,
 				27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */,
+				27C2BF991D648D81005F1677 /* TagButton.m in Sources */,
 				27C2BF911D646A99005F1677 /* ScanLocations+CoreDataClass.m in Sources */,
 				0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */,
 				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,

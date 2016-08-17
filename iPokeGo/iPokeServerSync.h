@@ -13,5 +13,6 @@
 
 - (void)fetchData;
 - (void)setLocation:(CLLocationCoordinate2D)location;
+- (void)removeLocation:(CLLocationCoordinate2D)location;
 
 @end

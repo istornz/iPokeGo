@@ -46,4 +46,6 @@
 #define SERVER_API_LOCA_POKEMONGOMAP    @"%%server_addr%%/next_loc?lat=%%latitude%%&lon=%%longitude%%"
 #define SERVER_API_LOCA_POGOM           @"%%server_addr%%/location?lat=%%latitude%%&lng=%%longitude%%&radius=%%radius%%"
 
+#define SERVER_API_LOCAREMOVE_POGOM     @"%%server_addr%%/location?lat=%%latitude%%&lng=%%longitude%%"
+
 #endif /* global_h */
