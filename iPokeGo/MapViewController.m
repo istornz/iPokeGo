@@ -97,6 +97,8 @@ BOOL flagIsPanning              = NO;
         
         [self.mapview setRegion:region animated:NO];
     }
+    
+    [self reloadMap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -495,7 +497,6 @@ BOOL flagIsPanning              = NO;
                 Pokemon *pokemon = (Pokemon *)anObject;
                 PokemonAnnotation *point = [[PokemonAnnotation alloc] initWithPokemon:pokemon andLocalization:self.localization];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[Gym class]]) {
                 Gym *gym = (Gym *)anObject;
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
@@ -523,13 +524,11 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsPokemonToDelete addObject:pokemon.spawnpoint];
                 PokemonAnnotation *point = [[PokemonAnnotation alloc] initWithPokemon:pokemon andLocalization:self.localization];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[Gym class]]) {
                 Gym *gym = (Gym *)anObject;
                 [self.annotationsGymsToDelete addObject:gym.identifier];
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[PokeStop class]]) {
                 PokeStop *pokeStop = (PokeStop *)anObject;
                 [self.annotationsPokeStopsToDelete addObject:pokeStop.identifier];
