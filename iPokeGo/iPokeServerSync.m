@@ -100,6 +100,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
         [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
         [self processSpawnPointsFromJSON:jsonData[@"spawnpoints"] usingContext:context];
+        [self processScanLocationsFromJSON:[jsonData[@"scan_locations"] allValues] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
     }];
     [task resume];
@@ -131,7 +132,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:display_gyms_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%spawnpoints_display%%" withString:display_spawnpoints_str];
     
-    NSLog(@"%@", request);
+    //NSLog(@"%@", request);
     
     return [NSURL URLWithString:request];
 }
@@ -330,6 +331,46 @@ static NSURLSession *iPokeServerSyncSharedSession;
         }
         
         [spawnpoint syncToValues:rawValues];
+    }
+}
+
+- (void)processScanLocationsFromJSON:(NSArray *)rawScanLocations usingContext:(NSManagedObjectContext *)context
+{
+    if (!rawScanLocations) {
+        return;
+    }
+    
+    NSString *entityName = NSStringFromClass(ScanLocations.class);
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    NSString *serverPrimaryKey = @"location";
+    NSArray *foundIdentifiers = [rawScanLocations valueForKey:serverPrimaryKey];
+    if (!foundIdentifiers) {
+        foundIdentifiers = @[];
+    }
+    
+    NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
+    [itemsToDeleteRequest setEntity:entity];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
+    [itemsToDeleteRequest setIncludesPropertyValues:NO];
+    NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ scanlocation", @(itemsToDelete.count));
+    }
+    for (NSManagedObject *itemToDelete in itemsToDelete) {
+        [context deleteObject:itemToDelete];
+    }
+    
+    NSFetchRequest *knownItemsRequest = [[NSFetchRequest alloc] init];
+    [knownItemsRequest setEntity:[NSEntityDescription  entityForName:entityName inManagedObjectContext:context]];
+    NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
+    
+    for (NSDictionary *rawValues in rawScanLocations) {
+        ScanLocations *scanlocation = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
+        if (!scanlocation) {
+            scanlocation = [[ScanLocations alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        }
+        
+        [scanlocation syncToValues:rawValues];
     }
 }
 

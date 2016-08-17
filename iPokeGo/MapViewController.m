@@ -26,12 +26,14 @@
 @property NSFetchedResultsController *pokemonFetchResultController;
 @property NSFetchedResultsController *pokestopFetchResultController;
 @property NSFetchedResultsController *spawnpointsFetchResultController;
+@property NSFetchedResultsController *locationsFetchResultController;
 
 @property NSMutableArray *annotationsToAdd;
 @property NSMutableArray *annotationsPokemonToDelete;
 @property NSMutableArray *annotationsGymsToDelete;
 @property NSMutableArray *annotationsPokeStopsToDelete;
 @property NSMutableArray *annotationsSpawnpointsToDelete;
+@property NSMutableArray *annotationsLocationsToDelete;
 
 @property CLLocationManager *locationManager;
 @property NSDictionary *localization;
@@ -640,6 +642,24 @@ BOOL flagIsPanning              = NO;
     return nil;
 }
 
+- (NSFetchedResultsController *)newScanLocationsFetchResultsControllersForCurrentPreferences
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM]) {
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScanLocations"];
+        [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+        request.fetchBatchSize = 50;
+        NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
+        frc.delegate = self;
+        NSError *error = nil;
+        if (![frc performFetch:&error]) {
+            NSLog(@"Error performing fetch request for gym listing: %@", error);
+        }
+        
+        return frc;
+    }
+    return nil;
+}
+
 - (void)reloadMap {
     NSLog(@"Reloading map...");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -654,6 +674,8 @@ BOOL flagIsPanning              = NO;
     self.pokestopFetchResultController = [self newPokestopFetchResultsControllersForCurrentPreferences];
     self.spawnpointsFetchResultController.delegate = nil;
     self.spawnpointsFetchResultController = [self newSpawnPointsFetchResultsControllersForCurrentPreferences];
+    self.locationsFetchResultController.delegate = nil;
+    self.locationsFetchResultController = [self newScanLocationsFetchResultsControllersForCurrentPreferences];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableArray *annotations = [[NSMutableArray alloc] init];
@@ -681,7 +703,8 @@ BOOL flagIsPanning              = NO;
                 [annotations addObject:point];
             }
         }
-        if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"]) {
+        if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"] && ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])) {
+            NSLog(@"[!] Pokemon-Go Map server detected !");
             CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
                                                                          [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
             
@@ -691,6 +714,19 @@ BOOL flagIsPanning              = NO;
             [annotations addObject:dropPin];
             
             [self.radarButton setHidden:NO];
+        }
+        else
+        {
+            NSLog(@"[!] Pogom server detected !");
+            
+            if (self.locationsFetchResultController) {
+                for (ScanLocations *scanlocation in self.locationsFetchResultController.fetchedObjects) {
+                    ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
+                    [annotations addObject:dropPin];
+                }
+            }
+            
+            //TODO: Set scan location pin for all
         }
         
         [self.mapview addAnnotations:annotations];
@@ -703,10 +739,13 @@ BOOL flagIsPanning              = NO;
     self.gymFetchResultController.delegate = nil;
     self.pokestopFetchResultController.delegate = nil;
     self.spawnpointsFetchResultController.delegate = nil;
+    self.locationsFetchResultController.delegate = nil;
+    
     self.pokemonFetchResultController = nil;
     self.gymFetchResultController = nil;
     self.pokestopFetchResultController = nil;
     self.spawnpointsFetchResultController = nil;
+    self.locationsFetchResultController = nil;
 }
 
 #pragma mark - Load helpers

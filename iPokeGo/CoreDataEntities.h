@@ -10,7 +10,10 @@
 #import "Gym+CoreDataProperties.h"
 #import "Pokemon+CoreDataProperties.h"
 #import "SpawnPoints+CoreDataProperties.h"
+#import "ScanLocations+CoreDataProperties.h"
+
 #import "PokeStop+CoreDataClass.h"
 #import "Gym+CoreDataClass.h"
 #import "Pokemon+CoreDataClass.h"
 #import "SpawnPoints+CoreDataClass.h"
+#import "ScanLocations+CoreDataClass.h"
