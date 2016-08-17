@@ -251,9 +251,6 @@ BOOL flagIsPanning              = NO;
             }
             
             [self.mapview addAnnotation:dropPin];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"radar_lat"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
         }
         else
         {
@@ -291,8 +288,6 @@ BOOL flagIsPanning              = NO;
             
         }
         // remove scan location coordinates from user defaults
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
         
         [self checkGPS];
     }
@@ -690,20 +685,17 @@ BOOL flagIsPanning              = NO;
 
 - (NSFetchedResultsController *)newScanLocationsFetchResultsControllersForCurrentPreferences
 {
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM]) {
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScanLocations"];
-        [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
-        request.fetchBatchSize = 50;
-        NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
-        frc.delegate = self;
-        NSError *error = nil;
-        if (![frc performFetch:&error]) {
-            NSLog(@"Error performing fetch request for gym listing: %@", error);
-        }
-        
-        return frc;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScanLocations"];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+    request.fetchBatchSize = 50;
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
+    frc.delegate = self;
+    NSError *error = nil;
+    if (![frc performFetch:&error]) {
+        NSLog(@"Error performing fetch request for gym listing: %@", error);
     }
-    return nil;
+    
+    return frc;
 }
 
 - (void)reloadMap {
@@ -749,28 +741,14 @@ BOOL flagIsPanning              = NO;
                 [annotations addObject:point];
             }
         }
-        if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"] && ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])) {
-            NSLog(@"[!] Pokemon-Go Map server detected !");
-            CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
-                                                                         [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
-            
-            ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-            dropPin.coordinate = location;
-            dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
-            [annotations addObject:dropPin];
-            
-            [self.radarButton setHidden:NO];
-        }
-        else
-        {
-            NSLog(@"[!] Pogom server detected !");
-            
-            if (self.locationsFetchResultController) {
-                for (ScanLocations *scanlocation in self.locationsFetchResultController.fetchedObjects) {
-                    ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
-                    [annotations addObject:dropPin];
-                }
+        if (self.locationsFetchResultController) {
+            BOOL hasScanLocations = NO;
+            for (ScanLocations *scanlocation in self.locationsFetchResultController.fetchedObjects) {
+                ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
+                [annotations addObject:dropPin];
+                hasScanLocations = YES;
             }
+            [self.radarButton setHidden:!hasScanLocations];
         }
         
         [self.mapview addAnnotations:annotations];
@@ -833,10 +811,21 @@ BOOL flagIsPanning              = NO;
 
 -(void)radarAction:(id)sender
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"]) {
-        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
-                                                                     [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
-        [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    // get region of all scan location annotations
+    MKMapRect region = MKMapRectNull;
+    for (int i = 0; i < [self.mapview.annotations count]; i++) {
+        MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+        if([annotation isKindOfClass:[ScanAnnotation class]]){
+            CLLocationCoordinate2D location = annotation.coordinate;
+            MKMapPoint p = MKMapPointForCoordinate(location);
+            region = MKMapRectUnion(region, MKMapRectMake(p.x, p.y, 0, 0));
+        }
+    }
+
+    if(!MKMapRectIsNull(region)){
+        MKCoordinateRegion regionMap = [self.mapview regionThatFits:MKCoordinateRegionForMapRect(region)];
+        regionMap.span = MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE);
+        [self.mapview setRegion:regionMap animated:YES];
     }
 }
 

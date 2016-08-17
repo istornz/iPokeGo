@@ -141,6 +141,55 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [task resume];
 }
 
+
+-(void)fetchScanLocationData
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP]) {
+        NSURL *url = [self buildScanLocationRequestURL];
+        
+        NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:[self buildRequestWithURL:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                if (httpResponse.statusCode != 200) {
+                    NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
+                    return;
+                }
+            }
+            
+            if (error) {
+                NSLog(@"Error reading server's location data: %@", error);
+                return;
+            }
+            
+            NSDictionary *jsonData = [NSJSONSerialization
+                                      JSONObjectWithData:data
+                                      options:NSJSONReadingMutableContainers
+                                      error:&error];
+            
+            if (!jsonData || error) {
+                NSLog(@"Error processing server's location data: %@", error);
+                return;
+            }
+            NSLog(@"Fetched scan location data");
+            
+            // Transform location data
+            NSNumber *latitude = [jsonData valueForKey:@"lat"];
+            NSNumber *longitude = [jsonData valueForKey:@"lng"];
+            NSString *idLocation = [[NSString alloc] initWithFormat:@"%@,%@", latitude, longitude];
+            NSDictionary *dataLocation = [[NSDictionary alloc]
+                                          initWithObjects:@[latitude, longitude, idLocation, @1, @1]
+                                          forKeys:@[@"latitude", @"longitude", @"location", @"altitude", @"radius"]];
+            NSArray *dataLocations = [[NSArray alloc] initWithObjects:dataLocation, nil];
+            
+            NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
+            [self processScanLocationsFromJSON:dataLocations usingContext:context];
+            [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
+        }];
+        [task resume];
+        NSLog(@"End process scan location data");
+    }
+}
+
 -(NSURL *)buildLoadDataRequestURL
 {
     // Build Request
@@ -168,6 +217,23 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request = [request stringByReplacingOccurrencesOfString:@"%%spawnpoints_display%%" withString:display_spawnpoints_str];
     
     //NSLog(@"%@", request);
+    
+    return [NSURL URLWithString:request];
+}
+
+
+-(NSURL *)buildScanLocationRequestURL
+{
+    // Build Request
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    NSString *request               = SERVER_API_DATA_SCAN_LOCATION;
+    
+    if([server_addr length] == 0) {
+        return nil;
+    }
+    
+    request = [request stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     
     return [NSURL URLWithString:request];
 }
