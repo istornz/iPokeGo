@@ -44,8 +44,11 @@ static NSURLSession *iPokeServerSyncSharedSession;
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if (httpResponse.statusCode != 200) {
-                NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
+            
+            if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
+                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
+                if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM])
+                    NSLog(@"Position changed !");
                 return;
             }
         }
@@ -55,11 +58,14 @@ static NSURLSession *iPokeServerSyncSharedSession;
             return;
         }
         
-        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if([dataStr isEqualToString:@"ok"]) {
-            NSLog(@"Position changed !");
-        } else {
-            NSLog(@"Error changing pinned location, server responded: %@", dataStr);
+        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])
+        {
+            NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if([dataStr isEqualToString:@"ok"]) {
+                NSLog(@"Position changed !");
+            } else {
+                NSLog(@"Error changing pinned location, server responded: %@", dataStr);
+            }
         }
     }];
     [task resume];
@@ -141,14 +147,26 @@ static NSURLSession *iPokeServerSyncSharedSession;
 {
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
     NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    NSString *server_type           = [defaults objectForKey:@"server_type"];
     
     if([server_addr length] == 0) {
         return nil;
     }
     
-    NSString *request = [SERVER_API_LOCA stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
-    request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
-    request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
+    NSString *request = nil;
+    if ([server_type isEqualToString:SERVER_API_DATA_POGOM])
+    {
+        request = [SERVER_API_LOCA_POGOM stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%radius%%" withString:[NSString stringWithFormat:@"%d", DEFAULT_RADIUS]];
+    }
+    else
+    {
+        request = [SERVER_API_DATA_POKEMONGOMAP stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
+    }
     
     return [NSURL URLWithString:request];
 }
