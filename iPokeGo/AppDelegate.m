@@ -172,6 +172,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 {
     dispatch_async(AppDelegateFetcherQueue, ^{
         [self.server fetchData];
+        [self.server fetchScanLocationData];
     });
 }
 
