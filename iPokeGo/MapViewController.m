@@ -363,7 +363,6 @@ BOOL flagIsPanning              = NO;
         }
         else if ([annotation isKindOfClass:[ScanAnnotation class]])
         {
-            ScanAnnotation *annotationScan = annotation;
             SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"scan"];
             if (!view) {
                 pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
@@ -742,8 +741,6 @@ BOOL flagIsPanning              = NO;
                     [annotations addObject:dropPin];
                 }
             }
-            
-            //TODO: Set scan location pin for all
         }
         
         [self.mapview addAnnotations:annotations];
