@@ -370,7 +370,7 @@ BOOL flagIsPanning              = NO;
             SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"scan"];
             if (!view) {
                 pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
-                pulsingView.canShowCallout = YES;
+                pulsingView.canShowCallout  = YES;
                 pulsingView.annotationColor = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
             }
             
