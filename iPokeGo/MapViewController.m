@@ -501,7 +501,6 @@ BOOL flagIsPanning              = NO;
                 Gym *gym = (Gym *)anObject;
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[PokeStop class]]) {
                 PokeStop *pokeStop = (PokeStop *)anObject;
                 PokestopAnnotation *point = [[PokestopAnnotation alloc] initWithPokestop:pokeStop];
@@ -512,8 +511,20 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsToAdd addObject:point];
             } else if ([anObject isKindOfClass:[ScanLocations class]]) {
                 ScanLocations *scanLocation = (ScanLocations *)anObject;
-                ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanLocation];
-                [self.annotationsToAdd addObject:point];
+                
+                BOOL isFound = NO;
+                for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                    MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                    if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
+                        if((round(annotation.coordinate.latitude * 1000.0) == round(scanLocation.latitude * 1000.0)) && (round(annotation.coordinate.longitude * 1000.0) == round(scanLocation.longitude * 1000.0)))
+                            isFound = YES;
+                    }
+                }
+                
+                if(!isFound) {
+                    ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanLocation];
+                    [self.annotationsToAdd addObject:point];
+                }
             }
             break;
         }
@@ -691,7 +702,7 @@ BOOL flagIsPanning              = NO;
     frc.delegate = self;
     NSError *error = nil;
     if (![frc performFetch:&error]) {
-        NSLog(@"Error performing fetch request for gym listing: %@", error);
+        NSLog(@"Error performing fetch request for locations listing: %@", error);
     }
     
     return frc;
