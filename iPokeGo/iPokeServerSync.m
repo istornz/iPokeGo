@@ -44,8 +44,11 @@ static NSURLSession *iPokeServerSyncSharedSession;
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if (httpResponse.statusCode != 200) {
-                NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
+            
+            if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
+                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
+                if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM])
+                    NSLog(@"Position changed !");
                 return;
             }
         }
@@ -55,11 +58,43 @@ static NSURLSession *iPokeServerSyncSharedSession;
             return;
         }
         
-        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if([dataStr isEqualToString:@"ok"]) {
-            NSLog(@"Position changed !");
-        } else {
-            NSLog(@"Error changing pinned location, server responded: %@", dataStr);
+        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])
+        {
+            NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if([dataStr isEqualToString:@"ok"]) {
+                NSLog(@"Position changed !");
+            } else {
+                NSLog(@"Error changing pinned location, server responded: %@", dataStr);
+            }
+        }
+    }];
+    [task resume];
+}
+
+-(void)removeLocation:(CLLocationCoordinate2D)location
+{
+    NSURL *url = [self buildRemoveLocationRequestURLWithLocation:location];
+    if (!url) {
+        return;
+    }
+    NSLog(@"%@", url);
+    NSMutableURLRequest *request = [self buildRequestWithURL:url];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"DELETE"];
+    NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            
+            if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
+                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
+                    NSLog(@"Position changed !");
+                return;
+            }
+        }
+        
+        if (error) {
+            NSLog(@"Error reading server's data: %@", error);
+            return;
         }
     }];
     [task resume];
@@ -100,9 +135,59 @@ static NSURLSession *iPokeServerSyncSharedSession;
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
         [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
         [self processSpawnPointsFromJSON:jsonData[@"spawnpoints"] usingContext:context];
+        [self processScanLocationsFromJSON:[jsonData[@"scan_locations"] allValues] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
     }];
     [task resume];
+}
+
+
+-(void)fetchScanLocationData
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP]) {
+        NSURL *url = [self buildScanLocationRequestURL];
+        
+        NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:[self buildRequestWithURL:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                if (httpResponse.statusCode != 200) {
+                    NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
+                    return;
+                }
+            }
+            
+            if (error) {
+                NSLog(@"Error reading server's location data: %@", error);
+                return;
+            }
+            
+            NSDictionary *jsonData = [NSJSONSerialization
+                                      JSONObjectWithData:data
+                                      options:NSJSONReadingMutableContainers
+                                      error:&error];
+            
+            if (!jsonData || error) {
+                NSLog(@"Error processing server's location data: %@", error);
+                return;
+            }
+            NSLog(@"Fetched scan location data");
+            
+            // Transform location data
+            NSNumber *latitude = [jsonData valueForKey:@"lat"];
+            NSNumber *longitude = [jsonData valueForKey:@"lng"];
+            NSString *idLocation = [[NSString alloc] initWithFormat:@"%@,%@", latitude, longitude];
+            NSDictionary *dataLocation = [[NSDictionary alloc]
+                                          initWithObjects:@[latitude, longitude, idLocation, @1, @1]
+                                          forKeys:@[@"latitude", @"longitude", @"location", @"altitude", @"radius"]];
+            NSArray *dataLocations = [[NSArray alloc] initWithObjects:dataLocation, nil];
+            
+            NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
+            [self processScanLocationsFromJSON:dataLocations usingContext:context];
+            [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
+        }];
+        [task resume];
+        NSLog(@"End process scan location data");
+    }
 }
 
 -(NSURL *)buildLoadDataRequestURL
@@ -131,7 +216,24 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:display_gyms_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%spawnpoints_display%%" withString:display_spawnpoints_str];
     
-    NSLog(@"%@", request);
+    //NSLog(@"%@", request);
+    
+    return [NSURL URLWithString:request];
+}
+
+
+-(NSURL *)buildScanLocationRequestURL
+{
+    // Build Request
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    NSString *request               = SERVER_API_DATA_SCAN_LOCATION;
+    
+    if([server_addr length] == 0) {
+        return nil;
+    }
+    
+    request = [request stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     
     return [NSURL URLWithString:request];
 }
@@ -140,12 +242,41 @@ static NSURLSession *iPokeServerSyncSharedSession;
 {
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
     NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    NSString *server_type           = [defaults objectForKey:@"server_type"];
     
     if([server_addr length] == 0) {
         return nil;
     }
     
-    NSString *request = [SERVER_API_LOCA stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+    NSString *request = nil;
+    if ([server_type isEqualToString:SERVER_API_DATA_POGOM])
+    {
+        request = [SERVER_API_LOCA_POGOM stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%radius%%" withString:[NSString stringWithFormat:@"%d", DEFAULT_RADIUS]];
+    }
+    else
+    {
+        request = [SERVER_API_DATA_POKEMONGOMAP stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
+    }
+    
+    return [NSURL URLWithString:request];
+}
+
+- (NSURL *)buildRemoveLocationRequestURLWithLocation:(CLLocationCoordinate2D)location
+{
+    // Only for pogom server
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    NSString *server_addr           = [defaults objectForKey:@"server_addr"];
+    
+    if([server_addr length] == 0) {
+        return nil;
+    }
+    
+    NSString *request = [SERVER_API_LOCAREMOVE_POGOM stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
     request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
     request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
     
@@ -330,6 +461,46 @@ static NSURLSession *iPokeServerSyncSharedSession;
         }
         
         [spawnpoint syncToValues:rawValues];
+    }
+}
+
+- (void)processScanLocationsFromJSON:(NSArray *)rawScanLocations usingContext:(NSManagedObjectContext *)context
+{
+    if (!rawScanLocations) {
+        return;
+    }
+    
+    NSString *entityName = NSStringFromClass(ScanLocations.class);
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    NSString *serverPrimaryKey = @"location";
+    NSArray *foundIdentifiers = [rawScanLocations valueForKey:serverPrimaryKey];
+    if (!foundIdentifiers) {
+        foundIdentifiers = @[];
+    }
+    
+    NSFetchRequest *itemsToDeleteRequest = [[NSFetchRequest alloc] init];
+    [itemsToDeleteRequest setEntity:entity];
+    [itemsToDeleteRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (identifier IN %@)" argumentArray:@[foundIdentifiers]]];
+    [itemsToDeleteRequest setIncludesPropertyValues:NO];
+    NSArray *itemsToDelete = [context executeFetchRequest:itemsToDeleteRequest error:nil];
+    if (itemsToDelete.count > 0) {
+        NSLog(@"Deleting %@ scanlocation", @(itemsToDelete.count));
+    }
+    for (NSManagedObject *itemToDelete in itemsToDelete) {
+        [context deleteObject:itemToDelete];
+    }
+    
+    NSFetchRequest *knownItemsRequest = [[NSFetchRequest alloc] init];
+    [knownItemsRequest setEntity:[NSEntityDescription  entityForName:entityName inManagedObjectContext:context]];
+    NSArray *knownItems = [context executeFetchRequest:knownItemsRequest error:nil];
+    
+    for (NSDictionary *rawValues in rawScanLocations) {
+        ScanLocations *scanlocation = [[knownItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier = %@" argumentArray:@[rawValues[serverPrimaryKey]]]] firstObject];
+        if (!scanlocation) {
+            scanlocation = [[ScanLocations alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        }
+        
+        [scanlocation syncToValues:rawValues];
     }
 }
 

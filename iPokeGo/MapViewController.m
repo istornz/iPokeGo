@@ -18,6 +18,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "FollowLocationHelper.h"
+#import "TagButton.h"
 @import CoreData;
 
 @interface MapViewController() <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
@@ -26,12 +27,14 @@
 @property NSFetchedResultsController *pokemonFetchResultController;
 @property NSFetchedResultsController *pokestopFetchResultController;
 @property NSFetchedResultsController *spawnpointsFetchResultController;
+@property NSFetchedResultsController *locationsFetchResultController;
 
 @property NSMutableArray *annotationsToAdd;
 @property NSMutableArray *annotationsPokemonToDelete;
 @property NSMutableArray *annotationsGymsToDelete;
 @property NSMutableArray *annotationsPokeStopsToDelete;
 @property NSMutableArray *annotationsSpawnpointsToDelete;
+@property NSMutableArray *annotationsLocationsToDelete;
 
 @property CLLocationManager *locationManager;
 @property NSDictionary *localization;
@@ -94,6 +97,8 @@ BOOL flagIsPanning              = NO;
         
         [self.mapview setRegion:region animated:NO];
     }
+    
+    [self reloadMap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,18 +242,33 @@ BOOL flagIsPanning              = NO;
         
         [self.radarButton setHidden:NO];
         
-        for (int i = 0; i < [self.mapview.annotations count]; i++) {
-            MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
-            if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
-                [self.mapview removeAnnotation:annotation];
-        }
-        [self.mapview addAnnotation:dropPin];
-        
         CLLocation *location = [[CLLocation alloc] initWithCoordinate:coordinate altitude:0 horizontalAccuracy:0 verticalAccuracy:0 timestamp:[NSDate date]];
-        [self updateLocationInServer:location];
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.latitude] forKey:@"radar_lat"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:coordinate.longitude] forKey:@"radar_long"];
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])
+        {
+            for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]])
+                    [self.mapview removeAnnotation:annotation];
+            }
+            
+            [self.mapview addAnnotation:dropPin];
+        }
+        else
+        {
+            for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
+                    ScanAnnotation *pos = self.mapview.annotations[i];
+                    if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude))
+                    [self.mapview removeAnnotation:annotation];
+                }
+            }
+            
+            [self.mapview addAnnotation:dropPin];
+        }
+        
+        [self updateLocationInServer:location];
     }
 }
 
@@ -270,8 +290,6 @@ BOOL flagIsPanning              = NO;
             
         }
         // remove scan location coordinates from user defaults
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_lat"];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"radar_long"];
         
         [self checkGPS];
     }
@@ -363,9 +381,10 @@ BOOL flagIsPanning              = NO;
         {
             SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"scan"];
             if (!view) {
-                pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
-                pulsingView.canShowCallout = YES;
-                pulsingView.annotationColor = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
+                pulsingView                             = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
+                pulsingView.canShowCallout              = YES;
+                pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initWithText:NSLocalizedString(@"DELETE", nil)];
+                pulsingView.annotationColor             = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
             }
             
             view = pulsingView;
@@ -391,14 +410,24 @@ BOOL flagIsPanning              = NO;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     CLLocationCoordinate2D endingCoord = CLLocationCoordinate2DMake(view.annotation.coordinate.latitude, view.annotation.coordinate.longitude);
-    NSString *drivingMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"driving_mode"];
-    MKPlacemark *endLocation = [[MKPlacemark alloc] initWithCoordinate:endingCoord addressDictionary:nil];
-    MKMapItem *endingItem = [[MKMapItem alloc] initWithPlacemark:endLocation];
     
-    NSMutableDictionary *launchOptions = [[NSMutableDictionary alloc] init];
-    [launchOptions setObject:drivingMode forKey:MKLaunchOptionsDirectionsModeKey];
-    
-    [endingItem openInMapsWithLaunchOptions:launchOptions];
+    if([view isKindOfClass:[SVPulsingAnnotationView class]])
+    {
+        //Send request to remove
+        iPokeServerSync *server = [[iPokeServerSync alloc] init];
+        [server removeLocation:endingCoord];
+    }
+    else
+    {
+        NSString *drivingMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"driving_mode"];
+        MKPlacemark *endLocation = [[MKPlacemark alloc] initWithCoordinate:endingCoord addressDictionary:nil];
+        MKMapItem *endingItem = [[MKMapItem alloc] initWithPlacemark:endLocation];
+        
+        NSMutableDictionary *launchOptions = [[NSMutableDictionary alloc] init];
+        [launchOptions setObject:drivingMode forKey:MKLaunchOptionsDirectionsModeKey];
+        
+        [endingItem openInMapsWithLaunchOptions:launchOptions];
+    }
 }
 
 #pragma mark - CLLocationManager delegate
@@ -456,6 +485,9 @@ BOOL flagIsPanning              = NO;
             } else if ([anObject isKindOfClass:[SpawnPoints class]]) {
                 SpawnPoints *spawnPoints = (SpawnPoints *)anObject;
                 [self.annotationsSpawnpointsToDelete addObject:spawnPoints.identifier];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanLocations = (ScanLocations *)anObject;
+                [self.annotationsLocationsToDelete addObject:scanLocations.identifier];
             }
             break;
         }
@@ -465,7 +497,6 @@ BOOL flagIsPanning              = NO;
                 Pokemon *pokemon = (Pokemon *)anObject;
                 PokemonAnnotation *point = [[PokemonAnnotation alloc] initWithPokemon:pokemon andLocalization:self.localization];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[Gym class]]) {
                 Gym *gym = (Gym *)anObject;
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
@@ -479,6 +510,10 @@ BOOL flagIsPanning              = NO;
                 SpawnPoints *spawnPoint = (SpawnPoints *)anObject;
                 SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnPoint];
                 [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanLocation = (ScanLocations *)anObject;
+                ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanLocation];
+                [self.annotationsToAdd addObject:point];
             }
             break;
         }
@@ -489,13 +524,11 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsPokemonToDelete addObject:pokemon.spawnpoint];
                 PokemonAnnotation *point = [[PokemonAnnotation alloc] initWithPokemon:pokemon andLocalization:self.localization];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[Gym class]]) {
                 Gym *gym = (Gym *)anObject;
                 [self.annotationsGymsToDelete addObject:gym.identifier];
                 GymAnnotation *point = [[GymAnnotation alloc] initWithGym:gym];
                 [self.annotationsToAdd addObject:point];
-                
             } else if ([anObject isKindOfClass:[PokeStop class]]) {
                 PokeStop *pokeStop = (PokeStop *)anObject;
                 [self.annotationsPokeStopsToDelete addObject:pokeStop.identifier];
@@ -505,6 +538,11 @@ BOOL flagIsPanning              = NO;
                 SpawnPoints *spawnpoint = (SpawnPoints *)anObject;
                 [self.annotationsSpawnpointsToDelete addObject:spawnpoint.identifier];
                 SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
+                [self.annotationsToAdd addObject:point];
+            } else if ([anObject isKindOfClass:[ScanLocations class]]) {
+                ScanLocations *scanlocation = (ScanLocations *)anObject;
+                [self.annotationsLocationsToDelete addObject:scanlocation.identifier];
+                ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
                 [self.annotationsToAdd addObject:point];
             }
             break;
@@ -521,27 +559,31 @@ BOOL flagIsPanning              = NO;
         NSArray *gymsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.gymID IN %@" argumentArray:@[[GymAnnotation class], self.annotationsGymsToDelete]]];
         NSArray *pokestopsToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.pokestopID IN %@" argumentArray:@[[PokestopAnnotation class], self.annotationsPokeStopsToDelete]]];
         NSArray *pokemonToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.spawnpointID IN %@" argumentArray:@[[PokemonAnnotation class], self.annotationsPokemonToDelete]]];
+        NSArray *scanlocationToRemove = [annotations filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self isKindOfClass: %@ AND self.scanLocationID IN %@" argumentArray:@[[ScanAnnotation class], self.annotationsLocationsToDelete]]];
         
         //make sure we're on the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mapview removeAnnotations:gymsToRemove];
             [self.mapview removeAnnotations:pokestopsToRemove];
             [self.mapview removeAnnotations:pokemonToRemove];
+            [self.mapview removeAnnotations:scanlocationToRemove];
             [self.mapview addAnnotations:self.annotationsToAdd];
             
             [self.annotationsToAdd removeAllObjects];
             [self.annotationsPokeStopsToDelete removeAllObjects];
             [self.annotationsPokemonToDelete removeAllObjects];
             [self.annotationsGymsToDelete removeAllObjects];
+            [self.annotationsLocationsToDelete removeAllObjects];
         });
     });}
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    self.annotationsToAdd = [[NSMutableArray alloc] init];
-    self.annotationsPokemonToDelete = [[NSMutableArray alloc] init];
-    self.annotationsGymsToDelete = [[NSMutableArray alloc] init];
-    self.annotationsPokeStopsToDelete = [[NSMutableArray alloc] init];
+    self.annotationsToAdd               = [[NSMutableArray alloc] init];
+    self.annotationsPokemonToDelete     = [[NSMutableArray alloc] init];
+    self.annotationsGymsToDelete        = [[NSMutableArray alloc] init];
+    self.annotationsPokeStopsToDelete   = [[NSMutableArray alloc] init];
+    self.annotationsLocationsToDelete   = [[NSMutableArray alloc] init];
 }
 
 #pragma mark - Fetch Results Controller setup
@@ -640,6 +682,21 @@ BOOL flagIsPanning              = NO;
     return nil;
 }
 
+- (NSFetchedResultsController *)newScanLocationsFetchResultsControllersForCurrentPreferences
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScanLocations"];
+    [request setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"identifier" ascending:YES]]];
+    request.fetchBatchSize = 50;
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[CoreDataPersistance sharedInstance].uiContext sectionNameKeyPath:nil cacheName:nil];
+    frc.delegate = self;
+    NSError *error = nil;
+    if (![frc performFetch:&error]) {
+        NSLog(@"Error performing fetch request for gym listing: %@", error);
+    }
+    
+    return frc;
+}
+
 - (void)reloadMap {
     NSLog(@"Reloading map...");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -654,6 +711,8 @@ BOOL flagIsPanning              = NO;
     self.pokestopFetchResultController = [self newPokestopFetchResultsControllersForCurrentPreferences];
     self.spawnpointsFetchResultController.delegate = nil;
     self.spawnpointsFetchResultController = [self newSpawnPointsFetchResultsControllersForCurrentPreferences];
+    self.locationsFetchResultController.delegate = nil;
+    self.locationsFetchResultController = [self newScanLocationsFetchResultsControllersForCurrentPreferences];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableArray *annotations = [[NSMutableArray alloc] init];
@@ -681,14 +740,14 @@ BOOL flagIsPanning              = NO;
                 [annotations addObject:point];
             }
         }
-        if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"]) {
-            CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
-                                                                         [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
-            
-            ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-            dropPin.coordinate = location;
-            dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
-            [annotations addObject:dropPin];
+        if (self.locationsFetchResultController) {
+            BOOL hasScanLocations = NO;
+            for (ScanLocations *scanlocation in self.locationsFetchResultController.fetchedObjects) {
+                ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
+                [annotations addObject:dropPin];
+                hasScanLocations = YES;
+            }
+            [self.radarButton setHidden:!hasScanLocations];
         }
         
         [self.mapview addAnnotations:annotations];
@@ -701,10 +760,13 @@ BOOL flagIsPanning              = NO;
     self.gymFetchResultController.delegate = nil;
     self.pokestopFetchResultController.delegate = nil;
     self.spawnpointsFetchResultController.delegate = nil;
+    self.locationsFetchResultController.delegate = nil;
+    
     self.pokemonFetchResultController = nil;
     self.gymFetchResultController = nil;
     self.pokestopFetchResultController = nil;
     self.spawnpointsFetchResultController = nil;
+    self.locationsFetchResultController = nil;
 }
 
 #pragma mark - Load helpers
@@ -748,10 +810,21 @@ BOOL flagIsPanning              = NO;
 
 -(void)radarAction:(id)sender
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"radar_lat"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"radar_long"]) {
-        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"],
-                                                                     [[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]);
-        [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
+    // get region of all scan location annotations
+    MKMapRect region = MKMapRectNull;
+    for (int i = 0; i < [self.mapview.annotations count]; i++) {
+        MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+        if([annotation isKindOfClass:[ScanAnnotation class]]){
+            CLLocationCoordinate2D location = annotation.coordinate;
+            MKMapPoint p = MKMapPointForCoordinate(location);
+            region = MKMapRectUnion(region, MKMapRectMake(p.x, p.y, 0, 0));
+        }
+    }
+
+    if(!MKMapRectIsNull(region)){
+        MKCoordinateRegion regionMap = [self.mapview regionThatFits:MKCoordinateRegionForMapRect(region)];
+        regionMap.span = MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE);
+        [self.mapview setRegion:regionMap animated:YES];
     }
 }
 
