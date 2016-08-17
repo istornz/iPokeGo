@@ -14,7 +14,7 @@
     if (self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
         self.canShowCallout = NO;
         self.image = [UIImage imageNamed:@"spawnpoint"];
-        self.frame = CGRectMake(0, 0, 10, 10);
+        self.frame = CGRectMake(0, 0, 5, 5);
         
     }
     
