@@ -845,14 +845,9 @@ BOOL flagIsPanning              = NO;
     }
 
     if(!MKMapRectIsNull(region)){
-        if (region.size.width == 0 && region.size.height == 0){
-            CLLocationCoordinate2D location = MKCoordinateForMapPoint(region.origin);
-            [self.mapview setRegion:MKCoordinateRegionMake(location, MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE)) animated:YES];
-        }else{
-            MKCoordinateRegion regionMap = [self.mapview regionThatFits:MKCoordinateRegionForMapRect(region)];
-            regionMap.span = MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE);
-            [self.mapview setRegion:regionMap animated:YES];
-        }
+        MKCoordinateRegion regionMap = [self.mapview regionThatFits:MKCoordinateRegionForMapRect(region)];
+        regionMap.span = MKCoordinateSpanMake(MAP_SCALE, MAP_SCALE);
+        [self.mapview setRegion:regionMap animated:YES];
     }
 }
 
