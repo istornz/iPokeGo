@@ -42,28 +42,19 @@ static NSURLSession *iPokeServerSyncSharedSession;
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            
-            if (httpResponse.statusCode != 200 && httpResponse.statusCode != 204) {
-                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
-                if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM])
-                    NSLog(@"Position changed !");
-                return;
-            }
-        }
-        
         if (error) {
             NSLog(@"Error reading server's data: %@", error);
             return;
         }
         
-        if([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POKEMONGOMAP])
-        {
-            NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if([dataStr isEqualToString:@"ok"]) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            
+            if (httpResponse.statusCode == 200 || httpResponse.statusCode == 204) {
                 NSLog(@"Position changed !");
-            } else {
+            }else{
+                NSLog(@"Server returned non 200 or 204 code: %@", @(httpResponse.statusCode));
+                NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 NSLog(@"Error changing pinned location, server responded: %@", dataStr);
             }
         }
