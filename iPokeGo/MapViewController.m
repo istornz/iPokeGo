@@ -879,11 +879,7 @@ BOOL flagIsPanning              = NO;
 
 - (CLLocation *)currentLocation
 {
-    CLLocation *baseLocation = self.mapview.userLocation.location;
-    if (!baseLocation) {
-        baseLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
-    }
-    return baseLocation;
+    return self.mapview.userLocation.location;
 }
 
 -(void)showAnnotationLocalNotif:(NSNotification *)notification
