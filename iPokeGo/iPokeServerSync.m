@@ -258,7 +258,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     }
     else
     {
-        request = [SERVER_API_DATA_POKEMONGOMAP stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
+        request = [SERVER_API_LOCA_POKEMONGOMAP stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
         request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
         request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
     }
