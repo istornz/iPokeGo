@@ -30,6 +30,7 @@
 @property NSFetchedResultsController *locationsFetchResultController;
 
 @property NSMutableArray *annotationsToAdd;
+@property NSMutableArray *overlaysToAdd;
 @property NSMutableArray *annotationsPokemonToDelete;
 @property NSMutableArray *annotationsGymsToDelete;
 @property NSMutableArray *annotationsPokeStopsToDelete;
@@ -108,6 +109,15 @@ BOOL flagIsPanning              = NO;
     [self reloadMap];
     [self checkGPS];
     [self loadMapPreferences];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKCircleRenderer *circleRenderer = [[MKCircleRenderer alloc] initWithCircle:overlay];
+    circleRenderer.fillColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:0.2];
+    circleRenderer.strokeColor = [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0];
+    circleRenderer.lineWidth = 0.5;
+    
+    return circleRenderer;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -236,9 +246,7 @@ BOOL flagIsPanning              = NO;
         CGPoint point = [sender locationInView:self.mapview];
         CLLocationCoordinate2D coordinate = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];
         
-        ScanAnnotation *dropPin = [[ScanAnnotation alloc] init];
-        dropPin.coordinate = coordinate;
-        dropPin.title = NSLocalizedString(@"Scan location", @"The title of an annotation on the map to scan the location.");
+        ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithLocation:coordinate];
         
         [self.radarButton setHidden:NO];
         
@@ -266,6 +274,7 @@ BOOL flagIsPanning              = NO;
             }
             
             [self.mapview addAnnotation:dropPin];
+            [self.mapview addOverlay:dropPin.circle];
         }
         
         [self updateLocationInServer:location];
@@ -415,8 +424,12 @@ BOOL flagIsPanning              = NO;
     {
         //Send request to remove
         iPokeServerSync *server = [[iPokeServerSync alloc] init];
+        ScanAnnotation *annot = view.annotation;
+        
         [server removeLocation:endingCoord];
+        
         [self.mapview removeAnnotation:view.annotation];
+        [self.mapview removeOverlay:annot.circle];
     }
     else
     {
@@ -525,6 +538,7 @@ BOOL flagIsPanning              = NO;
                 if(!isFound) {
                     ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanLocation];
                     [self.annotationsToAdd addObject:point];
+                    [self.overlaysToAdd addObject:point.circle];
                 }
             }
             break;
@@ -556,6 +570,7 @@ BOOL flagIsPanning              = NO;
                 [self.annotationsLocationsToDelete addObject:scanlocation.identifier];
                 ScanAnnotation *point = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
                 [self.annotationsToAdd addObject:point];
+                [self.overlaysToAdd addObject:point.circle];
             }
             break;
         }
@@ -579,9 +594,16 @@ BOOL flagIsPanning              = NO;
             [self.mapview removeAnnotations:pokestopsToRemove];
             [self.mapview removeAnnotations:pokemonToRemove];
             [self.mapview removeAnnotations:scanlocationToRemove];
+            
+            for (ScanAnnotation *annot in scanlocationToRemove) {
+                [self.mapview removeOverlay:annot.circle];
+            }
+            
             [self.mapview addAnnotations:self.annotationsToAdd];
+            [self.mapview addOverlays:self.overlaysToAdd];
             
             [self.annotationsToAdd removeAllObjects];
+            [self.overlaysToAdd removeAllObjects];
             [self.annotationsPokeStopsToDelete removeAllObjects];
             [self.annotationsPokemonToDelete removeAllObjects];
             [self.annotationsGymsToDelete removeAllObjects];
@@ -592,6 +614,7 @@ BOOL flagIsPanning              = NO;
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     self.annotationsToAdd               = [[NSMutableArray alloc] init];
+    self.overlaysToAdd                  = [[NSMutableArray alloc] init];
     self.annotationsPokemonToDelete     = [[NSMutableArray alloc] init];
     self.annotationsGymsToDelete        = [[NSMutableArray alloc] init];
     self.annotationsPokeStopsToDelete   = [[NSMutableArray alloc] init];
@@ -728,6 +751,7 @@ BOOL flagIsPanning              = NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSMutableArray *annotations = [[NSMutableArray alloc] init];
+        NSMutableArray *overlays    = [[NSMutableArray alloc] init];
         if (self.spawnpointsFetchResultController) {
             for (SpawnPoints *spawnpoint in self.spawnpointsFetchResultController.fetchedObjects) {
                 SpawnPointsAnnotation *point = [[SpawnPointsAnnotation alloc] initWithSpawnPoints:spawnpoint];
@@ -757,12 +781,18 @@ BOOL flagIsPanning              = NO;
             for (ScanLocations *scanlocation in self.locationsFetchResultController.fetchedObjects) {
                 ScanAnnotation *dropPin = [[ScanAnnotation alloc] initWithScanLocation:scanlocation];
                 [annotations addObject:dropPin];
+                [overlays addObject:dropPin.circle];
+
                 hasScanLocations = YES;
             }
             [self.radarButton setHidden:!hasScanLocations];
         }
         
         [self.mapview addAnnotations:annotations];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self.mapview addOverlays:overlays];
+        });
     });
 }
 
