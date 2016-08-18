@@ -50,7 +50,6 @@
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
 BOOL regionChangeRequested      = YES;
-BOOL followLocationEnabled      = NO;
 BOOL flagIsPanning              = NO;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -81,7 +80,7 @@ BOOL flagIsPanning              = NO;
     UILongPressGestureRecognizer *longPressGPSButtonGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGPSButtonGesture:)];
     [self.locationButton addGestureRecognizer:longPressGPSButtonGesture];
     
-    [self enableFollowLocation:NO];
+    [self enableFollowLocation:[[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"]];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [panGesture setDelegate:self];
@@ -212,14 +211,16 @@ BOOL flagIsPanning              = NO;
 
 - (void)enableFollowLocation:(BOOL)enable
 {
+    BOOL followLocationEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"];
+    [[NSUserDefaults standardUserDefaults] setBool:enable forKey:@"follow_location"];
+    self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
+    
     if(followLocationEnabled != enable) {
         NSLog(@"Enable follow location %s", enable ? "YES" : "NO");
-        followLocationEnabled = enable;
-        self.mapview.tintAdjustmentMode = enable ? UIViewTintAdjustmentModeNormal : UIViewTintAdjustmentModeDimmed;
         
         CWStatusBarNotification *notification = [CWStatusBarNotification new];
         NSString *notifMsg = nil;
-        if(followLocationEnabled) {
+        if(enable) {
             notifMsg = @"Follow location enabled";
             notification.notificationLabelBackgroundColor = NOTIF_FOLLOW_GREEN_COLOR;
             
@@ -288,18 +289,6 @@ BOOL flagIsPanning              = NO;
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
         [self enableFollowLocation:YES];
-        
-        // remove scan annotation from map
-        for (id <MKAnnotation> annotation in self.mapview.annotations)
-        {
-            if ([annotation isKindOfClass:[ScanAnnotation class]])
-            {
-                [self.mapview removeAnnotation:annotation];
-            }
-            
-        }
-        // remove scan location coordinates from user defaults
-        
         [self checkGPS];
     }
 }
@@ -451,7 +440,7 @@ BOOL flagIsPanning              = NO;
     for (CLLocation *location in locations) {
         //make sure it is reasonably fresh, say the last 30 seconds
         if ([location.timestamp timeIntervalSinceNow] > -30) {
-            if (followLocationEnabled){
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"]){
                 if ([self.followLocationHelper mustUpdateLocation:location]){
                     [self updateLocationInServer:location];
                 }
@@ -909,11 +898,7 @@ BOOL flagIsPanning              = NO;
 
 - (CLLocation *)currentLocation
 {
-    CLLocation *baseLocation = self.mapview.userLocation.location;
-    if (!baseLocation) {
-        baseLocation = [[CLLocation alloc] initWithLatitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_lat"] longitude:[[NSUserDefaults standardUserDefaults] doubleForKey:@"radar_long"]];
-    }
-    return baseLocation;
+    return self.mapview.userLocation.location;
 }
 
 -(void)showAnnotationLocalNotif:(NSNotification *)notification
