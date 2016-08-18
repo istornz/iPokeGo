@@ -280,18 +280,6 @@ BOOL flagIsPanning              = NO;
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         
         [self enableFollowLocation:YES];
-        
-        // remove scan annotation from map
-        for (id <MKAnnotation> annotation in self.mapview.annotations)
-        {
-            if ([annotation isKindOfClass:[ScanAnnotation class]])
-            {
-                [self.mapview removeAnnotation:annotation];
-            }
-            
-        }
-        // remove scan location coordinates from user defaults
-        
         [self checkGPS];
     }
 }
