@@ -11,6 +11,6 @@
 
 @interface TagButton : UIButton
 
--(instancetype)initWithText:(NSString *)text;
+-(instancetype)initTrashButton;
 
 @end

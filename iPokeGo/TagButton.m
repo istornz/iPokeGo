@@ -10,7 +10,7 @@
 
 @implementation TagButton
 
--(instancetype)initWithText:(NSString *)text
+-(instancetype)initTrashButton
 {
     if(self = [self init])
     {
@@ -18,10 +18,12 @@
         self.titleLabel.textAlignment   = NSTextAlignmentCenter;
         self.layer.cornerRadius         = 5.0f;
         self.layer.masksToBounds        = YES;
-        self.titleLabel.font            = [UIFont fontWithName:@"HelveticaNeue" size:15];
         self.backgroundColor            = [UIColor colorWithRed:0.75 green:0.19 blue:0.16 alpha:1.0];
         
-        [self setTitle:text forState:UIControlStateNormal];
+        self.contentMode = UIViewContentModeScaleAspectFill;
+        [self setImage:[UIImage imageNamed:@"trash"] forState:UIControlStateNormal];
+        self.imageEdgeInsets = UIEdgeInsetsMake(5, 10, 5, 10);
+        
         [self sizeToFit];
         
         CGRect frameLbl         = self.frame;

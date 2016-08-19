@@ -381,7 +381,7 @@ BOOL flagIsPanning              = NO;
             if (!view) {
                 pulsingView                             = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
                 pulsingView.canShowCallout              = YES;
-                pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initWithText:NSLocalizedString(@"DELETE", nil)];
+                pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initTrashButton];
                 pulsingView.annotationColor             = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
             }
             
