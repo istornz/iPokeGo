@@ -36,4 +36,10 @@
     return self;
 }
 
+-(void)drawCircleWithRadius:(int)radius
+{
+    self.radius = radius;
+    self.circle = [MKCircle circleWithCenterCoordinate:self.coordinate radius:radius];
+}
+
 @end

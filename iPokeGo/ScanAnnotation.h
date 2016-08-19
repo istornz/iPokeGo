@@ -19,5 +19,6 @@
 
 - (instancetype)initWithScanLocation:(ScanLocations *)scanlocation;
 - (instancetype)initWithLocation:(CLLocationCoordinate2D)location;
+-(void)drawCircleWithRadius:(int)radius;
 
 @end

@@ -201,12 +201,12 @@ BOOL flagIsPanning              = NO;
         [self.mapview setMapType:MKMapTypeHybridFlyover];
 }
 
-- (void)updateLocationInServer:(CLLocation *)location
+- (void)updateLocationInServer:(CLLocation *)location withRadius:(int)radius
 {
     NSLog(@"Set new location in server");
     [self.followLocationHelper updateLocation:location];
     iPokeServerSync *server = [[iPokeServerSync alloc] init];
-    [server setLocation:location.coordinate];
+    [server setLocation:location.coordinate withRadius:radius];
 }
 
 - (void)enableFollowLocation:(BOOL)enable
@@ -262,23 +262,60 @@ BOOL flagIsPanning              = NO;
             }
             
             [self.mapview addAnnotation:dropPin];
+            
+            [self updateLocationInServer:location withRadius:0];
         }
         else
         {
-            for (int i = 0; i < [self.mapview.annotations count]; i++) {
-                MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
-                if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
-                    ScanAnnotation *pos = self.mapview.annotations[i];
-                    if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude))
-                    [self.mapview removeAnnotation:annotation];
-                }
-            }
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:NSLocalizedString(@"Select radius", @"The title of an alert that tells the user to select a the radius of the scan area")
+                                        message:NSLocalizedString(@"Please select a radius for the scan area (it should be more or equal than 100 meter)", @"The message of an alert that tells the user to select a radius of the scan area")
+                                        preferredStyle:UIAlertControllerStyleAlert];
             
-            [self.mapview addAnnotation:dropPin];
-            [self.mapview addOverlay:dropPin.circle];
+            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField)
+             {
+                 textField.placeholder = [NSString stringWithFormat:@"%d", DEFAULT_RADIUS];
+                 textField.delegate = self;
+                 [textField setKeyboardType:UIKeyboardTypeNumberPad];
+             }];
+            
+            UIAlertAction *ok = [UIAlertAction
+                                     actionWithTitle:NSLocalizedString(@"OK", @"A button to save the entry")
+                                     style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction *action)
+                                 {
+                                     UITextField *radiusTextField = alert.textFields.firstObject;
+                                     int radiusEntered = [radiusTextField.text intValue];
+                                     
+                                     if(radiusEntered > 100)
+                                     {
+                                         for (int i = 0; i < [self.mapview.annotations count]; i++) {
+                                             MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
+                                             if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
+                                                 ScanAnnotation *pos = self.mapview.annotations[i];
+                                                 if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude))
+                                                     [self.mapview removeAnnotation:annotation];
+                                             }
+                                         }
+                                         
+                                         [dropPin drawCircleWithRadius:radiusEntered];
+                                         [self.mapview addAnnotation:dropPin];
+                                         [self.mapview addOverlay:dropPin.circle];
+                                         
+                                         [self updateLocationInServer:location withRadius:radiusEntered];
+                                     }
+                                 }];
+            
+            UIAlertAction *cancel = [UIAlertAction
+                                     actionWithTitle:NSLocalizedString(@"Cancel", @"A button to destroy the alert without saving")
+                                     style:UIAlertActionStyleCancel
+                                     handler:nil];
+            
+            [alert addAction:ok];
+            [alert addAction:cancel];
+            
+            [self presentViewController:alert animated:YES completion:nil];
         }
-        
-        [self updateLocationInServer:location];
     }
 }
 
@@ -442,7 +479,7 @@ BOOL flagIsPanning              = NO;
         if ([location.timestamp timeIntervalSinceNow] > -30) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"]){
                 if ([self.followLocationHelper mustUpdateLocation:location]){
-                    [self updateLocationInServer:location];
+                    [self updateLocationInServer:location withRadius:0];
                 }
                 if (!flagIsPanning){
                     [self.mapview setCenterCoordinate:location.coordinate animated:YES];
@@ -908,6 +945,21 @@ BOOL flagIsPanning              = NO;
     coordinate.longitude    = [[notification.userInfo objectForKey:@"longitude"] doubleValue];
     
     [self.mapview setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(MAP_SCALE_ANNOT, MAP_SCALE_ANNOT)) animated:YES];
+}
+
+#pragma mark - Textfield delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(string.length > 0)
+    {
+        NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+        
+        BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField];
+        return stringIsValid;
+    }
+    return YES;
 }
 
 @end

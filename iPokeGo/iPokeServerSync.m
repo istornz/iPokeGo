@@ -32,9 +32,9 @@ static NSURLSession *iPokeServerSyncSharedSession;
     return iPokeServerSyncSharedSession;
 }
 
-- (void)setLocation:(CLLocationCoordinate2D)location
+- (void)setLocation:(CLLocationCoordinate2D)location withRadius:(int)radius
 {
-    NSURL *url = [self buildChangeLocationRequestURLWithLocation:location];
+    NSURL *url = [self buildChangeLocationRequestURLWithLocation:location withRadius:radius];
     if (!url) {
         return;
     }
@@ -228,7 +228,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
     return [NSURL URLWithString:request];
 }
 
-- (NSURL *)buildChangeLocationRequestURLWithLocation:(CLLocationCoordinate2D)location
+- (NSURL *)buildChangeLocationRequestURLWithLocation:(CLLocationCoordinate2D)location withRadius:(int)radius
 {
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
     NSString *server_addr           = [defaults objectForKey:@"server_addr"];
@@ -244,7 +244,7 @@ static NSURLSession *iPokeServerSyncSharedSession;
         request = [SERVER_API_LOCA_POGOM stringByReplacingOccurrencesOfString:@"%%server_addr%%" withString:server_addr];
         request  = [request stringByReplacingOccurrencesOfString:@"%%latitude%%" withString:[NSString stringWithFormat:@"%f", location.latitude]];
         request  = [request stringByReplacingOccurrencesOfString:@"%%longitude%%" withString:[NSString stringWithFormat:@"%f", location.longitude]];
-        request  = [request stringByReplacingOccurrencesOfString:@"%%radius%%" withString:[NSString stringWithFormat:@"%d", DEFAULT_RADIUS]];
+        request  = [request stringByReplacingOccurrencesOfString:@"%%radius%%" withString:[NSString stringWithFormat:@"%d", radius]];
     }
     else
     {

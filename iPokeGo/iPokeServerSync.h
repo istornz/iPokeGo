@@ -13,7 +13,7 @@
 
 - (void)fetchData;
 - (void)fetchScanLocationData;
-- (void)setLocation:(CLLocationCoordinate2D)location;
+- (void)setLocation:(CLLocationCoordinate2D)location withRadius:(int)radius;
 - (void)removeLocation:(CLLocationCoordinate2D)location;
 
 @end
