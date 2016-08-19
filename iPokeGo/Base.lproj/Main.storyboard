@@ -531,6 +531,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="n4v-qt-5L6">
+                        <barButtonItem key="backBarButtonItem" title=" " id="eb4-go-Qr9"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="m43-dh-gzf">
                             <connections>
                                 <action selector="saveAction:" destination="CoE-At-s1E" id="3SK-Mq-UnH"/>
