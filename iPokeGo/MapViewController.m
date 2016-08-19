@@ -287,7 +287,7 @@ BOOL flagIsPanning              = NO;
                                      UITextField *radiusTextField = alert.textFields.firstObject;
                                      int radiusEntered = [radiusTextField.text intValue];
                                      
-                                     if(radiusEntered > 100)
+                                     if(radiusEntered >= 100)
                                      {
                                          for (int i = 0; i < [self.mapview.annotations count]; i++) {
                                              MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
