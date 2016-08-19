@@ -1,48 +1,111 @@
 
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "110-t6-E3T"; */
+"110-t6-E3T.text" = "Показать на карте";
+
 /* Class = "UITextField"; placeholder = "http://example.com:5000"; ObjectID = "2Np-Qc-YrV"; */
 "2Np-Qc-YrV.placeholder" = "http://вашсервер.com:5000";
 
 /* Class = "UILabel"; text = "Normal Notification"; ObjectID = "4fQ-bY-gce"; */
 "4fQ-bY-gce.text" = "Уведомления";
 
-/* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "54h-D9-tBH"; */
-"54h-D9-tBH.text" = "Редкие покемоны";
+/* Class = "UILabel"; text = "Common Pokémon"; ObjectID = "6Vg-GV-d5c"; */
+"6Vg-GV-d5c.text" = "Обычные покемоны";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6vJ-Q1-RjN"; */
+"6vJ-Q1-RjN.text" = "Метка";
 
 /* Class = "UILabel"; text = "Vibration"; ObjectID = "7ko-iA-AHA"; */
-"7ko-iA-AHA.text" = "Вибрация";
+"7ko-iA-AHA.text" = "Уведомлять о покемонах неподалёку";
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "8Xl-BM-0fo"; */
 "8Xl-BM-0fo.text" = "Уведомления";
 
+/* Class = "UILabel"; text = "Range"; ObjectID = "96z-YX-YPc"; */
+"96z-YX-YPc.text" = "Радиус";
+
 /* Class = "UINavigationItem"; title = "iPokeGO"; ObjectID = "9hh-uV-Y8u"; */
 "9hh-uV-Y8u.title" = "iPokeGO";
 
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "ADn-WN-2UQ"; */
+"ADn-WN-2UQ.text" = "Показывать на карте";
+
 /* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
-"Chl-3V-xZU.title" = "Редкие";
+"Chl-3V-xZU.title" = "Избранные";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GNt-l5-Ggl"; */
+"GNt-l5-Ggl.text" = "Метка";
+
+/* Class = "UILabel"; text = "Username"; ObjectID = "Gb4-Rk-D27"; */
+"Gb4-Rk-D27.text" = "Логин";
+
+/* Class = "UILabel"; text = "Run in Background"; ObjectID = "HHC-l9-650"; */
+"HHC-l9-650.text" = "Фоновый режим";
 
 /* Class = "UILabel"; text = "Bulbizarre"; ObjectID = "JXZ-XW-o1E"; */
 "JXZ-XW-o1E.text" = "Бульбазавр";
 
+/* Class = "UILabel"; text = "Show Time"; ObjectID = "LTX-Ru-39e"; */
+"LTX-Ru-39e.text" = "Показывать время исчезновения";
+
 /* Class = "UILabel"; text = "Server"; ObjectID = "LVj-cE-dT0"; */
 "LVj-cE-dT0.text" = "Сервер";
+
+/* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "Mlh-iI-ATM"; */
+"Mlh-iI-ATM.text" = "Показывать таймер вместо времени";
+
+/* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
+"l0T-Vk-KFi.text" = "Гимы";
+
+/* Class = "UILabel"; text = "Show only lured"; ObjectID = "P1m-Cn-XzO"; */
+"P1m-Cn-XzO.text" = "Показывать только с модулем";
+
+/* Class = "UILabel"; text = "Range"; ObjectID = "QIm-iD-I1b"; */
+"QIm-iD-I1b.text" = "Радиус";
+
+/* Class = "UILabel"; text = "Hide Common"; ObjectID = "Urz-pq-T1Q"; */
+"Urz-pq-T1Q.text" = "Скрыть обычных";
 
 /* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
 "VTm-hq-lXv.headerTitle" = "Отображение";
 
+/* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
+"WOD-rI-XQR.headerTitle" = "Общие";
+
+/* Class = "UILabel"; text = "Server type"; ObjectID = "aF6-t6-3tY"; */
+"aF6-t6-3tY.text" = "Тип сервера";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "acs-Ve-8xd"; */
+"acs-Ve-8xd.text" = "Пароль";
+
+/* Class = "UILabel"; text = "Favorite Pokémon"; ObjectID = "54h-D9-tBH"; */
+"54h-D9-tBH.text" = "Редкие покемоны";
+
+/* Class = "UILabel"; text = "Vibration"; ObjectID = "b1T-HP-5bO"; */
+"b1T-HP-5bO.text" = "Вибрация";
+
+/* Class = "UINavigationItem"; title = "Pokémons"; ObjectID = "dSR-Ua-HzP"; */
+"dSR-Ua-HzP.title" = "Покемоны";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dsi-Um-IFR"; */
+"dsi-Um-IFR.text" = "Метка";
+
+/* Class = "UINavigationItem"; title = "Favorite"; ObjectID = "Chl-3V-xZU"; */
+"Chl-3V-xZU.title" = "Редкие";
+
 /* Class = "UILabel"; text = "Hide Common"; ObjectID = "Vqr-4Z-ndM"; */
 "Vqr-4Z-ndM.text" = "Скрыть обычных";
 
-/* Class = "UITableViewSection"; headerTitle = "Global"; ObjectID = "WOD-rI-XQR"; */
-"WOD-rI-XQR.headerTitle" = "Общие";
+/* Class = "UILabel"; text = "Show on map"; ObjectID = "gu6-i9-B1Q"; */
+"gu6-i9-B1Q.text" = "Показывать на карте";
+
+/* Class = "UILabel"; text = "Show Distance"; ObjectID = "hWQ-kq-428"; */
+"hWQ-kq-428.text" = "Показывать расстояние";
 
 /* Class = "UILabel"; text = "Show Distance"; ObjectID = "f3D-0y-G02"; */
 "f3D-0y-G02.text" = "Показывать расстояние";
 
 /* Class = "UINavigationItem"; title = "Notifications"; ObjectID = "ki1-kr-sA7"; */
 "ki1-kr-sA7.title" = "Уведомления";
-
-/* Class = "UILabel"; text = "Gyms"; ObjectID = "l0T-Vk-KFi"; */
-"l0T-Vk-KFi.text" = "Гимы";
 
 /* Class = "UILabel"; text = "Pokémon"; ObjectID = "ltF-Ma-tNo"; */
 "ltF-Ma-tNo.text" = "Покемоны";
@@ -52,6 +115,9 @@
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "n4v-qt-5L6"; */
 "n4v-qt-5L6.title" = "Настройки";
+
+/* Class = "UILabel"; text = "Show only favorite"; ObjectID = "sP8-on-Svr"; */
+"sP8-on-Svr.text" = "Показывать только избранные";
 
 /* Class = "UILabel"; text = "Show Time"; ObjectID = "noN-PI-lN3"; */
 "noN-PI-lN3.text" = "Время до исчезновения";
@@ -64,3 +130,9 @@
 
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
 "ySg-LB-wEB.text" = "Таймер вместо времени";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wQQ-UU-P4I"; */
+"wQQ-UU-P4I.text" = "Метка";
+
+/* Class = "UILabel"; text = "Drive mode"; ObjectID = "zeM-yd-YUy"; */
+"zeM-yd-YUy.text" = "Способ передвижения";
