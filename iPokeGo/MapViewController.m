@@ -290,11 +290,12 @@ BOOL flagIsPanning              = NO;
                                      if(radiusEntered >= 100)
                                      {
                                          for (int i = 0; i < [self.mapview.annotations count]; i++) {
-                                             MKPointAnnotation *annotation = (MKPointAnnotation *)self.mapview.annotations[i];
                                              if([self.mapview.annotations[i] isKindOfClass:[ScanAnnotation class]]) {
                                                  ScanAnnotation *pos = self.mapview.annotations[i];
-                                                 if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude))
-                                                     [self.mapview removeAnnotation:annotation];
+                                                 if((pos.coordinate.latitude == coordinate.latitude) && (pos.coordinate.longitude == coordinate.longitude)) {
+                                                     [self.mapview removeAnnotation:pos];
+                                                     [self.mapview removeOverlay:pos.circle];
+                                                 }
                                              }
                                          }
                                          
@@ -762,6 +763,7 @@ BOOL flagIsPanning              = NO;
     NSLog(@"Reloading map...");
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.mapview removeAnnotations:self.mapview.annotations];
+        [self.mapview removeOverlays:self.mapview.overlays];
     });
     
     self.pokemonFetchResultController.delegate = nil;
@@ -815,10 +817,8 @@ BOOL flagIsPanning              = NO;
         }
         
         [self.mapview addAnnotations:annotations];
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            [self.mapview addOverlays:overlays];
-        });
+        [self.mapview addOverlays:overlays];
+
     });
 }
 
