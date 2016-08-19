@@ -419,8 +419,9 @@ BOOL flagIsPanning              = NO;
             if (!view) {
                 pulsingView                             = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"scan"];
                 pulsingView.canShowCallout              = YES;
-                pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initTrashButton];
                 pulsingView.annotationColor             = [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0];
+                if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"server_type"] isEqualToString:SERVER_API_DATA_POGOM])
+                    pulsingView.rightCalloutAccessoryView   = [[TagButton alloc] initTrashButton];
             }
             
             view = pulsingView;
