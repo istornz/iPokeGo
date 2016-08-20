@@ -1,5 +1,5 @@
 
-# Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/istornz)
+# Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/istornz)
 This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
 
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo7.jpg" width="270" height="480"/>
