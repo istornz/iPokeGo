@@ -331,6 +331,14 @@ static NSURLSession *iPokeServerSyncSharedSession;
     
     NSArray *newPokemon = [rawPokemon filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"NOT (spawnpoint_id IN %@)" argumentArray:@[knownPokemonIDs]]];
     for (NSDictionary *rawValues in newPokemon) {
+        // if current entry is already expired, do not add again
+        NSTimeInterval disappearsTimeInterval = [rawValues[@"disappear_time"] doubleValue] / 1000.0;
+        NSDate *disappearsTime = [NSDate dateWithTimeIntervalSince1970:disappearsTimeInterval];
+        if (disappearsTime < [NSDate date]) {
+            NSLog(@"Skipped adding pokemon with disappear_time of %@", disappearsTime);
+            continue;
+        }
+
         Pokemon *pokemon = [[Pokemon alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         [pokemon syncToValues:rawValues];
     }
