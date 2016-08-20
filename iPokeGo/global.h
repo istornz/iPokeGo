@@ -40,7 +40,7 @@
 #define NOTIF_FOLLOW_GREEN_COLOR    [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0]
 #define NOTIF_FOLLOW_RED_COLOR      [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0]
 
-#define SERVER_API_DATA_POKEMONGOMAP    @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%&spawnpoints=%%spawnpoints_display%%"
+#define SERVER_API_DATA_POKEMONGOMAP    @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%&spawnpoints=%%spawnpoints_display%%&ids=%%idlist%%"
 #define SERVER_API_DATA_SCAN_LOCATION   @"%%server_addr%%/loc"
 #define SERVER_API_DATA_POGOM           @"%%server_addr%%/map-data?pokemon=%%pokemon_display%%&gyms=%%gyms_display%%"
 

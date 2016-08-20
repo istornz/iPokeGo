@@ -190,7 +190,12 @@ static NSURLSession *iPokeServerSyncSharedSession;
     BOOL display_gyms               = [defaults boolForKey:@"display_gyms"];
     BOOL display_spawnpoints        = [defaults boolForKey:@"display_spawnpoints"];
     NSString *request               = [defaults valueForKey:@"server_type"];
-    
+    BOOL display_hidecommon         = [defaults boolForKey:@"display_common"];
+    BOOL display_onlyfav            = [defaults boolForKey:@"display_onlyfav"];
+    NSArray *pokemon_common         = [NSArray arrayWithArray:[defaults objectForKey:@"pokemon_common"]];
+    NSMutableArray *pokemon_fav     = [NSMutableArray arrayWithArray:[defaults objectForKey:@"pokemon_favorite"]];
+
+
     if([server_addr length] == 0) {
         return nil;
     }
@@ -205,7 +210,27 @@ static NSURLSession *iPokeServerSyncSharedSession;
     request = [request stringByReplacingOccurrencesOfString:@"%%pokestops_display%%" withString:display_pokestops_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%gyms_display%%" withString:display_gyms_str];
     request = [request stringByReplacingOccurrencesOfString:@"%%spawnpoints_display%%" withString:display_spawnpoints_str];
-    
+
+    // filter request by selected pokemon. no need to query for pokemon we won't display
+    NSMutableArray *pokemon_list = [[NSMutableArray alloc] init];
+
+    // if ONLY showing favs, build list from favs
+    if (display_onlyfav && pokemon_fav.count > 0) {
+        pokemon_list = pokemon_fav;
+    }
+    else if (display_hidecommon && pokemon_common.count > 0) {
+        // build full list
+        for (int i = 1; i <= POKEMON_NUMBER; i++) {
+            if (![pokemon_common containsObject:[@(i) stringValue]])
+                [pokemon_list addObject:@(i)];
+        }
+    }
+
+    // build request parameter. blank is fine - server will return all pokes
+    NSString *idlist = [pokemon_list componentsJoinedByString:@","];
+    request = [request stringByReplacingOccurrencesOfString:@"%%idlist%%" withString:idlist];
+
+
     //NSLog(@"%@", request);
     
     return [NSURL URLWithString:request];
