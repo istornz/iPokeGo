@@ -42,6 +42,7 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
 	self.passwordField.text = [prefs valueForKey:@"server_pass"];
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
+    [self.folloLocationSwitch setOn:[prefs boolForKey:@"follow_location"]];
     
     NSString *drivingMode = [prefs objectForKey:@"driving_mode"];
     if ([drivingMode isEqualToString:@"MKLaunchOptionsDirectionsModeTransit"])
@@ -85,6 +86,8 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
         [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
         [prefs setObject:server_addr forKey:@"server_addr"];
     }
+    
+    [prefs setBool:self.folloLocationSwitch.on forKey:@"follow_location"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
     [self dismissViewControllerAnimated:YES completion:nil];

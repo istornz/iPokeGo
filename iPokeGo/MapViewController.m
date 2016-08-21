@@ -50,7 +50,7 @@
 static CLLocationDegrees DeltaHideAllIcons = 0.2;
 static CLLocationDegrees DeltaHideText = 0.1;
 BOOL regionChangeRequested      = YES;
-BOOL flagIsPanning              = NO;
+BOOL mapCenterToGPSLocation     = YES;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -77,9 +77,6 @@ BOOL flagIsPanning              = NO;
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
     
-    UILongPressGestureRecognizer *longPressGPSButtonGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGPSButtonGesture:)];
-    [self.locationButton addGestureRecognizer:longPressGPSButtonGesture];
-    
     [self enableFollowLocation:[[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"]];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -104,6 +101,8 @@ BOOL flagIsPanning              = NO;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self enableFollowLocation:[[NSUserDefaults standardUserDefaults] boolForKey:@"follow_location"]];
     
     [self reloadMap];
     [self checkGPS];
@@ -320,30 +319,13 @@ BOOL flagIsPanning              = NO;
     }
 }
 
--(void)handleLongPressGPSButtonGesture:(UIGestureRecognizer*)sender
-{
-    if (sender.state == UIGestureRecognizerStateBegan)
-    {
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-        
-        [self enableFollowLocation:YES];
-        [self checkGPS];
-    }
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
 
 - (void)handlePanGesture:(UIGestureRecognizer*)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
-        flagIsPanning = YES;
-        if (gestureRecognizer.numberOfTouches == 1){
-            [self enableFollowLocation:NO];
-        }
-    }
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        flagIsPanning = NO;
+        mapCenterToGPSLocation = NO;
     }
 }
 
@@ -483,7 +465,7 @@ BOOL flagIsPanning              = NO;
                 if ([self.followLocationHelper mustUpdateLocation:location]){
                     [self updateLocationInServer:location withRadius:0];
                 }
-                if (!flagIsPanning){
+                if (mapCenterToGPSLocation) {
                     [self.mapview setCenterCoordinate:location.coordinate animated:YES];
                 }
             }else{
@@ -873,6 +855,7 @@ BOOL flagIsPanning              = NO;
 
 -(void)locationAction:(id)sender
 {
+    mapCenterToGPSLocation = YES;
     regionChangeRequested = YES;
     [self checkGPS];
 }
