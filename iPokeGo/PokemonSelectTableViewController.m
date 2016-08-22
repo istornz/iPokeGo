@@ -107,14 +107,14 @@
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    NSString *searchTerm = searchController.searchBar.text;
+    NSString *searchTerm = [searchController.searchBar.text lowercaseString];
     if([searchTerm length] == 0) {
         self.pokemonIDFiltered = [self.pokemonID mutableCopy];
     } else {
         NSMutableArray *searchResults = [[NSMutableArray alloc] init];
         
         for(id pokemon in self.pokemonID) {
-            if([[self.localization objectForKey:[NSString stringWithFormat:@"%@", pokemon]] containsString:searchTerm]) {
+            if([[[self.localization objectForKey:[NSString stringWithFormat:@"%@", pokemon]] lowercaseString] containsString:searchTerm]) {
                 [searchResults addObject:pokemon];
             }
         }
