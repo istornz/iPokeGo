@@ -45,6 +45,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     [self.isVisiblePokemonsOnMapSwitch setOn:[prefs boolForKey:@"display_pokemons"]];
+    [self.isVisibleSpawnPointsOnMapSwitch setOn:[prefs boolForKey:@"display_spawnpoints"]];
     [self.commonSwitch setOn:[prefs boolForKey:@"display_common"]];
     [self.viewOnlyFavoriteSwitch setOn:[prefs boolForKey:@"display_onlyfav"]];
     [self.distanceSwitch setOn:[prefs boolForKey:@"display_distance"]];
@@ -59,6 +60,8 @@
     
     if (sender == self.isVisiblePokemonsOnMapSwitch) {
         [prefs setBool:self.isVisiblePokemonsOnMapSwitch.on forKey:@"display_pokemons"];
+    } else if (sender == self.isVisibleSpawnPointsOnMapSwitch) {
+        [prefs setBool:self.isVisibleSpawnPointsOnMapSwitch.on forKey:@"display_spawnpoints"];
     } else if (sender == self.commonSwitch) {
         [prefs setBool:self.commonSwitch.on forKey:@"display_common"];
     } else if (sender == self.viewOnlyFavoriteSwitch) {

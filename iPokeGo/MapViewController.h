@@ -12,10 +12,11 @@
 #import "GymAnnotation.h"
 #import "PokestopAnnotation.h"
 #import "ScanAnnotation.h"
+#import "SpawnPointsAnnotation.h"
 #import "SVPulsingAnnotationView.h"
 #import "global.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate>
 
 @property(weak, nonatomic) IBOutlet UIButton *locationButton;
 @property(weak, nonatomic) IBOutlet UIButton *radarButton;

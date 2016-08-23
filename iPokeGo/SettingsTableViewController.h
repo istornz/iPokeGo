@@ -48,8 +48,15 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property(weak, nonatomic) IBOutlet UILabel *backgroundLabel;
 @property(weak, nonatomic) IBOutlet UISwitch *backgroundSwitch;
 
+@property(weak, nonatomic) IBOutlet UIImageView *folloLocationImageView;
+@property(weak, nonatomic) IBOutlet UILabel *folloLocationLabel;
+@property(weak, nonatomic) IBOutlet UISwitch *folloLocationSwitch;
+
 @property(weak, nonatomic) IBOutlet UIImageView *gymsImageView;
 @property(weak, nonatomic) IBOutlet UILabel *gymsLabel;
+
+@property(weak, nonatomic) IBOutlet UIImageView *licenseImageView;
+@property(weak, nonatomic) IBOutlet UILabel *licenseLabel;
 
 @property(weak, nonatomic) IBOutlet UILabel *footerLabel;
 

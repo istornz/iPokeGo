@@ -12,6 +12,8 @@
 @interface iPokeServerSync : NSObject
 
 - (void)fetchData;
-- (void)setLocation:(CLLocationCoordinate2D)location;
+- (void)fetchScanLocationData;
+- (void)setLocation:(CLLocationCoordinate2D)location withRadius:(int)radius;
+- (void)removeLocation:(CLLocationCoordinate2D)location;
 
 @end

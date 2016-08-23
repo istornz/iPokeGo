@@ -15,6 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *isVisiblePokemonsOnMapLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *isVisiblePokemonsOnMapSwitch;
 
+@property (weak, nonatomic) IBOutlet UIImageView *isVisibleSpawnPointsOnMapImageView;
+@property (weak, nonatomic) IBOutlet UILabel *isVisibleSpawnPointsOnMapLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *isVisibleSpawnPointsOnMapSwitch;
+
 @property (weak, nonatomic) IBOutlet UIImageView *commonImageView;
 @property (weak, nonatomic) IBOutlet UILabel *commonLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *commonSwitch;
