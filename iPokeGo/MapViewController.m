@@ -37,6 +37,8 @@
 @property NSMutableArray *annotationsSpawnpointsToDelete;
 @property NSMutableArray *annotationsLocationsToDelete;
 
+@property NSDictionary *locationsSearched;
+
 @property CLLocationManager *locationManager;
 @property NSDictionary *localization;
 @property CLLocationDegrees oldLatitudeDelta;
@@ -915,6 +917,73 @@ BOOL mapCenterToGPSLocation     = YES;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(IBAction)searchButtonAction:(id)sender
+{
+    BOOL hide;
+    NSUInteger animation;
+    if(self.searchBar.hidden) {
+        hide = NO;
+        animation = UIViewAnimationOptionTransitionFlipFromTop;
+        
+    } else {
+        hide = YES;
+        animation = UIViewAnimationOptionTransitionFlipFromBottom;
+    }
+    
+    [UIView transitionWithView:self.searchBar duration:0.5f options:animation animations:^(void){
+        
+        [self.searchBar setHidden:hide];
+        
+    } completion:nil];
+    
+    [self.searchBar resignFirstResponder];
+    self.locationsSearched = nil;
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+#pragma mark - Search bar delegate
+
+-(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    [self searchLocationsForAddress:searchBar.text];
+    
+    return YES;
+}
+
+#pragma mark - Search display controller
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.locationsSearched[@"results"] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"LocationCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.textLabel.text = self.locationsSearched[@"results"][indexPath.row][@"formatted_address"];
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.searchDisplayController setActive:NO animated:YES];
+    
+    double latitude = [self.locationsSearched[@"results"][indexPath.row][@"geometry"][@"location"][@"lat"] doubleValue];
+    double longitude = [self.locationsSearched[@"results"][indexPath.row][@"geometry"][@"location"][@"lng"] doubleValue];
+    
+    CLLocationCoordinate2D coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    [self.mapview setCenterCoordinate:coordinateLocation animated:NO];
+}
+
 #pragma mark - Misc
 
 - (CLLocation *)currentLocation
@@ -929,6 +998,53 @@ BOOL mapCenterToGPSLocation     = YES;
     coordinate.longitude    = [[notification.userInfo objectForKey:@"longitude"] doubleValue];
     
     [self.mapview setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(MAP_SCALE_ANNOT, MAP_SCALE_ANNOT)) animated:YES];
+}
+
+-(void)searchLocationsForAddress:(NSString *)addr
+{
+    /* 
+     We can use CLGeocoder from Apple but Google seems to be better for little town search ;)
+     
+     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+     [geocoder geocodeAddressString:addr completionHandler:^(NSArray *placemarks, NSError *error) {
+     //Error checking
+     
+     NSLog(@"%@", placemarks);
+     }];
+     
+     */
+    
+    // Build the string to Query Google Maps.
+    NSString *apiMapsURL = GOOGLE_MAP_SEARCH_API;
+    apiMapsURL = [apiMapsURL stringByReplacingOccurrencesOfString:@"%%addr%%" withString:addr];
+    apiMapsURL = [apiMapsURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    // Create url from the query
+    NSURL *url = [NSURL URLWithString:apiMapsURL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    
+    // Launch connexion in background
+    [NSURLConnection
+     sendAsynchronousRequest:urlRequest
+     queue:[[NSOperationQueue alloc] init]
+     completionHandler:^(NSURLResponse *response,
+                         NSData *data,
+                         NSError *error)
+     {
+         
+         if ([data length] > 0 && error == nil)
+         {
+             
+             // Parse JSON locations in NSDictionnary
+             self.locationsSearched =   [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:kNilOptions
+                                                                          error:&error];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.searchDisplayController.searchResultsTableView reloadData];
+             });
+         }
+         
+     }];
 }
 
 #pragma mark - Textfield delegate
