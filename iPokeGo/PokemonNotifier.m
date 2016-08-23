@@ -84,13 +84,13 @@
     CLLocationDistance distanceFromUser = [self.mapViewController.mapview.userLocation.location distanceFromLocation:[[CLLocation alloc] initWithLatitude:pokemon.latitude longitude:pokemon.longitude]];
 //    NSLog(@"Pokemon spawned %d meters from user location", (int)distanceFromUser);
     
-    NSString *message   = nil;
-    AVAudioPlayer *sound = nil;
-    BOOL pokemonIsInRange = FALSE;
+    NSString *message       = nil;
+    AVAudioPlayer *sound    = nil;
+    BOOL pokemonIsInRange   = FALSE;
     
     if([pokemon isFav]) {
         message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
-        sound   = self.pokemonAppearSound;
+        sound   = self.pokemonFavAppearSound;
         pokemonIsInRange = [prefs integerForKey:@"favorite_notification_range"] ? distanceFromUser < [prefs integerForKey:@"favorite_notification_range"] : YES;
     } else {
         message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
