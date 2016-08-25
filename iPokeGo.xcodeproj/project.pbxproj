@@ -11,6 +11,7 @@
 		0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E3851D473D7800CEEE3F /* TimerLabel.m */; };
 		0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E38B1D474C5A00CEEE3F /* DistanceLabel.m */; };
 		0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */; };
+		03C59E7A1D6E940E000A4ABA /* DeviceVibrate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C59E791D6E940E000A4ABA /* DeviceVibrate.m */; };
 		2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */; };
 		27315DD11D63243D002E149A /* SpawnPointsAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD01D63243D002E149A /* SpawnPointsAnnotation.m */; };
 		27315DD41D632509002E149A /* SpawnPointsAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD31D632509002E149A /* SpawnPointsAnnotationView.m */; };
@@ -91,6 +92,8 @@
 		0256E38B1D474C5A00CEEE3F /* DistanceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceLabel.m; sourceTree = "<group>"; };
 		0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatting.h"; sourceTree = "<group>"; };
 		0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatting.m"; sourceTree = "<group>"; };
+		03C59E781D6E940E000A4ABA /* DeviceVibrate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceVibrate.h; sourceTree = "<group>"; };
+		03C59E791D6E940E000A4ABA /* DeviceVibrate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceVibrate.m; sourceTree = "<group>"; };
 		095DAA6F1D5FB6E000377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		095DAA711D5FB77700377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymAnnotation.h; sourceTree = "<group>"; };
@@ -286,12 +289,14 @@
 		273604571D440B0900194BAF /* Custom classes */ = {
 			isa = PBXGroup;
 			children = (
-				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
 				2736045B1D440B1700194BAF /* CWStatusBarNotification */,
+				03C59E781D6E940E000A4ABA /* DeviceVibrate.h */,
+				03C59E791D6E940E000A4ABA /* DeviceVibrate.m */,
+				866862CE1D5D468B003070F3 /* FollowLocationHelper.h */,
+				866862CC1D5D4667003070F3 /* FollowLocationHelper.m */,
 				0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */,
 				0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */,
-				866862CC1D5D4667003070F3 /* FollowLocationHelper.m */,
-				866862CE1D5D468B003070F3 /* FollowLocationHelper.h */,
+				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
 			);
 			name = "Custom classes";
 			sourceTree = "<group>";
@@ -777,6 +782,7 @@
 				276B898B1D50FA97008164FE /* GymsSettingsTableViewController.m in Sources */,
 				81055BAC1D4D413D0071FDD2 /* iPokeServerSync.m in Sources */,
 				277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */,
+				03C59E7A1D6E940E000A4ABA /* DeviceVibrate.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
 				27DE81901D61D55C00F5F87E /* LicensesViewController.m in Sources */,
 				81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */,
