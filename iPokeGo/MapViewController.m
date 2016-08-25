@@ -19,6 +19,8 @@
 #import "CWStatusBarNotification.h"
 #import "FollowLocationHelper.h"
 #import "TagButton.h"
+#import "DeviceVibrate.h"
+
 @import CoreData;
 
 @interface MapViewController() <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate>
@@ -243,7 +245,7 @@ BOOL mapCenterToGPSLocation     = YES;
     {
         [self enableFollowLocation:NO];
         
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        [DeviceVibrate hapticVibrate];
         
         CGPoint point = [sender locationInView:self.mapview];
         CLLocationCoordinate2D coordinate = [self.mapview convertPoint:point toCoordinateFromView:self.mapview];

@@ -15,6 +15,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "SettingsTableViewController.h"
+#import "DeviceVibrate.h"
 
 @interface PokemonNotifier() <NSFetchedResultsControllerDelegate>
 
@@ -143,7 +144,7 @@
         [sound play];
         
         if([prefs boolForKey:@"vibration"]) {
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+            [DeviceVibrate standardVibrate];
         }
         
         [notification displayNotificationWithMessage:message forDuration:4.5f];
