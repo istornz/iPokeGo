@@ -23,7 +23,7 @@
         
         NSArray *gymLvl = @[@2000, @4000, @8000, @12000, @16000, @20000, @30000, @40000, @50000, @100000];
         int gym_level = 1;
-        while (gym_level <= gymLvl.count && gym.points >= [gymLvl[gym_level - 1] integerValue]) {
+        while (gym.points >= [gymLvl[gym_level - 1] integerValue]) {
             gym_level++;
         }
         
