@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 @import CoreLocation;
 
+NSString * const ShowFetchedDataStatusNavBar = @"Poke.ShowFetchedDataStatusNavBar";
+
 @interface iPokeServerSync : NSObject
 
 - (void)fetchData;

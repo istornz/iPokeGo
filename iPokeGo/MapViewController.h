@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "UINavigationController+M13ProgressViewBar.h"
 #import "PokemonAnnotation.h"
 #import "GymAnnotation.h"
 #import "PokestopAnnotation.h"
@@ -15,6 +16,8 @@
 #import "SpawnPointsAnnotation.h"
 #import "SVPulsingAnnotationView.h"
 #import "global.h"
+
+extern NSString * const MapViewShowFetchStatus;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UISearchBarDelegate, UITableViewDelegate>
 

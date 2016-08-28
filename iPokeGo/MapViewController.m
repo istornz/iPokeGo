@@ -51,10 +51,11 @@
 
 @implementation MapViewController
 
-static CLLocationDegrees DeltaHideAllIcons = 0.2;
-static CLLocationDegrees DeltaHideText = 0.1;
-BOOL regionChangeRequested      = YES;
-BOOL mapCenterToGPSLocation     = YES;
+NSString * const MapViewShowFetchStatus     = @"Poke.MapViewShowFetchStatus";
+static CLLocationDegrees DeltaHideAllIcons  = 0.2;
+static CLLocationDegrees DeltaHideText      = 0.1;
+BOOL regionChangeRequested                  = YES;
+BOOL mapCenterToGPSLocation                 = YES;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
@@ -65,6 +66,7 @@ BOOL mapCenterToGPSLocation     = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToActiveState) name:UIApplicationDidBecomeActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToBackgroundState) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFetchedDataStatusNavBar:) name:MapViewShowFetchStatus object:nil];
     }
     return self;
 }
@@ -77,6 +79,8 @@ BOOL mapCenterToGPSLocation     = YES;
     self.followLocationHelper = [[FollowLocationHelper alloc] init];
     
     [self loadNavBar];
+    [self.navigationController showProgress];
+    [self.navigationController setIndeterminate:YES];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapview addGestureRecognizer:longPressGesture];
@@ -86,7 +90,6 @@ BOOL mapCenterToGPSLocation     = YES;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [panGesture setDelegate:self];
     [self.mapview addGestureRecognizer:panGesture];
-    
     
     //default to the last known position
     NSDictionary *mapLocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"map_position"];
@@ -1047,6 +1050,27 @@ BOOL mapCenterToGPSLocation     = YES;
          }
          
      }];
+}
+
+-(void)showFetchedDataStatusNavBar:(NSNotification *)notification {
+    // Be sure mapview is initialized
+    if(self.mapview != nil) {
+        
+        if([[notification object] intValue] == STATUSCODE_BAR_SETSUCCESS)
+            [self.navigationController setPrimaryColor:STATUSCODE_BAR_SUCCESS_COLOR];
+        else
+            [self.navigationController setPrimaryColor:STATUSCODE_BAR_ERROR_COLOR];
+        
+        dispatch_async (dispatch_get_main_queue(), ^{
+            [self.navigationController showProgress];
+            [self.navigationController setIndeterminate:YES];
+        });
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.navigationController cancelProgress];
+        });
+        
+    }
 }
 
 #pragma mark - Textfield delegate
