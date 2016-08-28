@@ -145,6 +145,8 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
         self.dataCleanTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerCleanFrequency target:self selector:@selector(cleanData) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.dataCleanTimer forMode:NSDefaultRunLoopMode];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
 }
 
 #pragma mark Local notification delegate
