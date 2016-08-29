@@ -42,6 +42,7 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
 	self.passwordField.text = [prefs valueForKey:@"server_pass"];
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
+    [self.wifiSwitch setOn:[prefs boolForKey:@"wifi_only"]];
     [self.folloLocationSwitch setOn:[prefs boolForKey:@"follow_location"]];
     
     NSString *drivingMode = [prefs objectForKey:@"driving_mode"];
@@ -100,7 +101,10 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     if (sender == self.backgroundSwitch) {
         [prefs setBool:self.backgroundSwitch.on forKey:@"run_in_background"];
         [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];
-        
+    }
+    else if (sender == self.wifiSwitch) {
+        [prefs setBool:self.wifiSwitch.on forKey:@"wifi_only"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BackgroundSettingChangedNotification object:nil];
     }
 }
 

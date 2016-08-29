@@ -83,6 +83,7 @@
 		866862CD1D5D4667003070F3 /* FollowLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 866862CC1D5D4667003070F3 /* FollowLocationHelper.m */; };
 		AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F01D47D04200DEE95C /* pokemon.json */; };
 		AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F61D49252100DEE95C /* Localizable.strings */; };
+		F205FFEF1D74BD98008A192C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F205FFEE1D74BD98008A192C /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +271,8 @@
 		AEFA37F71D49252100DEE95C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37FF1D49292D00DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		AEFA380B1D49293400DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F205FFED1D74BD98008A192C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F205FFEE1D74BD98008A192C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +358,8 @@
 				0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */,
 				0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */,
 				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
+				F205FFED1D74BD98008A192C /* Reachability.h */,
+				F205FFEE1D74BD98008A192C /* Reachability.m */,
 			);
 			name = "Custom classes";
 			sourceTree = "<group>";
@@ -799,7 +804,6 @@
 				TargetAttributes = {
 					27F385571D4130B30004A1B3 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = C6D6DBHW5C;
 						DevelopmentTeamName = "Dimitri Dessus";
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -946,6 +950,7 @@
 				81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */,
 				0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */,
 				27BA23AF1D731AE1005CC560 /* M13ProgressViewRadiative.m in Sources */,
+				F205FFEF1D74BD98008A192C /* Reachability.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 				8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */,
 				811143091D4D598F00901851 /* PokeStop+CoreDataProperties.m in Sources */,
@@ -1127,6 +1132,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1141,6 +1147,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

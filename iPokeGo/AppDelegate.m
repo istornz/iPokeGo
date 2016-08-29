@@ -14,6 +14,7 @@
 #import "PokemonNotifier.h"
 #import "MapViewController.h"
 #import "SettingsTableViewController.h"
+#import "Reachability.h"
 
 @interface AppDelegate() <CLLocationManagerDelegate>
 
@@ -174,10 +175,12 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (void)refreshDataFromServer
 {
-    dispatch_async(AppDelegateFetcherQueue, ^{
-        [self.server fetchData];
-        [self.server fetchScanLocationData];
-    });
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: @"wifi_only"] || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWiFi) {
+        dispatch_async(AppDelegateFetcherQueue, ^{
+            [self.server fetchData];
+            [self.server fetchScanLocationData];
+        });
+    }
 }
 
 - (void)cleanData
