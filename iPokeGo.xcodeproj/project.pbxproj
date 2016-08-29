@@ -273,6 +273,9 @@
 		AEFA380B1D49293400DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F205FFED1D74BD98008A192C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		F205FFEE1D74BD98008A192C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		F205FFF11D74D123008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		F205FFF31D74D359008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F205FFF41D74D59A008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "pt-BR"; path = "pt-BR.lproj/pokemon.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -844,6 +847,7 @@
 				"zh-Hant-HK",
 				nl,
 				es,
+				"pt-BR",
 			);
 			mainGroup = 27F3854F1D4130B30004A1B3;
 			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
@@ -1005,6 +1009,7 @@
 				095DAA711D5FB77700377BB0 /* fr */,
 				48E593571D60BF3600FEA380 /* nl */,
 				8673808B1D60E1340062A80B /* es */,
+				F205FFF11D74D123008A192C /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1019,6 +1024,7 @@
 				AEFA37F51D491E4900DEE95C /* ja */,
 				58CA35391D4B792C003B7F85 /* ru */,
 				6A72213A1D5DCB5900E522B6 /* zh-Hant-HK */,
+				F205FFF41D74D59A008A192C /* pt-BR */,
 			);
 			name = pokemon.json;
 			sourceTree = "<group>";
@@ -1034,6 +1040,7 @@
 				095DAA6F1D5FB6E000377BB0 /* fr */,
 				48E593581D60BF3600FEA380 /* nl */,
 				8673808C1D60E1340062A80B /* es */,
+				F205FFF31D74D359008A192C /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

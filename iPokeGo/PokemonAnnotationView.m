@@ -43,7 +43,7 @@
         if([annotation.rarity length] > 0)
         {
             TagLabel *tagLabelView = [[TagLabel alloc] init];
-            [tagLabelView setLabelText:annotation.rarity.uppercaseString];
+            [tagLabelView setLabelText:NSLocalizedString(annotation.rarity.uppercaseString, @"Pokemon rarity annotation label")];
             [tagLabelView setBackgroundColor:bgColor];
             self.leftCalloutAccessoryView = tagLabelView;
         }
