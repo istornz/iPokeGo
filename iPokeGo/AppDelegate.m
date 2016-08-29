@@ -12,6 +12,7 @@
 #import "CoreDataPersistance.h"
 #import "CoreDataEntities.h"
 #import "PokemonNotifier.h"
+#import "MapViewController.h"
 #import "SettingsTableViewController.h"
 
 @interface AppDelegate() <CLLocationManagerDelegate>

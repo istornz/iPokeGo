@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MapViewController.h"
 
 extern NSString * const AppDelegateNotificationTapped;
 
