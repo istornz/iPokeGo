@@ -63,7 +63,7 @@
 "QIm-iD-I1b.text" = "Zone";
 
 /* Class = "UILabel"; text = "Hide Common"; ObjectID = "Urz-pq-T1Q"; */
-"Urz-pq-T1Q.text" = "Hide Common";
+"Urz-pq-T1Q.text" = "Masquer les communs";
 
 /* Class = "UITableViewSection"; headerTitle = "Viewing"; ObjectID = "VTm-hq-lXv"; */
 "VTm-hq-lXv.headerTitle" = "Viewing";
@@ -72,7 +72,7 @@
 "WOD-rI-XQR.headerTitle" = "Global";
 
 /* Class = "UILabel"; text = "Server type"; ObjectID = "aF6-t6-3tY"; */
-"aF6-t6-3tY.text" = "Server type";
+"aF6-t6-3tY.text" = "Type de serveur";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "acs-Ve-8xd"; */
 "acs-Ve-8xd.text" = "Password";
@@ -135,4 +135,7 @@
 "zeM-yd-YUy.text" = "Mode conduite";
 
 /* Class = "UILabel"; text = "Wifi only"; ObjectID = "d2S-j9-Knz"; */
-"d2S-j9-Knz.text" = "Wifi Seulement";
+"d2S-j9-Knz.text" = "Wifi uniquement";
+
+"Fxl-6M-trN.text" = "Suivre la position";
+"fNi-0S-oXY.text" = "Afficher les points de spawn";

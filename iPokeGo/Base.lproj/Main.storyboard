@@ -1662,12 +1662,12 @@
         <image name="distance" width="37" height="37"/>
         <image name="drive" width="52" height="52"/>
         <image name="favorite" width="51" height="51"/>
-        <image name="follow_location" width="50" height="50"/>
+        <image name="follow_location" width="48" height="48"/>
         <image name="gym" width="51" height="51"/>
         <image name="hide_annotation" width="48" height="48"/>
         <image name="hide_common" width="51" height="51"/>
         <image name="hide_spawnpoint" width="52" height="52"/>
-        <image name="infinity" width="50" height="50"/>
+        <image name="infinity" width="48" height="48"/>
         <image name="license" width="48" height="48"/>
         <image name="location" width="218" height="218"/>
         <image name="lured" width="50" height="50"/>
@@ -1685,7 +1685,7 @@
         <image name="time" width="37" height="37"/>
         <image name="timer" width="37" height="37"/>
         <image name="vibration" width="50" height="50"/>
-        <image name="wifi" width="28" height="21"/>
+        <image name="wifi" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="28I-b8-KcA"/>
