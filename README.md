@@ -40,6 +40,8 @@ You will have no more reason of all not to catch them ;)
 7. Tap the new profile created and trust it.
 8. You are now able to run the app on your device !
 
+For help with this part of installation, [r/sideloaded](https://reddit.com/r/sideloaded) (on reddit) will most likely be able to help you, as you are technically sideloading this app. There is also a good cydia impactor guide [here](https://www.reddit.com/r/sideloaded/wiki/ipasigning#wiki_how_to_sideload_using_saurik.27s_.22impactor.22).
+
 ## Configuration
 On settings, please enter the address of your server.
 
