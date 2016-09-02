@@ -54,13 +54,15 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - Server : Please use latest stable version (https://github.com/PokemonGoMap/PokemonGo-Map/releases)
 
 ## TODO
-- [x] Add possibility to follow user location (same as website)
-- [ ] Add a server status page
-- [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
-- [x] Update pokestop and gym annotations
-- [ ] Find a way to do some background task without hack
-- [x] Real notification
-- [x] Change scan position
+- [x] Add possibility to follow user location (same as website).
+- [x] Update pokestop and gym annotations.
+- [x] Real notification.
+- [x] Change scan position.
+- [x] Add a server status page.
+- [x] Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- [ ] Add a server switcher functionnality.
+- [ ] Regroup pokestops annotations to reduce CPU usage (clustering).
+- [ ] Find a way to do some background task without hack.
 
 ## Others
 If you want to edit storyboard file and compile with Xcode 7 on iOS 10 beta, please move the iOS 10 developer image inside Xcode 7 folder [refer to this link](http://stackoverflow.com/a/31013217)
