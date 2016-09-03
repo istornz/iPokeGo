@@ -223,6 +223,7 @@
 		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		48E593571D60BF3600FEA380 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		48E593581D60BF3600FEA380 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4DCC9E6B1D7B404E00E073C6 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/pokemon.json"; sourceTree = "<group>"; };
 		58CA35381D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		58CA35391D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/pokemon.json; sourceTree = "<group>"; };
 		58CA353A1D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -848,6 +849,7 @@
 				nl,
 				es,
 				"pt-BR",
+				"zh-Hant-TW",
 			);
 			mainGroup = 27F3854F1D4130B30004A1B3;
 			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
@@ -1025,6 +1027,7 @@
 				58CA35391D4B792C003B7F85 /* ru */,
 				6A72213A1D5DCB5900E522B6 /* zh-Hant-HK */,
 				F205FFF41D74D59A008A192C /* pt-BR */,
+				4DCC9E6B1D7B404E00E073C6 /* zh-Hant-TW */,
 			);
 			name = pokemon.json;
 			sourceTree = "<group>";
