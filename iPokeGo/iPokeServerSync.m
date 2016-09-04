@@ -130,7 +130,12 @@ static NSURLSession *iPokeServerSyncSharedSession;
         NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
         [self processPokemonFromJSON:jsonData[@"pokemons"] usingContext:context];
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
-        [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
+        
+        if([NSStringFromClass([jsonData[@"gyms"] class]) isEqualToString:@"__NSArrayM"])
+            [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
+        else
+            [self processGymsFromJSON:[jsonData[@"gyms"] allValues] usingContext:context];
+        
         [self processSpawnPointsFromJSON:jsonData[@"spawnpoints"] usingContext:context];
         [self processScanLocationsFromJSON:[jsonData[@"scan_locations"] allValues] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
