@@ -262,6 +262,8 @@
 		866862CE1D5D468B003070F3 /* FollowLocationHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowLocationHelper.h; sourceTree = "<group>"; };
 		8673808B1D60E1340062A80B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		8673808C1D60E1340062A80B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9206A3161D806417004959DA /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Main.strings"; sourceTree = "<group>"; };
+		9206A3171D807072004959DA /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37F11D47D04800DEE95C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/pokemon.json; sourceTree = "<group>"; };
@@ -1012,6 +1014,7 @@
 				48E593571D60BF3600FEA380 /* nl */,
 				8673808B1D60E1340062A80B /* es */,
 				F205FFF11D74D123008A192C /* pt-BR */,
+				9206A3161D806417004959DA /* zh-Hant-TW */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				48E593581D60BF3600FEA380 /* nl */,
 				8673808C1D60E1340062A80B /* es */,
 				F205FFF31D74D359008A192C /* pt-BR */,
+				9206A3171D807072004959DA /* zh-Hant-TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
