@@ -18,6 +18,7 @@
 #import "global.h"
 
 extern NSString * const MapViewShowFetchStatus;
+extern NSString * const MapViewReloadData;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate, UISearchBarDelegate, UITableViewDelegate>
 

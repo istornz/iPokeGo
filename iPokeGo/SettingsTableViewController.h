@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "global.h"
+#import "iPokeServerSync.h"
 
 #define CELL_INDEX_DRIVINGMODE  5
 

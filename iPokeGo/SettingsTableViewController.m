@@ -39,7 +39,6 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     
     NSString *server_name = [prefs valueForKey:@"server_name"];
     self.serverTextLabel.text = server_name;
-	
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
     [self.wifiSwitch setOn:[prefs boolForKey:@"wifi_only"]];
@@ -61,6 +60,9 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     [prefs setBool:self.folloLocationSwitch.on forKey:@"follow_location"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:SettingsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerForceReloadData object:nil];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

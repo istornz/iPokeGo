@@ -52,6 +52,7 @@
 @implementation MapViewController
 
 NSString * const MapViewShowFetchStatus     = @"Poke.MapViewShowFetchStatus";
+NSString * const MapViewReloadData          = @"Poke.MapViewReloadData";
 static CLLocationDegrees DeltaHideAllIcons  = 0.2;
 static CLLocationDegrees DeltaHideText      = 0.1;
 BOOL regionChangeRequested                  = YES;
@@ -67,6 +68,7 @@ BOOL mapCenterToGPSLocation                 = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToActiveState) name:UIApplicationDidBecomeActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appSwitchedToBackgroundState) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFetchedDataStatusNavBar:) name:MapViewShowFetchStatus object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMap) name:MapViewReloadData object:nil];
     }
     return self;
 }
