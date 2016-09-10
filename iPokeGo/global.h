@@ -48,6 +48,9 @@
 
 #define GOOGLE_MAP_SEARCH_API           @"http://maps.googleapis.com/maps/api/geocode/json?address=%%addr%%"
 
+#define POKEMONGOMAP_TYPE           0
+#define POGOM_TYPE                  1
+
 #define SERVER_API_DATA_POKEMONGOMAP    @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%&spawnpoints=%%spawnpoints_display%%&ids=%%idlist%%"
 #define SERVER_API_DATA_SCAN_LOCATION   @"%%server_addr%%/loc"
 #define SERVER_API_DATA_POGOM           @"%%server_addr%%/map-data?pokemon=%%pokemon_display%%&gyms=%%gyms_display%%"

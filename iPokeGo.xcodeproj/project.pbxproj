@@ -13,6 +13,9 @@
 		0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */; };
 		03C59E7A1D6E940E000A4ABA /* DeviceVibrate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C59E791D6E940E000A4ABA /* DeviceVibrate.m */; };
 		2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */; };
+		272E3B651D7C71390027A833 /* ServersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B641D7C71390027A833 /* ServersTableViewController.m */; };
+		272E3B681D7C73A10027A833 /* ServersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B671D7C73A10027A833 /* ServersTableViewCell.m */; };
+		272E3B6B1D7C76180027A833 /* AddServerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */; };
 		27315DD11D63243D002E149A /* SpawnPointsAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD01D63243D002E149A /* SpawnPointsAnnotation.m */; };
 		27315DD41D632509002E149A /* SpawnPointsAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD31D632509002E149A /* SpawnPointsAnnotationView.m */; };
 		273604561D44094700194BAF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604551D44094700194BAF /* ding.mp3 */; };
@@ -118,6 +121,12 @@
 		095DAA711D5FB77700377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymAnnotation.h; sourceTree = "<group>"; };
 		2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GymAnnotation.m; sourceTree = "<group>"; };
+		272E3B631D7C71390027A833 /* ServersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersTableViewController.h; sourceTree = "<group>"; };
+		272E3B641D7C71390027A833 /* ServersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersTableViewController.m; sourceTree = "<group>"; };
+		272E3B661D7C73A10027A833 /* ServersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersTableViewCell.h; sourceTree = "<group>"; };
+		272E3B671D7C73A10027A833 /* ServersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersTableViewCell.m; sourceTree = "<group>"; };
+		272E3B691D7C76180027A833 /* AddServerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServerTableViewController.h; sourceTree = "<group>"; };
+		272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServerTableViewController.m; sourceTree = "<group>"; };
 		27315DCF1D63243D002E149A /* SpawnPointsAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpawnPointsAnnotation.h; sourceTree = "<group>"; };
 		27315DD01D63243D002E149A /* SpawnPointsAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpawnPointsAnnotation.m; sourceTree = "<group>"; };
 		27315DD21D632509002E149A /* SpawnPointsAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpawnPointsAnnotationView.h; sourceTree = "<group>"; };
@@ -333,6 +342,19 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		272E3B621D7C71210027A833 /* Servers */ = {
+			isa = PBXGroup;
+			children = (
+				272E3B631D7C71390027A833 /* ServersTableViewController.h */,
+				272E3B641D7C71390027A833 /* ServersTableViewController.m */,
+				272E3B661D7C73A10027A833 /* ServersTableViewCell.h */,
+				272E3B671D7C73A10027A833 /* ServersTableViewCell.m */,
+				272E3B691D7C76180027A833 /* AddServerTableViewController.h */,
+				272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */,
+			);
+			name = Servers;
+			sourceTree = "<group>";
+		};
 		272FCEA71D423F74003ED548 /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +466,7 @@
 			children = (
 				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
 				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
+				272E3B621D7C71210027A833 /* Servers */,
 				276B89901D50FB22008164FE /* Pokemon select list */,
 				276B898C1D50FB08008164FE /* Notifications */,
 				276B898D1D50FB0E008164FE /* Pokemons */,
@@ -908,6 +931,7 @@
 				27BA23A31D731AE1005CC560 /* M13ProgressHUD.m in Sources */,
 				27C2BF991D648D81005F1677 /* TagButton.m in Sources */,
 				27BA23B31D731AE1005CC560 /* M13ProgressViewStripedBar.m in Sources */,
+				272E3B681D7C73A10027A833 /* ServersTableViewCell.m in Sources */,
 				27C2BF911D646A99005F1677 /* ScanLocations+CoreDataClass.m in Sources */,
 				0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */,
 				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,
@@ -923,6 +947,7 @@
 				27BA23B01D731AE1005CC560 /* M13ProgressViewRing.m in Sources */,
 				866862CD1D5D4667003070F3 /* FollowLocationHelper.m in Sources */,
 				811142FF1D4D596700901851 /* Pokemon+CoreDataProperties.m in Sources */,
+				272E3B6B1D7C76180027A833 /* AddServerTableViewController.m in Sources */,
 				0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */,
 				2785D1181D5E153A004FC688 /* TagLabel.m in Sources */,
 				27F385631D4130B30004A1B3 /* MapViewController.m in Sources */,
@@ -956,6 +981,7 @@
 				81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */,
 				0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */,
 				27BA23AF1D731AE1005CC560 /* M13ProgressViewRadiative.m in Sources */,
+				272E3B651D7C71390027A833 /* ServersTableViewController.m in Sources */,
 				F205FFEF1D74BD98008A192C /* Reachability.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 				8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */,

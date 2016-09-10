@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "global.h"
 
-#define CELL_INDEX_SERVERTYPE   0
 #define CELL_INDEX_DRIVINGMODE  5
 
 extern NSString * const SettingsChangedNotification;
@@ -21,20 +20,9 @@ extern NSString * const BackgroundSettingChangedNotification;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *fermerButton;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
-@property(weak, nonatomic) IBOutlet UIImageView *serverTypeImageView;
-@property(weak, nonatomic) IBOutlet UILabel *serverTypeLabel;
-
 @property(weak, nonatomic) IBOutlet UIImageView *serverImageView;
 @property(weak, nonatomic) IBOutlet UILabel *serverLabel;
-@property(weak, nonatomic) IBOutlet UITextField *serverField;
-
-@property(weak, nonatomic) IBOutlet UIImageView *usernameImageView;
-@property(weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property(weak, nonatomic) IBOutlet UITextField *usernameField;
-
-@property(weak, nonatomic) IBOutlet UIImageView *passwordImageView;
-@property(weak, nonatomic) IBOutlet UILabel *passwordLabel;
-@property(weak, nonatomic) IBOutlet UITextField *passwordField;
+@property(weak, nonatomic) IBOutlet UILabel *serverTextLabel;
 
 @property(weak, nonatomic) IBOutlet UILabel *drivingModeLabel;
 
