@@ -60,7 +60,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - [x] Change scan position.
 - [x] Add a server status page.
 - [x] Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
-- [ ] Add a server switcher functionnality.
+- [x] Add a server switcher functionnality.
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering).
 - [ ] Find a way to do some background task without hack.
 
