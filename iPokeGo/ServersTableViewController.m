@@ -59,18 +59,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // TODO: Add more flexibility with sections
-    
-    /*
-    int sections = 0;
-    if ([self.serversPokemonGoMapArray count] > 0) {
-        sections += 1;
-    }
-    
-    if ([self.serversPogomArray count] > 0) {
-        sections += 1;
-    }
-    */
     return 2;
 }
 
@@ -91,10 +79,24 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
+    if (section == 0 && [self.serversPokemonGoMapArray count] > 0)
         return @"PokemonGO-Map";
-    else if (section == 1)
+    else if (section == 1 && [self.serversPogomArray count] > 0)
         return @"Pogom";
+    
+    if([self.serversPokemonGoMapArray count] == 0 && [self.serversPogomArray count] == 0)
+    {
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+        noDataLabel.text             = NSLocalizedString(@"No server", nil);
+        noDataLabel.textColor        = [UIColor blackColor];
+        noDataLabel.textAlignment    = NSTextAlignmentCenter;
+        self.tableView.backgroundView = noDataLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    else
+    {
+        self.tableView.backgroundView = nil;
+    }
         
     return nil;
 }
