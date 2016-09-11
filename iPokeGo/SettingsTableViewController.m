@@ -38,7 +38,17 @@ NSString * const BackgroundSettingChangedNotification   = @"Poke.BackgroundSetti
     NSUserDefaults *prefs   = [NSUserDefaults standardUserDefaults];
     
     NSString *server_name = [prefs valueForKey:@"server_name"];
-    self.serverTextLabel.text = server_name;
+    if([server_name length] == 0)
+    {
+        self.serverTextLabel.textColor = [UIColor grayColor];
+        self.serverTextLabel.text = @"Empty";
+    }
+    else
+    {
+        self.serverTextLabel.textColor = [UIColor colorWithRed:0.30 green:0.58 blue:1.00 alpha:1.0];
+        self.serverTextLabel.text = server_name;
+    }
+    
     
     [self.backgroundSwitch setOn:[prefs boolForKey:@"run_in_background"]];
     [self.wifiSwitch setOn:[prefs boolForKey:@"wifi_only"]];
