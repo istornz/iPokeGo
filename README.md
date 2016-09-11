@@ -17,6 +17,8 @@ This is a client for the Pokemap server (https://github.com/PokemonGoMap/Pokemon
 - See distance and remaining time on each pokemons.
 - Possibility to show/hide common pokemon in a list.
 - Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- Possibility to switch between all your servers easily.
+- Wifi only mode if you run this app at your home.
 - Possibility to follow user location.
 
 ## Now with real push notification !
