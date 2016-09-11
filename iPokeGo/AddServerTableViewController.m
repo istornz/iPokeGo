@@ -64,7 +64,22 @@ int short server_type = POKEMONGOMAP_TYPE;
     }
     else
     {
-        // TODO: Alert error
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(@"Error", @"The title of an alert that tells the user there is an error")
+                                    message:NSLocalizedString(@"Please check if you have correctly entered server name and url", @"The message of an alert that tells the user to check server name and ip address")
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okbutton = [UIAlertAction
+                                 actionWithTitle:NSLocalizedString(@"OK", @"A button to close the alert")
+                                 style:UIAlertActionStyleCancel
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        
+        [alert addAction:okbutton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
