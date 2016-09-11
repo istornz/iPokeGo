@@ -152,6 +152,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerForceReloadData object:nil];
 }
 
 #pragma mark Local notification delegate
