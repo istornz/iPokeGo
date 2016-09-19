@@ -595,20 +595,16 @@
                                         <rect key="frame" x="0.0" y="152" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Af2-lX-l3H" id="vSj-UV-nYi">
-                                            <frame key="frameInset" width="414" height="149.5"/>
+                                            <frame key="frameInset" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQG-Au-u2L">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="150" id="44i-oc-nvq"/>
-                                                    </constraints>
-                                                </pickerView>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQG-Au-u2L"/>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="tQG-Au-u2L" secondAttribute="trailing" id="ayC-Fr-6o2"/>
-                                                <constraint firstAttribute="bottom" secondItem="tQG-Au-u2L" secondAttribute="bottom" id="dg2-Ox-Ezk"/>
-                                                <constraint firstItem="tQG-Au-u2L" firstAttribute="top" secondItem="vSj-UV-nYi" secondAttribute="top" id="pBA-iu-7SS"/>
-                                                <constraint firstItem="tQG-Au-u2L" firstAttribute="leading" secondItem="vSj-UV-nYi" secondAttribute="leading" id="suq-YQ-tfX"/>
+                                                <constraint firstItem="tQG-Au-u2L" firstAttribute="top" secondItem="vSj-UV-nYi" secondAttribute="top" id="3AE-oC-sSv"/>
+                                                <constraint firstItem="tQG-Au-u2L" firstAttribute="leading" secondItem="vSj-UV-nYi" secondAttribute="leading" id="F0K-YK-rfT"/>
+                                                <constraint firstAttribute="trailing" secondItem="tQG-Au-u2L" secondAttribute="trailing" id="PF8-xk-h1s"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="tQG-Au-u2L" secondAttribute="bottom" constant="-0.33333333333334281" id="nNK-4X-PPC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -683,20 +679,16 @@
                                         <rect key="frame" x="0.0" y="390" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2A-9G-ZHF" id="u6J-lx-x1X">
-                                            <frame key="frameInset" width="414" height="149.5"/>
+                                            <frame key="frameInset" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AS3-3i-IJU">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="150" id="Zcr-AF-WXM"/>
-                                                    </constraints>
-                                                </pickerView>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AS3-3i-IJU"/>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="AS3-3i-IJU" secondAttribute="bottom" id="5cM-BT-MEB"/>
-                                                <constraint firstItem="AS3-3i-IJU" firstAttribute="top" secondItem="u6J-lx-x1X" secondAttribute="top" id="END-RT-lQe"/>
-                                                <constraint firstItem="AS3-3i-IJU" firstAttribute="leading" secondItem="u6J-lx-x1X" secondAttribute="leading" id="H9W-S4-C1M"/>
-                                                <constraint firstAttribute="trailing" secondItem="AS3-3i-IJU" secondAttribute="trailing" id="fCG-r4-NHj"/>
+                                                <constraint firstItem="AS3-3i-IJU" firstAttribute="centerY" secondItem="u6J-lx-x1X" secondAttribute="centerY" id="6Ef-yp-eEi"/>
+                                                <constraint firstItem="AS3-3i-IJU" firstAttribute="leading" secondItem="u6J-lx-x1X" secondAttribute="leading" id="AJf-X0-Vuw"/>
+                                                <constraint firstAttribute="trailing" secondItem="AS3-3i-IJU" secondAttribute="trailing" id="ZGD-TW-SGc"/>
+                                                <constraint firstItem="AS3-3i-IJU" firstAttribute="top" secondItem="u6J-lx-x1X" secondAttribute="top" id="uYL-do-KsO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -792,7 +784,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCT-aZ-cAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2780" y="440"/>
+            <point key="canvasLocation" x="2779.7101449275365" y="439.4021739130435"/>
         </scene>
         <!--Licenses-->
         <scene sceneID="F9o-lD-C0U">

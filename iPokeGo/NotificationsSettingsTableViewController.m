@@ -28,7 +28,7 @@
     [super viewWillAppear:animated];
 
     self.rangePickerRanges = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500, @5000, @10000, @25000];
-    self.pickerCellRowHeight = CGRectGetHeight(self.commonRangePicker.frame);
+    self.pickerCellRowHeight = 150;
     
     self.commonRangePicker.delegate = self;
     self.commonRangePicker.delegate = self;
