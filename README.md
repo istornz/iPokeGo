@@ -2,6 +2,10 @@
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/istornz)
 This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
 
+iPokeGO is now officially available on the AppStore !
+
+<a href="https://itunes.apple.com/us/app/ipokego-for-pokemon-go/id1138277066?l=fr&ls=1&mt=8" ><img src="http://dimitridessus.fr/img/iPokeGo/appstore.png" width="150"/></a>
+
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo7.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo8.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo3.jpg" width="270" height="480"/>
