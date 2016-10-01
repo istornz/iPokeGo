@@ -20,6 +20,24 @@
     if (self.identifier == 0) {
         self.identifier = [values[@"pokemon_id"] intValue];
     }
+    
+    // Pokemon IVs
+    if (self.individual_attack == 0) {
+        self.individual_attack = [values[@"individual_attack"] intValue];
+    }
+    if (self.individual_defense == 0) {
+        self.individual_defense = [values[@"individual_defense"] intValue];
+    }
+    if (self.individual_stamina == 0) {
+        self.individual_stamina = [values[@"individual_stamina"] intValue];
+    }
+    if (self.move_1 == 0) {
+        self.move_1 = [values[@"move_1"] intValue];
+    }
+    if (self.move_2 == 0) {
+        self.move_2 = [values[@"move_2"] intValue];
+    }
+    
     NSTimeInterval disappearsTime = [values[@"disappear_time"] doubleValue] / 1000.0;
     if (!self.disappears || self.disappears.timeIntervalSince1970 != disappearsTime) {
         self.disappears = [NSDate dateWithTimeIntervalSince1970:disappearsTime];
