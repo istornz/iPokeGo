@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)syncToValues:(NSDictionary *)values;
 - (BOOL)isFav;
 - (BOOL)isCommon;
+- (BOOL)isStrong;
 
 @end
 

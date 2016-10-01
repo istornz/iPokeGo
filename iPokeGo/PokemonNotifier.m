@@ -114,6 +114,11 @@
         return;
     }
     
+    if([prefs boolForKey:@"only_notify_for_iv"] && ![pokemon isStrong]) {
+//        NSLog(@"Not showing notification because pokemon is not strong");
+        return;
+    }
+    
     //creating a region to zoom on the pokemon
     MKCoordinateRegion region;
     region.center = pokemon.location;

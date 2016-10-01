@@ -27,20 +27,23 @@
 {
     [super viewWillAppear:animated];
 
-    self.rangePickerRanges = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500, @5000, @10000, @25000];
-    self.pickerCellRowHeight = 150;
+    self.rangePickerRanges      = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500, @5000, @10000, @25000];
+    self.pickerCellRowHeight    = 150;
     
-    self.commonRangePicker.delegate = self;
     self.commonRangePicker.delegate = self;
     self.commonRangePicker.dataSource = self;
     self.favoriteRangePicker.delegate = self;
     self.favoriteRangePicker.dataSource = self;
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.tableView.tableFooterView = footerView;
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     self.normalNotificationSwitch.on = [prefs boolForKey:@"norm_notification"];
     self.favoriteNotificationSwitch.on = [prefs boolForKey:@"fav_notification"];
     self.vibrationSwitch.on = [prefs boolForKey:@"vibration"];
     self.rangeSwitch.on = [prefs boolForKey:@"only_notify_in_range"];
+    self.ivSwitch.on = [prefs boolForKey:@"only_notify_for_iv"];
     
     self.commonRangeLabel.text = [NSString stringWithFormat:@"%dm", (int)[prefs integerForKey:@"common_notification_range"]];
     self.favoriteRangeLabel.text = [NSString stringWithFormat:@"%dm", (int)[prefs integerForKey:@"favorite_notification_range"]];
@@ -79,6 +82,8 @@
         [prefs setBool:self.rangeSwitch.on forKey:@"only_notify_in_range"];
         [self.tableView beginUpdates];
         [self.tableView endUpdates];
+    } else if (sender == self.ivSwitch) {
+        [prefs setBool:self.ivSwitch.on forKey:@"only_notify_for_iv"];
     }
 }
 

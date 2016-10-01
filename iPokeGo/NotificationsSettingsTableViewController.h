@@ -29,6 +29,9 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *favoriteRangePicker;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteRangeLabel;
 
+@property (weak, nonatomic) IBOutlet UISwitch *ivSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *ivLabel;
+
 -(IBAction)switchAction:(UISwitch *)sender;
 
 @end

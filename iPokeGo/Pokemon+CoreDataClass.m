@@ -77,4 +77,17 @@
     return [commonPokemon containsObject:pokemonID];
 }
 
+-(BOOL)isStrong
+{
+    BOOL isStrong;
+    
+    float iv = (float)((self.individual_attack + self.individual_defense + self.individual_stamina) / (float)45) * 100;
+    if(iv >= 70)
+        isStrong = YES;
+    else
+        isStrong = NO;
+    
+    return isStrong;
+}
+
 @end
