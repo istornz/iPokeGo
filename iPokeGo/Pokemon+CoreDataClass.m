@@ -97,7 +97,6 @@
     
     NSInteger userIVRange = [[NSUserDefaults standardUserDefaults] integerForKey:@"iv_notification_range"];
     
-    NSLog(@"================================= USER CHOICE -> %ld", (long)userIVRange);
     if(userIVRange == 100) {
         if(self.iv == 100)
             isStrong = YES;
