@@ -8,15 +8,18 @@
 
 #import "NotificationsSettingsTableViewController.h"
 
-#define kCommonRangeCell     1
-#define kCommonRangePicker   2
-#define kFavoriteRangeCell   4
-#define kFavoriteRangePicker 5
+#define kCommonRangeCell        1
+#define kCommonRangePicker      2
+#define kFavoriteRangeCell      4
+#define kFavoriteRangePicker    5
+#define kIVRangeCell            9
+#define kIVRangePicker          10
 
 @interface NotificationsSettingsTableViewController ()
 
 @property (assign) NSInteger pickerCellRowHeight;
 @property (nonatomic, strong) NSArray *rangePickerRanges;
+@property (nonatomic, strong) NSArray *ivPickerRanges;
 @property (nonatomic, strong) NSIndexPath *pickerIndexPath;
 
 @end
@@ -28,12 +31,15 @@
     [super viewWillAppear:animated];
 
     self.rangePickerRanges      = @[@0, @100, @250, @500, @750, @1000, @1500, @2000, @2500, @5000, @10000, @25000];
+    self.ivPickerRanges         = @[@50, @60, @70, @80, @90, @100];
     self.pickerCellRowHeight    = 150;
     
     self.commonRangePicker.delegate = self;
     self.commonRangePicker.dataSource = self;
     self.favoriteRangePicker.delegate = self;
     self.favoriteRangePicker.dataSource = self;
+    self.ivRangePicker.delegate = self;
+    self.ivRangePicker.dataSource = self;
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.tableView.tableFooterView = footerView;
@@ -48,8 +54,15 @@
     self.commonRangeLabel.text = [NSString stringWithFormat:@"%dm", (int)[prefs integerForKey:@"common_notification_range"]];
     self.favoriteRangeLabel.text = [NSString stringWithFormat:@"%dm", (int)[prefs integerForKey:@"favorite_notification_range"]];
     
+    int ivRange = (int)[prefs integerForKey:@"iv_notification_range"];
+    if(ivRange < 100)
+        self.ivRangeLabel.text = [NSString stringWithFormat:@">= %d %%", ivRange];
+    else
+        self.ivRangeLabel.text = [NSString stringWithFormat:@"= %d %%", ivRange];
+    
     [self.commonRangePicker selectRow:[self rangePickerRowForValue:(int)[prefs integerForKey:@"common_notification_range"]] inComponent:0 animated:YES];
     [self.favoriteRangePicker selectRow:[self rangePickerRowForValue:(int)[prefs integerForKey:@"favorite_notification_range"]] inComponent:0 animated:YES];
+    [self.ivRangePicker selectRow:[self ivPickerRowForValue:(int)[prefs integerForKey:@"iv_notification_range"]] inComponent:0 animated:YES];
 }
 
 -(int)rangePickerRowForValue:(int)value
@@ -58,6 +71,22 @@
         int index;
         for (index = 0; index <= self.rangePickerRanges.count; index++) {
             if ([[self.rangePickerRanges objectAtIndex:index] intValue] == value) {
+                return index;
+            }
+        }
+        
+        return 0;
+    } else {
+        return 0;
+    }
+}
+
+-(int)ivPickerRowForValue:(int)value
+{
+    if(self.ivPickerRanges.count) {
+        int index;
+        for (index = 0; index <= self.ivPickerRanges.count; index++) {
+            if ([[self.ivPickerRanges objectAtIndex:index] intValue] == value) {
                 return index;
             }
         }
@@ -84,12 +113,15 @@
         [self.tableView endUpdates];
     } else if (sender == self.ivSwitch) {
         [prefs setBool:self.ivSwitch.on forKey:@"only_notify_for_iv"];
+        self.pickerIndexPath = nil;
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == kCommonRangeCell || indexPath.row == kFavoriteRangeCell) {
+    if(indexPath.row == kCommonRangeCell || indexPath.row == kFavoriteRangeCell || indexPath.row == kIVRangeCell) {
         if(!self.pickerIndexPath || self.pickerIndexPath.row - 1 != indexPath.row) {
             switch (indexPath.row) {
                 case kCommonRangeCell:
@@ -97,6 +129,9 @@
                     break;
                 case kFavoriteRangeCell:
                     self.pickerIndexPath = [NSIndexPath indexPathForRow:kFavoriteRangePicker inSection:0];
+                    break;
+                case kIVRangeCell:
+                    self.pickerIndexPath = [NSIndexPath indexPathForRow:kIVRangePicker inSection:0];
                     break;
             }
         } else {
@@ -135,6 +170,17 @@
             } else {
                 return 0;
             }
+        case kIVRangeCell:
+            if(!self.ivSwitch.on) {
+                return 0;
+            }
+            break;
+        case kIVRangePicker:
+            if(indexPath == self.pickerIndexPath) {
+                return self.pickerCellRowHeight;
+            } else {
+                return 0;
+            }
             break;
     }
     
@@ -152,13 +198,27 @@
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return self.rangePickerRanges.count;
+    if(pickerView == self.ivRangePicker)
+        return self.ivPickerRanges.count;
+    else
+        return self.rangePickerRanges.count;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    int value = [[self.rangePickerRanges objectAtIndex:row] intValue];
+    if(pickerView == self.ivRangePicker)
+    {
+        int value = [[self.ivPickerRanges objectAtIndex:row] intValue];
+        
+        if(value < 100) {
+            return [NSString stringWithFormat:@">= %d%%", value];
+        } else {
+            return @"= 100%";
+        }
+    }
     
+    int value = [[self.rangePickerRanges objectAtIndex:row] intValue];
+        
     if(value) {
         return [NSString stringWithFormat:@"%dm", value];
     } else {
@@ -169,13 +229,21 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    int rowInt = [[self.rangePickerRanges objectAtIndex:row] intValue];
+    int rangeRowInt = [[self.rangePickerRanges objectAtIndex:row] intValue];
+    int ivRowInt = [[self.ivPickerRanges objectAtIndex:row] intValue];
     if(pickerView == self.commonRangePicker) {
-        [prefs setInteger:rowInt forKey:@"common_notification_range"];
-        self.commonRangeLabel.text = [NSString stringWithFormat:@"%dm", rowInt];
+        [prefs setInteger:rangeRowInt forKey:@"common_notification_range"];
+        self.commonRangeLabel.text = [NSString stringWithFormat:@"%dm", rangeRowInt];
     } else if(pickerView == self.favoriteRangePicker) {
-        [prefs setInteger:rowInt forKey:@"favorite_notification_range"];
-        self.favoriteRangeLabel.text = [NSString stringWithFormat:@"%dm", rowInt];
+        [prefs setInteger:rangeRowInt forKey:@"favorite_notification_range"];
+        self.favoriteRangeLabel.text = [NSString stringWithFormat:@"%dm", rangeRowInt];
+    } else if(pickerView == self.ivRangePicker) {
+        [prefs setInteger:ivRowInt forKey:@"iv_notification_range"];
+        
+        if(ivRowInt < 100)
+            self.ivRangeLabel.text = [NSString stringWithFormat:@">= %d %%", ivRowInt];
+        else
+            self.ivRangeLabel.text = [NSString stringWithFormat:@"= %d %%", ivRowInt];
     }
 }
 

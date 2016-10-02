@@ -31,7 +31,7 @@
         self.move_2              = pokemon.move_2;
         self.coordinate          = pokemon.location;
         self.title               = [localization objectForKey:[NSString stringWithFormat:@"%@", @(pokemon.identifier)]];
-        self.iv                  = (float)((pokemon.individual_attack + pokemon.individual_defense + pokemon.individual_stamina) / (float)45) * 100;
+        self.iv                  = pokemon.iv;
         self.pokemonID           = pokemon.identifier;
         
         NSString *subtitleStr;

@@ -16,6 +16,7 @@
 @dynamic individual_attack;
 @dynamic individual_defense;
 @dynamic individual_stamina;
+@dynamic iv;
 @dynamic move_1;
 @dynamic move_2;
 @dynamic latitude;

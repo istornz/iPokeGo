@@ -31,6 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *ivSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *ivLabel;
+@property (weak, nonatomic) IBOutlet UIPickerView *ivRangePicker;
+@property (weak, nonatomic) IBOutlet UILabel *ivRangeLabel;
 
 -(IBAction)switchAction:(UISwitch *)sender;
 

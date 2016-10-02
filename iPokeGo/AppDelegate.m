@@ -62,6 +62,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
                                @"only_notify_for_iv": @"NO",
                                @"common_notification_range": @"100",
                                @"favorite_notification_range": @"2500",
+                               @"iv_notification_range": @"80",
                                @"server_type": SERVER_API_DATA_POKEMONGOMAP,
                                @"follow_location": @"NO"};
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];

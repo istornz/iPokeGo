@@ -793,6 +793,56 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Nlh-pG-QmQ">
+                                        <rect key="frame" x="0.0" y="672" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nlh-pG-QmQ" id="DEB-gV-E4v">
+                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iv_range" translatesAutoresizingMaskIntoConstraints="NO" id="fqk-R5-0p0" userLabel="Range Image View">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="vWc-PA-QIp"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IVs range" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JZ-MC-hCE">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guQ-wM-2Y2">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.23828989270000001" green="0.4934507608" blue="0.99851572509999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="guQ-wM-2Y2" firstAttribute="centerY" secondItem="fqk-R5-0p0" secondAttribute="centerY" id="6y9-6J-Zto"/>
+                                                <constraint firstItem="fqk-R5-0p0" firstAttribute="leading" secondItem="DEB-gV-E4v" secondAttribute="leadingMargin" id="JOw-zQ-sgT"/>
+                                                <constraint firstItem="guQ-wM-2Y2" firstAttribute="baseline" secondItem="1JZ-MC-hCE" secondAttribute="baseline" id="P73-z5-4pd"/>
+                                                <constraint firstItem="fqk-R5-0p0" firstAttribute="top" secondItem="DEB-gV-E4v" secondAttribute="topMargin" id="V4j-oQ-tTB"/>
+                                                <constraint firstItem="guQ-wM-2Y2" firstAttribute="trailing" secondItem="DEB-gV-E4v" secondAttribute="trailingMargin" id="X45-9J-S7u"/>
+                                                <constraint firstItem="1JZ-MC-hCE" firstAttribute="leading" secondItem="fqk-R5-0p0" secondAttribute="trailing" constant="8" symbolic="YES" id="hmu-MM-PWx"/>
+                                                <constraint firstItem="fqk-R5-0p0" firstAttribute="bottom" secondItem="DEB-gV-E4v" secondAttribute="bottomMargin" id="jKx-jX-aXX"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="WUk-t5-LQG">
+                                        <rect key="frame" x="0.0" y="716" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WUk-t5-LQG" id="b7P-De-amL">
+                                            <frame key="frameInset" width="375" height="149.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-RQ-iyI"/>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BOT-RQ-iyI" firstAttribute="centerY" secondItem="b7P-De-amL" secondAttribute="centerY" id="CSv-RT-veQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="BOT-RQ-iyI" secondAttribute="trailing" id="LOK-8d-NEb"/>
+                                                <constraint firstItem="BOT-RQ-iyI" firstAttribute="top" secondItem="b7P-De-amL" secondAttribute="top" id="VAi-pW-R91"/>
+                                                <constraint firstItem="BOT-RQ-iyI" firstAttribute="leading" secondItem="b7P-De-amL" secondAttribute="leading" id="qLE-6I-k8N"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -811,6 +861,8 @@
                         <outlet property="favoriteRangeLabel" destination="GNt-l5-Ggl" id="vKe-wP-P88"/>
                         <outlet property="favoriteRangePicker" destination="AS3-3i-IJU" id="fn3-DN-VKq"/>
                         <outlet property="ivLabel" destination="hGE-Xt-S2J" id="ob5-Oz-Uqi"/>
+                        <outlet property="ivRangeLabel" destination="guQ-wM-2Y2" id="5TS-LY-Bpo"/>
+                        <outlet property="ivRangePicker" destination="BOT-RQ-iyI" id="eBv-1L-geL"/>
                         <outlet property="ivSwitch" destination="3SM-xM-tXC" id="jz0-46-kSx"/>
                         <outlet property="normalNotificationImageView" destination="FEZ-lz-79d" id="Dry-fm-Nci"/>
                         <outlet property="normalNotificationLabel" destination="4fQ-bY-gce" id="Ica-wT-957"/>
@@ -1826,6 +1878,7 @@
         <image name="hide_spawnpoint" width="39" height="39"/>
         <image name="infinity" width="36" height="36"/>
         <image name="iv_pokemon" width="37" height="37"/>
+        <image name="iv_range" width="37" height="37"/>
         <image name="license" width="36" height="36"/>
         <image name="location" width="216" height="216"/>
         <image name="lured" width="37" height="37"/>

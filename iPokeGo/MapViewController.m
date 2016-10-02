@@ -370,6 +370,7 @@ BOOL mapCenterToGPSLocation                 = YES;
             if (!view) {
                 view = [[PokemonAnnotationView alloc] initWithAnnotation:annotationPokemon currentLocation:[self currentLocation] reuseIdentifier:reuse];
             } else {
+                NSLog(@"NEED UPDATE !! %f", annotationPokemon.iv);
                 [((PokemonAnnotationView *)view) setAnnotation:annotation withLocation:[self currentLocation]];
             }
             view.hidden = self.mapview.region.span.latitudeDelta >= DeltaHideAllIcons;
