@@ -2,8 +2,12 @@
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/istornz)
 This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
 
+iPokeGO is now officially available on the AppStore !
+
+<a href="https://itunes.apple.com/us/app/ipokego-for-pokemon-go/id1138277066?l=fr&ls=1&mt=8" ><img src="http://dimitridessus.fr/img/iPokeGo/appstore.png" width="150"/></a>
+
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo7.jpg" width="270" height="480"/>
-<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo6.jpg" width="270" height="480"/>
+<img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo8.jpg" width="270" height="480"/>
 <img src="http://dimitridessus.fr/img/iPokeGo/screenshots/iPokeGo3.jpg" width="270" height="480"/>
 
 ## Features
@@ -17,6 +21,8 @@ This is a client for the Pokemap server (https://github.com/PokemonGoMap/Pokemon
 - See distance and remaining time on each pokemons.
 - Possibility to show/hide common pokemon in a list.
 - Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- Possibility to switch between all your servers easily.
+- Wifi only mode if you run this app at your home.
 - Possibility to follow user location.
 
 ## Now with real push notification !
@@ -40,6 +46,8 @@ You will have no more reason of all not to catch them ;)
 7. Tap the new profile created and trust it.
 8. You are now able to run the app on your device !
 
+For help with this part of installation, [r/sideloaded](https://reddit.com/r/sideloaded) (on reddit) will most likely be able to help you, as you are technically sideloading this app. There is also a good cydia impactor guide [here](https://www.reddit.com/r/sideloaded/wiki/ipasigning#wiki_how_to_sideload_using_saurik.27s_.22impactor.22).
+
 ## Configuration
 On settings, please enter the address of your server.
 
@@ -52,13 +60,15 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - Server : Please use latest stable version (https://github.com/PokemonGoMap/PokemonGo-Map/releases)
 
 ## TODO
-- [x] Add possibility to follow user location (same as website)
-- [ ] Add a server status page
-- [ ] Regroup pokestops annotations to reduce CPU usage (clustering)
-- [x] Update pokestop and gym annotations
-- [ ] Find a way to do some background task without hack
-- [x] Real notification
-- [x] Change scan position
+- [x] Add possibility to follow user location (same as website).
+- [x] Update pokestop and gym annotations.
+- [x] Real notification.
+- [x] Change scan position.
+- [x] Add a server status page.
+- [x] Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- [x] Add a server switcher functionality.
+- [ ] Regroup pokestops annotations to reduce CPU usage (clustering).
+- [ ] Find a way to do some background task without hack.
 
 ## Others
 If you want to edit storyboard file and compile with Xcode 7 on iOS 10 beta, please move the iOS 10 developer image inside Xcode 7 folder [refer to this link](http://stackoverflow.com/a/31013217)

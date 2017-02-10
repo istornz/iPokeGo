@@ -27,30 +27,78 @@
         self.canShowCallout = YES;
         self.rightCalloutAccessoryView = button;
         self.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(annotation.pokemonID)]];
+        
         self.frame = CGRectMake(0, 0, 45, 45);
         self.location = location;
         
-        UIColor *bgColor = COLOR_COMMON;
-        if([annotation.rarity isEqualToString:@"Uncommon"])
-            bgColor = COLOR_UNCOMMON;
-        else if([annotation.rarity isEqualToString:@"Rare"])
-            bgColor = COLOR_RARE;
-        else if([annotation.rarity isEqualToString:@"Very Rare"])
-            bgColor = COLOR_VERYRARE;
-        else if([annotation.rarity isEqualToString:@"Ultra Rare"])
-            bgColor = COLOR_ULTRARARE;
-
-        if([annotation.rarity length] > 0)
+        if([annotation.rarity length] > 0 || annotation.iv > 0)
         {
+            UIColor *bgColor;
             TagLabel *tagLabelView = [[TagLabel alloc] init];
-            [tagLabelView setLabelText:annotation.rarity.uppercaseString];
-            [tagLabelView setBackgroundColor:bgColor];
-            self.leftCalloutAccessoryView = tagLabelView;
+            if(annotation.iv > 0) {
+                //Display IV instead of rarity
+                
+                if((annotation.iv <= 20.0)) {
+                    bgColor = COLOR_COMMON;
+                } else if((annotation.iv > 20.0) && (annotation.iv <= 40.0)) {
+                    bgColor = COLOR_UNCOMMON;
+                } else if((annotation.iv > 40.0) && (annotation.iv <= 70.0)) {
+                    bgColor = COLOR_RARE;
+                } else if((annotation.iv > 70.0) && (annotation.iv <= 90)) {
+                    bgColor = COLOR_VERYRARE;
+                } else if((annotation.iv > 90) && (annotation.iv <= 100)) {
+                    bgColor = COLOR_ULTRARARE;
+                    // Wow pokemon is very strong !
+                    // Let's user know it :)
+                    [self addHoveredImage:[UIImage imageNamed:@"hot_pokemon"]];
+                }
+                
+                [tagLabelView setLabelText:[NSString stringWithFormat:@"IV: %.f%%", annotation.iv]];
+                [tagLabelView setBackgroundColor:bgColor];
+                self.leftCalloutAccessoryView = tagLabelView;
+                
+            } else {
+                if([annotation.rarity length] > 0)
+                {
+                    if([annotation.rarity isEqualToString:@"Uncommon"])
+                        bgColor = COLOR_UNCOMMON;
+                    else if([annotation.rarity isEqualToString:@"Rare"])
+                        bgColor = COLOR_RARE;
+                    else if([annotation.rarity isEqualToString:@"Very Rare"])
+                        bgColor = COLOR_VERYRARE;
+                    else if([annotation.rarity isEqualToString:@"Ultra Rare"])
+                        bgColor = COLOR_ULTRARARE;
+                    else
+                        bgColor = COLOR_COMMON;
+                    
+                    [tagLabelView setLabelText:NSLocalizedString(annotation.rarity.uppercaseString, @"Pokemon rarity annotation label")];
+                    [tagLabelView setBackgroundColor:bgColor];
+                    self.leftCalloutAccessoryView = tagLabelView;
+                }
+            }
         }
         
         [self updateForAnnotation:annotation withLocation:location];
     }
     return self;
+}
+
+-(void)addHoveredImage:(UIImage *)image
+{
+    CGSize size = CGSizeMake(45, 45);
+    
+    // Add option for retina screen
+    UIGraphicsBeginImageContextWithOptions(size, false, [[UIScreen mainScreen] scale]);
+    
+    [self.image drawInRect:CGRectMake(0,0,size.width, size.height)];
+    [image drawInRect:CGRectMake(0,0, 15, 15)];
+    
+    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    //set finalImage to IBOulet UIImageView
+    self.image = finalImage;
 }
 
 - (void)setAnnotation:(id<MKAnnotation>)annotation withLocation:(CLLocation *)location
@@ -63,6 +111,32 @@
 
 - (void)updateForAnnotation:(PokemonAnnotation *)annotation withLocation:(CLLocation *)location
 {
+    if(annotation.iv > 0)
+    {
+        TagLabel *tagLabelView = [[TagLabel alloc] init];
+        UIColor *bgColor;
+        //Display IV instead of rarity
+        
+        if((annotation.iv <= 20.0)) {
+            bgColor = COLOR_COMMON;
+        } else if((annotation.iv > 20.0) && (annotation.iv <= 40.0)) {
+            bgColor = COLOR_UNCOMMON;
+        } else if((annotation.iv > 40.0) && (annotation.iv <= 70.0)) {
+            bgColor = COLOR_RARE;
+        } else if((annotation.iv > 70.0) && (annotation.iv <= 90)) {
+            bgColor = COLOR_VERYRARE;
+        } else if((annotation.iv > 90) && (annotation.iv <= 100)) {
+            bgColor = COLOR_ULTRARARE;
+            // Wow pokemon is very strong !
+            // Let's user know it :)
+            [self addHoveredImage:[UIImage imageNamed:@"hot_pokemon"]];
+        }
+        
+        [tagLabelView setLabelText:[NSString stringWithFormat:@"IV: %.f%%", annotation.iv]];
+        [tagLabelView setBackgroundColor:bgColor];
+        self.leftCalloutAccessoryView = tagLabelView;
+    }
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:@"display_time"] && ![defaults boolForKey:@"display_timer"]) {
         if (!self.timeLabel) {

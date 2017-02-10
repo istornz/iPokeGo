@@ -11,7 +11,11 @@
 		0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E3851D473D7800CEEE3F /* TimerLabel.m */; };
 		0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E38B1D474C5A00CEEE3F /* DistanceLabel.m */; };
 		0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */; };
+		03C59E7A1D6E940E000A4ABA /* DeviceVibrate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C59E791D6E940E000A4ABA /* DeviceVibrate.m */; };
 		2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */; };
+		272E3B651D7C71390027A833 /* ServersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B641D7C71390027A833 /* ServersTableViewController.m */; };
+		272E3B681D7C73A10027A833 /* ServersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B671D7C73A10027A833 /* ServersTableViewCell.m */; };
+		272E3B6B1D7C76180027A833 /* AddServerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */; };
 		27315DD11D63243D002E149A /* SpawnPointsAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD01D63243D002E149A /* SpawnPointsAnnotation.m */; };
 		27315DD41D632509002E149A /* SpawnPointsAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27315DD31D632509002E149A /* SpawnPointsAnnotationView.m */; };
 		273604561D44094700194BAF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 273604551D44094700194BAF /* ding.mp3 */; };
@@ -26,6 +30,25 @@
 		2785D1181D5E153A004FC688 /* TagLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2785D1171D5E153A004FC688 /* TagLabel.m */; };
 		2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2788622C1D4226D300CCF60E /* PokestopAnnotation.m */; };
 		2798B9DB1D4F8CEC00B33BE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */; };
+		27BA23A11D731AE1005CC560 /* UIApplication+M13ProgressSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23781D731AE1005CC560 /* UIApplication+M13ProgressSuite.m */; };
+		27BA23A21D731AE1005CC560 /* M13ProgressConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA237B1D731AE1005CC560 /* M13ProgressConsole.m */; };
+		27BA23A31D731AE1005CC560 /* M13ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA237E1D731AE1005CC560 /* M13ProgressHUD.m */; };
+		27BA23A41D731AE1005CC560 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23801D731AE1005CC560 /* UIImage+ImageEffects.m */; };
+		27BA23A51D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23831D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.m */; };
+		27BA23A61D731AE1005CC560 /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23861D731AE1005CC560 /* M13ProgressView.m */; };
+		27BA23A71D731AE1005CC560 /* M13ProgressViewBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23881D731AE1005CC560 /* M13ProgressViewBar.m */; };
+		27BA23A81D731AE1005CC560 /* M13ProgressViewBorderedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA238A1D731AE1005CC560 /* M13ProgressViewBorderedBar.m */; };
+		27BA23A91D731AE1005CC560 /* M13ProgressViewFilteredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA238C1D731AE1005CC560 /* M13ProgressViewFilteredImage.m */; };
+		27BA23AA1D731AE1005CC560 /* M13ProgressViewImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA238E1D731AE1005CC560 /* M13ProgressViewImage.m */; };
+		27BA23AB1D731AE1005CC560 /* M13ProgressViewLetterpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23901D731AE1005CC560 /* M13ProgressViewLetterpress.m */; };
+		27BA23AC1D731AE1005CC560 /* M13ProgressViewMetro.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23921D731AE1005CC560 /* M13ProgressViewMetro.m */; };
+		27BA23AD1D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23941D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.m */; };
+		27BA23AE1D731AE1005CC560 /* M13ProgressViewPie.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23961D731AE1005CC560 /* M13ProgressViewPie.m */; };
+		27BA23AF1D731AE1005CC560 /* M13ProgressViewRadiative.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23981D731AE1005CC560 /* M13ProgressViewRadiative.m */; };
+		27BA23B01D731AE1005CC560 /* M13ProgressViewRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA239A1D731AE1005CC560 /* M13ProgressViewRing.m */; };
+		27BA23B11D731AE1005CC560 /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA239C1D731AE1005CC560 /* M13ProgressViewSegmentedBar.m */; };
+		27BA23B21D731AE1005CC560 /* M13ProgressViewSegmentedRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA239E1D731AE1005CC560 /* M13ProgressViewSegmentedRing.m */; };
+		27BA23B31D731AE1005CC560 /* M13ProgressViewStripedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BA23A01D731AE1005CC560 /* M13ProgressViewStripedBar.m */; };
 		27C2BF901D646A99005F1677 /* ScanLocations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF8D1D646A99005F1677 /* ScanLocations+CoreDataProperties.m */; };
 		27C2BF911D646A99005F1677 /* ScanLocations+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF8F1D646A99005F1677 /* ScanLocations+CoreDataClass.m */; };
 		27C2BF991D648D81005F1677 /* TagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C2BF981D648D81005F1677 /* TagButton.m */; };
@@ -63,6 +86,7 @@
 		866862CD1D5D4667003070F3 /* FollowLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 866862CC1D5D4667003070F3 /* FollowLocationHelper.m */; };
 		AEFA37EE1D47D04200DEE95C /* pokemon.json in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F01D47D04200DEE95C /* pokemon.json */; };
 		AEFA37F81D49252100DEE95C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEFA37F61D49252100DEE95C /* Localizable.strings */; };
+		F205FFEF1D74BD98008A192C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F205FFEE1D74BD98008A192C /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,10 +115,18 @@
 		0256E38B1D474C5A00CEEE3F /* DistanceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceLabel.m; sourceTree = "<group>"; };
 		0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatting.h"; sourceTree = "<group>"; };
 		0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatting.m"; sourceTree = "<group>"; };
+		03C59E781D6E940E000A4ABA /* DeviceVibrate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceVibrate.h; sourceTree = "<group>"; };
+		03C59E791D6E940E000A4ABA /* DeviceVibrate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceVibrate.m; sourceTree = "<group>"; };
 		095DAA6F1D5FB6E000377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		095DAA711D5FB77700377BB0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		2720658A1D4223FD00D3B6E6 /* GymAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GymAnnotation.h; sourceTree = "<group>"; };
 		2720658B1D4223FD00D3B6E6 /* GymAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GymAnnotation.m; sourceTree = "<group>"; };
+		272E3B631D7C71390027A833 /* ServersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersTableViewController.h; sourceTree = "<group>"; };
+		272E3B641D7C71390027A833 /* ServersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersTableViewController.m; sourceTree = "<group>"; };
+		272E3B661D7C73A10027A833 /* ServersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServersTableViewCell.h; sourceTree = "<group>"; };
+		272E3B671D7C73A10027A833 /* ServersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServersTableViewCell.m; sourceTree = "<group>"; };
+		272E3B691D7C76180027A833 /* AddServerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServerTableViewController.h; sourceTree = "<group>"; };
+		272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServerTableViewController.m; sourceTree = "<group>"; };
 		27315DCF1D63243D002E149A /* SpawnPointsAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpawnPointsAnnotation.h; sourceTree = "<group>"; };
 		27315DD01D63243D002E149A /* SpawnPointsAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpawnPointsAnnotation.m; sourceTree = "<group>"; };
 		27315DD21D632509002E149A /* SpawnPointsAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpawnPointsAnnotationView.h; sourceTree = "<group>"; };
@@ -120,6 +152,44 @@
 		2788622B1D4226D300CCF60E /* PokestopAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokestopAnnotation.h; sourceTree = "<group>"; };
 		2788622C1D4226D300CCF60E /* PokestopAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokestopAnnotation.m; sourceTree = "<group>"; };
 		2798B9DA1D4F8CEC00B33BE5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		27BA23771D731AE1005CC560 /* UIApplication+M13ProgressSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+M13ProgressSuite.h"; sourceTree = "<group>"; };
+		27BA23781D731AE1005CC560 /* UIApplication+M13ProgressSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+M13ProgressSuite.m"; sourceTree = "<group>"; };
+		27BA237A1D731AE1005CC560 /* M13ProgressConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressConsole.h; sourceTree = "<group>"; };
+		27BA237B1D731AE1005CC560 /* M13ProgressConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressConsole.m; sourceTree = "<group>"; };
+		27BA237D1D731AE1005CC560 /* M13ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressHUD.h; sourceTree = "<group>"; };
+		27BA237E1D731AE1005CC560 /* M13ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressHUD.m; sourceTree = "<group>"; };
+		27BA237F1D731AE1005CC560 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		27BA23801D731AE1005CC560 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		27BA23821D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+M13ProgressViewBar.h"; sourceTree = "<group>"; };
+		27BA23831D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+M13ProgressViewBar.m"; sourceTree = "<group>"; };
+		27BA23851D731AE1005CC560 /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
+		27BA23861D731AE1005CC560 /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
+		27BA23871D731AE1005CC560 /* M13ProgressViewBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBar.h; sourceTree = "<group>"; };
+		27BA23881D731AE1005CC560 /* M13ProgressViewBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBar.m; sourceTree = "<group>"; };
+		27BA23891D731AE1005CC560 /* M13ProgressViewBorderedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewBorderedBar.h; sourceTree = "<group>"; };
+		27BA238A1D731AE1005CC560 /* M13ProgressViewBorderedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewBorderedBar.m; sourceTree = "<group>"; };
+		27BA238B1D731AE1005CC560 /* M13ProgressViewFilteredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewFilteredImage.h; sourceTree = "<group>"; };
+		27BA238C1D731AE1005CC560 /* M13ProgressViewFilteredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewFilteredImage.m; sourceTree = "<group>"; };
+		27BA238D1D731AE1005CC560 /* M13ProgressViewImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewImage.h; sourceTree = "<group>"; };
+		27BA238E1D731AE1005CC560 /* M13ProgressViewImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewImage.m; sourceTree = "<group>"; };
+		27BA238F1D731AE1005CC560 /* M13ProgressViewLetterpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewLetterpress.h; sourceTree = "<group>"; };
+		27BA23901D731AE1005CC560 /* M13ProgressViewLetterpress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewLetterpress.m; sourceTree = "<group>"; };
+		27BA23911D731AE1005CC560 /* M13ProgressViewMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetro.h; sourceTree = "<group>"; };
+		27BA23921D731AE1005CC560 /* M13ProgressViewMetro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetro.m; sourceTree = "<group>"; };
+		27BA23931D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewMetroDotPolygon.h; sourceTree = "<group>"; };
+		27BA23941D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewMetroDotPolygon.m; sourceTree = "<group>"; };
+		27BA23951D731AE1005CC560 /* M13ProgressViewPie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewPie.h; sourceTree = "<group>"; };
+		27BA23961D731AE1005CC560 /* M13ProgressViewPie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewPie.m; sourceTree = "<group>"; };
+		27BA23971D731AE1005CC560 /* M13ProgressViewRadiative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRadiative.h; sourceTree = "<group>"; };
+		27BA23981D731AE1005CC560 /* M13ProgressViewRadiative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRadiative.m; sourceTree = "<group>"; };
+		27BA23991D731AE1005CC560 /* M13ProgressViewRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewRing.h; sourceTree = "<group>"; };
+		27BA239A1D731AE1005CC560 /* M13ProgressViewRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewRing.m; sourceTree = "<group>"; };
+		27BA239B1D731AE1005CC560 /* M13ProgressViewSegmentedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedBar.h; sourceTree = "<group>"; };
+		27BA239C1D731AE1005CC560 /* M13ProgressViewSegmentedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedBar.m; sourceTree = "<group>"; };
+		27BA239D1D731AE1005CC560 /* M13ProgressViewSegmentedRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedRing.h; sourceTree = "<group>"; };
+		27BA239E1D731AE1005CC560 /* M13ProgressViewSegmentedRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedRing.m; sourceTree = "<group>"; };
+		27BA239F1D731AE1005CC560 /* M13ProgressViewStripedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewStripedBar.h; sourceTree = "<group>"; };
+		27BA23A01D731AE1005CC560 /* M13ProgressViewStripedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewStripedBar.m; sourceTree = "<group>"; };
 		27C2BF8C1D646A99005F1677 /* ScanLocations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ScanLocations+CoreDataProperties.h"; sourceTree = "<group>"; };
 		27C2BF8D1D646A99005F1677 /* ScanLocations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ScanLocations+CoreDataProperties.m"; sourceTree = "<group>"; };
 		27C2BF8E1D646A99005F1677 /* ScanLocations+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ScanLocations+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -162,6 +232,7 @@
 		27F424561D46A246007ADEE4 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		48E593571D60BF3600FEA380 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		48E593581D60BF3600FEA380 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4DCC9E6B1D7B404E00E073C6 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/pokemon.json"; sourceTree = "<group>"; };
 		58CA35381D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		58CA35391D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/pokemon.json; sourceTree = "<group>"; };
 		58CA353A1D4B792C003B7F85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -200,6 +271,8 @@
 		866862CE1D5D468B003070F3 /* FollowLocationHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FollowLocationHelper.h; sourceTree = "<group>"; };
 		8673808B1D60E1340062A80B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		8673808C1D60E1340062A80B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9206A3161D806417004959DA /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Main.strings"; sourceTree = "<group>"; };
+		9206A3171D807072004959DA /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AE1E273F1D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		AE1E27401D4A8F4900FA1BA0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37F11D47D04800DEE95C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/pokemon.json; sourceTree = "<group>"; };
@@ -210,6 +283,11 @@
 		AEFA37F71D49252100DEE95C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AEFA37FF1D49292D00DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		AEFA380B1D49293400DEE95C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F205FFED1D74BD98008A192C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F205FFEE1D74BD98008A192C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		F205FFF11D74D123008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		F205FFF31D74D359008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F205FFF41D74D59A008A192C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "pt-BR"; path = "pt-BR.lproj/pokemon.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +344,19 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		272E3B621D7C71210027A833 /* Servers */ = {
+			isa = PBXGroup;
+			children = (
+				272E3B631D7C71390027A833 /* ServersTableViewController.h */,
+				272E3B641D7C71390027A833 /* ServersTableViewController.m */,
+				272E3B661D7C73A10027A833 /* ServersTableViewCell.h */,
+				272E3B671D7C73A10027A833 /* ServersTableViewCell.m */,
+				272E3B691D7C76180027A833 /* AddServerTableViewController.h */,
+				272E3B6A1D7C76180027A833 /* AddServerTableViewController.m */,
+			);
+			name = Servers;
+			sourceTree = "<group>";
+		};
 		272FCEA71D423F74003ED548 /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,12 +377,17 @@
 		273604571D440B0900194BAF /* Custom classes */ = {
 			isa = PBXGroup;
 			children = (
-				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
+				27BA23751D731ACC005CC560 /* M13ProgressSuite */,
 				2736045B1D440B1700194BAF /* CWStatusBarNotification */,
+				03C59E781D6E940E000A4ABA /* DeviceVibrate.h */,
+				03C59E791D6E940E000A4ABA /* DeviceVibrate.m */,
+				866862CE1D5D468B003070F3 /* FollowLocationHelper.h */,
+				866862CC1D5D4667003070F3 /* FollowLocationHelper.m */,
 				0256E38D1D47BF9200CEEE3F /* NSString+Formatting.h */,
 				0256E38E1D47BF9200CEEE3F /* NSString+Formatting.m */,
-				866862CC1D5D4667003070F3 /* FollowLocationHelper.m */,
-				866862CE1D5D468B003070F3 /* FollowLocationHelper.h */,
+				27F424511D469C06007ADEE4 /* SVPulsingAnnotationView */,
+				F205FFED1D74BD98008A192C /* Reachability.h */,
+				F205FFEE1D74BD98008A192C /* Reachability.m */,
 			);
 			name = "Custom classes";
 			sourceTree = "<group>";
@@ -372,6 +468,7 @@
 			children = (
 				27F385911D4138730004A1B3 /* SettingsTableViewController.h */,
 				27F385921D4138730004A1B3 /* SettingsTableViewController.m */,
+				272E3B621D7C71210027A833 /* Servers */,
 				276B89901D50FB22008164FE /* Pokemon select list */,
 				276B898C1D50FB08008164FE /* Notifications */,
 				276B898D1D50FB0E008164FE /* Pokemons */,
@@ -380,6 +477,91 @@
 				27DE818D1D61D54100F5F87E /* Licenses */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		27BA23751D731ACC005CC560 /* M13ProgressSuite */ = {
+			isa = PBXGroup;
+			children = (
+				27BA23761D731AE1005CC560 /* Application */,
+				27BA23791D731AE1005CC560 /* Console */,
+				27BA237C1D731AE1005CC560 /* HUD */,
+				27BA23811D731AE1005CC560 /* NavigationController */,
+				27BA23841D731AE1005CC560 /* ProgressViews */,
+			);
+			name = M13ProgressSuite;
+			sourceTree = "<group>";
+		};
+		27BA23761D731AE1005CC560 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				27BA23771D731AE1005CC560 /* UIApplication+M13ProgressSuite.h */,
+				27BA23781D731AE1005CC560 /* UIApplication+M13ProgressSuite.m */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		27BA23791D731AE1005CC560 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				27BA237A1D731AE1005CC560 /* M13ProgressConsole.h */,
+				27BA237B1D731AE1005CC560 /* M13ProgressConsole.m */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		27BA237C1D731AE1005CC560 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				27BA237D1D731AE1005CC560 /* M13ProgressHUD.h */,
+				27BA237E1D731AE1005CC560 /* M13ProgressHUD.m */,
+				27BA237F1D731AE1005CC560 /* UIImage+ImageEffects.h */,
+				27BA23801D731AE1005CC560 /* UIImage+ImageEffects.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		27BA23811D731AE1005CC560 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				27BA23821D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.h */,
+				27BA23831D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.m */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		27BA23841D731AE1005CC560 /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+				27BA23851D731AE1005CC560 /* M13ProgressView.h */,
+				27BA23861D731AE1005CC560 /* M13ProgressView.m */,
+				27BA23871D731AE1005CC560 /* M13ProgressViewBar.h */,
+				27BA23881D731AE1005CC560 /* M13ProgressViewBar.m */,
+				27BA23891D731AE1005CC560 /* M13ProgressViewBorderedBar.h */,
+				27BA238A1D731AE1005CC560 /* M13ProgressViewBorderedBar.m */,
+				27BA238B1D731AE1005CC560 /* M13ProgressViewFilteredImage.h */,
+				27BA238C1D731AE1005CC560 /* M13ProgressViewFilteredImage.m */,
+				27BA238D1D731AE1005CC560 /* M13ProgressViewImage.h */,
+				27BA238E1D731AE1005CC560 /* M13ProgressViewImage.m */,
+				27BA238F1D731AE1005CC560 /* M13ProgressViewLetterpress.h */,
+				27BA23901D731AE1005CC560 /* M13ProgressViewLetterpress.m */,
+				27BA23911D731AE1005CC560 /* M13ProgressViewMetro.h */,
+				27BA23921D731AE1005CC560 /* M13ProgressViewMetro.m */,
+				27BA23931D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.h */,
+				27BA23941D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.m */,
+				27BA23951D731AE1005CC560 /* M13ProgressViewPie.h */,
+				27BA23961D731AE1005CC560 /* M13ProgressViewPie.m */,
+				27BA23971D731AE1005CC560 /* M13ProgressViewRadiative.h */,
+				27BA23981D731AE1005CC560 /* M13ProgressViewRadiative.m */,
+				27BA23991D731AE1005CC560 /* M13ProgressViewRing.h */,
+				27BA239A1D731AE1005CC560 /* M13ProgressViewRing.m */,
+				27BA239B1D731AE1005CC560 /* M13ProgressViewSegmentedBar.h */,
+				27BA239C1D731AE1005CC560 /* M13ProgressViewSegmentedBar.m */,
+				27BA239D1D731AE1005CC560 /* M13ProgressViewSegmentedRing.h */,
+				27BA239E1D731AE1005CC560 /* M13ProgressViewSegmentedRing.m */,
+				27BA239F1D731AE1005CC560 /* M13ProgressViewStripedBar.h */,
+				27BA23A01D731AE1005CC560 /* M13ProgressViewStripedBar.m */,
+			);
+			path = ProgressViews;
 			sourceTree = "<group>";
 		};
 		27C2BF921D646ACC005F1677 /* PokeStops */ = {
@@ -692,6 +874,8 @@
 				"zh-Hant-HK",
 				nl,
 				es,
+				"pt-BR",
+				"zh-Hant-TW",
 			);
 			mainGroup = 27F3854F1D4130B30004A1B3;
 			productRefGroup = 27F385591D4130B30004A1B3 /* Products */;
@@ -743,26 +927,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				276B89881D50FA8B008164FE /* PokestopsSettingsTableViewController.m in Sources */,
+				27BA23A51D731AE1005CC560 /* UINavigationController+M13ProgressViewBar.m in Sources */,
+				27BA23AC1D731AE1005CC560 /* M13ProgressViewMetro.m in Sources */,
 				27F38F1E1D4185B40004A1B3 /* PokemonAnnotation.m in Sources */,
+				27BA23AD1D731AE1005CC560 /* M13ProgressViewMetroDotPolygon.m in Sources */,
+				27BA23A31D731AE1005CC560 /* M13ProgressHUD.m in Sources */,
 				27C2BF991D648D81005F1677 /* TagButton.m in Sources */,
+				27BA23B31D731AE1005CC560 /* M13ProgressViewStripedBar.m in Sources */,
+				272E3B681D7C73A10027A833 /* ServersTableViewCell.m in Sources */,
 				27C2BF911D646A99005F1677 /* ScanLocations+CoreDataClass.m in Sources */,
 				0256E38F1D47BF9200CEEE3F /* NSString+Formatting.m in Sources */,
 				27F424571D46A246007ADEE4 /* SVPulsingAnnotationView.m in Sources */,
+				27BA23AE1D731AE1005CC560 /* M13ProgressViewPie.m in Sources */,
 				277209DF1D441E1F0008B7FA /* PokemonTableViewCell.m in Sources */,
 				81C963721D4F26C700DD6592 /* PokeStopAnnotationView.m in Sources */,
+				27BA23A11D731AE1005CC560 /* UIApplication+M13ProgressSuite.m in Sources */,
 				8111430A1D4D598F00901851 /* Gym+CoreDataClass.m in Sources */,
 				27F385931D4138730004A1B3 /* SettingsTableViewController.m in Sources */,
 				81055B8F1D4D3DC20071FDD2 /* Model.xcdatamodeld in Sources */,
 				2720658C1D4223FD00D3B6E6 /* GymAnnotation.m in Sources */,
 				81C9636F1D4F254A00DD6592 /* GymAnnotationView.m in Sources */,
+				27BA23B01D731AE1005CC560 /* M13ProgressViewRing.m in Sources */,
 				866862CD1D5D4667003070F3 /* FollowLocationHelper.m in Sources */,
 				811142FF1D4D596700901851 /* Pokemon+CoreDataProperties.m in Sources */,
+				272E3B6B1D7C76180027A833 /* AddServerTableViewController.m in Sources */,
 				0256E38C1D474C5A00CEEE3F /* DistanceLabel.m in Sources */,
 				2785D1181D5E153A004FC688 /* TagLabel.m in Sources */,
 				27F385631D4130B30004A1B3 /* MapViewController.m in Sources */,
+				27BA23A81D731AE1005CC560 /* M13ProgressViewBorderedBar.m in Sources */,
 				27F385601D4130B30004A1B3 /* AppDelegate.m in Sources */,
 				27C2BF901D646A99005F1677 /* ScanLocations+CoreDataProperties.m in Sources */,
 				27315DD41D632509002E149A /* SpawnPointsAnnotationView.m in Sources */,
+				27BA23A41D731AE1005CC560 /* UIImage+ImageEffects.m in Sources */,
 				81771E081D4DA47B004DC881 /* PokemonNotifier.m in Sources */,
 				815EBB5D1D4EE34800773636 /* SpriteSplitter.m in Sources */,
 				276B89851D50FA83008164FE /* PokemonsSettingsTableViewController.m in Sources */,
@@ -771,21 +967,33 @@
 				27315DD11D63243D002E149A /* SpawnPointsAnnotation.m in Sources */,
 				27DFD24A1D631B2200298D31 /* SpawnPoints+CoreDataClass.m in Sources */,
 				27DFD2491D631B2200298D31 /* SpawnPoints+CoreDataProperties.m in Sources */,
+				27BA23A71D731AE1005CC560 /* M13ProgressViewBar.m in Sources */,
 				81C963751D4F27A200DD6592 /* PokemonAnnotationView.m in Sources */,
 				27F3855D1D4130B30004A1B3 /* main.m in Sources */,
+				27BA23AB1D731AE1005CC560 /* M13ProgressViewLetterpress.m in Sources */,
 				273604641D440E4900194BAF /* CWStatusBarNotification.m in Sources */,
+				27BA23AA1D731AE1005CC560 /* M13ProgressViewImage.m in Sources */,
+				27BA23B21D731AE1005CC560 /* M13ProgressViewSegmentedRing.m in Sources */,
 				276B898B1D50FA97008164FE /* GymsSettingsTableViewController.m in Sources */,
 				81055BAC1D4D413D0071FDD2 /* iPokeServerSync.m in Sources */,
 				277209DC1D441CAA0008B7FA /* PokemonSelectTableViewController.m in Sources */,
+				03C59E7A1D6E940E000A4ABA /* DeviceVibrate.m in Sources */,
 				2788622D1D4226D300CCF60E /* PokestopAnnotation.m in Sources */,
 				27DE81901D61D55C00F5F87E /* LicensesViewController.m in Sources */,
+				27BA23B11D731AE1005CC560 /* M13ProgressViewSegmentedBar.m in Sources */,
 				81055BAF1D4D46790071FDD2 /* CoreDataPersistance.m in Sources */,
 				0256E3861D473D7800CEEE3F /* TimerLabel.m in Sources */,
+				27BA23AF1D731AE1005CC560 /* M13ProgressViewRadiative.m in Sources */,
+				272E3B651D7C71390027A833 /* ServersTableViewController.m in Sources */,
+				F205FFEF1D74BD98008A192C /* Reachability.m in Sources */,
 				27F4244A1D468394007ADEE4 /* ScanAnnotation.m in Sources */,
 				8111430B1D4D598F00901851 /* Gym+CoreDataProperties.m in Sources */,
 				811143091D4D598F00901851 /* PokeStop+CoreDataProperties.m in Sources */,
+				27BA23A21D731AE1005CC560 /* M13ProgressConsole.m in Sources */,
+				27BA23A91D731AE1005CC560 /* M13ProgressViewFilteredImage.m in Sources */,
 				811142FE1D4D596700901851 /* Pokemon+CoreDataClass.m in Sources */,
 				0256E3831D473D6A00CEEE3F /* TimeLabel.m in Sources */,
+				27BA23A61D731AE1005CC560 /* M13ProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +1040,8 @@
 				095DAA711D5FB77700377BB0 /* fr */,
 				48E593571D60BF3600FEA380 /* nl */,
 				8673808B1D60E1340062A80B /* es */,
+				F205FFF11D74D123008A192C /* pt-BR */,
+				9206A3161D806417004959DA /* zh-Hant-TW */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -846,6 +1056,8 @@
 				AEFA37F51D491E4900DEE95C /* ja */,
 				58CA35391D4B792C003B7F85 /* ru */,
 				6A72213A1D5DCB5900E522B6 /* zh-Hant-HK */,
+				F205FFF41D74D59A008A192C /* pt-BR */,
+				4DCC9E6B1D7B404E00E073C6 /* zh-Hant-TW */,
 			);
 			name = pokemon.json;
 			sourceTree = "<group>";
@@ -861,6 +1073,8 @@
 				095DAA6F1D5FB6E000377BB0 /* fr */,
 				48E593581D60BF3600FEA380 /* nl */,
 				8673808C1D60E1340062A80B /* es */,
+				F205FFF31D74D359008A192C /* pt-BR */,
+				9206A3171D807072004959DA /* zh-Hant-TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -959,6 +1173,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = C6D6DBHW5C;
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -973,6 +1189,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = C6D6DBHW5C;
 				INFOPLIST_FILE = iPokeGo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

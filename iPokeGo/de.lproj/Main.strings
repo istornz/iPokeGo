@@ -55,3 +55,6 @@
 /* Class = "UILabel"; text = "Show Timer instead of Time"; ObjectID = "ySg-LB-wEB"; */
 "ySg-LB-wEB.text" = "Timer statt Zeit anzeigen";
 
+/* Class = "UILabel"; text = "Wifi only"; ObjectID = "d2S-j9-Knz"; */
+"d2S-j9-Knz.text" = "Nur Wifi";
+

@@ -40,6 +40,17 @@
 #define NOTIF_FOLLOW_GREEN_COLOR    [UIColor colorWithRed:0.10 green:0.74 blue:0.61 alpha:1.0]
 #define NOTIF_FOLLOW_RED_COLOR      [UIColor colorWithRed:0.91 green:0.30 blue:0.24 alpha:1.0]
 
+#define STATUSCODE_BAR_SETERROR     0
+#define STATUSCODE_BAR_SETSUCCESS   1
+
+#define STATUSCODE_BAR_ERROR_COLOR      [UIColor colorWithRed:1.00 green:0.80 blue:0.00 alpha:1.0]
+#define STATUSCODE_BAR_SUCCESS_COLOR    [UIColor colorWithRed:0.00 green:1.00 blue:0.00 alpha:1.0]
+
+#define GOOGLE_MAP_SEARCH_API           @"http://maps.googleapis.com/maps/api/geocode/json?address=%%addr%%"
+
+#define POKEMONGOMAP_TYPE           0
+#define POGOM_TYPE                  1
+
 #define SERVER_API_DATA_POKEMONGOMAP    @"%%server_addr%%/raw_data?pokemon=%%pokemon_display%%&pokestops=%%pokestops_display%%&gyms=%%gyms_display%%&spawnpoints=%%spawnpoints_display%%&ids=%%idlist%%"
 #define SERVER_API_DATA_SCAN_LOCATION   @"%%server_addr%%/loc"
 #define SERVER_API_DATA_POGOM           @"%%server_addr%%/map-data?pokemon=%%pokemon_display%%&gyms=%%gyms_display%%"

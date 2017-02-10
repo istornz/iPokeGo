@@ -12,7 +12,9 @@
 #import "CoreDataPersistance.h"
 #import "CoreDataEntities.h"
 #import "PokemonNotifier.h"
+#import "MapViewController.h"
 #import "SettingsTableViewController.h"
+#import "Reachability.h"
 
 @interface AppDelegate() <CLLocationManagerDelegate>
 
@@ -57,8 +59,10 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
                                @"map_type_standard": @"YES",
                                @"driving_mode": @"MKLaunchOptionsDirectionsModeDriving",
                                @"only_notify_in_range": @"FALSE",
+                               @"only_notify_for_iv": @"NO",
                                @"common_notification_range": @"100",
                                @"favorite_notification_range": @"2500",
+                               @"iv_notification_range": @"80",
                                @"server_type": SERVER_API_DATA_POKEMONGOMAP,
                                @"follow_location": @"NO"};
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
@@ -122,7 +126,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
         //if we're going into the background lets try to slow down the notifications a bit to save battery
         //for now we'll use once every 20 seconds or so for a check
         [self.dataFetchTimer invalidate];
-        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequencyBackground target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
+        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequencyBackground target:self selector:@selector(refreshDataFromServer:) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
     }
 }
@@ -131,20 +135,26 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     [application setApplicationIconBadgeNumber:0];
     
     [self updateDateText];
+    [self.dateUpdateTimer invalidate];
     self.dateUpdateTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerRefreshFrequency target:self selector:@selector(updateDateText) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.dateUpdateTimer forMode:NSRunLoopCommonModes];
     
     if (!self.dataFetchTimer || self.dataFetchTimer.timeInterval == AppDelegatServerRefreshFrequencyBackground) {
-        [self refreshDataFromServer];
-        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequency target:self selector:@selector(refreshDataFromServer) userInfo:nil repeats:YES];
+        [self refreshDataFromServer:nil];
+        [self.dataFetchTimer invalidate];
+        self.dataFetchTimer = [NSTimer timerWithTimeInterval:AppDelegatServerRefreshFrequency target:self selector:@selector(refreshDataFromServer:) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.dataFetchTimer forMode:NSDefaultRunLoopMode];
     }
     
     if (!self.dataCleanTimer) {
         [self cleanData];
+        [self.dataCleanTimer invalidate];
         self.dataCleanTimer = [NSTimer timerWithTimeInterval:AppDelegateTimerCleanFrequency target:self selector:@selector(cleanData) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.dataCleanTimer forMode:NSDefaultRunLoopMode];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ServerForceReloadData object:nil];
 }
 
 #pragma mark Local notification delegate
@@ -169,12 +179,14 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
     [self.notifier notificationTapped:notification];
 }
 
-- (void)refreshDataFromServer
+- (void)refreshDataFromServer:(NSTimer *)timer
 {
-    dispatch_async(AppDelegateFetcherQueue, ^{
-        [self.server fetchData];
-        [self.server fetchScanLocationData];
-    });
+    if (![[NSUserDefaults standardUserDefaults] boolForKey: @"wifi_only"] || [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == ReachableViaWiFi) {
+        dispatch_async(AppDelegateFetcherQueue, ^{
+            [self.server fetchData];
+            [self.server fetchScanLocationData];
+        });
+    }
 }
 
 - (void)cleanData
@@ -203,7 +215,7 @@ static NSTimeInterval AppDelegatServerRefreshFrequencyBackground = 20.0;
 
 - (void)serverChanged:(NSNotification *)notification
 {
-    [self refreshDataFromServer];
+    [self refreshDataFromServer:nil];
 }
 
 #pragma mark - Hack background mode

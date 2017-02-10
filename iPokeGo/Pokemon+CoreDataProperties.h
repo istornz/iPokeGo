@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSDate *disappears;
 @property (nullable, nonatomic, copy) NSString *encounter;
 @property (nonatomic) int32_t identifier;
+@property (nonatomic) int16_t individual_attack;
+@property (nonatomic) int16_t individual_defense;
+@property (nonatomic) int16_t individual_stamina;
+@property (nonatomic) float iv;
+@property (nonatomic) int16_t move_1;
+@property (nonatomic) int16_t move_2;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (nullable, nonatomic, copy) NSString *name;

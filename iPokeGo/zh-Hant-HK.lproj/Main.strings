@@ -124,3 +124,6 @@
 
 /* Class = "UILabel"; text = "Drive mode"; ObjectID = "zeM-yd-YUy"; */
 "zeM-yd-YUy.text" = "駕駛模式";
+
+/* Class = "UILabel"; text = "Wifi only"; ObjectID = "d2S-j9-Knz"; */
+"d2S-j9-Knz.text" = "只有WiFi";

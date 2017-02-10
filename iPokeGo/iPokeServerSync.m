@@ -15,7 +15,20 @@
 
 @implementation iPokeServerSync
 
+NSString * const ServerForceReloadData = @"Poke.ServerForceReloadData";
+
 static NSURLSession *iPokeServerSyncSharedSession;
+
+-(id)init
+{
+    if(self = [super init])
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(necesaryToReload) name:ServerForceReloadData object:nil];
+        self.necessaryToReload = NO;
+    }
+    
+    return self;
+}
 
 + (NSURLSession *)sharedSession
 {
@@ -30,6 +43,11 @@ static NSURLSession *iPokeServerSyncSharedSession;
     });
     
     return iPokeServerSyncSharedSession;
+}
+
+-(void)necesaryToReload
+{
+    self.necessaryToReload = YES;
 }
 
 - (void)setLocation:(CLLocationCoordinate2D)location withRadius:(int)radius
@@ -96,17 +114,20 @@ static NSURLSession *iPokeServerSyncSharedSession;
     if (!url) {
         return;
     }
+    
     NSURLSessionDataTask *task = [[iPokeServerSync sharedSession] dataTaskWithRequest:[self buildRequestWithURL:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
             if (httpResponse.statusCode != 200) {
                 NSLog(@"Server returned non 200 code: %@", @(httpResponse.statusCode));
+                [[NSNotificationCenter defaultCenter] postNotificationName:MapViewShowFetchStatus object:[NSNumber numberWithInt:STATUSCODE_BAR_SETERROR]];
                 return;
             }
         }
         
         if (error) {
             NSLog(@"Error reading server's data: %@", error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:MapViewShowFetchStatus object:[NSNumber numberWithInt:STATUSCODE_BAR_SETERROR]];
             return;
         }
         
@@ -117,16 +138,32 @@ static NSURLSession *iPokeServerSyncSharedSession;
         
         if (!jsonData || error) {
             NSLog(@"Error processing server's data: %@", error);
+            [[NSNotificationCenter defaultCenter] postNotificationName:MapViewShowFetchStatus object:[NSNumber numberWithInt:STATUSCODE_BAR_SETERROR]];
             return;
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:MapViewShowFetchStatus object:[NSNumber numberWithInt:STATUSCODE_BAR_SETSUCCESS]];
+        
         NSLog(@"Fetched data");
         NSManagedObjectContext *context = [[CoreDataPersistance sharedInstance] newWorkerContext];
         [self processPokemonFromJSON:jsonData[@"pokemons"] usingContext:context];
         [self processStopsFromJSON:jsonData[@"pokestops"] usingContext:context];
-        [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
+        
+        if([NSStringFromClass([jsonData[@"gyms"] class]) isEqualToString:@"__NSArrayM"])
+            [self processGymsFromJSON:jsonData[@"gyms"] usingContext:context];
+        else
+            [self processGymsFromJSON:[jsonData[@"gyms"] allValues] usingContext:context];
+        
         [self processSpawnPointsFromJSON:jsonData[@"spawnpoints"] usingContext:context];
         [self processScanLocationsFromJSON:[jsonData[@"scan_locations"] allValues] usingContext:context];
         [[CoreDataPersistance sharedInstance] commitChangesAndDiscardContext:context];
+        
+        if(self.necessaryToReload)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:MapViewReloadData object:nil];
+            self.necessaryToReload = NO;
+        }
+        
     }];
     [task resume];
 }
@@ -194,7 +231,6 @@ static NSURLSession *iPokeServerSyncSharedSession;
     BOOL display_onlyfav            = [defaults boolForKey:@"display_onlyfav"];
     NSArray *pokemon_common         = [NSArray arrayWithArray:[defaults objectForKey:@"pokemon_common"]];
     NSMutableArray *pokemon_fav     = [NSMutableArray arrayWithArray:[defaults objectForKey:@"pokemon_favorite"]];
-
 
     if([server_addr length] == 0) {
         return nil;

@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 @import CoreLocation;
 
+extern NSString * const ServerForceReloadData;
+
 @interface iPokeServerSync : NSObject
+
+@property BOOL necessaryToReload;
 
 - (void)fetchData;
 - (void)fetchScanLocationData;

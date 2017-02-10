@@ -15,6 +15,7 @@
 #import <AudioToolbox/AudioServices.h>
 #import "CWStatusBarNotification.h"
 #import "SettingsTableViewController.h"
+#import "DeviceVibrate.h"
 
 @interface PokemonNotifier() <NSFetchedResultsControllerDelegate>
 
@@ -84,13 +85,13 @@
     CLLocationDistance distanceFromUser = [self.mapViewController.mapview.userLocation.location distanceFromLocation:[[CLLocation alloc] initWithLatitude:pokemon.latitude longitude:pokemon.longitude]];
 //    NSLog(@"Pokemon spawned %d meters from user location", (int)distanceFromUser);
     
-    NSString *message   = nil;
-    AVAudioPlayer *sound = nil;
-    BOOL pokemonIsInRange = FALSE;
+    NSString *message       = nil;
+    AVAudioPlayer *sound    = nil;
+    BOOL pokemonIsInRange   = FALSE;
     
     if([pokemon isFav]) {
         message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] your favorite pokemon was added to the map!", @"The hint that a favorite Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
-        sound   = self.pokemonAppearSound;
+        sound   = self.pokemonFavAppearSound;
         pokemonIsInRange = [prefs integerForKey:@"favorite_notification_range"] ? distanceFromUser < [prefs integerForKey:@"favorite_notification_range"] : YES;
     } else {
         message = [NSString localizedStringWithFormat:NSLocalizedString(@"[Pokemon] was added to the map!", @"The hint that a certain Pokémon appeared on the map.") , [self.localization objectForKey:[NSString stringWithFormat:@"%d", pokemon.identifier]]];
@@ -110,6 +111,11 @@
     
     if([prefs boolForKey:@"display_onlyfav"] && ![pokemon isFav]) {
 //        NSLog(@"Not showing notification because pokemon is not favorite");
+        return;
+    }
+    
+    if([prefs boolForKey:@"only_notify_for_iv"] && ![pokemon isStrong]) {
+//        NSLog(@"Not showing notification because pokemon is not strong");
         return;
     }
     
@@ -143,7 +149,7 @@
         [sound play];
         
         if([prefs boolForKey:@"vibration"]) {
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+            [DeviceVibrate standardVibrate];
         }
         
         [notification displayNotificationWithMessage:message forDuration:4.5f];
