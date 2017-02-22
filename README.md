@@ -1,6 +1,6 @@
 
 # Pokemap client for iOS [![Build Status](https://travis-ci.org/istornz/iPokeGo.svg?branch=master)](https://travis-ci.org/istornz/iPokeGo) [![Donate](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/istornz)
-This is a client for the Pokemap server (https://github.com/PokemonGoMap/PokemonGo-Map)
+This is a client for the Pokemap server (https://github.com/RocketMap/RocketMap)
 
 iPokeGO is now officially available on the AppStore !
 
@@ -20,7 +20,7 @@ iPokeGO is now officially available on the AppStore !
 - Add any server (heroku, your server, jelastic and more...).
 - See distance and remaining time on each pokemons.
 - Possibility to show/hide common pokemon in a list.
-- Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- Supports [**RocketMap**](https://github.com/RocketMap/RocketMap) and [**Pogom**](https://github.com/favll/pogom) server.
 - Possibility to switch between all your servers easily.
 - Wifi only mode if you run this app at your home.
 - Possibility to follow user location.
@@ -65,7 +65,7 @@ To find your address look at this : http://bit.ly/2aweVR1 (if you have a local s
 - [x] Real notification.
 - [x] Change scan position.
 - [x] Add a server status page.
-- [x] Supports [**PokemonGo-Map**](https://github.com/PokemonGoMap/PokemonGo-Map) and [**Pogom**](https://github.com/favll/pogom) server.
+- [x] Supports [**RocketMap**](https://github.com/RocketMap/RocketMap) and [**Pogom**](https://github.com/favll/pogom) server.
 - [x] Add a server switcher functionality.
 - [ ] Regroup pokestops annotations to reduce CPU usage (clustering).
 - [ ] Find a way to do some background task without hack.
@@ -80,7 +80,7 @@ There is an [Android port](https://github.com/omkarmoghe/Pokemap) in the works. 
 iPokeGo is released under the MIT license. See LICENSE for details.
 Thx to @ryanmclachlan for the beautiful UI Design !
 
-#[Official Website] (https://pokemongomap.github.io/PoGoMapWebsite/)
+#[Official Github] (https://github.com/RocketMap/RocketMap)
 Live visualization of all pokemon (with option to show gyms and pokestops) in your area. This is a proof of concept that we can load all nearby pokemon given a location. Currently runs on a Flask server displaying a Google Map with markers on it.
 
 Using this software is against the ToS and can get you banned. Use at your own risk.
