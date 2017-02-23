@@ -9,7 +9,7 @@
 #ifndef global_h
 #define global_h
 
-#define POKEMON_NUMBER      151
+#define POKEMON_NUMBER      255
 #define DEFAULT_RADIUS      120
 
 #define SELECT_FAVORITE	    0
