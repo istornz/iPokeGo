@@ -14,12 +14,15 @@
 #import "TimerLabel.h"
 #import "TagLabel.h"
 #import "DistanceLabel.h"
+#import "PokemonAnnotationLabel.h"
 
 @interface PokemonAnnotationView : MKAnnotationView
 
 @property (weak) TimeLabel* timeLabel;
 @property (weak) TimerLabel* timerLabel;
 @property (weak) DistanceLabel* distanceLabel;
+@property NSDictionary *localization;
+@property NSString *pathTheme;
 
 - (instancetype)initWithAnnotation:(PokemonAnnotation *)annotation currentLocation:(CLLocation *)location reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setAnnotation:(id<MKAnnotation>)annotation withLocation:(CLLocation *)location;

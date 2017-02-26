@@ -10,7 +10,7 @@
 #import "global.h"
 #import "iPokeServerSync.h"
 
-#define CELL_INDEX_DRIVINGMODE  2
+#define CELL_INDEX_DRIVINGMODE  3
 
 extern NSString * const SettingsChangedNotification;
 extern NSString * const ServerChangedNotification;

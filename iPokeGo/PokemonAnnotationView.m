@@ -19,6 +19,10 @@
 
 - (instancetype)initWithAnnotation:(PokemonAnnotation *)annotation currentLocation:(CLLocation *)location reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
+        
+        [self loadLocalization];
+        [self loadTheme];
+        
         UIButton *button    = [UIButton buttonWithType:UIButtonTypeCustom];
         UIImage *btnImage   = [UIImage imageNamed:@"drive"];
         button.frame = CGRectMake(0, 0, 30, 30);
@@ -26,7 +30,14 @@
         
         self.canShowCallout = YES;
         self.rightCalloutAccessoryView = button;
-        self.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", @(annotation.pokemonID)]];
+        
+        if(self.pathTheme.length > 0) {
+            self.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@/images/%@.png", self.pathTheme,@(annotation.pokemonID)]];
+        } else {
+            PokemonAnnotationLabel *labelPokemonName = [[PokemonAnnotationLabel alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+            [labelPokemonName setText:[NSString stringWithFormat:@"%@", [self.localization objectForKey:[NSString stringWithFormat:@"%d", annotation.pokemonID]]]];
+            [self addSubview:labelPokemonName];
+        }
         
         self.frame = CGRectMake(0, 0, 45, 45);
         self.location = location;
@@ -83,6 +94,39 @@
     return self;
 }
 
+-(void)loadLocalization {
+    NSError *error;
+    
+    NSURL *filePath = [[NSBundle mainBundle] URLForResource:@"pokemon" withExtension:@"json"];
+    
+    self.localization = [[NSDictionary alloc] init];
+    
+    NSString *stringPath = [filePath absoluteString];
+    NSData *localizationData = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringPath]];
+    
+    self.localization = [NSJSONSerialization JSONObjectWithData:localizationData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&error];
+}
+
+
+-(void)loadTheme {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *themeInstalled = [defaults objectForKey:@"themeInstalled"];
+    
+    if([themeInstalled count] > 0) {
+        
+        if([themeInstalled[@"dir"] length] == 0) {
+            self.pathTheme = @"";
+        } else {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            
+            self.pathTheme = [NSString stringWithFormat:@"%@/%@", documentsDirectory, themeInstalled[@"dir"]];
+        }
+    }
+}
+
 -(void)addHoveredImage:(UIImage *)image
 {
     CGSize size = CGSizeMake(45, 45);
@@ -136,7 +180,7 @@
         [tagLabelView setBackgroundColor:bgColor];
         self.leftCalloutAccessoryView = tagLabelView;
     }
-
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:@"display_time"] && ![defaults boolForKey:@"display_timer"]) {
         if (!self.timeLabel) {

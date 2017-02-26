@@ -75,7 +75,7 @@
     
     cell.pokemonName.text           = [self.localization objectForKey:pokemonID];
 
-    cell.pokemonimageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", pokemonID]];
+    //cell.pokemonimageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Pokemon_%@", pokemonID]];
     
     if ([self.pokemonSelected containsObject:pokemonID]) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
